@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.springframework.web.client.RestTemplate;
 
-import riconeapi.models.authentication.UserInfo;
-import riconeapi.models.authentication.Endpoint;
+import riconeapi.models.authentication.*;
+
 
 public class Authenticator
 {
