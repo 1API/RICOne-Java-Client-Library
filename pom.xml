@@ -5,6 +5,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>RICOne API Client Library</name>
 	<description>Client library for the RICOne data api</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 		<dependency>

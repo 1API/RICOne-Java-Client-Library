@@ -10,11 +10,10 @@ public class RicOneApiClient
 //	private OAuth2RestTemplate restTemplate;
     private String baseApiUrl;
     public SifXpress sifXpress;
-
-    /// <summary>
-    /// Use endpoint values to authenticate to data API
-    /// </summary>
-    /// <param name="endpoint"></param>
+    
+    /**Use endpoint values to authenticate to data API
+     * @param endpoint
+     */
     public RicOneApiClient(Endpoint endpoint)
     {
         this.token = endpoint.getToken();
@@ -22,24 +21,19 @@ public class RicOneApiClient
         this.restTemplate = new RestTemplate();
 
         sifXpress = new SifXpress(token, baseApiUrl, restTemplate);
-        
-//        restTemplate.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token, "Bearer");
-//        sifXpress = new SifXpress(token, baseApiUrl, restTemplate);
-
     }
-    /// <summary>
-    /// Use endpoint values to authenticate to data API
-    /// </summary>
-    /// <param name="token"></param>
-    /// <param name="baseApiUrl"></param>
-//    public RicOneApiClient(String token, String baseApiUrl)
-//    {
-//        this.token = token;
-//        this.baseApiUrl = baseApiUrl;
-//        this.restTemplate = new restTemplate(baseApiUrl);
-////        restTemplate.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator(token, "Bearer");
-////        sifXpress = new SifXpress(token, baseApiUrl, restTemplate);
-//       
-//    }
+    
+    /**Use endpoint values to authenticate to data API
+     * @param token
+     * @param baseApiUrl
+     */
+    public RicOneApiClient(String token, String baseApiUrl)
+    {
+        this.token = token;
+        this.baseApiUrl = baseApiUrl;
+        this.restTemplate = new RestTemplate();
+
+        sifXpress = new SifXpress(token, baseApiUrl, restTemplate);
+    }
 
 }
