@@ -1,18 +1,26 @@
 import riconeapi.models.authentication.Endpoint;
 import sif.dd.xPress.model.XCalendarType;
+import sif.dd.xPress.model.XContactStudentRelationshipType;
+import sif.dd.xPress.model.XContactType;
 import sif.dd.xPress.model.XCourseType;
+import sif.dd.xPress.model.XEmailType;
+import sif.dd.xPress.model.XEnrollmentType;
+import sif.dd.xPress.model.XLanguageType;
 import sif.dd.xPress.model.XLeaType;
 import sif.dd.xPress.model.XMeetingTimeType;
 import sif.dd.xPress.model.XOtherCourseIdType;
 import sif.dd.xPress.model.XOtherOrganizationIdType;
 import sif.dd.xPress.model.XOtherPersonIdType;
+import sif.dd.xPress.model.XPersonNameType;
 import sif.dd.xPress.model.XPersonReferenceType;
+import sif.dd.xPress.model.XRaceType;
 import sif.dd.xPress.model.XStaffPersonAssignmentType;
 import sif.dd.xPress.model.XRosterType;
 import sif.dd.xPress.model.XSchoolType;
 import sif.dd.xPress.model.XSessionType;
 import sif.dd.xPress.model.XStaffReferenceType;
 import sif.dd.xPress.model.XStaffType;
+import sif.dd.xPress.model.XStudentType;
 import sif.dd.xPress.model.XTelephoneType;
 
 public class RicOneApiTests
@@ -112,20 +120,20 @@ public class RicOneApiTests
 //            XStaffs_GetXStaffsByXRoster(ricOne);         
 
             // xStudents
-            //XStudents_GetXStudents(ricOne);
-            //XStudents_GetXStudent(ricOne);
-            //XStudents_GetXStudentsByXLea(ricOne);
-            //XStudents_GetXStudentsByXSchool(ricOne);
-            //XStudents_GetXStudentsByXRoster(ricOne);
-            //XStudents_GetXStudentsByXStaff(ricOne);
-            //XStudents_GetXStudentsByXContact(ricOne);
+//            XStudents_GetXStudents(ricOne);
+//            XStudents_GetXStudent(ricOne);
+//            XStudents_GetXStudentsByXLea(ricOne);
+//            XStudents_GetXStudentsByXSchool(ricOne);
+//            XStudents_GetXStudentsByXRoster(ricOne);
+//            XStudents_GetXStudentsByXStaff(ricOne);
+//            XStudents_GetXStudentsByXContact(ricOne);
 
             // xContacts
-            //XContacts_GetXSContacts(ricOne);
-            //XContacts_GetXSContact(ricOne);
-            //XContacts_GetXContactsByXLea(ricOne);
-            //XContacts_GetXContactsByXSchool(ricOne);
-            //XContacts_GetXContactsByXStudent(ricOne);
+//            XContacts_GetXSContacts(ricOne);
+//            XContacts_GetXSContact(ricOne);
+//            XContacts_GetXContactsByXLea(ricOne);
+//            XContacts_GetXContactsByXSchool(ricOne);
+//            XContacts_GetXContactsByXStudent(ricOne);
 
 
 		}
@@ -1654,7 +1662,2147 @@ public class RicOneApiTests
          }
     }
  	// #################### xStudents ####################
+    //RETURN ALL STUDENTS
+    public static void XStudents_GetXStudents(RicOneApiClient ricOne)
+    { 
+        for(XStudentType s : ricOne.sifXpress.GetXStudents())
+        {
+            System.out.println("refId: " + s.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + s.getName().getType());
+            System.out.println("prefix: " + s.getName().getPrefix());
+            System.out.println("familyName: " + s.getName().getFamilyName());
+            System.out.println("givenName: " + s.getName().getGivenName());
+            System.out.println("middleName: " + s.getName().getMiddleName());
+            System.out.println("suffix: " + s.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : s.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + s.getLocalId());
+            System.out.println("loginId: " + s.getLoginId());
+            System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + s.getAddress().getAddressType());
+            System.out.println("city: " + s.getAddress().getCity());
+            System.out.println("line1: " + s.getAddress().getLine1());
+            System.out.println("line2: " + s.getAddress().getLine2());
+            System.out.println("countryCode: " + s.getAddress().getCountryCode());
+            System.out.println("postalCode: " + s.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + s.getAddress().getStateProvince());
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : s.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + s.getEmail().getEmailType());
+            System.out.println("emailAddress: " + s.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : s.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("##### BEGIN DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN RACES #####");
+            for(XRaceType r : s.getDemographics().getRaces().getRace())
+            {
+                System.out.println("race: " + r.getRace());
+            }
+            System.out.println("##### END RACES #####");
+            System.out.println("hispanicLatinoEthnicity: " + s.getDemographics().isHispanicLatinoEthnicity());
+            System.out.println("sex: " + s.getDemographics().getSex());
+            System.out.println("birthDate: " + s.getDemographics().getBirthDate());
+            System.out.println("countryOfBirth: " + s.getDemographics().getCountryOfBirth());
+            System.out.println("usCitizenshipStatus: " + s.getDemographics().getUsCitizenshipStatus());
+            System.out.println("##### END DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN ENROLLMENT #####");
+            System.out.println("leaRefId: " + s.getEnrollment().getLeaRefId());
+            System.out.println("schoolRefId: " + s.getEnrollment().getSchoolRefId());
+            System.out.println("studentSchoolAssociationRefId: " + s.getEnrollment().getStudentSchoolAssociationRefId());
+            System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
+            System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
+            System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+            System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+            System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
+            System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+            System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getHomeRoomTeacher().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getHomeRoomTeacher().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getHomeRoomTeacher().getFamilyName());
+            System.out.println("##### END HOMEROOMTEACHER #####");
+            System.out.println("gradeLevel: " + s.getEnrollment().getGradeLevel());
+            System.out.println("projectedGraduationYear: " + s.getEnrollment().getProjectedGraduationYear());
+            System.out.println("##### BEGIN COUNSELOR #####");
+            System.out.println("refId: " + s.getEnrollment().getCounselor().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getCounselor().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getCounselor().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getCounselor().getFamilyName());
+            System.out.println("##### END COUNSELOR #####");
+            System.out.println("##### END ENROLLMENT #####");
+            System.out.println("##### BEGIN OTHERENROLLMENT #####");
+            for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
+            {  
+                System.out.println("leaRefId: " + e.getLeaRefId());
+                System.out.println("schoolRefId: " + e.getSchoolRefId());
+                System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
+                System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
+                System.out.println("membershipType: " + e.getMembershipType());
+                System.out.println("entryDate: " + e.getEntryDate());
+                System.out.println("exitDate: " + e.getExitDate());
+                System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
+                System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+                System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
+                System.out.println("localId: " + e.getHomeRoomTeacher().getLocalId());
+                System.out.println("givenName: " + e.getHomeRoomTeacher().getGivenName());
+                System.out.println("familyName: " + e.getHomeRoomTeacher().getFamilyName());
+                System.out.println("##### END HOMEROOMTEACHER #####");
+                System.out.println("gradeLevel: " + e.getGradeLevel());
+                System.out.println("projectedGraduationYear: " + e.getProjectedGraduationYear());
+                System.out.println("##### BEGIN COUNSELOR #####");
+                System.out.println("refId: " + e.getCounselor().getRefId());
+                System.out.println("localId: " + e.getCounselor().getLocalId());
+                System.out.println("givenName: " + e.getCounselor().getGivenName());
+                System.out.println("familyName: " + e.getCounselor().getFamilyName());
+                System.out.println("##### END COUNSELOR #####"); 
+            }
+            System.out.println("##### END OTHERENROLLMENT #####");
+            System.out.println("##### BEGIN ACADEMICSUMMARY #####");
+            System.out.println("cumulativeWeightedGpa: " + s.getAcademicSummary().getCumulativeWeightedGpa());
+            System.out.println("termWeightedGpa: " + s.getAcademicSummary().getTermWeightedGpa());
+            System.out.println("classRank: " + s.getAcademicSummary().getClassRank());
+            System.out.println("##### END ACADEMICSUMMARY #####");
+            System.out.println("##### BEGIN STUDENTCONTACTS #####");
+            for(String contactRefid : s.getStudentContacts().getContactPersonRefId())
+            {
+                System.out.println("contactPersonRefId: " + contactRefid);
+            }
+            for(XContactType c : s.getStudentContacts().getXContact())
+            {
+                System.out.println("##### BEGIN NAME #####");
+                System.out.println("type: " + c.getName().getType());
+                System.out.println("prefix: " + c.getName().getPrefix());
+                System.out.println("familyName: " + c.getName().getFamilyName());
+                System.out.println("givenName: " + c.getName().getGivenName());
+                System.out.println("middleName: " + c.getName().getMiddleName());
+                System.out.println("suffix: " + c.getName().getSuffix());
+                System.out.println("##### END NAME #####");
+                System.out.println("##### BEGIN OTHERNAME #####");
+                for(XPersonNameType n : c.getOtherNames().getName())
+                {
+                    System.out.println("type: " + n.getType());
+                    System.out.println("prefix: " + n.getPrefix());
+                    System.out.println("familyName: " + n.getFamilyName());
+                    System.out.println("givenName: " + n.getGivenName());
+                    System.out.println("middleName: " + n.getMiddleName());
+                    System.out.println("suffix: " + n.getSuffix());
+                }
+                System.out.println("##### END OTHERNAME #####");
+                System.out.println(": " + c.getLocalId());
+                System.out.println(": " + c.getLoginId());
+                System.out.println("##### BEGIN OTHERIDS #####");
+                for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+                {
+                    System.out.println("id: " + id.getId());
+                    System.out.println("type: " + id.getType());
+                }
+                System.out.println("##### END OTHERIDS #####");
+                System.out.println("##### BEGIN ADDRESS #####");
+                System.out.println("addressType: " + c.getAddress().getAddressType());
+                System.out.println("city: " + c.getAddress().getCity());
+                System.out.println("line1: " + c.getAddress().getLine1());
+                System.out.println("line2: " + c.getAddress().getLine2());
+                System.out.println("countryCode: " + c.getAddress().getCountryCode());
+                System.out.println("postalCode: " + c.getAddress().getPostalCode());
+                System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END ADDRESS #####");
+                System.out.println("##### BEGIN PHONENUMBERS #####");
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END PHONENUMBERS #####");
+                System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+                for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+                {
+                    System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                    System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                    System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+                }
+                System.out.println("##### END OTHERPHONENUMBERS #####");
+                System.out.println("##### BEGIN EMAIL #####");
+                System.out.println("emailType: " + c.getEmail().getEmailType());
+                System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+                System.out.println("##### END EMAIL #####");
+                System.out.println("##### BEGIN OTHEREMAILS #####");
+                for(XEmailType e : c.getOtherEmails().getEmail())
+                {
+                    System.out.println("emailType: " + e.getEmailType());
+                    System.out.println("emailAddress: " + e.getEmailAddress());
+                }
+                System.out.println("##### END OTHEREMAILS #####");
+                System.out.println(": " + c.getSex());
+                System.out.println(": " + c.getEmployerType());
+                System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+                for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+                {
+                    System.out.println("studentRefId: " + csr.getStudentRefId());
+                    System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                    System.out.println("restrictions: " + csr.getRestrictions());
+                    System.out.println("livesWith: " + csr.isLivesWith());
+                    System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                    System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                    System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                    System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                    System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                    System.out.println("contactSequence: " + csr.getContactSequence());
+                }
+                System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            }
+            System.out.println("##### END STUDENTCONTACTS #####");
+            System.out.println("##### BEGIN LANGUAGES #####");
+            for(XLanguageType l : s.getLanguages().getLanguage())
+            {
+                System.out.println("type: " + l.getType());
+                System.out.println("code: " + l.getCode());
+            }
+            System.out.println("##### END LANGUAGES #####");
+            System.out.println("========================================");
+        }
+    }
+    //RETURN SINGLE STUDENT
+    public static void XStudents_GetXStudent(RicOneApiClient ricOne)
+    {
+        XStudentType s = ricOne.sifXpress.GetXStudent(refId);
+
+        System.out.println("refId: " + s.getRefId());
+        System.out.println("##### BEGIN NAME #####");
+        System.out.println("type: " + s.getName().getType());
+        System.out.println("prefix: " + s.getName().getPrefix());
+        System.out.println("familyName: " + s.getName().getFamilyName());
+        System.out.println("givenName: " + s.getName().getGivenName());
+        System.out.println("middleName: " + s.getName().getMiddleName());
+        System.out.println("suffix: " + s.getName().getSuffix());
+        System.out.println("##### END NAME #####");
+        System.out.println("##### BEGIN OTHERNAME #####");
+        for(XPersonNameType n : s.getOtherNames().getName())
+        {
+            System.out.println("type: " + n.getType());
+            System.out.println("prefix: " + n.getPrefix());
+            System.out.println("familyName: " + n.getFamilyName());
+            System.out.println("givenName: " + n.getGivenName());
+            System.out.println("middleName: " + n.getMiddleName());
+            System.out.println("suffix: " + n.getSuffix());
+        }
+        System.out.println("##### END OTHERNAME #####");
+
+        System.out.println("localId: " + s.getLocalId());
+        System.out.println("loginId: " + s.getLoginId());
+        System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
+        System.out.println("##### BEGIN OTHERIDS #####");
+        for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
+        {
+            System.out.println("id: " + id.getId());
+            System.out.println("type: " + id.getType());
+        }
+        System.out.println("##### END OTHERIDS #####");
+        System.out.println("##### BEGIN ADDRESS #####");
+        System.out.println("addressType: " + s.getAddress().getAddressType());
+        System.out.println("city: " + s.getAddress().getCity());
+        System.out.println("line1: " + s.getAddress().getLine1());
+        System.out.println("line2: " + s.getAddress().getLine2());
+        System.out.println("countryCode: " + s.getAddress().getCountryCode());
+        System.out.println("postalCode: " + s.getAddress().getPostalCode());
+        System.out.println("stateProvince: " + s.getAddress().getStateProvince());
+        System.out.println("number: " + s.getPhoneNumber().getNumber());
+        System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+        System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+        System.out.println("##### END ADDRESS #####");
+        System.out.println("##### BEGIN PHONENUMBERS #####");
+        System.out.println("number: " + s.getPhoneNumber().getNumber());
+        System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+        System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+        System.out.println("##### END PHONENUMBERS #####");
+        System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+        for(XTelephoneType p : s.getOtherPhoneNumbers().getPhoneNumber())
+        {
+            System.out.println("otherPhoneNumbers number: " + p.getNumber());
+            System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+            System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+        }
+        System.out.println("##### END OTHERPHONENUMBERS #####");
+        System.out.println("##### BEGIN EMAIL #####");
+        System.out.println("emailType: " + s.getEmail().getEmailType());
+        System.out.println("emailAddress: " + s.getEmail().getEmailAddress());
+        System.out.println("##### END EMAIL #####");
+        System.out.println("##### BEGIN OTHEREMAILS #####");
+        for(XEmailType e : s.getOtherEmails().getEmail())
+        {
+            System.out.println("emailType: " + e.getEmailType());
+            System.out.println("emailAddress: " + e.getEmailAddress());
+        }
+        System.out.println("##### END OTHEREMAILS #####");
+        System.out.println("##### BEGIN DEMOGRAPHICS #####");
+        System.out.println("##### BEGIN RACES #####");
+        for(XRaceType r : s.getDemographics().getRaces().getRace())
+        {
+            System.out.println("race: " + r.getRace());
+        }
+        System.out.println("##### END RACES #####");
+        System.out.println("hispanicLatinoEthnicity: " + s.getDemographics().isHispanicLatinoEthnicity());
+        System.out.println("sex: " + s.getDemographics().getSex());
+        System.out.println("birthDate: " + s.getDemographics().getBirthDate());
+        System.out.println("countryOfBirth: " + s.getDemographics().getCountryOfBirth());
+        System.out.println("usCitizenshipStatus: " + s.getDemographics().getUsCitizenshipStatus());
+        System.out.println("##### END DEMOGRAPHICS #####");
+        System.out.println("##### BEGIN ENROLLMENT #####");
+        System.out.println("leaRefId: " + s.getEnrollment().getLeaRefId());
+        System.out.println("schoolRefId: " + s.getEnrollment().getSchoolRefId());
+        System.out.println("studentSchoolAssociationRefId: " + s.getEnrollment().getStudentSchoolAssociationRefId());
+        System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
+        System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
+        System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+        System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+        System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
+        System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+        System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
+        System.out.println("localId: " + s.getEnrollment().getHomeRoomTeacher().getLocalId());
+        System.out.println("givenName: " + s.getEnrollment().getHomeRoomTeacher().getGivenName());
+        System.out.println("familyName: " + s.getEnrollment().getHomeRoomTeacher().getFamilyName());
+        System.out.println("##### END HOMEROOMTEACHER #####");
+        System.out.println("gradeLevel: " + s.getEnrollment().getGradeLevel());
+        System.out.println("projectedGraduationYear: " + s.getEnrollment().getProjectedGraduationYear());
+        System.out.println("##### BEGIN COUNSELOR #####");
+        System.out.println("refId: " + s.getEnrollment().getCounselor().getRefId());
+        System.out.println("localId: " + s.getEnrollment().getCounselor().getLocalId());
+        System.out.println("givenName: " + s.getEnrollment().getCounselor().getGivenName());
+        System.out.println("familyName: " + s.getEnrollment().getCounselor().getFamilyName());
+        System.out.println("##### END COUNSELOR #####");
+        System.out.println("##### END ENROLLMENT #####");
+        System.out.println("##### BEGIN OTHERENROLLMENT #####");
+        for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
+        {  
+            System.out.println("leaRefId: " + e.getLeaRefId());
+            System.out.println("schoolRefId: " + e.getSchoolRefId());
+            System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
+            System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
+            System.out.println("membershipType: " + e.getMembershipType());
+            System.out.println("entryDate: " + e.getEntryDate());
+            System.out.println("exitDate: " + e.getExitDate());
+            System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
+            System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+            System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
+            System.out.println("localId: " + e.getHomeRoomTeacher().getLocalId());
+            System.out.println("givenName: " + e.getHomeRoomTeacher().getGivenName());
+            System.out.println("familyName: " + e.getHomeRoomTeacher().getFamilyName());
+            System.out.println("##### END HOMEROOMTEACHER #####");
+            System.out.println("gradeLevel: " + e.getGradeLevel());
+            System.out.println("projectedGraduationYear: " + e.getProjectedGraduationYear());
+            System.out.println("##### BEGIN COUNSELOR #####");
+            System.out.println("refId: " + e.getCounselor().getRefId());
+            System.out.println("localId: " + e.getCounselor().getLocalId());
+            System.out.println("givenName: " + e.getCounselor().getGivenName());
+            System.out.println("familyName: " + e.getCounselor().getFamilyName());
+            System.out.println("##### END COUNSELOR #####"); 
+        }
+        System.out.println("##### END OTHERENROLLMENT #####");
+        System.out.println("##### BEGIN ACADEMICSUMMARY #####");
+        System.out.println("cumulativeWeightedGpa: " + s.getAcademicSummary().getCumulativeWeightedGpa());
+        System.out.println("termWeightedGpa: " + s.getAcademicSummary().getTermWeightedGpa());
+        System.out.println("classRank: " + s.getAcademicSummary().getClassRank());
+        System.out.println("##### END ACADEMICSUMMARY #####");
+        System.out.println("##### BEGIN STUDENTCONTACTS #####");
+        for(String contactRefid : s.getStudentContacts().getContactPersonRefId())
+        {
+            System.out.println("contactPersonRefId: " + contactRefid);
+        }
+        for(XContactType c : s.getStudentContacts().getXContact())
+        {
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + c.getName().getType());
+            System.out.println("prefix: " + c.getName().getPrefix());
+            System.out.println("familyName: " + c.getName().getFamilyName());
+            System.out.println("givenName: " + c.getName().getGivenName());
+            System.out.println("middleName: " + c.getName().getMiddleName());
+            System.out.println("suffix: " + c.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : c.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+            System.out.println(": " + c.getLocalId());
+            System.out.println(": " + c.getLoginId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + c.getAddress().getAddressType());
+            System.out.println("city: " + c.getAddress().getCity());
+            System.out.println("line1: " + c.getAddress().getLine1());
+            System.out.println("line2: " + c.getAddress().getLine2());
+            System.out.println("countryCode: " + c.getAddress().getCountryCode());
+            System.out.println("postalCode: " + c.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + c.getEmail().getEmailType());
+            System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : c.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println(": " + c.getSex());
+            System.out.println(": " + c.getEmployerType());
+            System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+            for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+            {
+                System.out.println("studentRefId: " + csr.getStudentRefId());
+                System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                System.out.println("restrictions: " + csr.getRestrictions());
+                System.out.println("livesWith: " + csr.isLivesWith());
+                System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                System.out.println("contactSequence: " + csr.getContactSequence());
+            }
+            System.out.println("##### END CONTACTRELATIONSHIPS #####");
+        }
+        System.out.println("##### END STUDENTCONTACTS #####");
+        System.out.println("##### BEGIN LANGUAGES #####");
+        for(XLanguageType l : s.getLanguages().getLanguage())
+        {
+            System.out.println("type: " + l.getType());
+            System.out.println("code: " + l.getCode());
+        }
+        System.out.println("##### END LANGUAGES #####");
+        System.out.println("========================================");
+    }
+    //RETURN STUDENTS BY LEA
+    public static void XStudents_GetXStudentsByXLea(RicOneApiClient ricOne)
+    {
+        for(XStudentType s : ricOne.sifXpress.GetXStudentsByXLea(refId))
+        {
+        	System.out.println("refId: " + s.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + s.getName().getType());
+            System.out.println("prefix: " + s.getName().getPrefix());
+            System.out.println("familyName: " + s.getName().getFamilyName());
+            System.out.println("givenName: " + s.getName().getGivenName());
+            System.out.println("middleName: " + s.getName().getMiddleName());
+            System.out.println("suffix: " + s.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : s.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + s.getLocalId());
+            System.out.println("loginId: " + s.getLoginId());
+            System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + s.getAddress().getAddressType());
+            System.out.println("city: " + s.getAddress().getCity());
+            System.out.println("line1: " + s.getAddress().getLine1());
+            System.out.println("line2: " + s.getAddress().getLine2());
+            System.out.println("countryCode: " + s.getAddress().getCountryCode());
+            System.out.println("postalCode: " + s.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + s.getAddress().getStateProvince());
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : s.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + s.getEmail().getEmailType());
+            System.out.println("emailAddress: " + s.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : s.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("##### BEGIN DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN RACES #####");
+            for(XRaceType r : s.getDemographics().getRaces().getRace())
+            {
+                System.out.println("race: " + r.getRace());
+            }
+            System.out.println("##### END RACES #####");
+            System.out.println("hispanicLatinoEthnicity: " + s.getDemographics().isHispanicLatinoEthnicity());
+            System.out.println("sex: " + s.getDemographics().getSex());
+            System.out.println("birthDate: " + s.getDemographics().getBirthDate());
+            System.out.println("countryOfBirth: " + s.getDemographics().getCountryOfBirth());
+            System.out.println("usCitizenshipStatus: " + s.getDemographics().getUsCitizenshipStatus());
+            System.out.println("##### END DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN ENROLLMENT #####");
+            System.out.println("leaRefId: " + s.getEnrollment().getLeaRefId());
+            System.out.println("schoolRefId: " + s.getEnrollment().getSchoolRefId());
+            System.out.println("studentSchoolAssociationRefId: " + s.getEnrollment().getStudentSchoolAssociationRefId());
+            System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
+            System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
+            System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+            System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+            System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
+            System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+            System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getHomeRoomTeacher().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getHomeRoomTeacher().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getHomeRoomTeacher().getFamilyName());
+            System.out.println("##### END HOMEROOMTEACHER #####");
+            System.out.println("gradeLevel: " + s.getEnrollment().getGradeLevel());
+            System.out.println("projectedGraduationYear: " + s.getEnrollment().getProjectedGraduationYear());
+            System.out.println("##### BEGIN COUNSELOR #####");
+            System.out.println("refId: " + s.getEnrollment().getCounselor().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getCounselor().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getCounselor().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getCounselor().getFamilyName());
+            System.out.println("##### END COUNSELOR #####");
+            System.out.println("##### END ENROLLMENT #####");
+            System.out.println("##### BEGIN OTHERENROLLMENT #####");
+            for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
+            {  
+                System.out.println("leaRefId: " + e.getLeaRefId());
+                System.out.println("schoolRefId: " + e.getSchoolRefId());
+                System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
+                System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
+                System.out.println("membershipType: " + e.getMembershipType());
+                System.out.println("entryDate: " + e.getEntryDate());
+                System.out.println("exitDate: " + e.getExitDate());
+                System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
+                System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+                System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
+                System.out.println("localId: " + e.getHomeRoomTeacher().getLocalId());
+                System.out.println("givenName: " + e.getHomeRoomTeacher().getGivenName());
+                System.out.println("familyName: " + e.getHomeRoomTeacher().getFamilyName());
+                System.out.println("##### END HOMEROOMTEACHER #####");
+                System.out.println("gradeLevel: " + e.getGradeLevel());
+                System.out.println("projectedGraduationYear: " + e.getProjectedGraduationYear());
+                System.out.println("##### BEGIN COUNSELOR #####");
+                System.out.println("refId: " + e.getCounselor().getRefId());
+                System.out.println("localId: " + e.getCounselor().getLocalId());
+                System.out.println("givenName: " + e.getCounselor().getGivenName());
+                System.out.println("familyName: " + e.getCounselor().getFamilyName());
+                System.out.println("##### END COUNSELOR #####"); 
+            }
+            System.out.println("##### END OTHERENROLLMENT #####");
+            System.out.println("##### BEGIN ACADEMICSUMMARY #####");
+            System.out.println("cumulativeWeightedGpa: " + s.getAcademicSummary().getCumulativeWeightedGpa());
+            System.out.println("termWeightedGpa: " + s.getAcademicSummary().getTermWeightedGpa());
+            System.out.println("classRank: " + s.getAcademicSummary().getClassRank());
+            System.out.println("##### END ACADEMICSUMMARY #####");
+            System.out.println("##### BEGIN STUDENTCONTACTS #####");
+            for(String contactRefid : s.getStudentContacts().getContactPersonRefId())
+            {
+                System.out.println("contactPersonRefId: " + contactRefid);
+            }
+            for(XContactType c : s.getStudentContacts().getXContact())
+            {
+                System.out.println("##### BEGIN NAME #####");
+                System.out.println("type: " + c.getName().getType());
+                System.out.println("prefix: " + c.getName().getPrefix());
+                System.out.println("familyName: " + c.getName().getFamilyName());
+                System.out.println("givenName: " + c.getName().getGivenName());
+                System.out.println("middleName: " + c.getName().getMiddleName());
+                System.out.println("suffix: " + c.getName().getSuffix());
+                System.out.println("##### END NAME #####");
+                System.out.println("##### BEGIN OTHERNAME #####");
+                for(XPersonNameType n : c.getOtherNames().getName())
+                {
+                    System.out.println("type: " + n.getType());
+                    System.out.println("prefix: " + n.getPrefix());
+                    System.out.println("familyName: " + n.getFamilyName());
+                    System.out.println("givenName: " + n.getGivenName());
+                    System.out.println("middleName: " + n.getMiddleName());
+                    System.out.println("suffix: " + n.getSuffix());
+                }
+                System.out.println("##### END OTHERNAME #####");
+                System.out.println(": " + c.getLocalId());
+                System.out.println(": " + c.getLoginId());
+                System.out.println("##### BEGIN OTHERIDS #####");
+                for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+                {
+                    System.out.println("id: " + id.getId());
+                    System.out.println("type: " + id.getType());
+                }
+                System.out.println("##### END OTHERIDS #####");
+                System.out.println("##### BEGIN ADDRESS #####");
+                System.out.println("addressType: " + c.getAddress().getAddressType());
+                System.out.println("city: " + c.getAddress().getCity());
+                System.out.println("line1: " + c.getAddress().getLine1());
+                System.out.println("line2: " + c.getAddress().getLine2());
+                System.out.println("countryCode: " + c.getAddress().getCountryCode());
+                System.out.println("postalCode: " + c.getAddress().getPostalCode());
+                System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END ADDRESS #####");
+                System.out.println("##### BEGIN PHONENUMBERS #####");
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END PHONENUMBERS #####");
+                System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+                for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+                {
+                    System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                    System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                    System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+                }
+                System.out.println("##### END OTHERPHONENUMBERS #####");
+                System.out.println("##### BEGIN EMAIL #####");
+                System.out.println("emailType: " + c.getEmail().getEmailType());
+                System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+                System.out.println("##### END EMAIL #####");
+                System.out.println("##### BEGIN OTHEREMAILS #####");
+                for(XEmailType e : c.getOtherEmails().getEmail())
+                {
+                    System.out.println("emailType: " + e.getEmailType());
+                    System.out.println("emailAddress: " + e.getEmailAddress());
+                }
+                System.out.println("##### END OTHEREMAILS #####");
+                System.out.println(": " + c.getSex());
+                System.out.println(": " + c.getEmployerType());
+                System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+                for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+                {
+                    System.out.println("studentRefId: " + csr.getStudentRefId());
+                    System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                    System.out.println("restrictions: " + csr.getRestrictions());
+                    System.out.println("livesWith: " + csr.isLivesWith());
+                    System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                    System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                    System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                    System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                    System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                    System.out.println("contactSequence: " + csr.getContactSequence());
+                }
+                System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            }
+            System.out.println("##### END STUDENTCONTACTS #####");
+            System.out.println("##### BEGIN LANGUAGES #####");
+            for(XLanguageType l : s.getLanguages().getLanguage())
+            {
+                System.out.println("type: " + l.getType());
+                System.out.println("code: " + l.getCode());
+            }
+            System.out.println("##### END LANGUAGES #####");
+            System.out.println("========================================");
+        }
+    }
+    //RETURN STUDENTS BY SCHOOL
+    public static void XStudents_GetXStudentsByXSchool(RicOneApiClient ricOne) 
+    {
+        for(XStudentType s : ricOne.sifXpress.GetXStudentsByXSchool(refId))
+        {
+        	System.out.println("refId: " + s.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + s.getName().getType());
+            System.out.println("prefix: " + s.getName().getPrefix());
+            System.out.println("familyName: " + s.getName().getFamilyName());
+            System.out.println("givenName: " + s.getName().getGivenName());
+            System.out.println("middleName: " + s.getName().getMiddleName());
+            System.out.println("suffix: " + s.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : s.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + s.getLocalId());
+            System.out.println("loginId: " + s.getLoginId());
+            System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + s.getAddress().getAddressType());
+            System.out.println("city: " + s.getAddress().getCity());
+            System.out.println("line1: " + s.getAddress().getLine1());
+            System.out.println("line2: " + s.getAddress().getLine2());
+            System.out.println("countryCode: " + s.getAddress().getCountryCode());
+            System.out.println("postalCode: " + s.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + s.getAddress().getStateProvince());
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : s.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + s.getEmail().getEmailType());
+            System.out.println("emailAddress: " + s.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : s.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("##### BEGIN DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN RACES #####");
+            for(XRaceType r : s.getDemographics().getRaces().getRace())
+            {
+                System.out.println("race: " + r.getRace());
+            }
+            System.out.println("##### END RACES #####");
+            System.out.println("hispanicLatinoEthnicity: " + s.getDemographics().isHispanicLatinoEthnicity());
+            System.out.println("sex: " + s.getDemographics().getSex());
+            System.out.println("birthDate: " + s.getDemographics().getBirthDate());
+            System.out.println("countryOfBirth: " + s.getDemographics().getCountryOfBirth());
+            System.out.println("usCitizenshipStatus: " + s.getDemographics().getUsCitizenshipStatus());
+            System.out.println("##### END DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN ENROLLMENT #####");
+            System.out.println("leaRefId: " + s.getEnrollment().getLeaRefId());
+            System.out.println("schoolRefId: " + s.getEnrollment().getSchoolRefId());
+            System.out.println("studentSchoolAssociationRefId: " + s.getEnrollment().getStudentSchoolAssociationRefId());
+            System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
+            System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
+            System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+            System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+            System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
+            System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+            System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getHomeRoomTeacher().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getHomeRoomTeacher().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getHomeRoomTeacher().getFamilyName());
+            System.out.println("##### END HOMEROOMTEACHER #####");
+            System.out.println("gradeLevel: " + s.getEnrollment().getGradeLevel());
+            System.out.println("projectedGraduationYear: " + s.getEnrollment().getProjectedGraduationYear());
+            System.out.println("##### BEGIN COUNSELOR #####");
+            System.out.println("refId: " + s.getEnrollment().getCounselor().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getCounselor().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getCounselor().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getCounselor().getFamilyName());
+            System.out.println("##### END COUNSELOR #####");
+            System.out.println("##### END ENROLLMENT #####");
+            System.out.println("##### BEGIN OTHERENROLLMENT #####");
+            for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
+            {  
+                System.out.println("leaRefId: " + e.getLeaRefId());
+                System.out.println("schoolRefId: " + e.getSchoolRefId());
+                System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
+                System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
+                System.out.println("membershipType: " + e.getMembershipType());
+                System.out.println("entryDate: " + e.getEntryDate());
+                System.out.println("exitDate: " + e.getExitDate());
+                System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
+                System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+                System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
+                System.out.println("localId: " + e.getHomeRoomTeacher().getLocalId());
+                System.out.println("givenName: " + e.getHomeRoomTeacher().getGivenName());
+                System.out.println("familyName: " + e.getHomeRoomTeacher().getFamilyName());
+                System.out.println("##### END HOMEROOMTEACHER #####");
+                System.out.println("gradeLevel: " + e.getGradeLevel());
+                System.out.println("projectedGraduationYear: " + e.getProjectedGraduationYear());
+                System.out.println("##### BEGIN COUNSELOR #####");
+                System.out.println("refId: " + e.getCounselor().getRefId());
+                System.out.println("localId: " + e.getCounselor().getLocalId());
+                System.out.println("givenName: " + e.getCounselor().getGivenName());
+                System.out.println("familyName: " + e.getCounselor().getFamilyName());
+                System.out.println("##### END COUNSELOR #####"); 
+            }
+            System.out.println("##### END OTHERENROLLMENT #####");
+            System.out.println("##### BEGIN ACADEMICSUMMARY #####");
+            System.out.println("cumulativeWeightedGpa: " + s.getAcademicSummary().getCumulativeWeightedGpa());
+            System.out.println("termWeightedGpa: " + s.getAcademicSummary().getTermWeightedGpa());
+            System.out.println("classRank: " + s.getAcademicSummary().getClassRank());
+            System.out.println("##### END ACADEMICSUMMARY #####");
+            System.out.println("##### BEGIN STUDENTCONTACTS #####");
+            for(String contactRefid : s.getStudentContacts().getContactPersonRefId())
+            {
+                System.out.println("contactPersonRefId: " + contactRefid);
+            }
+            for(XContactType c : s.getStudentContacts().getXContact())
+            {
+                System.out.println("##### BEGIN NAME #####");
+                System.out.println("type: " + c.getName().getType());
+                System.out.println("prefix: " + c.getName().getPrefix());
+                System.out.println("familyName: " + c.getName().getFamilyName());
+                System.out.println("givenName: " + c.getName().getGivenName());
+                System.out.println("middleName: " + c.getName().getMiddleName());
+                System.out.println("suffix: " + c.getName().getSuffix());
+                System.out.println("##### END NAME #####");
+                System.out.println("##### BEGIN OTHERNAME #####");
+                for(XPersonNameType n : c.getOtherNames().getName())
+                {
+                    System.out.println("type: " + n.getType());
+                    System.out.println("prefix: " + n.getPrefix());
+                    System.out.println("familyName: " + n.getFamilyName());
+                    System.out.println("givenName: " + n.getGivenName());
+                    System.out.println("middleName: " + n.getMiddleName());
+                    System.out.println("suffix: " + n.getSuffix());
+                }
+                System.out.println("##### END OTHERNAME #####");
+                System.out.println(": " + c.getLocalId());
+                System.out.println(": " + c.getLoginId());
+                System.out.println("##### BEGIN OTHERIDS #####");
+                for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+                {
+                    System.out.println("id: " + id.getId());
+                    System.out.println("type: " + id.getType());
+                }
+                System.out.println("##### END OTHERIDS #####");
+                System.out.println("##### BEGIN ADDRESS #####");
+                System.out.println("addressType: " + c.getAddress().getAddressType());
+                System.out.println("city: " + c.getAddress().getCity());
+                System.out.println("line1: " + c.getAddress().getLine1());
+                System.out.println("line2: " + c.getAddress().getLine2());
+                System.out.println("countryCode: " + c.getAddress().getCountryCode());
+                System.out.println("postalCode: " + c.getAddress().getPostalCode());
+                System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END ADDRESS #####");
+                System.out.println("##### BEGIN PHONENUMBERS #####");
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END PHONENUMBERS #####");
+                System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+                for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+                {
+                    System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                    System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                    System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+                }
+                System.out.println("##### END OTHERPHONENUMBERS #####");
+                System.out.println("##### BEGIN EMAIL #####");
+                System.out.println("emailType: " + c.getEmail().getEmailType());
+                System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+                System.out.println("##### END EMAIL #####");
+                System.out.println("##### BEGIN OTHEREMAILS #####");
+                for(XEmailType e : c.getOtherEmails().getEmail())
+                {
+                    System.out.println("emailType: " + e.getEmailType());
+                    System.out.println("emailAddress: " + e.getEmailAddress());
+                }
+                System.out.println("##### END OTHEREMAILS #####");
+                System.out.println(": " + c.getSex());
+                System.out.println(": " + c.getEmployerType());
+                System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+                for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+                {
+                    System.out.println("studentRefId: " + csr.getStudentRefId());
+                    System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                    System.out.println("restrictions: " + csr.getRestrictions());
+                    System.out.println("livesWith: " + csr.isLivesWith());
+                    System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                    System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                    System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                    System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                    System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                    System.out.println("contactSequence: " + csr.getContactSequence());
+                }
+                System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            }
+            System.out.println("##### END STUDENTCONTACTS #####");
+            System.out.println("##### BEGIN LANGUAGES #####");
+            for(XLanguageType l : s.getLanguages().getLanguage())
+            {
+                System.out.println("type: " + l.getType());
+                System.out.println("code: " + l.getCode());
+            }
+            System.out.println("##### END LANGUAGES #####");
+            System.out.println("========================================");
+        }
+    }
+    //RETURN STUDENTS BY ROSTER
+    public static void XStudents_GetXStudentsByXRoster(RicOneApiClient ricOne)
+    {
+        for(XStudentType s : ricOne.sifXpress.GetXStudentsByXRoster(refId))
+        {
+        	System.out.println("refId: " + s.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + s.getName().getType());
+            System.out.println("prefix: " + s.getName().getPrefix());
+            System.out.println("familyName: " + s.getName().getFamilyName());
+            System.out.println("givenName: " + s.getName().getGivenName());
+            System.out.println("middleName: " + s.getName().getMiddleName());
+            System.out.println("suffix: " + s.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : s.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + s.getLocalId());
+            System.out.println("loginId: " + s.getLoginId());
+            System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + s.getAddress().getAddressType());
+            System.out.println("city: " + s.getAddress().getCity());
+            System.out.println("line1: " + s.getAddress().getLine1());
+            System.out.println("line2: " + s.getAddress().getLine2());
+            System.out.println("countryCode: " + s.getAddress().getCountryCode());
+            System.out.println("postalCode: " + s.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + s.getAddress().getStateProvince());
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : s.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + s.getEmail().getEmailType());
+            System.out.println("emailAddress: " + s.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : s.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("##### BEGIN DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN RACES #####");
+            for(XRaceType r : s.getDemographics().getRaces().getRace())
+            {
+                System.out.println("race: " + r.getRace());
+            }
+            System.out.println("##### END RACES #####");
+            System.out.println("hispanicLatinoEthnicity: " + s.getDemographics().isHispanicLatinoEthnicity());
+            System.out.println("sex: " + s.getDemographics().getSex());
+            System.out.println("birthDate: " + s.getDemographics().getBirthDate());
+            System.out.println("countryOfBirth: " + s.getDemographics().getCountryOfBirth());
+            System.out.println("usCitizenshipStatus: " + s.getDemographics().getUsCitizenshipStatus());
+            System.out.println("##### END DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN ENROLLMENT #####");
+            System.out.println("leaRefId: " + s.getEnrollment().getLeaRefId());
+            System.out.println("schoolRefId: " + s.getEnrollment().getSchoolRefId());
+            System.out.println("studentSchoolAssociationRefId: " + s.getEnrollment().getStudentSchoolAssociationRefId());
+            System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
+            System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
+            System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+            System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+            System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
+            System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+            System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getHomeRoomTeacher().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getHomeRoomTeacher().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getHomeRoomTeacher().getFamilyName());
+            System.out.println("##### END HOMEROOMTEACHER #####");
+            System.out.println("gradeLevel: " + s.getEnrollment().getGradeLevel());
+            System.out.println("projectedGraduationYear: " + s.getEnrollment().getProjectedGraduationYear());
+            System.out.println("##### BEGIN COUNSELOR #####");
+            System.out.println("refId: " + s.getEnrollment().getCounselor().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getCounselor().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getCounselor().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getCounselor().getFamilyName());
+            System.out.println("##### END COUNSELOR #####");
+            System.out.println("##### END ENROLLMENT #####");
+            System.out.println("##### BEGIN OTHERENROLLMENT #####");
+            for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
+            {  
+                System.out.println("leaRefId: " + e.getLeaRefId());
+                System.out.println("schoolRefId: " + e.getSchoolRefId());
+                System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
+                System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
+                System.out.println("membershipType: " + e.getMembershipType());
+                System.out.println("entryDate: " + e.getEntryDate());
+                System.out.println("exitDate: " + e.getExitDate());
+                System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
+                System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+                System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
+                System.out.println("localId: " + e.getHomeRoomTeacher().getLocalId());
+                System.out.println("givenName: " + e.getHomeRoomTeacher().getGivenName());
+                System.out.println("familyName: " + e.getHomeRoomTeacher().getFamilyName());
+                System.out.println("##### END HOMEROOMTEACHER #####");
+                System.out.println("gradeLevel: " + e.getGradeLevel());
+                System.out.println("projectedGraduationYear: " + e.getProjectedGraduationYear());
+                System.out.println("##### BEGIN COUNSELOR #####");
+                System.out.println("refId: " + e.getCounselor().getRefId());
+                System.out.println("localId: " + e.getCounselor().getLocalId());
+                System.out.println("givenName: " + e.getCounselor().getGivenName());
+                System.out.println("familyName: " + e.getCounselor().getFamilyName());
+                System.out.println("##### END COUNSELOR #####"); 
+            }
+            System.out.println("##### END OTHERENROLLMENT #####");
+            System.out.println("##### BEGIN ACADEMICSUMMARY #####");
+            System.out.println("cumulativeWeightedGpa: " + s.getAcademicSummary().getCumulativeWeightedGpa());
+            System.out.println("termWeightedGpa: " + s.getAcademicSummary().getTermWeightedGpa());
+            System.out.println("classRank: " + s.getAcademicSummary().getClassRank());
+            System.out.println("##### END ACADEMICSUMMARY #####");
+            System.out.println("##### BEGIN STUDENTCONTACTS #####");
+            for(String contactRefid : s.getStudentContacts().getContactPersonRefId())
+            {
+                System.out.println("contactPersonRefId: " + contactRefid);
+            }
+            for(XContactType c : s.getStudentContacts().getXContact())
+            {
+                System.out.println("##### BEGIN NAME #####");
+                System.out.println("type: " + c.getName().getType());
+                System.out.println("prefix: " + c.getName().getPrefix());
+                System.out.println("familyName: " + c.getName().getFamilyName());
+                System.out.println("givenName: " + c.getName().getGivenName());
+                System.out.println("middleName: " + c.getName().getMiddleName());
+                System.out.println("suffix: " + c.getName().getSuffix());
+                System.out.println("##### END NAME #####");
+                System.out.println("##### BEGIN OTHERNAME #####");
+                for(XPersonNameType n : c.getOtherNames().getName())
+                {
+                    System.out.println("type: " + n.getType());
+                    System.out.println("prefix: " + n.getPrefix());
+                    System.out.println("familyName: " + n.getFamilyName());
+                    System.out.println("givenName: " + n.getGivenName());
+                    System.out.println("middleName: " + n.getMiddleName());
+                    System.out.println("suffix: " + n.getSuffix());
+                }
+                System.out.println("##### END OTHERNAME #####");
+                System.out.println(": " + c.getLocalId());
+                System.out.println(": " + c.getLoginId());
+                System.out.println("##### BEGIN OTHERIDS #####");
+                for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+                {
+                    System.out.println("id: " + id.getId());
+                    System.out.println("type: " + id.getType());
+                }
+                System.out.println("##### END OTHERIDS #####");
+                System.out.println("##### BEGIN ADDRESS #####");
+                System.out.println("addressType: " + c.getAddress().getAddressType());
+                System.out.println("city: " + c.getAddress().getCity());
+                System.out.println("line1: " + c.getAddress().getLine1());
+                System.out.println("line2: " + c.getAddress().getLine2());
+                System.out.println("countryCode: " + c.getAddress().getCountryCode());
+                System.out.println("postalCode: " + c.getAddress().getPostalCode());
+                System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END ADDRESS #####");
+                System.out.println("##### BEGIN PHONENUMBERS #####");
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END PHONENUMBERS #####");
+                System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+                for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+                {
+                    System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                    System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                    System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+                }
+                System.out.println("##### END OTHERPHONENUMBERS #####");
+                System.out.println("##### BEGIN EMAIL #####");
+                System.out.println("emailType: " + c.getEmail().getEmailType());
+                System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+                System.out.println("##### END EMAIL #####");
+                System.out.println("##### BEGIN OTHEREMAILS #####");
+                for(XEmailType e : c.getOtherEmails().getEmail())
+                {
+                    System.out.println("emailType: " + e.getEmailType());
+                    System.out.println("emailAddress: " + e.getEmailAddress());
+                }
+                System.out.println("##### END OTHEREMAILS #####");
+                System.out.println(": " + c.getSex());
+                System.out.println(": " + c.getEmployerType());
+                System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+                for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+                {
+                    System.out.println("studentRefId: " + csr.getStudentRefId());
+                    System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                    System.out.println("restrictions: " + csr.getRestrictions());
+                    System.out.println("livesWith: " + csr.isLivesWith());
+                    System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                    System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                    System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                    System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                    System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                    System.out.println("contactSequence: " + csr.getContactSequence());
+                }
+                System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            }
+            System.out.println("##### END STUDENTCONTACTS #####");
+            System.out.println("##### BEGIN LANGUAGES #####");
+            for(XLanguageType l : s.getLanguages().getLanguage())
+            {
+                System.out.println("type: " + l.getType());
+                System.out.println("code: " + l.getCode());
+            }
+            System.out.println("##### END LANGUAGES #####");
+            System.out.println("========================================");
+        }
+    }
+    //RETURN STUDENTS BY STAFF
+    public static void XStudents_GetXStudentsByXStaff(RicOneApiClient ricOne)
+    {
+        for(XStudentType s : ricOne.sifXpress.GetXStudentsByXStaff(refId))
+        {
+        	System.out.println("refId: " + s.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + s.getName().getType());
+            System.out.println("prefix: " + s.getName().getPrefix());
+            System.out.println("familyName: " + s.getName().getFamilyName());
+            System.out.println("givenName: " + s.getName().getGivenName());
+            System.out.println("middleName: " + s.getName().getMiddleName());
+            System.out.println("suffix: " + s.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : s.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + s.getLocalId());
+            System.out.println("loginId: " + s.getLoginId());
+            System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + s.getAddress().getAddressType());
+            System.out.println("city: " + s.getAddress().getCity());
+            System.out.println("line1: " + s.getAddress().getLine1());
+            System.out.println("line2: " + s.getAddress().getLine2());
+            System.out.println("countryCode: " + s.getAddress().getCountryCode());
+            System.out.println("postalCode: " + s.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + s.getAddress().getStateProvince());
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : s.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + s.getEmail().getEmailType());
+            System.out.println("emailAddress: " + s.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : s.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("##### BEGIN DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN RACES #####");
+            for(XRaceType r : s.getDemographics().getRaces().getRace())
+            {
+                System.out.println("race: " + r.getRace());
+            }
+            System.out.println("##### END RACES #####");
+            System.out.println("hispanicLatinoEthnicity: " + s.getDemographics().isHispanicLatinoEthnicity());
+            System.out.println("sex: " + s.getDemographics().getSex());
+            System.out.println("birthDate: " + s.getDemographics().getBirthDate());
+            System.out.println("countryOfBirth: " + s.getDemographics().getCountryOfBirth());
+            System.out.println("usCitizenshipStatus: " + s.getDemographics().getUsCitizenshipStatus());
+            System.out.println("##### END DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN ENROLLMENT #####");
+            System.out.println("leaRefId: " + s.getEnrollment().getLeaRefId());
+            System.out.println("schoolRefId: " + s.getEnrollment().getSchoolRefId());
+            System.out.println("studentSchoolAssociationRefId: " + s.getEnrollment().getStudentSchoolAssociationRefId());
+            System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
+            System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
+            System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+            System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+            System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
+            System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+            System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getHomeRoomTeacher().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getHomeRoomTeacher().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getHomeRoomTeacher().getFamilyName());
+            System.out.println("##### END HOMEROOMTEACHER #####");
+            System.out.println("gradeLevel: " + s.getEnrollment().getGradeLevel());
+            System.out.println("projectedGraduationYear: " + s.getEnrollment().getProjectedGraduationYear());
+            System.out.println("##### BEGIN COUNSELOR #####");
+            System.out.println("refId: " + s.getEnrollment().getCounselor().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getCounselor().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getCounselor().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getCounselor().getFamilyName());
+            System.out.println("##### END COUNSELOR #####");
+            System.out.println("##### END ENROLLMENT #####");
+            System.out.println("##### BEGIN OTHERENROLLMENT #####");
+            for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
+            {  
+                System.out.println("leaRefId: " + e.getLeaRefId());
+                System.out.println("schoolRefId: " + e.getSchoolRefId());
+                System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
+                System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
+                System.out.println("membershipType: " + e.getMembershipType());
+                System.out.println("entryDate: " + e.getEntryDate());
+                System.out.println("exitDate: " + e.getExitDate());
+                System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
+                System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+                System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
+                System.out.println("localId: " + e.getHomeRoomTeacher().getLocalId());
+                System.out.println("givenName: " + e.getHomeRoomTeacher().getGivenName());
+                System.out.println("familyName: " + e.getHomeRoomTeacher().getFamilyName());
+                System.out.println("##### END HOMEROOMTEACHER #####");
+                System.out.println("gradeLevel: " + e.getGradeLevel());
+                System.out.println("projectedGraduationYear: " + e.getProjectedGraduationYear());
+                System.out.println("##### BEGIN COUNSELOR #####");
+                System.out.println("refId: " + e.getCounselor().getRefId());
+                System.out.println("localId: " + e.getCounselor().getLocalId());
+                System.out.println("givenName: " + e.getCounselor().getGivenName());
+                System.out.println("familyName: " + e.getCounselor().getFamilyName());
+                System.out.println("##### END COUNSELOR #####"); 
+            }
+            System.out.println("##### END OTHERENROLLMENT #####");
+            System.out.println("##### BEGIN ACADEMICSUMMARY #####");
+            System.out.println("cumulativeWeightedGpa: " + s.getAcademicSummary().getCumulativeWeightedGpa());
+            System.out.println("termWeightedGpa: " + s.getAcademicSummary().getTermWeightedGpa());
+            System.out.println("classRank: " + s.getAcademicSummary().getClassRank());
+            System.out.println("##### END ACADEMICSUMMARY #####");
+            System.out.println("##### BEGIN STUDENTCONTACTS #####");
+            for(String contactRefid : s.getStudentContacts().getContactPersonRefId())
+            {
+                System.out.println("contactPersonRefId: " + contactRefid);
+            }
+            for(XContactType c : s.getStudentContacts().getXContact())
+            {
+                System.out.println("##### BEGIN NAME #####");
+                System.out.println("type: " + c.getName().getType());
+                System.out.println("prefix: " + c.getName().getPrefix());
+                System.out.println("familyName: " + c.getName().getFamilyName());
+                System.out.println("givenName: " + c.getName().getGivenName());
+                System.out.println("middleName: " + c.getName().getMiddleName());
+                System.out.println("suffix: " + c.getName().getSuffix());
+                System.out.println("##### END NAME #####");
+                System.out.println("##### BEGIN OTHERNAME #####");
+                for(XPersonNameType n : c.getOtherNames().getName())
+                {
+                    System.out.println("type: " + n.getType());
+                    System.out.println("prefix: " + n.getPrefix());
+                    System.out.println("familyName: " + n.getFamilyName());
+                    System.out.println("givenName: " + n.getGivenName());
+                    System.out.println("middleName: " + n.getMiddleName());
+                    System.out.println("suffix: " + n.getSuffix());
+                }
+                System.out.println("##### END OTHERNAME #####");
+                System.out.println(": " + c.getLocalId());
+                System.out.println(": " + c.getLoginId());
+                System.out.println("##### BEGIN OTHERIDS #####");
+                for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+                {
+                    System.out.println("id: " + id.getId());
+                    System.out.println("type: " + id.getType());
+                }
+                System.out.println("##### END OTHERIDS #####");
+                System.out.println("##### BEGIN ADDRESS #####");
+                System.out.println("addressType: " + c.getAddress().getAddressType());
+                System.out.println("city: " + c.getAddress().getCity());
+                System.out.println("line1: " + c.getAddress().getLine1());
+                System.out.println("line2: " + c.getAddress().getLine2());
+                System.out.println("countryCode: " + c.getAddress().getCountryCode());
+                System.out.println("postalCode: " + c.getAddress().getPostalCode());
+                System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END ADDRESS #####");
+                System.out.println("##### BEGIN PHONENUMBERS #####");
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END PHONENUMBERS #####");
+                System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+                for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+                {
+                    System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                    System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                    System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+                }
+                System.out.println("##### END OTHERPHONENUMBERS #####");
+                System.out.println("##### BEGIN EMAIL #####");
+                System.out.println("emailType: " + c.getEmail().getEmailType());
+                System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+                System.out.println("##### END EMAIL #####");
+                System.out.println("##### BEGIN OTHEREMAILS #####");
+                for(XEmailType e : c.getOtherEmails().getEmail())
+                {
+                    System.out.println("emailType: " + e.getEmailType());
+                    System.out.println("emailAddress: " + e.getEmailAddress());
+                }
+                System.out.println("##### END OTHEREMAILS #####");
+                System.out.println(": " + c.getSex());
+                System.out.println(": " + c.getEmployerType());
+                System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+                for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+                {
+                    System.out.println("studentRefId: " + csr.getStudentRefId());
+                    System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                    System.out.println("restrictions: " + csr.getRestrictions());
+                    System.out.println("livesWith: " + csr.isLivesWith());
+                    System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                    System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                    System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                    System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                    System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                    System.out.println("contactSequence: " + csr.getContactSequence());
+                }
+                System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            }
+            System.out.println("##### END STUDENTCONTACTS #####");
+            System.out.println("##### BEGIN LANGUAGES #####");
+            for(XLanguageType l : s.getLanguages().getLanguage())
+            {
+                System.out.println("type: " + l.getType());
+                System.out.println("code: " + l.getCode());
+            }
+            System.out.println("##### END LANGUAGES #####");
+            System.out.println("========================================");
+        }
+    }
+    //RETURN STUDENTS BY CONTACT
+    public static void XStudents_GetXStudentsByXContact(RicOneApiClient ricOne)
+    {
+        for(XStudentType s : ricOne.sifXpress.GetXStudentsByXContact(refId))
+        {
+        	System.out.println("refId: " + s.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + s.getName().getType());
+            System.out.println("prefix: " + s.getName().getPrefix());
+            System.out.println("familyName: " + s.getName().getFamilyName());
+            System.out.println("givenName: " + s.getName().getGivenName());
+            System.out.println("middleName: " + s.getName().getMiddleName());
+            System.out.println("suffix: " + s.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : s.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + s.getLocalId());
+            System.out.println("loginId: " + s.getLoginId());
+            System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + s.getAddress().getAddressType());
+            System.out.println("city: " + s.getAddress().getCity());
+            System.out.println("line1: " + s.getAddress().getLine1());
+            System.out.println("line2: " + s.getAddress().getLine2());
+            System.out.println("countryCode: " + s.getAddress().getCountryCode());
+            System.out.println("postalCode: " + s.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + s.getAddress().getStateProvince());
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + s.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + s.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + s.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : s.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + s.getEmail().getEmailType());
+            System.out.println("emailAddress: " + s.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : s.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("##### BEGIN DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN RACES #####");
+            for(XRaceType r : s.getDemographics().getRaces().getRace())
+            {
+                System.out.println("race: " + r.getRace());
+            }
+            System.out.println("##### END RACES #####");
+            System.out.println("hispanicLatinoEthnicity: " + s.getDemographics().isHispanicLatinoEthnicity());
+            System.out.println("sex: " + s.getDemographics().getSex());
+            System.out.println("birthDate: " + s.getDemographics().getBirthDate());
+            System.out.println("countryOfBirth: " + s.getDemographics().getCountryOfBirth());
+            System.out.println("usCitizenshipStatus: " + s.getDemographics().getUsCitizenshipStatus());
+            System.out.println("##### END DEMOGRAPHICS #####");
+            System.out.println("##### BEGIN ENROLLMENT #####");
+            System.out.println("leaRefId: " + s.getEnrollment().getLeaRefId());
+            System.out.println("schoolRefId: " + s.getEnrollment().getSchoolRefId());
+            System.out.println("studentSchoolAssociationRefId: " + s.getEnrollment().getStudentSchoolAssociationRefId());
+            System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
+            System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
+            System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+            System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+            System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
+            System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+            System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getHomeRoomTeacher().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getHomeRoomTeacher().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getHomeRoomTeacher().getFamilyName());
+            System.out.println("##### END HOMEROOMTEACHER #####");
+            System.out.println("gradeLevel: " + s.getEnrollment().getGradeLevel());
+            System.out.println("projectedGraduationYear: " + s.getEnrollment().getProjectedGraduationYear());
+            System.out.println("##### BEGIN COUNSELOR #####");
+            System.out.println("refId: " + s.getEnrollment().getCounselor().getRefId());
+            System.out.println("localId: " + s.getEnrollment().getCounselor().getLocalId());
+            System.out.println("givenName: " + s.getEnrollment().getCounselor().getGivenName());
+            System.out.println("familyName: " + s.getEnrollment().getCounselor().getFamilyName());
+            System.out.println("##### END COUNSELOR #####");
+            System.out.println("##### END ENROLLMENT #####");
+            System.out.println("##### BEGIN OTHERENROLLMENT #####");
+            for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
+            {  
+                System.out.println("leaRefId: " + e.getLeaRefId());
+                System.out.println("schoolRefId: " + e.getSchoolRefId());
+                System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
+                System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
+                System.out.println("membershipType: " + e.getMembershipType());
+                System.out.println("entryDate: " + e.getEntryDate());
+                System.out.println("exitDate: " + e.getExitDate());
+                System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
+                System.out.println("##### BEGIN HOMEROOMTEACHER #####");
+                System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
+                System.out.println("localId: " + e.getHomeRoomTeacher().getLocalId());
+                System.out.println("givenName: " + e.getHomeRoomTeacher().getGivenName());
+                System.out.println("familyName: " + e.getHomeRoomTeacher().getFamilyName());
+                System.out.println("##### END HOMEROOMTEACHER #####");
+                System.out.println("gradeLevel: " + e.getGradeLevel());
+                System.out.println("projectedGraduationYear: " + e.getProjectedGraduationYear());
+                System.out.println("##### BEGIN COUNSELOR #####");
+                System.out.println("refId: " + e.getCounselor().getRefId());
+                System.out.println("localId: " + e.getCounselor().getLocalId());
+                System.out.println("givenName: " + e.getCounselor().getGivenName());
+                System.out.println("familyName: " + e.getCounselor().getFamilyName());
+                System.out.println("##### END COUNSELOR #####"); 
+            }
+            System.out.println("##### END OTHERENROLLMENT #####");
+            System.out.println("##### BEGIN ACADEMICSUMMARY #####");
+            System.out.println("cumulativeWeightedGpa: " + s.getAcademicSummary().getCumulativeWeightedGpa());
+            System.out.println("termWeightedGpa: " + s.getAcademicSummary().getTermWeightedGpa());
+            System.out.println("classRank: " + s.getAcademicSummary().getClassRank());
+            System.out.println("##### END ACADEMICSUMMARY #####");
+            System.out.println("##### BEGIN STUDENTCONTACTS #####");
+            for(String contactRefid : s.getStudentContacts().getContactPersonRefId())
+            {
+                System.out.println("contactPersonRefId: " + contactRefid);
+            }
+            for(XContactType c : s.getStudentContacts().getXContact())
+            {
+                System.out.println("##### BEGIN NAME #####");
+                System.out.println("type: " + c.getName().getType());
+                System.out.println("prefix: " + c.getName().getPrefix());
+                System.out.println("familyName: " + c.getName().getFamilyName());
+                System.out.println("givenName: " + c.getName().getGivenName());
+                System.out.println("middleName: " + c.getName().getMiddleName());
+                System.out.println("suffix: " + c.getName().getSuffix());
+                System.out.println("##### END NAME #####");
+                System.out.println("##### BEGIN OTHERNAME #####");
+                for(XPersonNameType n : c.getOtherNames().getName())
+                {
+                    System.out.println("type: " + n.getType());
+                    System.out.println("prefix: " + n.getPrefix());
+                    System.out.println("familyName: " + n.getFamilyName());
+                    System.out.println("givenName: " + n.getGivenName());
+                    System.out.println("middleName: " + n.getMiddleName());
+                    System.out.println("suffix: " + n.getSuffix());
+                }
+                System.out.println("##### END OTHERNAME #####");
+                System.out.println(": " + c.getLocalId());
+                System.out.println(": " + c.getLoginId());
+                System.out.println("##### BEGIN OTHERIDS #####");
+                for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+                {
+                    System.out.println("id: " + id.getId());
+                    System.out.println("type: " + id.getType());
+                }
+                System.out.println("##### END OTHERIDS #####");
+                System.out.println("##### BEGIN ADDRESS #####");
+                System.out.println("addressType: " + c.getAddress().getAddressType());
+                System.out.println("city: " + c.getAddress().getCity());
+                System.out.println("line1: " + c.getAddress().getLine1());
+                System.out.println("line2: " + c.getAddress().getLine2());
+                System.out.println("countryCode: " + c.getAddress().getCountryCode());
+                System.out.println("postalCode: " + c.getAddress().getPostalCode());
+                System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END ADDRESS #####");
+                System.out.println("##### BEGIN PHONENUMBERS #####");
+                System.out.println("number: " + c.getPhoneNumber().getNumber());
+                System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+                System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+                System.out.println("##### END PHONENUMBERS #####");
+                System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+                for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+                {
+                    System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                    System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                    System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+                }
+                System.out.println("##### END OTHERPHONENUMBERS #####");
+                System.out.println("##### BEGIN EMAIL #####");
+                System.out.println("emailType: " + c.getEmail().getEmailType());
+                System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+                System.out.println("##### END EMAIL #####");
+                System.out.println("##### BEGIN OTHEREMAILS #####");
+                for(XEmailType e : c.getOtherEmails().getEmail())
+                {
+                    System.out.println("emailType: " + e.getEmailType());
+                    System.out.println("emailAddress: " + e.getEmailAddress());
+                }
+                System.out.println("##### END OTHEREMAILS #####");
+                System.out.println(": " + c.getSex());
+                System.out.println(": " + c.getEmployerType());
+                System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+                for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+                {
+                    System.out.println("studentRefId: " + csr.getStudentRefId());
+                    System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                    System.out.println("restrictions: " + csr.getRestrictions());
+                    System.out.println("livesWith: " + csr.isLivesWith());
+                    System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                    System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                    System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                    System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                    System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                    System.out.println("contactSequence: " + csr.getContactSequence());
+                }
+                System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            }
+            System.out.println("##### END STUDENTCONTACTS #####");
+            System.out.println("##### BEGIN LANGUAGES #####");
+            for(XLanguageType l : s.getLanguages().getLanguage())
+            {
+                System.out.println("type: " + l.getType());
+                System.out.println("code: " + l.getCode());
+            }
+            System.out.println("##### END LANGUAGES #####");
+            System.out.println("========================================");        
+        }
+    }
+
  	// #################### xContacts ####################
-    
+    //RETURN ALL CONTACTS
+    public static void XContacts_GetXSContacts(RicOneApiClient ricOne)
+    {
+        for(XContactType c : ricOne.sifXpress.GetXContacts())
+        {
+            System.out.println("refId: " + c.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + c.getName().getType());
+            System.out.println("prefix: " + c.getName().getPrefix());
+            System.out.println("familyName: " + c.getName().getFamilyName());
+            System.out.println("givenName: " + c.getName().getGivenName());
+            System.out.println("middleName: " + c.getName().getMiddleName());
+            System.out.println("suffix: " + c.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : c.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + c.getLocalId());
+            System.out.println("loginId: " + c.getLoginId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + c.getAddress().getAddressType());
+            System.out.println("city: " + c.getAddress().getCity());
+            System.out.println("line1: " + c.getAddress().getLine1());
+            System.out.println("line2: " + c.getAddress().getLine2());
+            System.out.println("countryCode: " + c.getAddress().getCountryCode());
+            System.out.println("postalCode: " + c.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + c.getEmail().getEmailType());
+            System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : c.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("sex: " + c.getSex());
+            System.out.println("employerType: " + c.getEmployerType());
+            System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+            for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+            {
+                System.out.println("studentRefId: " + csr.getStudentRefId());
+                System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                System.out.println("restrictions: " + csr.getRestrictions());
+                System.out.println("livesWith: " + csr.isLivesWith());
+                System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                System.out.println("contactSequence: " + csr.getContactSequence());
+            }
+            System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            System.out.println("========================================");
+        }
+    }
+    //RETURN SINGLE CONTACT
+    public static void XContacts_GetXSContact(RicOneApiClient ricOne)
+    {
+        XContactType c = ricOne.sifXpress.GetXContact(refId);
+
+        System.out.println("refId: " + c.getRefId());
+        System.out.println("##### BEGIN NAME #####");
+        System.out.println("type: " + c.getName().getType());
+        System.out.println("prefix: " + c.getName().getPrefix());
+        System.out.println("familyName: " + c.getName().getFamilyName());
+        System.out.println("givenName: " + c.getName().getGivenName());
+        System.out.println("middleName: " + c.getName().getMiddleName());
+        System.out.println("suffix: " + c.getName().getSuffix());
+        System.out.println("##### END NAME #####");
+        System.out.println("##### BEGIN OTHERNAME #####");
+        for(XPersonNameType n : c.getOtherNames().getName())
+        {
+            System.out.println("type: " + n.getType());
+            System.out.println("prefix: " + n.getPrefix());
+            System.out.println("familyName: " + n.getFamilyName());
+            System.out.println("givenName: " + n.getGivenName());
+            System.out.println("middleName: " + n.getMiddleName());
+            System.out.println("suffix: " + n.getSuffix());
+        }
+        System.out.println("##### END OTHERNAME #####");
+
+        System.out.println("localId: " + c.getLocalId());
+        System.out.println("loginId: " + c.getLoginId());
+        System.out.println("##### BEGIN OTHERIDS #####");
+        for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+        {
+            System.out.println("id: " + id.getId());
+            System.out.println("type: " + id.getType());
+        }
+        System.out.println("##### END OTHERIDS #####");
+        System.out.println("##### BEGIN ADDRESS #####");
+        System.out.println("addressType: " + c.getAddress().getAddressType());
+        System.out.println("city: " + c.getAddress().getCity());
+        System.out.println("line1: " + c.getAddress().getLine1());
+        System.out.println("line2: " + c.getAddress().getLine2());
+        System.out.println("countryCode: " + c.getAddress().getCountryCode());
+        System.out.println("postalCode: " + c.getAddress().getPostalCode());
+        System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+        System.out.println("number: " + c.getPhoneNumber().getNumber());
+        System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+        System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+        System.out.println("##### END ADDRESS #####");
+        System.out.println("##### BEGIN PHONENUMBERS #####");
+        System.out.println("number: " + c.getPhoneNumber().getNumber());
+        System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+        System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+        System.out.println("##### END PHONENUMBERS #####");
+        System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+        for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+        {
+            System.out.println("otherPhoneNumbers number: " + p.getNumber());
+            System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+            System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+        }
+        System.out.println("##### END OTHERPHONENUMBERS #####");
+        System.out.println("##### BEGIN EMAIL #####");
+        System.out.println("emailType: " + c.getEmail().getEmailType());
+        System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+        System.out.println("##### END EMAIL #####");
+        System.out.println("##### BEGIN OTHEREMAILS #####");
+        for(XEmailType e : c.getOtherEmails().getEmail())
+        {
+            System.out.println("emailType: " + e.getEmailType());
+            System.out.println("emailAddress: " + e.getEmailAddress());
+        }
+        System.out.println("##### END OTHEREMAILS #####");
+        System.out.println("sex: " + c.getSex());
+        System.out.println("employerType: " + c.getEmployerType());
+        System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+        for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+        {
+            System.out.println("studentRefId: " + csr.getStudentRefId());
+            System.out.println("relationshipCode: " + csr.getRelationshipCode());
+            System.out.println("restrictions: " + csr.getRestrictions());
+            System.out.println("livesWith: " + csr.isLivesWith());
+            System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+            System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+            System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+            System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+            System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+            System.out.println("contactSequence: " + csr.getContactSequence());
+        }
+        System.out.println("##### END CONTACTRELATIONSHIPS #####");
+        System.out.println("========================================");
+    }
+    //RETURN CONTACTS BY LEA
+    public static void XContacts_GetXContactsByXLea(RicOneApiClient ricOne)
+    {
+        for(XContactType c : ricOne.sifXpress.GetXContactsByXLea(refId))
+        {
+        	System.out.println("refId: " + c.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + c.getName().getType());
+            System.out.println("prefix: " + c.getName().getPrefix());
+            System.out.println("familyName: " + c.getName().getFamilyName());
+            System.out.println("givenName: " + c.getName().getGivenName());
+            System.out.println("middleName: " + c.getName().getMiddleName());
+            System.out.println("suffix: " + c.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : c.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + c.getLocalId());
+            System.out.println("loginId: " + c.getLoginId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + c.getAddress().getAddressType());
+            System.out.println("city: " + c.getAddress().getCity());
+            System.out.println("line1: " + c.getAddress().getLine1());
+            System.out.println("line2: " + c.getAddress().getLine2());
+            System.out.println("countryCode: " + c.getAddress().getCountryCode());
+            System.out.println("postalCode: " + c.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + c.getEmail().getEmailType());
+            System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : c.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("sex: " + c.getSex());
+            System.out.println("employerType: " + c.getEmployerType());
+            System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+            for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+            {
+                System.out.println("studentRefId: " + csr.getStudentRefId());
+                System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                System.out.println("restrictions: " + csr.getRestrictions());
+                System.out.println("livesWith: " + csr.isLivesWith());
+                System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                System.out.println("contactSequence: " + csr.getContactSequence());
+            }
+            System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            System.out.println("========================================");
+        }
+    }
+    //RETURN CONTACTS BY SCHOOL
+    public static void XContacts_GetXContactsByXSchool(RicOneApiClient ricOne)
+    {
+        for(XContactType c : ricOne.sifXpress.GetXContactsByXSchool(refId))
+        {
+        	System.out.println("refId: " + c.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + c.getName().getType());
+            System.out.println("prefix: " + c.getName().getPrefix());
+            System.out.println("familyName: " + c.getName().getFamilyName());
+            System.out.println("givenName: " + c.getName().getGivenName());
+            System.out.println("middleName: " + c.getName().getMiddleName());
+            System.out.println("suffix: " + c.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : c.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + c.getLocalId());
+            System.out.println("loginId: " + c.getLoginId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + c.getAddress().getAddressType());
+            System.out.println("city: " + c.getAddress().getCity());
+            System.out.println("line1: " + c.getAddress().getLine1());
+            System.out.println("line2: " + c.getAddress().getLine2());
+            System.out.println("countryCode: " + c.getAddress().getCountryCode());
+            System.out.println("postalCode: " + c.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + c.getEmail().getEmailType());
+            System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : c.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("sex: " + c.getSex());
+            System.out.println("employerType: " + c.getEmployerType());
+            System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+            for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+            {
+                System.out.println("studentRefId: " + csr.getStudentRefId());
+                System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                System.out.println("restrictions: " + csr.getRestrictions());
+                System.out.println("livesWith: " + csr.isLivesWith());
+                System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                System.out.println("contactSequence: " + csr.getContactSequence());
+            }
+            System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            System.out.println("========================================");
+        }
+    }
+    //RETURN CONTACTS BY STUDENT
+    public static void XContacts_GetXContactsByXStudent(RicOneApiClient ricOne)
+    {
+        for(XContactType c : ricOne.sifXpress.GetXContactsByXStudent(refId))
+        {
+        	System.out.println("refId: " + c.getRefId());
+            System.out.println("##### BEGIN NAME #####");
+            System.out.println("type: " + c.getName().getType());
+            System.out.println("prefix: " + c.getName().getPrefix());
+            System.out.println("familyName: " + c.getName().getFamilyName());
+            System.out.println("givenName: " + c.getName().getGivenName());
+            System.out.println("middleName: " + c.getName().getMiddleName());
+            System.out.println("suffix: " + c.getName().getSuffix());
+            System.out.println("##### END NAME #####");
+            System.out.println("##### BEGIN OTHERNAME #####");
+            for(XPersonNameType n : c.getOtherNames().getName())
+            {
+                System.out.println("type: " + n.getType());
+                System.out.println("prefix: " + n.getPrefix());
+                System.out.println("familyName: " + n.getFamilyName());
+                System.out.println("givenName: " + n.getGivenName());
+                System.out.println("middleName: " + n.getMiddleName());
+                System.out.println("suffix: " + n.getSuffix());
+            }
+            System.out.println("##### END OTHERNAME #####");
+
+            System.out.println("localId: " + c.getLocalId());
+            System.out.println("loginId: " + c.getLoginId());
+            System.out.println("##### BEGIN OTHERIDS #####");
+            for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
+            {
+                System.out.println("id: " + id.getId());
+                System.out.println("type: " + id.getType());
+            }
+            System.out.println("##### END OTHERIDS #####");
+            System.out.println("##### BEGIN ADDRESS #####");
+            System.out.println("addressType: " + c.getAddress().getAddressType());
+            System.out.println("city: " + c.getAddress().getCity());
+            System.out.println("line1: " + c.getAddress().getLine1());
+            System.out.println("line2: " + c.getAddress().getLine2());
+            System.out.println("countryCode: " + c.getAddress().getCountryCode());
+            System.out.println("postalCode: " + c.getAddress().getPostalCode());
+            System.out.println("stateProvince: " + c.getAddress().getStateProvince());
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END ADDRESS #####");
+            System.out.println("##### BEGIN PHONENUMBERS #####");
+            System.out.println("number: " + c.getPhoneNumber().getNumber());
+            System.out.println("phoneNumberType: " + c.getPhoneNumber().getPhoneNumberType());
+            System.out.println("primaryIndicator: " + c.getPhoneNumber().isPrimaryIndicator());
+            System.out.println("##### END PHONENUMBERS #####");
+            System.out.println("##### BEGIN OTHERPHONENUMBERS #####");
+            for(XTelephoneType p : c.getOtherPhoneNumbers().getPhoneNumber())
+            {
+                System.out.println("otherPhoneNumbers number: " + p.getNumber());
+                System.out.println("phoneNumberType: " + p.getPhoneNumberType());
+                System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
+            }
+            System.out.println("##### END OTHERPHONENUMBERS #####");
+            System.out.println("##### BEGIN EMAIL #####");
+            System.out.println("emailType: " + c.getEmail().getEmailType());
+            System.out.println("emailAddress: " + c.getEmail().getEmailAddress());
+            System.out.println("##### END EMAIL #####");
+            System.out.println("##### BEGIN OTHEREMAILS #####");
+            for(XEmailType e : c.getOtherEmails().getEmail())
+            {
+                System.out.println("emailType: " + e.getEmailType());
+                System.out.println("emailAddress: " + e.getEmailAddress());
+            }
+            System.out.println("##### END OTHEREMAILS #####");
+            System.out.println("sex: " + c.getSex());
+            System.out.println("employerType: " + c.getEmployerType());
+            System.out.println("##### BEGIN CONTACTRELATIONSHIPS #####");
+            for(XContactStudentRelationshipType csr : c.getRelationships().getRelationship())
+            {
+                System.out.println("studentRefId: " + csr.getStudentRefId());
+                System.out.println("relationshipCode: " + csr.getRelationshipCode());
+                System.out.println("restrictions: " + csr.getRestrictions());
+                System.out.println("livesWith: " + csr.isLivesWith());
+                System.out.println("primaryContactIndicator: " + csr.isPrimaryContactIndicator());
+                System.out.println("emergencyContactIndicator: " + csr.isEmergencyContactIndicator());
+                System.out.println("financialResponsibilityIndicator: " + csr.isFinancialResponsibilityIndicator());
+                System.out.println("custodialIndicator: " + csr.isCustodialIndicator());
+                System.out.println("communicationsIndicator: " + csr.isCommunicationsIndicator());
+                System.out.println("contactSequence: " + csr.getContactSequence());
+            }
+            System.out.println("##### END CONTACTRELATIONSHIPS #####");
+            System.out.println("========================================");
+        }
+    }
     
 }

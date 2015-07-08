@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 
 import sif.dd.xPress.model.XCalendarCollectionType;
 import sif.dd.xPress.model.XCalendarType;
+import sif.dd.xPress.model.XContactCollectionType;
+import sif.dd.xPress.model.XContactType;
 import sif.dd.xPress.model.XCourseCollectionType;
 import sif.dd.xPress.model.XCourseType;
 import sif.dd.xPress.model.XLeaCollectionType;
@@ -15,6 +17,8 @@ import sif.dd.xPress.model.XSchoolCollectionType;
 import sif.dd.xPress.model.XSchoolType;
 import sif.dd.xPress.model.XStaffCollectionType;
 import sif.dd.xPress.model.XStaffType;
+import sif.dd.xPress.model.XStudentCollectionType;
+import sif.dd.xPress.model.XStudentType;
 
 public class SifXpress
 {
@@ -963,8 +967,340 @@ public class SifXpress
 		return response.getBody().getXStaff();  	
 	}
 	// #################### xStudents ####################
-	// #################### xContacts ####################
+	/**
+	 * 
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return All Students with paging
+	 */
+	public List<XStudentType> GetXStudents(String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStudents?accessToken=" + token + paging, XStudentCollectionType.class, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();  	
+	}
+	/**
+	 * 
+	 * @return All Students
+	 */
+	public List<XStudentType> GetXStudents()
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStudents?accessToken=" + token, XStudentCollectionType.class);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Single Student by refId with paging
+	 */
+	public XStudentType GetXStudent(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XStudentType> response = restTemplate.getForEntity(baseApiUrl + "xStudents/{refId}?accessToken=" + token + paging, XStudentType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Single Student by refId
+	 */
+	public XStudentType GetXStudent(String refId)
+	{	
+		ResponseEntity<XStudentType> response = restTemplate.getForEntity(baseApiUrl + "xStudents/{refId}?accessToken=" + token, XStudentType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Students associated to a specific Lea by refId with paging
+	 */
+	public List<XStudentType> GetXStudentsByXLea(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xStudents?accessToken=" + token + paging, XStudentCollectionType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Students associated to a specific Lea by refId
+	 */
+	public List<XStudentType> GetXStudentsByXLea(String refId)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xStudents?accessToken=" + token, XStudentCollectionType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Students associated to a specific School by refId with paging
+	 */
+	public List<XStudentType> GetXStudentsByXSchool(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xSchools/{refId}/xStudents?accessToken=" + token + paging, XStudentCollectionType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Students associated to a specific School by refId
+	 */
+	public List<XStudentType> GetXStudentsByXSchool(String refId)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xSchools/{refId}/xStudents?accessToken=" + token, XStudentCollectionType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Students associated to a specific Roster by refId with paging
+	 */
+	public List<XStudentType> GetXStudentsByXRoster(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xRosters/{refId}/xStudents?accessToken=" + token + paging, XStudentCollectionType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Students associated to a specific Roster by refId
+	 */
+	public List<XStudentType> GetXStudentsByXRoster(String refId)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xRosters/{refId}/xStudents?accessToken=" + token, XStudentCollectionType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Students associated to a specific Staff by refId with paging
+	 */
+	public List<XStudentType> GetXStudentsByXStaff(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStaffs/{refId}/xStudents?accessToken=" + token + paging, XStudentCollectionType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Students associated to a specific Staff by refId
+	 */
+	public List<XStudentType> GetXStudentsByXStaff(String refId)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStaffs/{refId}/xStudents?accessToken=" + token, XStudentCollectionType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Students associated to a specific Contact by refId with paging
+	 */
+	public List<XStudentType> GetXStudentsByXContact(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xContacts/{refId}/xStudents?accessToken=" + token + paging, XStudentCollectionType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Students associated to a specific Contact by refId
+	 */
+	public List<XStudentType> GetXStudentsByXContact(String refId)
+	{	
+		ResponseEntity<XStudentCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xContacts/{refId}/xStudents?accessToken=" + token, XStudentCollectionType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXStudent();	
+	}
 	
+	// #################### xContacts ####################
+	/**
+	 * 
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return All Contacts with paging
+	 */
+	public List<XContactType> GetXContacts(String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XContactCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xContacts?accessToken=" + token + paging, XContactCollectionType.class, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXContact();  	
+	}
+	/**
+	 * 
+	 * @return All Contacts
+	 */
+	public List<XContactType> GetXContacts()
+	{	
+		ResponseEntity<XContactCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xContacts?accessToken=" + token, XContactCollectionType.class);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXContact();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Single Contact by refId with paging
+	 */
+	public XContactType GetXContact(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XContactType> response = restTemplate.getForEntity(baseApiUrl + "xContacts/{refId}?accessToken=" + token + paging, XContactType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Single Contact by refId
+	 */
+	public XContactType GetXContact(String refId)
+	{	
+		ResponseEntity<XContactType> response = restTemplate.getForEntity(baseApiUrl + "xContacts/{refId}?accessToken=" + token, XContactType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Contacts associated to a specific Lea by refId wtih paging
+	 */
+	public List<XContactType> GetXContactsByXLea(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XContactCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xContacts?accessToken=" + token + paging, XContactCollectionType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXContact();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Contacts associated to a specific Lea by refId
+	 */
+	public List<XContactType> GetXContactsByXLea(String refId)
+	{	
+		ResponseEntity<XContactCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xContacts?accessToken=" + token, XContactCollectionType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXContact();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Contacts associated to a specific School by refId with paging
+	 */
+	public List<XContactType> GetXContactsByXSchool(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XContactCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xSchools/{refId}/xContacts?accessToken=" + token + paging, XContactCollectionType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXContact();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Contacts associated to a specific School by refId
+	 */
+	public List<XContactType> GetXContactsByXSchool(String refId)
+	{	
+		ResponseEntity<XContactCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xSchools/{refId}/xContacts?accessToken=" + token, XContactCollectionType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXContact();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Contacts associated to a specific Student by refId with paging
+	 */
+	public List<XContactType> GetXContactsByXStudent(String refId, String navigationPage, String navigationPageSize)
+	{	
+		ResponseEntity<XContactCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStudents/{refId}/xContacts?accessToken=" + token + paging, XContactCollectionType.class, refId, navigationPage, navigationPageSize);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXContact();  	
+	}
+	/**
+	 * 
+	 * @param refId
+	 * @return Contacts associated to a specific Student by refId
+	 */
+	public List<XContactType> GetXContactsByXStudent(String refId)
+	{	
+		ResponseEntity<XContactCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStudents/{refId}/xContacts?accessToken=" + token, XContactCollectionType.class, refId);
+		
+		Util.ResponseHandler(response.getStatusCode());
+		
+		return response.getBody().getXContact();  	
+	}
 	
 	
 }
