@@ -3,22 +3,22 @@ import java.util.List;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
 
-import sif.dd.xPress.model.XCalendarCollectionType;
-import sif.dd.xPress.model.XCalendarType;
-import sif.dd.xPress.model.XContactCollectionType;
-import sif.dd.xPress.model.XContactType;
-import sif.dd.xPress.model.XCourseCollectionType;
-import sif.dd.xPress.model.XCourseType;
-import sif.dd.xPress.model.XLeaCollectionType;
-import sif.dd.xPress.model.XLeaType;
-import sif.dd.xPress.model.XRosterCollectionType;
-import sif.dd.xPress.model.XRosterType;
-import sif.dd.xPress.model.XSchoolCollectionType;
-import sif.dd.xPress.model.XSchoolType;
-import sif.dd.xPress.model.XStaffCollectionType;
-import sif.dd.xPress.model.XStaffType;
-import sif.dd.xPress.model.XStudentCollectionType;
-import sif.dd.xPress.model.XStudentType;
+import riconeapi.models.sifxpress.XCalendarCollectionType;
+import riconeapi.models.sifxpress.XCalendarType;
+import riconeapi.models.sifxpress.XContactCollectionType;
+import riconeapi.models.sifxpress.XContactType;
+import riconeapi.models.sifxpress.XCourseCollectionType;
+import riconeapi.models.sifxpress.XCourseType;
+import riconeapi.models.sifxpress.XLeaCollectionType;
+import riconeapi.models.sifxpress.XLeaType;
+import riconeapi.models.sifxpress.XRosterCollectionType;
+import riconeapi.models.sifxpress.XRosterType;
+import riconeapi.models.sifxpress.XSchoolCollectionType;
+import riconeapi.models.sifxpress.XSchoolType;
+import riconeapi.models.sifxpress.XStaffCollectionType;
+import riconeapi.models.sifxpress.XStaffType;
+import riconeapi.models.sifxpress.XStudentCollectionType;
+import riconeapi.models.sifxpress.XStudentType;
 
 public class SifXpress
 {
@@ -232,7 +232,7 @@ public class SifXpress
 	 */
 	public XSchoolType GetXSchool(String refId)
     {	
-		ResponseEntity<XSchoolType> response = restTemplate.getForEntity(baseApiUrl + "xSchools/{refId}?accessToken=" + token + paging, XSchoolType.class, refId);
+		ResponseEntity<XSchoolType> response = restTemplate.getForEntity(baseApiUrl + "xSchools/{refId}?accessToken=" + token, XSchoolType.class, refId);
 		
 		Util.ResponseHandler(response.getStatusCode());
 		
@@ -260,7 +260,7 @@ public class SifXpress
 	 */
 	public List<XSchoolType> GetXSchoolsByXLea(String refId)
     {	
-		ResponseEntity<XSchoolCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xSchools?accessToken=" + token + paging, XSchoolCollectionType.class, refId);
+		ResponseEntity<XSchoolCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xSchools?accessToken=" + token, XSchoolCollectionType.class, refId);
 		
 		Util.ResponseHandler(response.getStatusCode());
 		

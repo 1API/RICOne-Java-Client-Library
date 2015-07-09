@@ -1,27 +1,27 @@
 import riconeapi.models.authentication.Endpoint;
-import sif.dd.xPress.model.XCalendarType;
-import sif.dd.xPress.model.XContactStudentRelationshipType;
-import sif.dd.xPress.model.XContactType;
-import sif.dd.xPress.model.XCourseType;
-import sif.dd.xPress.model.XEmailType;
-import sif.dd.xPress.model.XEnrollmentType;
-import sif.dd.xPress.model.XLanguageType;
-import sif.dd.xPress.model.XLeaType;
-import sif.dd.xPress.model.XMeetingTimeType;
-import sif.dd.xPress.model.XOtherCourseIdType;
-import sif.dd.xPress.model.XOtherOrganizationIdType;
-import sif.dd.xPress.model.XOtherPersonIdType;
-import sif.dd.xPress.model.XPersonNameType;
-import sif.dd.xPress.model.XPersonReferenceType;
-import sif.dd.xPress.model.XRaceType;
-import sif.dd.xPress.model.XStaffPersonAssignmentType;
-import sif.dd.xPress.model.XRosterType;
-import sif.dd.xPress.model.XSchoolType;
-import sif.dd.xPress.model.XSessionType;
-import sif.dd.xPress.model.XStaffReferenceType;
-import sif.dd.xPress.model.XStaffType;
-import sif.dd.xPress.model.XStudentType;
-import sif.dd.xPress.model.XTelephoneType;
+import riconeapi.models.sifxpress.XCalendarType;
+import riconeapi.models.sifxpress.XContactStudentRelationshipType;
+import riconeapi.models.sifxpress.XContactType;
+import riconeapi.models.sifxpress.XCourseType;
+import riconeapi.models.sifxpress.XEmailType;
+import riconeapi.models.sifxpress.XEnrollmentType;
+import riconeapi.models.sifxpress.XLanguageType;
+import riconeapi.models.sifxpress.XLeaType;
+import riconeapi.models.sifxpress.XMeetingTimeType;
+import riconeapi.models.sifxpress.XOtherCourseIdType;
+import riconeapi.models.sifxpress.XOtherOrganizationIdType;
+import riconeapi.models.sifxpress.XOtherPersonIdType;
+import riconeapi.models.sifxpress.XPersonNameType;
+import riconeapi.models.sifxpress.XPersonReferenceType;
+import riconeapi.models.sifxpress.XRaceType;
+import riconeapi.models.sifxpress.XRosterType;
+import riconeapi.models.sifxpress.XSchoolType;
+import riconeapi.models.sifxpress.XSessionType;
+import riconeapi.models.sifxpress.XStaffPersonAssignmentType;
+import riconeapi.models.sifxpress.XStaffReferenceType;
+import riconeapi.models.sifxpress.XStaffType;
+import riconeapi.models.sifxpress.XStudentType;
+import riconeapi.models.sifxpress.XTelephoneType;
 
 public class RicOneApiTests
 {
@@ -134,8 +134,6 @@ public class RicOneApiTests
 //            XContacts_GetXContactsByXLea(ricOne);
 //            XContacts_GetXContactsByXSchool(ricOne);
 //            XContacts_GetXContactsByXStudent(ricOne);
-
-
 		}
 
 	}
@@ -144,7 +142,7 @@ public class RicOneApiTests
 	//RETURN ALL LEAS
 	public static void XLeas_GetXLeas(RicOneApiClient ricOne)
 	{
-		for (XLeaType lea : ricOne.sifXpress.GetXLeas(navigationPage, navigationPageSize))
+		for (XLeaType lea : ricOne.sifXpress.GetXLeas())
 		{	
 			
 			System.out.println("refId: " + lea.getRefId());
