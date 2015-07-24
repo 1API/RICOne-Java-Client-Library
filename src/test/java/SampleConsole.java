@@ -5,14 +5,14 @@ import riconeapi.models.sifxpress.XRosterType;
 
 public class SampleConsole
 {
-	//private static final String username = "YOUR USERNAME";
-    //private static final String password = "YOUR PASSWORD";
-	private static final String username = "Full_3";
-	private static final String password = "Full_3";
-	//Optional
-	private static final String providerId = "SCRIC - Test Data Provider 1";
-	private static final String navigationPage = "1";
-	private static final String navigationPageSize = "5";
+	// static final String username = "YOUR USERNAME";
+	// static final String password = "YOUR PASSWORD";
+	static final String username = "Full_3";
+	static final String password = "Full_3";
+	// Optional
+	static final String providerId = "SCRIC - Test Data Provider 1";
+	// static final int navigationPage = 1;
+	static final int navigationPageSize = 500;
 
 	public static void main(String[] args)
 	{
@@ -24,18 +24,22 @@ public class SampleConsole
 
             for(XLeaType l : ricOne.sifXpress.GetXLeas()) //Iterate through each xLea
             {
-                for(XRosterType r : ricOne.sifXpress.GetXRostersByXLea(l.getRefId(), navigationPage, navigationPageSize)) //Get each roster for each lea refId w/ paging
-                {
-                    System.out.println("courseTitle: " + r.getCourseTitle());
-                    for(XPersonReferenceType p : r.getStudents().getStudentReference()) //Students for each course
-                    {
-                        System.out.println("refId: " + p.getRefId());
-                        System.out.println("localId: " + p.getLocalId());
-                        System.out.println("givenName: " + p.getGivenName());
-                        System.out.println("familyName: " + p.getFamilyName());
-                    }
-
-                }
+            	for (int i = 1; i <= ricOne.sifXpress.GetLastPage(navigationPageSize, SifXpress.ServicePath.GetXRostersByXLea, l.getRefId()); i++) //Get max page size for rosters by lea
+        		{
+	                for(XRosterType r : ricOne.sifXpress.GetXRostersByXLea(l.getRefId(), i, navigationPageSize)) //Get each roster for each lea refId w/ paging
+	                {
+	                    System.out.println("courseTitle: " + r.getCourseTitle());
+	                    for(XPersonReferenceType p : r.getStudents().getStudentReference()) //Students for each course
+	                    {
+	                        System.out.println("refId: " + p.getRefId());
+	                        System.out.println("localId: " + p.getLocalId());
+	                        System.out.println("givenName: " + p.getGivenName());
+	                        System.out.println("familyName: " + p.getFamilyName());
+	                    }
+	
+	                }
+	                System.out.println("######## PAGE " + i + " ########");
+        		}
             }
         }
 
