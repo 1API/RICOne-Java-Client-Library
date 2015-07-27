@@ -3,6 +3,10 @@ import org.springframework.http.HttpStatus;
 
 public class Util
 {
+	/**
+	 * Response handler to return HTTP Status Codes if an error with a request occurs
+	 * @param response
+	 */
 	 public static void ResponseHandler(HttpStatus response)
      {
          HttpStatus httpStatusCode = response;

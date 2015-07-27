@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * UserInfo type contains id, user_name, token, and list of endpoints
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserInfo implements Serializable {
 

@@ -3,7 +3,10 @@ package riconeapi.models.authentication;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
+/**
+ * Endpoint type contatins enpoint name, href, and token
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Endpoint implements Serializable {
 	

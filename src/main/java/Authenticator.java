@@ -7,7 +7,10 @@ import org.springframework.web.client.RestTemplate;
 
 import riconeapi.models.authentication.*;
 
-
+/**
+ * Contains methods to authenticate and pull data from OAuth server
+ *
+ */
 public class Authenticator
 {
 	final String oauthBaseUrl = "http://oauth.riconeapi.net/login";

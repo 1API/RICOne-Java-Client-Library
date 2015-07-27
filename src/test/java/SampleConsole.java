@@ -5,12 +5,10 @@ import riconeapi.models.sifxpress.XRosterType;
 
 public class SampleConsole
 {
-	// static final String username = "YOUR USERNAME";
-	// static final String password = "YOUR PASSWORD";
-	static final String username = "Full_3";
-	static final String password = "Full_3";
+	static final String username = "YOUR USERNAME";
+	static final String password = "YOUR PASSWORD";
 	// Optional
-	static final String providerId = "SCRIC - Test Data Provider 1";
+	static final String providerId = "North East Regional Information Center - productio";
 	// static final int navigationPage = 1;
 	static final int navigationPageSize = 500;
 
