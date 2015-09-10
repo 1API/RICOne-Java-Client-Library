@@ -6,12 +6,6 @@ The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTe
 (http://projects.spring.io/spring-framework/), and FasterXML Jackson (http://wiki.fasterxml.com/JacksonHome). 
 The client library supports OAuth2 authentication.
 
-
-## v1.1
-* Added max page size
-
-## v1.0
-
 ### Features
 * Makes calls to the RICOne API using the SIFxPress model in Java projects
 * User can login to OAuth server using credentials to retrieve provider information
@@ -41,3 +35,10 @@ for(Endpoint e : auth.GetEndpoints())
 static final String username = "YOUR USERNAME";
 static final String password = "YOUR PASSWORD";
 ```
+## Change Log
+### v1.1.1
+* Modified Endpoint.java model file to include provider id
+* In Authenticator.java, switched GetEndPoints() to match on provider id versus provider name
+
+### v1.1
+* Added max page size
