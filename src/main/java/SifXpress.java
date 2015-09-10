@@ -1,3 +1,9 @@
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.1
+ * @since       Jul 24, 2015
+ * Filename		SifXpress.java
+ */
 import java.util.List;
 
 import org.springframework.web.client.RestTemplate;

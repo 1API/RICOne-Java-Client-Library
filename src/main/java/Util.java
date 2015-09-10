@@ -1,3 +1,9 @@
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.0
+ * @since       Jul 7, 2015
+ * Filename		Util.java
+ */
 import org.springframework.http.HttpStatus;
 
 

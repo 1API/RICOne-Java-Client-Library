@@ -1,3 +1,9 @@
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.0
+ * @since       Jul 2, 2015
+ * Filename		UserInfo.java
+ */
 package riconeapi.models.authentication;
 
 import java.io.Serializable;

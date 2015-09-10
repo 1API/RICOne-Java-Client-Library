@@ -1,3 +1,9 @@
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.1
+ * @since       Jul 27, 2015
+ * Filename		Authenticator.java
+ */
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,13 +65,12 @@ public class Authenticator
         vars.put("password", this.password);
        
         UserInfo user = rt.postForObject(oauthBaseUrl, vars, UserInfo.class);
-        
 
 		List<Endpoint> endpoints = new ArrayList();
         
         for(Endpoint e : user.getEndpoint())
         {
-        	if(e.getName().equals(providerId))
+        	if(e.getProviderId().equals(providerId))
         	{
         		endpoints.add(e);
         	}

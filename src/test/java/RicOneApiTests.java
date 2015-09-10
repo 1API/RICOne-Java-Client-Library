@@ -1,3 +1,9 @@
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.1
+ * @since       Jul 24, 2015
+ * Filename		UserInfo.java
+ */
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.sifxpress.XCalendarType;
 import riconeapi.models.sifxpress.XContactStudentRelationshipType;
@@ -26,11 +32,11 @@ import riconeapi.models.sifxpress.XTelephoneType;
 public class RicOneApiTests
 {
 	// Test Constants
-	final static String username = "Full_3";
-	final static String password = "Full_3";
+	final static String username = "Demo1";
+	final static String password = "Demo1";
 	// final String provider =
 	// "North East Regional Information Center - productio";
-	final static String providerId = "SCRIC - Test Data Provider 1";
+	final static String providerId = "NERIC01";
 	// static String navigationPage = "1";
 //	static int navigationPageSize = 2;
 	 static int navigationPageSize = 250;
@@ -61,12 +67,12 @@ public class RicOneApiTests
 	{
 		Authenticator auth = new Authenticator(username, password);
 		
-		for (Endpoint e : auth.GetEndpoints(providerId))
+		for (Endpoint e : auth.GetEndpoints())
 		{
 			RicOneApiClient ricOne = new RicOneApiClient(e);
 
 			// xLeas
-			// XLeas_GetXLeas(ricOne);
+//			 XLeas_GetXLeas(ricOne);
 			// XLeas_GetXLea(ricOne);
 			// XLeas_GetXLeasByXSchool(ricOne);
 			// XLeas_GetXLeasByXStudent(ricOne);
