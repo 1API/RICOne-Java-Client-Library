@@ -3,8 +3,7 @@ Copyright © 2014-2015 New York State Education Department. All rights reserved.
 
 # RICOne API Java Client Library
 The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTemplate
-(http://projects.spring.io/spring-framework/), and FasterXML Jackson (http://wiki.fasterxml.com/JacksonHome). 
-The client library supports OAuth2 authentication.
+(http://projects.spring.io/spring-framework/), and FasterXML Jackson (http://wiki.fasterxml.com/JacksonHome).
 
 
 ## v1.1
