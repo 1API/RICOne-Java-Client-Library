@@ -35,6 +35,15 @@ static final String username = "YOUR USERNAME";
 static final String password = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.1.2
+* Additional Service Paths
+     * xLeas/{id}/xCalendars
+     * xSchools/{id}/xCourses
+     * xSaffs/{id}/xLeas
+     * xRosters/{id}/xLeas
+     * xRosters/{id}/xCourses
+     * xStudents/{id}/xStaffs 
+
 ### v1.1.1
 * Modified Endpoint.java model file to include provider id
 * In Authenticator.java, switched GetEndPoints() to match on provider id versus provider name

@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.1
- * @since       Jul 24, 2015
+ * @version     1.1.2
+ * @since       Sep 29, 2015
  * Filename		SifXpress.java
  */
 import java.util.List;
@@ -132,7 +132,66 @@ public class SifXpress
 
 		return response.getBody().getXLea();
 	}
+	
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Leas associated to a specific Roster by refId with paging
+	 */
+	public List<XLeaType> GetXLeasByXRoster(String refId, Integer navigationPage, Integer navigationPageSize)
+	{
+		ResponseEntity<XLeaCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xRosters/{refId}/xLeas?accessToken=" + token + paging, XLeaCollectionType.class, refId, navigationPage, navigationPageSize);
 
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXLea();
+	}
+
+	/**
+	 * 
+	 * @param refId
+	 * @return Leas associated to a specific Roster by refId
+	 */
+	public List<XLeaType> GetXLeasByXRoster(String refId)
+	{
+		ResponseEntity<XLeaCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xRosters/{refId}/xLeas?accessToken=" + token, XLeaCollectionType.class, refId);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXLea();
+	}
+
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Leas associated to a specific Staff by refId with paging
+	 */
+	public List<XLeaType> GetXLeasByXStaff(String refId, Integer navigationPage, Integer navigationPageSize)
+	{
+		ResponseEntity<XLeaCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStaffs/{refId}/xLeas?accessToken=" + token + paging, XLeaCollectionType.class, refId, navigationPage, navigationPageSize);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXLea();
+	}
+
+	/**
+	 * 
+	 * @param refId
+	 * @return Leas associated to a specific Staff by refId
+	 */
+	public List<XLeaType> GetXLeasByXStaff(String refId)
+	{
+		ResponseEntity<XLeaCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStaffs/{refId}/xLeas?accessToken=" + token, XLeaCollectionType.class, refId);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXLea();
+	}
 	/**
 	 * 
 	 * @param refId
@@ -520,6 +579,36 @@ public class SifXpress
 
 		return response.getBody();
 	}
+	
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Calendars associated to a specific Lea by refId with paging
+	 */
+	public List<XCalendarType> GetXCalendarsByXLea(String refId, Integer navigationPage, Integer navigationPageSize)
+	{
+		ResponseEntity<XCalendarCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xCalendars?accessToken=" + token + paging, XCalendarCollectionType.class, refId, navigationPage, navigationPageSize);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXCalendar();
+	}
+
+	/**
+	 * 
+	 * @param refId
+	 * @return Calendars associated to a specific Lea by refId
+	 */
+	public List<XCalendarType> GetXCalendarsByXLea(String refId)
+	{
+		ResponseEntity<XCalendarCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xCalendars?accessToken=" + token, XCalendarCollectionType.class, refId);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXCalendar();
+	}
 
 	/**
 	 * 
@@ -634,6 +723,66 @@ public class SifXpress
 	public List<XCourseType> GetXCoursesByXLea(String refId)
 	{
 		ResponseEntity<XCourseCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas/{refId}/xCourses?accessToken=" + token, XCourseCollectionType.class, refId);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXCourse();
+	}
+	
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Courses associated to a specific School by refId with paging
+	 */
+	public List<XCourseType> GetXCoursesByXSchool(String refId, Integer navigationPage, Integer navigationPageSize)
+	{
+		ResponseEntity<XCourseCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xSchools/{refId}/xCourses?accessToken=" + token + paging, XCourseCollectionType.class, refId, navigationPage, navigationPageSize);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXCourse();
+	}
+
+	/**
+	 * 
+	 * @param refId
+	 * @return Courses associated to a specific School by refId
+	 */
+	public List<XCourseType> GetXCoursesByXSchool(String refId)
+	{
+		ResponseEntity<XCourseCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xSchools/{refId}/xCourses?accessToken=" + token, XCourseCollectionType.class, refId);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXCourse();
+	}
+	
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Courses associated to a specific Roster by refId with paging
+	 */
+	public List<XCourseType> GetXCoursesByXRoster(String refId, Integer navigationPage, Integer navigationPageSize)
+	{
+		ResponseEntity<XCourseCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xRosters/{refId}/xCourses?accessToken=" + token + paging, XCourseCollectionType.class, refId, navigationPage, navigationPageSize);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXCourse();
+	}
+
+	/**
+	 * 
+	 * @param refId
+	 * @return Courses associated to a specific Roster by refId
+	 */
+	public List<XCourseType> GetXCoursesByXRoster(String refId)
+	{
+		ResponseEntity<XCourseCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xRosters/{refId}/xCourses?accessToken=" + token, XCourseCollectionType.class, refId);
 
 		Util.ResponseHandler(response.getStatusCode());
 
@@ -859,9 +1008,9 @@ public class SifXpress
 	public List<XStaffType> GetXStaffs(Integer navigationPage, Integer navigationPageSize)
 	{
 		ResponseEntity<XStaffCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStaffs?accessToken=" + token + paging, XStaffCollectionType.class, navigationPage, navigationPageSize);
-
+		
 		Util.ResponseHandler(response.getStatusCode());
-
+		
 		return response.getBody().getXStaff();
 	}
 
@@ -872,9 +1021,9 @@ public class SifXpress
 	public List<XStaffType> GetXStaffs()
 	{
 		ResponseEntity<XStaffCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStaffs?accessToken=" + token, XStaffCollectionType.class);
-
+		
 		Util.ResponseHandler(response.getStatusCode());
-
+		
 		return response.getBody().getXStaff();
 	}
 
@@ -1022,6 +1171,36 @@ public class SifXpress
 	public List<XStaffType> GetXStaffsByXRoster(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xRosters/{refId}/xStaffs?accessToken=" + token, XStaffCollectionType.class, refId);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXStaff();
+	}
+	
+	/**
+	 * 
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Staffs associated to a specific Student by refId with paging
+	 */
+	public List<XStaffType> GetXStaffsByXStudent(String refId, Integer navigationPage, Integer navigationPageSize)
+	{
+		ResponseEntity<XStaffCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStudents/{refId}/xStaffs?accessToken=" + token + paging, XStaffCollectionType.class, refId, navigationPage, navigationPageSize);
+
+		Util.ResponseHandler(response.getStatusCode());
+
+		return response.getBody().getXStaff();
+	}
+
+	/**
+	 * 
+	 * @param refId
+	 * @return Staffs associated to a specific Student by refId
+	 */
+	public List<XStaffType> GetXStaffsByXStudent(String refId)
+	{
+		ResponseEntity<XStaffCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xStudents/{refId}/xStaffs?accessToken=" + token, XStaffCollectionType.class, refId);
 
 		Util.ResponseHandler(response.getStatusCode());
 
@@ -1393,11 +1572,11 @@ public class SifXpress
 	 */
 	public enum ServicePath
 	{
-		GetXLeas("xLeas"), GetXLeasByXSchool("xSchools/{refId}/xLeas"), GetXLeasByXStudent("xStudents/{refId}/xLeas"), GetXLeasByXContact("xContacts/{refId}/xLeas"), GetXSchools("xSchools"), GetXSchoolsByXLea("xLeas/{refId}/xSchools"), GetXSchoolsByXCalendar("xCalendars/{refId}/xSchools"), GetXSchoolsByXCourse(
-				"xCourses/{refId}/xSchools"), GetXSchoolsByXRoster("xRosters/{refId}/xSchools"), GetXSchoolsByXStaff("xStaffs/{refId}/xSchools"), GetXSchoolsByXStudent("xStudents/{refId}/xSchools"), GetXSchoolsByXContact("xContacts/{refId}/xSchools"), GetXCalendars("xCalendars"), GetXCalendarsByXSchool(
-				"xSchools/{refId}/xCalendars"), GetXCourses("xCourses"), GetXCoursesByXLea("xLeas/{refId}/xCourses"), GetXRosters("xRosters"), GetXRostersByXLea("xLeas/{refId}/xRosters"), GetXRostersByXSchool("xSchools/{refId}/xRosters"), GetXRostersByXCourse("xCourses/{refId}/xRosters"), GetXRostersByXStaff(
+		GetXLeas("xLeas"), GetXLeasByXSchool("xSchools/{refId}/xLeas"), GetXLeasByXRoster("xRosters/{refId}/xLeas"), GetXLeasByXStaff("xStaffs/{refId}/xLeas"), GetXLeasByXStudent("xStudents/{refId}/xLeas"), GetXLeasByXContact("xContacts/{refId}/xLeas"), GetXSchools("xSchools"), GetXSchoolsByXLea("xLeas/{refId}/xSchools"), GetXSchoolsByXCalendar("xCalendars/{refId}/xSchools"), GetXSchoolsByXCourse(
+				"xCourses/{refId}/xSchools"), GetXSchoolsByXRoster("xRosters/{refId}/xSchools"), GetXSchoolsByXStaff("xStaffs/{refId}/xSchools"), GetXSchoolsByXStudent("xStudents/{refId}/xSchools"), GetXSchoolsByXContact("xContacts/{refId}/xSchools"), GetXCalendars("xCalendars"), GetXCalendarsByXLea("xLeas/{refId}/xCalendars"), GetXCalendarsByXSchool(
+				"xSchools/{refId}/xCalendars"), GetXCourses("xCourses"), GetXCoursesByXLea("xLeas/{refId}/xCourses"), GetXCoursesByXSchool("xSchools/{refId}/xCourses"), GetXCoursesByXRoster("xRosters/{refId}/xCourses"), GetXRosters("xRosters"), GetXRostersByXLea("xLeas/{refId}/xRosters"), GetXRostersByXSchool("xSchools/{refId}/xRosters"), GetXRostersByXCourse("xCourses/{refId}/xRosters"), GetXRostersByXStaff(
 				"xStaffs/{refId}/xRosters"), GetXRostersByXStudent("xStudents/{refId}/xRosters"), GetXStaffs("xStaffs"), GetXStaffsByXLea("xLeas/{refId}/xStaffs"), GetXStaffsByXSchool("xSchools/{refId}/xStaffs"), GetXStaffsByXCourse("xCourses/{refId}/xStaffs"), GetXStaffsByXRoster(
-				"xRosters/{refId}/xStaffs"), GetXStudents("xStudents"), GetXStudentsByXLea("xLeas/{refId}/xStudents"), GetXStudentsByXSchool("xSchools/{refId}/xStudents"), GetXStudentsByXRoster("xRosters/{refId}/xStudents"), GetXStudentsByXStaff("xStaffs/{refId}/xStudents"), GetXStudentsByXContact(
+				"xRosters/{refId}/xStaffs"), GetXStaffsByXStudent("xStudents/{refId}/xStaffs"), GetXStudents("xStudents"), GetXStudentsByXLea("xLeas/{refId}/xStudents"), GetXStudentsByXSchool("xSchools/{refId}/xStudents"), GetXStudentsByXRoster("xRosters/{refId}/xStudents"), GetXStudentsByXStaff("xStaffs/{refId}/xStudents"), GetXStudentsByXContact(
 				"xContacts/{refId}/xStudents"), GetXContacts("xContacts"), GetXContactsByXLea("xLeas/{refId}/xContacts"), GetXContactsByXSchool("xSchools/{refId}/xContacts"), GetXContactsByXStudent("xStudents/{refId}/xContacts");
 
 		private String value;
@@ -1425,7 +1604,7 @@ public class SifXpress
 		int navigationPage = 1;
 		int navigationLastPage = 0;
 
-		if (p.name().equals("GetXLeasByXSchool") || p.name().equals("GetXLeasByXStudent") || p.name().equals("GetXLeasByXContact"))
+		if (p.name().equals("GetXLeasByXSchool") || p.name().equals("GetXLeasByXRoster") || p.name().equals("GetXLeasByXStaff") || p.name().equals("GetXLeasByXStudent") || p.name().equals("GetXLeasByXContact"))
 		{
 			ResponseEntity<XLeaCollectionType> response = restTemplate.getForEntity(baseApiUrl + p.value + "?accessToken=" + token + paging, XLeaCollectionType.class, refId, navigationPage, navigationPageSize);
 
@@ -1442,7 +1621,7 @@ public class SifXpress
 
 			navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 		}
-		else if (p.name().equals("GetXCalendarsByXSchool"))
+		else if (p.name().equals("GetXCalendarsByXLea") || p.name().equals("GetXCalendarsByXSchool"))
 		{
 			ResponseEntity<XCalendarCollectionType> response = restTemplate.getForEntity(baseApiUrl + p.value + "?accessToken=" + token + paging, XCalendarCollectionType.class, refId, navigationPage, navigationPageSize);
 
@@ -1450,7 +1629,7 @@ public class SifXpress
 
 			navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 		}
-		else if (p.name().equals("GetXCoursesByXLea"))
+		else if (p.name().equals("GetXCoursesByXLea") || p.name().equals("GetXCoursesByXSchool") || p.name().equals("GetXCoursesByXRoster"))
 		{
 			ResponseEntity<XCourseCollectionType> response = restTemplate.getForEntity(baseApiUrl + p.value + "?accessToken=" + token + paging, XCourseCollectionType.class, refId, navigationPage, navigationPageSize);
 
@@ -1466,7 +1645,7 @@ public class SifXpress
 
 			navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 		}
-		else if (p.name().equals("GetXStaffsByXLea") || p.name().equals("GetXStaffsByXSchool") || p.name().equals("GetXStaffsByXCourse") || p.name().equals("GetXStaffsByXRoster"))
+		else if (p.name().equals("GetXStaffsByXLea") || p.name().equals("GetXStaffsByXSchool") || p.name().equals("GetXStaffsByXCourse") || p.name().equals("GetXStaffsByXRoster") || p.name().equals("GetXStaffsByXStudent"))
 		{
 			ResponseEntity<XStaffCollectionType> response = restTemplate.getForEntity(baseApiUrl + p.value + "?accessToken=" + token + paging, XStaffCollectionType.class, refId, navigationPage, navigationPageSize);
 
@@ -1548,10 +1727,16 @@ public class SifXpress
 		else if (p.name().equals("GetXStaffs"))
 		{
 			ResponseEntity<XStaffCollectionType> response = restTemplate.getForEntity(baseApiUrl + p.value + "?accessToken=" + token + paging, XStaffCollectionType.class, navigationPage, navigationPageSize);
-
+			
 			Util.ResponseHandler(response.getStatusCode());
 
 			navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+			
+//			System.out.println(restTemplate.getForEntity(baseApiUrl + p.value + "?accessToken=" + token + paging, XStaffCollectionType.class, navigationPage, navigationPageSize).toString());
+//			System.out.println(response.getHeaders().toString());
+//			System.out.println(baseApiUrl + p.value + "?accessToken=" + token + paging);
+//			System.out.println(navigationLastPage);
+			
 		}
 		else if (p.name().equals("GetXStudents"))
 		{
