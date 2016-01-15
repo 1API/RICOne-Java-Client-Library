@@ -14,6 +14,8 @@ import javax.net.ssl.X509TrustManager;
 
 import java.security.cert.X509Certificate;
 
+import riconeapi.common.Authenticator;
+import riconeapi.common.RicOneApiClient;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.sifxpress.XCalendarType;
 import riconeapi.models.sifxpress.XContactStudentRelationshipType;

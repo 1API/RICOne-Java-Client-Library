@@ -4,6 +4,9 @@
  * @since       Jul 9, 2015
  * Filename		SampleConsole.java
  */
+import riconeapi.common.Authenticator;
+import riconeapi.common.RicOneApiClient;
+import riconeapi.common.SifXpress;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.sifxpress.XLeaType;
 import riconeapi.models.sifxpress.XPersonReferenceType;

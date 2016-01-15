@@ -35,6 +35,10 @@ static final String username = "YOUR USERNAME";
 static final String password = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.1.3
+* Updated auth url
+* Changed accessToken to access_token to reflect RFC 6750 specification
+
 ### v1.1.2
 * Additional Service Paths
      * xLeas/{id}/xCalendars

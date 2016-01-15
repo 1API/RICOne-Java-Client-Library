@@ -1,3 +1,5 @@
+package riconeapi.common;
+
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.0

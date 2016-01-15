@@ -1,3 +1,5 @@
+package riconeapi.common;
+
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.1
@@ -19,7 +21,7 @@ import riconeapi.models.authentication.*;
  */
 public class Authenticator
 {
-	final String oauthBaseUrl = "http://oauth.riconeapi.net/login";
+	final String oauthBaseUrl = "http://auth.ricone.org/login";
     private String username;
     private String password;
 
