@@ -1,11 +1,12 @@
-package riconeapi.common;
-
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.1
- * @since       Jul 27, 2015
+ * @version     1.1.3.1
+ * @since       Feb 04, 2016
  * Filename		Authenticator.java
  */
+
+package riconeapi.common;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,24 +17,25 @@ import org.springframework.web.client.RestTemplate;
 import riconeapi.models.authentication.*;
 
 /**
- * Contains methods to authenticate and pull data from OAuth server
+ * Contains methods to authenticate and pull data from auth server
  *
  */
 public class Authenticator
 {
-	final String oauthBaseUrl = "http://auth.ricone.org/login";
+	private String authUrl;
     private String username;
     private String password;
 
     private final RestTemplate rt;
     
     /**
-     * Establish connection to authenticate to OAuth server
+     * Establish connection to authenticate to auth server
      * @param username
      * @param password
      */
-    public Authenticator(String username, String password)
+    public Authenticator(String authUrl, String username, String password)
     {
+    	this.authUrl = authUrl;
         this.username = username;
         this.password = password;        
         rt = new RestTemplate();
@@ -49,7 +51,7 @@ public class Authenticator
 
          vars.put("username", this.username);
          vars.put("password", this.password);
-         UserInfo user = rt.postForObject(oauthBaseUrl, vars, UserInfo.class);
+         UserInfo user = rt.postForObject(authUrl, vars, UserInfo.class);
     	
     	return user;
     }
@@ -66,7 +68,7 @@ public class Authenticator
         vars.put("username", this.username);
         vars.put("password", this.password);
        
-        UserInfo user = rt.postForObject(oauthBaseUrl, vars, UserInfo.class);
+        UserInfo user = rt.postForObject(authUrl, vars, UserInfo.class);
 
 		List<Endpoint> endpoints = new ArrayList();
         
@@ -92,7 +94,7 @@ public class Authenticator
         vars.put("username", this.username);
         vars.put("password", this.password);
        
-        UserInfo user = rt.postForObject(oauthBaseUrl, vars, UserInfo.class);
+        UserInfo user = rt.postForObject(authUrl, vars, UserInfo.class);
            
         return user.getEndpoint();
     }

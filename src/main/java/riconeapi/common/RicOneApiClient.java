@@ -1,11 +1,12 @@
-package riconeapi.common;
-
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.0
  * @since       Jul 7, 2015
  * Filename		RicOneApiClient.java
  */
+
+package riconeapi.common;
+
 import org.springframework.web.client.RestTemplate;
 
 import riconeapi.models.authentication.*;

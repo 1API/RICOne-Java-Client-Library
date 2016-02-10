@@ -1,11 +1,12 @@
-package riconeapi.common;
-
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.0
  * @since       Jul 7, 2015
  * Filename		Util.java
  */
+
+package riconeapi.common;
+
 import org.springframework.http.HttpStatus;
 
 
@@ -19,16 +20,13 @@ public class Util
      {
          HttpStatus httpStatusCode = response;
 
-         if (httpStatusCode == HttpStatus.OK ||
-            httpStatusCode == HttpStatus.CREATED ||
-            httpStatusCode == HttpStatus.NO_CONTENT)
+         if (httpStatusCode == HttpStatus.OK)
          {
 //             System.out.println(httpStatusCode);
-             return;
          }
          else
          {
-        	 System.out.println("HttpError: " + httpStatusCode.toString());
+        	 System.out.println("HttpCode: " + httpStatusCode.toString());
          }
      }
 }

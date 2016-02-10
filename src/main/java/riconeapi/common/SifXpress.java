@@ -1,11 +1,12 @@
-package riconeapi.common;
-
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.1.2
- * @since       Sep 29, 2015
+ * @version     1.1.3.1
+ * @since       Feb 08, 2016
  * Filename		SifXpress.java
  */
+
+package riconeapi.common;
+
 import java.util.List;
 
 import org.springframework.web.client.RestTemplate;
@@ -57,9 +58,15 @@ public class SifXpress
 		ResponseEntity<XLeaCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas?access_token=" + token + paging, XLeaCollectionType.class, navigationPage, navigationPageSize);
 
 		Util.ResponseHandler(response.getStatusCode());
-
-		return response.getBody().getXLea();
-
+		
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -70,9 +77,15 @@ public class SifXpress
 		ResponseEntity<XLeaCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xLeas?access_token=" + token, XLeaCollectionType.class);
 
 		Util.ResponseHandler(response.getStatusCode());
-
-		return response.getBody().getXLea();
-
+		
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -88,7 +101,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -102,7 +122,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -118,7 +145,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -132,7 +166,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	/**
@@ -148,7 +189,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -162,7 +210,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -178,7 +233,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -192,7 +254,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 	/**
 	 * 
@@ -207,7 +276,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -221,7 +297,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -237,7 +320,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -251,7 +341,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXLea();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXLea();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	// #################### xSchools ####################
@@ -267,7 +364,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -280,7 +384,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -296,7 +407,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -310,7 +428,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -326,7 +451,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -340,7 +472,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -356,7 +495,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -370,7 +516,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -386,7 +539,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -400,7 +560,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -416,7 +583,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -430,7 +604,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -446,7 +627,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -460,7 +648,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -476,7 +671,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -490,7 +692,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -506,7 +715,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -520,7 +736,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXSchool();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXSchool();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	// #################### xCalendars ####################
@@ -535,8 +758,15 @@ public class SifXpress
 		ResponseEntity<XCalendarCollectionType> response = restTemplate.getForEntity(baseApiUrl + "xCalendars?access_token=" + token + paging, XCalendarCollectionType.class, navigationPage, navigationPageSize);
 
 		Util.ResponseHandler(response.getStatusCode());
-
-		return response.getBody().getXCalendar();
+		
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCalendar();
+		}
+		else
+		{
+			return null;
+		}	
 	}
 
 	/**
@@ -549,7 +779,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCalendar();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCalendar();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -565,7 +802,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -579,7 +823,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	/**
@@ -595,7 +846,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCalendar();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCalendar();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -609,7 +867,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCalendar();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCalendar();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -625,7 +890,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCalendar();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCalendar();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -639,7 +911,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCalendar();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCalendar();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	// #################### xCourses ####################
@@ -655,7 +934,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCourse();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCourse();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -668,7 +954,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCourse();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCourse();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -684,7 +977,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -698,7 +998,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -714,7 +1021,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCourse();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCourse();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -728,7 +1042,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCourse();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCourse();
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	/**
@@ -744,7 +1065,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCourse();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCourse();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -758,7 +1086,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCourse();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCourse();
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	/**
@@ -774,7 +1109,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCourse();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCourse();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -788,7 +1130,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXCourse();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXCourse();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	// #################### xRosters ####################
@@ -804,7 +1153,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -817,7 +1173,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -833,7 +1196,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -847,7 +1217,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -863,7 +1240,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -877,7 +1261,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -893,7 +1284,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -907,7 +1305,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -923,7 +1328,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -937,7 +1349,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -953,7 +1372,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -967,7 +1393,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -983,7 +1416,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -997,7 +1437,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXRoster();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXRoster();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	// #################### xStaffs ####################
@@ -1013,7 +1460,14 @@ public class SifXpress
 		
 		Util.ResponseHandler(response.getStatusCode());
 		
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1026,7 +1480,14 @@ public class SifXpress
 		
 		Util.ResponseHandler(response.getStatusCode());
 		
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1042,7 +1503,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1056,7 +1524,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1072,7 +1547,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1086,7 +1568,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1102,7 +1591,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1116,7 +1612,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1132,7 +1635,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1146,7 +1656,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1162,7 +1679,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1176,7 +1700,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	/**
@@ -1192,7 +1723,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1206,7 +1744,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStaff();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStaff();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	// #################### xStudents ####################
@@ -1222,7 +1767,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1235,7 +1787,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{	
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1251,7 +1810,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1265,7 +1831,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1281,7 +1854,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1295,7 +1875,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1311,7 +1898,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1325,7 +1919,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1341,7 +1942,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1355,7 +1963,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1371,7 +1986,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1385,7 +2007,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1401,7 +2030,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1415,7 +2051,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXStudent();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXStudent();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	// #################### xContacts ####################
@@ -1431,7 +2074,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXContact();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXContact();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1444,7 +2094,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXContact();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXContact();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1460,7 +2117,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1474,7 +2138,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody();
+		if(response.getBody() != null)
+		{
+			return response.getBody();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1490,7 +2161,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXContact();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXContact();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1504,7 +2182,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXContact();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXContact();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1520,7 +2205,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXContact();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXContact();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1534,7 +2226,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXContact();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXContact();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1550,7 +2249,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXContact();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXContact();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**
@@ -1564,7 +2270,14 @@ public class SifXpress
 
 		Util.ResponseHandler(response.getStatusCode());
 
-		return response.getBody().getXContact();
+		if(response.getBody() != null)
+		{
+			return response.getBody().getXContact();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	// #################### navigationLastPage ####################
