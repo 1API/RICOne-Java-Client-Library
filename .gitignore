@@ -40,6 +40,5 @@ local.properties
 .texlipse
 
 # Package Files #
-*.jar
 *.war
 *.ear
