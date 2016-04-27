@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.0
- * @since       Jul 7, 2015
+ * @version     1.2
+ * @since       Apr 25, 2015
  * Filename		RicOneApiClient.java
  */
 
@@ -15,10 +15,10 @@ public class RicOneApiClient
 {
 	private String token;
 	//private DefaultOAuth2AccessToken token;
-    private RestTemplate restTemplate;
+    private RestTemplate rt;
 //	private OAuth2RestTemplate restTemplate;
     private String baseApiUrl;
-    public SifXpress sifXpress;
+    public XPress xPress;
     
     /**Use endpoint values to authenticate to data API
      * @param endpoint
@@ -27,9 +27,9 @@ public class RicOneApiClient
     {
         this.token = endpoint.getToken();
         this.baseApiUrl = endpoint.getHref();
-        this.restTemplate = new RestTemplate();
+        this.rt = new RestTemplate();
 
-        sifXpress = new SifXpress(token, baseApiUrl, restTemplate);
+        xPress = new XPress(token, baseApiUrl, rt);
     }
     
     /**Use endpoint values to authenticate to data API
@@ -40,9 +40,9 @@ public class RicOneApiClient
     {
         this.token = token;
         this.baseApiUrl = baseApiUrl;
-        this.restTemplate = new RestTemplate();
+        this.rt = new RestTemplate();
 
-        sifXpress = new SifXpress(token, baseApiUrl, restTemplate);
+        xPress = new XPress(token, baseApiUrl, rt);
     }
 
 }

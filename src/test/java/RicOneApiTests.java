@@ -1,13 +1,15 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.1.3.1
+ * @version     1.2
  * @since       Feb 4, 2016
  * Filename		RicOneApiTests.java
  */
 
 import riconeapi.common.Authenticator;
 import riconeapi.common.RicOneApiClient;
+import riconeapi.common.Util;
 import riconeapi.models.authentication.Endpoint;
+import riconeapi.models.sifxpress.XAppProvisioningInfoType;
 import riconeapi.models.sifxpress.XCalendarType;
 import riconeapi.models.sifxpress.XContactStudentRelationshipType;
 import riconeapi.models.sifxpress.XContactType;
@@ -36,41 +38,45 @@ public class RicOneApiTests
 {
 	// Test Constants
 	final static String authUrl = "http://auth.test.ricone.org/login";
-	final static String username = "StarRen_1";
-	final static String password = "StarRen_1";
+	final static String clientId = "dpademo";
+	final static String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+	
+//	final static String authUrl = "https://auth.ricone.org/login";
+//	final static String clientId = "STAR_Assessments";
+//	final static String clientSecret = "STAR_Assessments";
 
-//	final static String providerId = "NERIC01";
-	final static String providerId = "SCRICAPIT01";
-//	static int navigationPage = 1;
-//	static int navigationPageSize = 1;
-//	static int navigationPageSize = 20000;
+	final static String providerId = "sandbox";
+//	static String navigationPage = "1";
+//	static String navigationPageSize = "1";
+//	static String navigationPageSize = "20000";
     
 	// Null:
 	static String refId = null;
 	// Lea:
-//	static String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+//	static String refId = "EBC3675E-D2F4-457F-BD73-5F83B1FAFD62";
 	// School:
-//	static String refId = "66667705-6C51-4C30-A22A-77CEA0FBCF53";
+//	static String refId = "1B378FC1-75BA-4108-AD04-B61E54C5DB4B";
 	// Calendar:
-//	static String refId = "B0FD06FD-5F35-4D96-B2EA-AA96CD2D0F38";
+//	static String refId = "1851D612-F245-4CBE-AF54-2A8B575866E4";
 	// Course:
-//	static String refId = "C9DEA47A-DB79-4912-B5F4-03EB50C2A99F";
+//	static String refId = "005E09B5-D7D1-414A-832C-C003CFADC559";
 	// Roster:
-//	static String refId = "4BDC482E-B0CA-4D36-B5EC-607E06D08727";
+//	static String refId = "52EBB46C-6AA2-49A0-ABAA-EA6AE2C05D5C";
 	// Staff:
-//	static String refId = "61126B90-2AF9-4176-9377-005686D1B855";
+//	static String refId = "3F97D697-A1FD-49EE-B476-1548854527C1";
 	// Student:
-//	static String refId = "0AC93DFD-DC1C-48A4-9D37-000210E4C952";
-//	static String refId = "D47B7B88-CE17-44FB-B94F-0000E5BA0532";
+//	static String refId = "5AC8BBB0-D830-42BD-A4DA-5E8ACE903F48";
 	// Contact 1:
-//	static String refId = "9a7345c7-72bd-4672-aee2-001876903ad8";
-//	static String refId = "128592BC-691D-4ED0-9493-0007D6966142";
+//	static String refId = "";
 
+	
+	
 	public static void main(String[] args)
-	{   
-		Authenticator auth = new Authenticator(authUrl, username, password);
+	{   	
+		Util.disableSslVerification();
+		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 		
-		for (Endpoint e : auth.GetEndpoints(providerId))
+		for (Endpoint e : auth.getEndpoints(providerId))
 		{
 			RicOneApiClient ricOne = new RicOneApiClient(e);
 
@@ -126,7 +132,7 @@ public class RicOneApiTests
 //			XStaffs_GetXStaffsByXStudent(ricOne);
 
 			// xStudents
-//			XStudents_GetXStudents(ricOne);
+			XStudents_GetXStudents(ricOne);
 //			XStudents_GetXStudent(ricOne);
 //			XStudents_GetXStudentsByXLea(ricOne);
 //			XStudents_GetXStudentsByXSchool(ricOne);
@@ -208,9 +214,9 @@ public class RicOneApiTests
 	//RETURN ALL LEAS
 	public static void XLeas_GetXLeas(RicOneApiClient ricOne)
 	{
-		if(ricOne.sifXpress.GetXLeas() != null)
-		{
-			for (XLeaType lea : ricOne.sifXpress.GetXLeas())
+//		if(ricOne.sifXpress.GetXLeas(navigationPage, navigationPageSize) != null)
+//		{
+			for (XLeaType lea : ricOne.xPress.getXLeas())
 			{	
 				
 				System.out.println("refId: " + lea.getRefId());
@@ -248,15 +254,15 @@ public class RicOneApiTests
 
 				System.out.println("========================================");
 			}
-		}
+//		}
 		
 	}
 	//RETURN SINGLE LEA
 	public static void XLeas_GetXLea(RicOneApiClient ricOne)
     {
-		if(ricOne.sifXpress.GetXLea(refId) != null)
+		if(ricOne.xPress.getXLea(refId) != null)
 		{
-			XLeaType lea = ricOne.sifXpress.GetXLea(refId);
+			XLeaType lea = ricOne.xPress.getXLea(refId);
 			
 			System.out.println("refId: " + lea.getRefId());
 			System.out.println("leaName: " + lea.getLeaName());
@@ -298,9 +304,9 @@ public class RicOneApiTests
 	 //RETURN LEAS BY SCHOOL
     public static void XLeas_GetXLeasByXSchool(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXLeasByXSchool(refId) != null)
+    	if(ricOne.xPress.getXLeasByXSchool(refId) != null)
     	{
-    		for (XLeaType lea : ricOne.sifXpress.GetXLeasByXSchool(refId))
+    		for (XLeaType lea : ricOne.xPress.getXLeasByXSchool(refId))
     		{	
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
@@ -343,9 +349,9 @@ public class RicOneApiTests
     //RETURN LEAS BY ROSTER
     public static void XLeas_GetXLeasByXRoster(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXLeasByXRoster(refId) != null)
+    	if(ricOne.xPress.getXLeasByXRoster(refId) != null)
     	{
-    		for (XLeaType lea : ricOne.sifXpress.GetXLeasByXRoster(refId))
+    		for (XLeaType lea : ricOne.xPress.getXLeasByXRoster(refId))
     		{	
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
@@ -388,9 +394,9 @@ public class RicOneApiTests
     //RETURN LEAS BY STAFF
     public static void XLeas_GetXLeasByXStaff(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXLeasByXStaff(refId) != null)
+    	if(ricOne.xPress.getXLeasByXStaff(refId) != null)
     	{
-    		for (XLeaType lea : ricOne.sifXpress.GetXLeasByXStaff(refId))
+    		for (XLeaType lea : ricOne.xPress.getXLeasByXStaff(refId))
     		{	
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
@@ -433,9 +439,9 @@ public class RicOneApiTests
     //RETURN LEAS BY STUDENT
     public static void XLeas_GetXLeasByXStudent(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXLeasByXStudent(refId) != null)
+    	if(ricOne.xPress.getXLeasByXStudent(refId) != null)
     	{
-    		for (XLeaType lea : ricOne.sifXpress.GetXLeasByXStudent(refId))
+    		for (XLeaType lea : ricOne.xPress.getXLeasByXStudent(refId))
     		{	
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
@@ -478,9 +484,9 @@ public class RicOneApiTests
     //RETURN LEAS BY CONTACT
     public static void XLeas_GetXLeasByXContact(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXLeasByXContact(refId) != null)
+    	if(ricOne.xPress.getXLeasByXContact(refId) != null)
     	{
-    		for (XLeaType lea : ricOne.sifXpress.GetXLeasByXContact(refId))
+    		for (XLeaType lea : ricOne.xPress.getXLeasByXContact(refId))
     		{	
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
@@ -525,9 +531,9 @@ public class RicOneApiTests
  
     public static void XSchools_GetXSchools(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXSchools() != null)
+    	if(ricOne.xPress.getXSchools() != null)
     	{
-    		for(XSchoolType school : ricOne.sifXpress.GetXSchools())
+    		for(XSchoolType school : ricOne.xPress.getXSchools())
             {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
@@ -541,12 +547,12 @@ public class RicOneApiTests
                 }
                 System.out.println("##### END OTHERIDS #####");
                 System.out.println("schoolName: " + school.getSchoolName());
-                System.out.println("##### BEGIN YEARGROUPS #####");
-                for(String yg : school.getYearGroups().getYearGroup())
+                System.out.println("##### BEGIN GRADELEVELS #####");
+                for(String gl : school.getGradeLevels().getGradeLevel())
                 {
-                    System.out.println("yearGroup: " + yg);
+                    System.out.println("gradeLevel: " + gl);
                 }
-                System.out.println("##### END YEARGROUPS #####");
+                System.out.println("##### END GRADELEVELS #####");
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + school.getAddress().getAddressType());
                 System.out.println("city: " + school.getAddress().getCity());
@@ -576,9 +582,9 @@ public class RicOneApiTests
     //RETURN SINGLE SCHOOL
     public static void XSchools_GetXSchool(RicOneApiClient ricOne)
     {
-        if(ricOne.sifXpress.GetXSchool(refId) != null)
+        if(ricOne.xPress.getXSchool(refId) != null)
         {
-        	XSchoolType school = ricOne.sifXpress.GetXSchool(refId);
+        	XSchoolType school = ricOne.xPress.getXSchool(refId);
 
             System.out.println("refId: " + school.getRefId());
             System.out.println("leaRefId: " + school.getRefId());
@@ -592,12 +598,12 @@ public class RicOneApiTests
             }
             System.out.println("##### END OTHERIDS #####");
             System.out.println("schoolName: " + school.getSchoolName());
-            System.out.println("##### BEGIN YEARGROUPS #####");
-            for(String yg : school.getYearGroups().getYearGroup())
+            System.out.println("##### BEGIN GRADELEVELS #####");
+            for(String gl : school.getGradeLevels().getGradeLevel())
             {
-                System.out.println("yearGroup: " + yg);
+                System.out.println("gradeLevel: " + gl);
             }
-            System.out.println("##### END YEARGROUPS #####");
+            System.out.println("##### END GRADELEVELS #####");
             System.out.println("##### BEGIN ADDRESS #####");
             System.out.println("addressType: " + school.getAddress().getAddressType());
             System.out.println("city: " + school.getAddress().getCity());
@@ -626,9 +632,9 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY LEA
     public static void XSchools_GetXSchoolsByXLea(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXSchoolsByXLea(refId) != null)
+    	if(ricOne.xPress.getXSchoolsByXLea(refId) != null)
     	{
-    		for(XSchoolType school : ricOne.sifXpress.GetXSchoolsByXLea(refId))
+    		for(XSchoolType school : ricOne.xPress.getXSchoolsByXLea(refId))
 	        {
 	        	System.out.println("refId: " + school.getRefId());
 	            System.out.println("leaRefId: " + school.getRefId());
@@ -642,12 +648,12 @@ public class RicOneApiTests
 	            }
 	            System.out.println("##### END OTHERIDS #####");
 	            System.out.println("schoolName: " + school.getSchoolName());
-	            System.out.println("##### BEGIN YEARGROUPS #####");
-	            for(String yg : school.getYearGroups().getYearGroup())
+	            System.out.println("##### BEGIN GRADELEVELS #####");
+	            for(String gl : school.getGradeLevels().getGradeLevel())
 	            {
-	                System.out.println("yearGroup: " + yg);
+	                System.out.println("gradeLevel: " + gl);
 	            }
-	            System.out.println("##### END YEARGROUPS #####");
+	            System.out.println("##### END GRADELEVELS #####");
 	            System.out.println("##### BEGIN ADDRESS #####");
 	            System.out.println("addressType: " + school.getAddress().getAddressType());
 	            System.out.println("city: " + school.getAddress().getCity());
@@ -677,9 +683,9 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY CALENDAR
     public static void XSchools_GetXSchoolsByXCalendar(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXSchoolsByXCalendar(refId) !=null)
+    	if(ricOne.xPress.getXSchoolsByXCalendar(refId) !=null)
     	{
-			for (XSchoolType school : ricOne.sifXpress.GetXSchoolsByXCalendar(refId))
+			for (XSchoolType school : ricOne.xPress.getXSchoolsByXCalendar(refId))
 			{
 				System.out.println("refId: " + school.getRefId());
 				System.out.println("leaRefId: " + school.getRefId());
@@ -693,12 +699,12 @@ public class RicOneApiTests
 				}
 				System.out.println("##### END OTHERIDS #####");
 				System.out.println("schoolName: " + school.getSchoolName());
-				System.out.println("##### BEGIN YEARGROUPS #####");
-				for (String yg : school.getYearGroups().getYearGroup())
+				System.out.println("##### BEGIN GRADELEVELS #####");
+				for (String gl : school.getGradeLevels().getGradeLevel())
 				{
-					System.out.println("yearGroup: " + yg);
+					System.out.println("gradeLevel: " + gl);
 				}
-				System.out.println("##### END YEARGROUPS #####");
+				System.out.println("##### END GRADELEVELS #####");
 				System.out.println("##### BEGIN ADDRESS #####");
 				System.out.println("addressType: " + school.getAddress().getAddressType());
 				System.out.println("city: " + school.getAddress().getCity());
@@ -728,9 +734,9 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY COURSE
     public static void XSchools_GetXSchoolsByXCourse(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXSchoolsByXCourse(refId) != null)
+    	if(ricOne.xPress.getXSchoolsByXCourse(refId) != null)
     	{
-    		for(XSchoolType school : ricOne.sifXpress.GetXSchoolsByXCourse(refId))
+    		for(XSchoolType school : ricOne.xPress.getXSchoolsByXCourse(refId))
             {
             	System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
@@ -744,12 +750,12 @@ public class RicOneApiTests
                 }
                 System.out.println("##### END OTHERIDS #####");
                 System.out.println("schoolName: " + school.getSchoolName());
-                System.out.println("##### BEGIN YEARGROUPS #####");
-                for(String yg : school.getYearGroups().getYearGroup())
+                System.out.println("##### BEGIN GRADELEVELS #####");
+                for(String gl : school.getGradeLevels().getGradeLevel())
                 {
-                    System.out.println("yearGroup: " + yg);
+                    System.out.println("gradeLevel: " + gl);
                 }
-                System.out.println("##### END YEARGROUPS #####");
+                System.out.println("##### END GRADELEVELS #####");
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + school.getAddress().getAddressType());
                 System.out.println("city: " + school.getAddress().getCity());
@@ -780,9 +786,9 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY ROSTER
     public static void XSchools_GetXSchoolsByXRoster(RicOneApiClient ricOne)
      {
-    	if(ricOne.sifXpress.GetXSchoolsByXRoster(refId) != null)
+    	if(ricOne.xPress.getXSchoolsByXRoster(refId) != null)
     	{
-    		for(XSchoolType school : ricOne.sifXpress.GetXSchoolsByXRoster(refId))
+    		for(XSchoolType school : ricOne.xPress.getXSchoolsByXRoster(refId))
             {
            	 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
@@ -796,12 +802,12 @@ public class RicOneApiTests
                 }
                 System.out.println("##### END OTHERIDS #####");
                 System.out.println("schoolName: " + school.getSchoolName());
-                System.out.println("##### BEGIN YEARGROUPS #####");
-                for(String yg : school.getYearGroups().getYearGroup())
+                System.out.println("##### BEGIN GRADELEVELS #####");
+                for(String gl : school.getGradeLevels().getGradeLevel())
                 {
-                    System.out.println("yearGroup: " + yg);
+                    System.out.println("gradeLevel: " + gl);
                 }
-                System.out.println("##### END YEARGROUPS #####");
+                System.out.println("##### END GRADELEVELS #####");
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + school.getAddress().getAddressType());
                 System.out.println("city: " + school.getAddress().getCity());
@@ -831,9 +837,9 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY STAFF
     public static void XSchools_GetXSchoolsByXStaff(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXSchoolsByXStaff(refId) != null)
+    	if(ricOne.xPress.getXSchoolsByXStaff(refId) != null)
     	{
-    		for(XSchoolType school : ricOne.sifXpress.GetXSchoolsByXStaff(refId))
+    		for(XSchoolType school : ricOne.xPress.getXSchoolsByXStaff(refId))
             {
             	System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
@@ -847,12 +853,12 @@ public class RicOneApiTests
                 }
                 System.out.println("##### END OTHERIDS #####");
                 System.out.println("schoolName: " + school.getSchoolName());
-                System.out.println("##### BEGIN YEARGROUPS #####");
-                for(String yg : school.getYearGroups().getYearGroup())
+                System.out.println("##### BEGIN GRADELEVELS #####");
+                for(String gl : school.getGradeLevels().getGradeLevel())
                 {
-                    System.out.println("yearGroup: " + yg);
+                    System.out.println("gradeLevel: " + gl);
                 }
-                System.out.println("##### END YEARGROUPS #####");
+                System.out.println("##### END GRADELEVELS #####");
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + school.getAddress().getAddressType());
                 System.out.println("city: " + school.getAddress().getCity());
@@ -882,9 +888,9 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY STUDENT
     public static void XSchools_GetXSchoolsByXStudent(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXSchoolsByXStudent(refId) != null)
+    	if(ricOne.xPress.getXSchoolsByXStudent(refId) != null)
     	{
-    		for(XSchoolType school : ricOne.sifXpress.GetXSchoolsByXStudent(refId))
+    		for(XSchoolType school : ricOne.xPress.getXSchoolsByXStudent(refId))
             {
             	System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
@@ -898,12 +904,12 @@ public class RicOneApiTests
                 }
                 System.out.println("##### END OTHERIDS #####");
                 System.out.println("schoolName: " + school.getSchoolName());
-                System.out.println("##### BEGIN YEARGROUPS #####");
-                for(String yg : school.getYearGroups().getYearGroup())
+                System.out.println("##### BEGIN GRADELEVELS #####");
+                for(String gl : school.getGradeLevels().getGradeLevel())
                 {
-                    System.out.println("yearGroup: " + yg);
+                    System.out.println("gradeLevel: " + gl);
                 }
-                System.out.println("##### END YEARGROUPS #####");
+                System.out.println("##### END GRADELEVELS #####");
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + school.getAddress().getAddressType());
                 System.out.println("city: " + school.getAddress().getCity());
@@ -933,9 +939,9 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY CONTACT
     public static void XSchools_GetXSchoolsByXContact(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXSchoolsByXContact(refId) != null)
+    	if(ricOne.xPress.getXSchoolsByXContact(refId) != null)
     	{
-    		for(XSchoolType school : ricOne.sifXpress.GetXSchoolsByXContact(refId))
+    		for(XSchoolType school : ricOne.xPress.getXSchoolsByXContact(refId))
             {
             	System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
@@ -949,12 +955,12 @@ public class RicOneApiTests
                 }
                 System.out.println("##### END OTHERIDS #####");
                 System.out.println("schoolName: " + school.getSchoolName());
-                System.out.println("##### BEGIN YEARGROUPS #####");
-                for(String yg : school.getYearGroups().getYearGroup())
+                System.out.println("##### BEGIN GRADELEVELS #####");
+                for(String gl : school.getGradeLevels().getGradeLevel())
                 {
-                    System.out.println("yearGroup: " + yg);
+                    System.out.println("gradeLevel: " + gl);
                 }
-                System.out.println("##### END YEARGROUPS #####");
+                System.out.println("##### END GRADELEVELS #####");
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + school.getAddress().getAddressType());
                 System.out.println("city: " + school.getAddress().getCity());
@@ -986,9 +992,9 @@ public class RicOneApiTests
     //RETURN ALL CALENDARS
     public static void XCalendars_GetXCalendars(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCalendars() != null)
+    	if(ricOne.xPress.getXCalendars() != null)
     	{
-    		for(XCalendarType calendar : ricOne.sifXpress.GetXCalendars())
+    		for(XCalendarType calendar : ricOne.xPress.getXCalendars())
             {
                 System.out.println("refId: " + calendar.getRefId());
                 System.out.println("schoolRefId: " + calendar.getSchoolRefId());
@@ -1013,9 +1019,9 @@ public class RicOneApiTests
     //RETURN SINGLE CALENDAR
     public static void XCalendars_GetXCalendar(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCalendar(refId) != null)
+    	if(ricOne.xPress.getXCalendar(refId) != null)
     	{
-    		XCalendarType calendar = ricOne.sifXpress.GetXCalendar(refId);
+    		XCalendarType calendar = ricOne.xPress.getXCalendar(refId);
 
             System.out.println("refId: " + calendar.getRefId());
             System.out.println("schoolRefId: " + calendar.getSchoolRefId());
@@ -1039,9 +1045,9 @@ public class RicOneApiTests
     //RETURN CALENDARS BY LEA
     public static void XCalendars_GetXCalendarsByXLea(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCalendarsByXLea(refId) != null)
+    	if(ricOne.xPress.getXCalendarsByXLea(refId) != null)
     	{
-    		for(XCalendarType calendar : ricOne.sifXpress.GetXCalendarsByXLea(refId))
+    		for(XCalendarType calendar : ricOne.xPress.getXCalendarsByXLea(refId))
             {
             	System.out.println("refId: " + calendar.getRefId());
                 System.out.println("schoolRefId: " + calendar.getSchoolRefId());
@@ -1066,9 +1072,9 @@ public class RicOneApiTests
     //RETURN CALENDARS BY SCHOOL
     public static void XCalendars_GetXCalendarsByXSchool(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCalendarsByXSchool(refId) != null)
+    	if(ricOne.xPress.getXCalendarsByXSchool(refId) != null)
     	{
-    		for(XCalendarType calendar : ricOne.sifXpress.GetXCalendarsByXSchool(refId))
+    		for(XCalendarType calendar : ricOne.xPress.getXCalendarsByXSchool(refId))
             {
             	System.out.println("refId: " + calendar.getRefId());
                 System.out.println("schoolRefId: " + calendar.getSchoolRefId());
@@ -1095,9 +1101,9 @@ public class RicOneApiTests
     //RETURN ALL COURSES
     public static void XCourses_GetXCourses(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCourses() != null)
+    	if(ricOne.xPress.getXCourses() != null)
     	{
-    		for(XCourseType course : ricOne.sifXpress.GetXCourses())
+    		for(XCourseType course : ricOne.xPress.getXCourses())
             {
                 System.out.println("refId: " + course.getRefId());
                 System.out.println("schoolRefId: " + course.getSchoolRefId());
@@ -1130,9 +1136,9 @@ public class RicOneApiTests
     //RETURN SINGLE COURSE
     public static void XCourses_GetXCourse(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCourse(refId) != null)
+    	if(ricOne.xPress.getXCourse(refId) != null)
     	{
-    		XCourseType course = ricOne.sifXpress.GetXCourse(refId);
+    		XCourseType course = ricOne.xPress.getXCourse(refId);
         	
         	System.out.println("refId: " + course.getRefId());
             System.out.println("schoolRefId: " + course.getSchoolRefId());
@@ -1164,9 +1170,9 @@ public class RicOneApiTests
     //RETURN COURSES BY LEA
     public static void XCourses_GetXCoursesByXLea(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCoursesByXLea(refId) != null)
+    	if(ricOne.xPress.getXCoursesByXLea(refId) != null)
     	{
-    		for (XCourseType course : ricOne.sifXpress.GetXCoursesByXLea(refId))
+    		for (XCourseType course : ricOne.xPress.getXCoursesByXLea(refId))
             {
             	System.out.println("refId: " + course.getRefId());
                 System.out.println("schoolRefId: " + course.getSchoolRefId());
@@ -1199,9 +1205,9 @@ public class RicOneApiTests
     //RETURN COURSES BY School
     public static void XCourses_GetXCoursesByXSchool(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCoursesByXSchool(refId) != null)
+    	if(ricOne.xPress.getXCoursesByXSchool(refId) != null)
     	{
-    		for (XCourseType course : ricOne.sifXpress.GetXCoursesByXSchool(refId))
+    		for (XCourseType course : ricOne.xPress.getXCoursesByXSchool(refId))
             {
             	System.out.println("refId: " + course.getRefId());
                 System.out.println("schoolRefId: " + course.getSchoolRefId());
@@ -1234,9 +1240,9 @@ public class RicOneApiTests
     //RETURN COURSES BY ROSTER
     public static void XCourses_GetXCoursesByXRoster(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXCoursesByXRoster(refId) != null)
+    	if(ricOne.xPress.getXCoursesByXRoster(refId) != null)
     	{
-			for (XCourseType course : ricOne.sifXpress.GetXCoursesByXRoster(refId))
+			for (XCourseType course : ricOne.xPress.getXCoursesByXRoster(refId))
 			{
 				System.out.println("refId: " + course.getRefId());
 				System.out.println("schoolRefId: " + course.getSchoolRefId());
@@ -1271,9 +1277,9 @@ public class RicOneApiTests
     //RETURN ALL ROSTERS
     public static void XRosters_GetXRosters(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXRosters() != null)
+    	if(ricOne.xPress.getXRosters() != null)
     	{
-    		for(XRosterType r : ricOne.sifXpress.GetXRosters())
+    		for(XRosterType r : ricOne.xPress.getXRosters())
             {
                 System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
@@ -1336,9 +1342,9 @@ public class RicOneApiTests
     //RETURN SINGLE ROSTER
     public static void XRosters_GetXRoster(RicOneApiClient ricOne)
     {
-        if(ricOne.sifXpress.GetXRoster(refId) != null)
+        if(ricOne.xPress.getXRoster(refId) != null)
         {
-        	XRosterType r = ricOne.sifXpress.GetXRoster(refId);
+        	XRosterType r = ricOne.xPress.getXRoster(refId);
 
             System.out.println("refId: " + r.getRefId());
             System.out.println("courseRefId: " + r.getCourseRefId());
@@ -1400,9 +1406,9 @@ public class RicOneApiTests
     //RETURN ROSTERS BY LEA
     public static void XRosters_GetXRostersByXLea(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXRostersByXLea(refId) != null)
+    	if(ricOne.xPress.getXRostersByXLea(refId) != null)
     	{
-    		for (XRosterType r : ricOne.sifXpress.GetXRostersByXLea(refId))
+    		for (XRosterType r : ricOne.xPress.getXRostersByXLea(refId))
             {
             	System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
@@ -1465,9 +1471,9 @@ public class RicOneApiTests
     //RETURN ROSTERS BY SCHOOL
     public static void XRosters_GetXRostersByXSchool(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXRostersByXSchool(refId) != null)
+    	if(ricOne.xPress.getXRostersByXSchool(refId) != null)
     	{
-			for (XRosterType r : ricOne.sifXpress.GetXRostersByXSchool(refId))
+			for (XRosterType r : ricOne.xPress.getXRostersByXSchool(refId))
 			{
 				System.out.println("refId: " + r.getRefId());
 				System.out.println("courseRefId: " + r.getCourseRefId());
@@ -1530,9 +1536,9 @@ public class RicOneApiTests
     //RETURN ROSTERS BY CROUSE
     public static void XRosters_GetXRostersByXCourse(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXRostersByXCourse(refId) != null)
+    	if(ricOne.xPress.getXRostersByXCourse(refId) != null)
     	{
-    		for (XRosterType r : ricOne.sifXpress.GetXRostersByXCourse(refId))
+    		for (XRosterType r : ricOne.xPress.getXRostersByXCourse(refId))
             {
             	System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
@@ -1595,9 +1601,9 @@ public class RicOneApiTests
     //RETURN ROSTERS BY STAFF
     public static void XRosters_GetXRostersByXStaff(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXRostersByXStaff(refId) != null)
+    	if(ricOne.xPress.getXRostersByXStaff(refId) != null)
     	{
-    		for (XRosterType r : ricOne.sifXpress.GetXRostersByXStaff(refId))
+    		for (XRosterType r : ricOne.xPress.getXRostersByXStaff(refId))
             {
             	System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
@@ -1660,9 +1666,9 @@ public class RicOneApiTests
     //RETURN ROSTERS BY STUDENT
     public static void XRosters_GetXRostersByXStudent(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXRostersByXStudent(refId) != null)
+    	if(ricOne.xPress.getXRostersByXStudent(refId) != null)
     	{
-    		for (XRosterType r : ricOne.sifXpress.GetXRostersByXStudent(refId))
+    		for (XRosterType r : ricOne.xPress.getXRostersByXStudent(refId))
             {
             	System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
@@ -1727,9 +1733,9 @@ public class RicOneApiTests
     //RETURN ALL STAFFS
     public static void XStaffs_GetXStaffs(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStaffs() != null)
+    	if(ricOne.xPress.getXStaffs() != null)
     	{
-    		for(XStaffType s : ricOne.sifXpress.GetXStaffs())
+    		for(XStaffType s : ricOne.xPress.getXStaffs())
             {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -1741,7 +1747,6 @@ public class RicOneApiTests
                 System.out.println("suffix: " + s.getName().getSuffix());
                 System.out.println("##### END NAME #####");
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -1775,9 +1780,9 @@ public class RicOneApiTests
     //RETURN SINGLE STAFF
     public static void XStaffs_GetXStaff(RicOneApiClient ricOne)
     {
-        if(ricOne.sifXpress.GetXStaff(refId) != null)
+        if(ricOne.xPress.getXStaff(refId) != null)
         {
-        	XStaffType s = ricOne.sifXpress.GetXStaff(refId);
+        	XStaffType s = ricOne.xPress.getXStaff(refId);
 
             System.out.println("refId: " + s.getRefId());
             System.out.println("##### BEGIN NAME #####");
@@ -1789,7 +1794,6 @@ public class RicOneApiTests
             System.out.println("suffix: " + s.getName().getSuffix());
             System.out.println("##### END NAME #####");
             System.out.println("localId: " + s.getLocalId());
-            System.out.println("loginId: " + s.getLoginId());
             System.out.println("stateProvinceId: " + s.getStateProvinceId());
             System.out.println("##### BEGIN OTHERIDS #####");
             for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -1822,9 +1826,9 @@ public class RicOneApiTests
     //RETURN STAFFS BY LEA
     public static void XStaffs_GetXStaffsByXLea(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStaffsByXLea(refId) != null)
+    	if(ricOne.xPress.getXStaffsByXLea(refId) != null)
     	{
-    		for(XStaffType s : ricOne.sifXpress.GetXStaffsByXLea(refId))
+    		for(XStaffType s : ricOne.xPress.getXStaffsByXLea(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -1836,7 +1840,6 @@ public class RicOneApiTests
                 System.out.println("suffix: " + s.getName().getSuffix());
                 System.out.println("##### END NAME #####");
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -1870,9 +1873,9 @@ public class RicOneApiTests
     //RETURN STAFFS BY SCHOOL
     public static void XStaffs_GetXStaffsByXSchool(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStaffsByXSchool(refId) != null)
+    	if(ricOne.xPress.getXStaffsByXSchool(refId) != null)
     	{
-    		for(XStaffType s : ricOne.sifXpress.GetXStaffsByXSchool(refId))
+    		for(XStaffType s : ricOne.xPress.getXStaffsByXSchool(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -1884,7 +1887,6 @@ public class RicOneApiTests
                 System.out.println("suffix: " + s.getName().getSuffix());
                 System.out.println("##### END NAME #####");
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -1918,9 +1920,9 @@ public class RicOneApiTests
     //RETURN STAFFS BY COURSE
     public static void XStaffs_GetXStaffsByXCourse(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStaffsByXCourse(refId) != null)
+    	if(ricOne.xPress.getXStaffsByXCourse(refId) != null)
     	{
-    		for(XStaffType s : ricOne.sifXpress.GetXStaffsByXCourse(refId))
+    		for(XStaffType s : ricOne.xPress.getXStaffsByXCourse(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -1932,7 +1934,6 @@ public class RicOneApiTests
                 System.out.println("suffix: " + s.getName().getSuffix());
                 System.out.println("##### END NAME #####");
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -1966,9 +1967,9 @@ public class RicOneApiTests
     //RETURN STAFFS BY ROSTER
     public static void XStaffs_GetXStaffsByXRoster(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStaffsByXRoster(refId) != null)
+    	if(ricOne.xPress.getXStaffsByXRoster(refId) != null)
     	{
-    		for(XStaffType s : ricOne.sifXpress.GetXStaffsByXRoster(refId))
+    		for(XStaffType s : ricOne.xPress.getXStaffsByXRoster(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -1980,7 +1981,6 @@ public class RicOneApiTests
                 System.out.println("suffix: " + s.getName().getSuffix());
                 System.out.println("##### END NAME #####");
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -2014,9 +2014,9 @@ public class RicOneApiTests
   //RETURN STAFFS BY ROSTER
     public static void XStaffs_GetXStaffsByXStudent(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStaffsByXStudent(refId) != null)
+    	if(ricOne.xPress.getXStaffsByXStudent(refId) != null)
     	{
-    		for(XStaffType s : ricOne.sifXpress.GetXStaffsByXStudent(refId))
+    		for(XStaffType s : ricOne.xPress.getXStaffsByXStudent(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -2028,7 +2028,6 @@ public class RicOneApiTests
                 System.out.println("suffix: " + s.getName().getSuffix());
                 System.out.println("##### END NAME #####");
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -2063,9 +2062,9 @@ public class RicOneApiTests
     //RETURN ALL STUDENTS
     public static void XStudents_GetXStudents(RicOneApiClient ricOne)
     { 
-    	if(ricOne.sifXpress.GetXStudents() != null)
+    	if(ricOne.xPress.getXStudents().getData() != null)
     	{
-    		for(XStudentType s : ricOne.sifXpress.GetXStudents())
+    		for(XStudentType s : (XStudentType[]) ricOne.xPress.getXStudents().getData())
             {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -2089,7 +2088,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -2230,7 +2228,6 @@ public class RicOneApiTests
                     }
                     System.out.println("##### END OTHERNAME #####");
                     System.out.println(": " + c.getLocalId());
-                    System.out.println(": " + c.getLoginId());
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                     {
@@ -2307,9 +2304,9 @@ public class RicOneApiTests
     //RETURN SINGLE STUDENT
     public static void XStudents_GetXStudent(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStudent(refId) != null)
+    	if(ricOne.xPress.getXStudent(refId) != null)
     	{
-    		 XStudentType s = ricOne.sifXpress.GetXStudent(refId);
+    		 XStudentType s = ricOne.xPress.getXStudent(refId);
 
     	        System.out.println("refId: " + s.getRefId());
     	        System.out.println("##### BEGIN NAME #####");
@@ -2333,7 +2330,6 @@ public class RicOneApiTests
     	        System.out.println("##### END OTHERNAME #####");
 
     	        System.out.println("localId: " + s.getLocalId());
-    	        System.out.println("loginId: " + s.getLoginId());
     	        System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
     	        System.out.println("##### BEGIN OTHERIDS #####");
     	        for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -2474,7 +2470,6 @@ public class RicOneApiTests
     	            }
     	            System.out.println("##### END OTHERNAME #####");
     	            System.out.println(": " + c.getLocalId());
-    	            System.out.println(": " + c.getLoginId());
     	            System.out.println("##### BEGIN OTHERIDS #####");
     	            for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
     	            {
@@ -2550,9 +2545,9 @@ public class RicOneApiTests
     //RETURN STUDENTS BY LEA
     public static void XStudents_GetXStudentsByXLea(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStudentsByXLea(refId) != null)
+    	if(ricOne.xPress.getXStudentsByXLea(refId) != null)
     	{
-    		for(XStudentType s : ricOne.sifXpress.GetXStudentsByXLea(refId))
+    		for(XStudentType s : ricOne.xPress.getXStudentsByXLea(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -2576,7 +2571,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -2716,8 +2710,7 @@ public class RicOneApiTests
                         System.out.println("suffix: " + n.getSuffix());
                     }
                     System.out.println("##### END OTHERNAME #####");
-                    System.out.println(": " + c.getLocalId());
-                    System.out.println(": " + c.getLoginId());
+                    System.out.println("localId: " + c.getLocalId());
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                     {
@@ -2794,9 +2787,9 @@ public class RicOneApiTests
     //RETURN STUDENTS BY SCHOOL
     public static void XStudents_GetXStudentsByXSchool(RicOneApiClient ricOne) 
     {
-    	if(ricOne.sifXpress.GetXStudentsByXSchool(refId) != null)
+    	if(ricOne.xPress.getXStudentsByXSchool(refId) != null)
     	{
-    		for(XStudentType s : ricOne.sifXpress.GetXStudentsByXSchool(refId))
+    		for(XStudentType s : ricOne.xPress.getXStudentsByXSchool(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -2820,7 +2813,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -2960,8 +2952,7 @@ public class RicOneApiTests
                         System.out.println("suffix: " + n.getSuffix());
                     }
                     System.out.println("##### END OTHERNAME #####");
-                    System.out.println(": " + c.getLocalId());
-                    System.out.println(": " + c.getLoginId());
+                    System.out.println("localId: " + c.getLocalId());
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                     {
@@ -3038,9 +3029,9 @@ public class RicOneApiTests
     //RETURN STUDENTS BY ROSTER
     public static void XStudents_GetXStudentsByXRoster(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStudentsByXRoster(refId) != null)
+    	if(ricOne.xPress.getXStudentsByXRoster(refId) != null)
     	{
-    		for(XStudentType s : ricOne.sifXpress.GetXStudentsByXRoster(refId))
+    		for(XStudentType s : ricOne.xPress.getXStudentsByXRoster(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -3064,7 +3055,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -3204,8 +3194,7 @@ public class RicOneApiTests
                         System.out.println("suffix: " + n.getSuffix());
                     }
                     System.out.println("##### END OTHERNAME #####");
-                    System.out.println(": " + c.getLocalId());
-                    System.out.println(": " + c.getLoginId());
+                    System.out.println("localId: " + c.getLocalId());
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                     {
@@ -3282,9 +3271,9 @@ public class RicOneApiTests
     //RETURN STUDENTS BY STAFF
     public static void XStudents_GetXStudentsByXStaff(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStudentsByXStaff(refId) != null)
+    	if(ricOne.xPress.getXStudentsByXStaff(refId) != null)
     	{
-    		for(XStudentType s : ricOne.sifXpress.GetXStudentsByXStaff(refId))
+    		for(XStudentType s : ricOne.xPress.getXStudentsByXStaff(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -3308,7 +3297,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -3448,8 +3436,7 @@ public class RicOneApiTests
                         System.out.println("suffix: " + n.getSuffix());
                     }
                     System.out.println("##### END OTHERNAME #####");
-                    System.out.println(": " + c.getLocalId());
-                    System.out.println(": " + c.getLoginId());
+                    System.out.println("localId: " + c.getLocalId());
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                     {
@@ -3526,9 +3513,9 @@ public class RicOneApiTests
     //RETURN STUDENTS BY CONTACT
     public static void XStudents_GetXStudentsByXContact(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXStudentsByXContact(refId) != null)
+    	if(ricOne.xPress.getXStudentsByXContact(refId) != null)
     	{
-    		for(XStudentType s : ricOne.sifXpress.GetXStudentsByXContact(refId))
+    		for(XStudentType s : ricOne.xPress.getXStudentsByXContact(refId))
             {
             	System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -3552,7 +3539,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-                System.out.println("loginId: " + s.getLoginId());
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : s.getOtherIds().getOtherId())
@@ -3692,8 +3678,7 @@ public class RicOneApiTests
                         System.out.println("suffix: " + n.getSuffix());
                     }
                     System.out.println("##### END OTHERNAME #####");
-                    System.out.println(": " + c.getLocalId());
-                    System.out.println(": " + c.getLoginId());
+                    System.out.println("localId: " + c.getLocalId());
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                     {
@@ -3772,9 +3757,9 @@ public class RicOneApiTests
     //RETURN ALL CONTACTS
     public static void XContacts_GetXSContacts(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXContacts() != null)
+    	if(ricOne.xPress.getXContacts() != null)
     	{
-    		for(XContactType c : ricOne.sifXpress.GetXContacts())
+    		for(XContactType c : ricOne.xPress.getXContacts())
             {
                 System.out.println("refId: " + c.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -3798,7 +3783,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + c.getLocalId());
-                System.out.println("loginId: " + c.getLoginId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                 {
@@ -3866,9 +3850,9 @@ public class RicOneApiTests
     //RETURN SINGLE CONTACT
     public static void XContacts_GetXSContact(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXContact(refId) != null)
+    	if(ricOne.xPress.getXContact(refId) != null)
     	{
-    		XContactType c = ricOne.sifXpress.GetXContact(refId);
+    		XContactType c = ricOne.xPress.getXContact(refId);
 
             System.out.println("refId: " + c.getRefId());
             System.out.println("##### BEGIN NAME #####");
@@ -3892,7 +3876,6 @@ public class RicOneApiTests
             System.out.println("##### END OTHERNAME #####");
 
             System.out.println("localId: " + c.getLocalId());
-            System.out.println("loginId: " + c.getLoginId());
             System.out.println("##### BEGIN OTHERIDS #####");
             for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
             {
@@ -3959,9 +3942,9 @@ public class RicOneApiTests
     //RETURN CONTACTS BY LEA
     public static void XContacts_GetXContactsByXLea(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXContactsByXLea(refId) != null)
+    	if(ricOne.xPress.getXContactsByXLea(refId) != null)
     	{
-    		for(XContactType c : ricOne.sifXpress.GetXContactsByXLea(refId))
+    		for(XContactType c : ricOne.xPress.getXContactsByXLea(refId))
             {
             	System.out.println("refId: " + c.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -3985,7 +3968,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + c.getLocalId());
-                System.out.println("loginId: " + c.getLoginId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                 {
@@ -4053,9 +4035,9 @@ public class RicOneApiTests
     //RETURN CONTACTS BY SCHOOL
     public static void XContacts_GetXContactsByXSchool(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXContactsByXSchool(refId) != null)
+    	if(ricOne.xPress.getXContactsByXSchool(refId) != null)
     	{
-    		for(XContactType c : ricOne.sifXpress.GetXContactsByXSchool(refId))
+    		for(XContactType c : ricOne.xPress.getXContactsByXSchool(refId))
             {
             	System.out.println("refId: " + c.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -4079,7 +4061,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + c.getLocalId());
-                System.out.println("loginId: " + c.getLoginId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                 {
@@ -4147,9 +4128,9 @@ public class RicOneApiTests
     //RETURN CONTACTS BY STUDENT
     public static void XContacts_GetXContactsByXStudent(RicOneApiClient ricOne)
     {
-    	if(ricOne.sifXpress.GetXContactsByXStudent(refId) != null)
+    	if(ricOne.xPress.getXContactsByXStudent(refId) != null)
     	{
-    		for(XContactType c : ricOne.sifXpress.GetXContactsByXStudent(refId))
+    		for(XContactType c : ricOne.xPress.getXContactsByXStudent(refId))
             {
             	System.out.println("refId: " + c.getRefId());
                 System.out.println("##### BEGIN NAME #####");
@@ -4173,7 +4154,6 @@ public class RicOneApiTests
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + c.getLocalId());
-                System.out.println("loginId: " + c.getLoginId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for(XOtherPersonIdType id : c.getOtherIds().getOtherId())
                 {
@@ -4536,12 +4516,12 @@ public class RicOneApiTests
 //				}
 //				System.out.println("##### END OTHERIDS #####");
 //				System.out.println("schoolName: " + school.getSchoolName());
-//				System.out.println("##### BEGIN YEARGROUPS #####");
-//				for (String yg : school.getYearGroups().getYearGroup())
+//				System.out.println("##### BEGIN GRADELEVELS #####");
+//				for (String gl : school.getGradeLevels().getGradeLevel())
 //				{
-//					System.out.println("yearGroup: " + yg);
+//					System.out.println("gradeLevel: " + gl);
 //				}
-//				System.out.println("##### END YEARGROUPS #####");
+//				System.out.println("##### END GRADELEVELS #####");
 //				System.out.println("##### BEGIN ADDRESS #####");
 //				System.out.println("addressType: " + school.getAddress().getAddressType());
 //				System.out.println("city: " + school.getAddress().getCity());
@@ -4589,12 +4569,12 @@ public class RicOneApiTests
 //				}
 //				System.out.println("##### END OTHERIDS #####");
 //				System.out.println("schoolName: " + school.getSchoolName());
-//				System.out.println("##### BEGIN YEARGROUPS #####");
-//				for (String yg : school.getYearGroups().getYearGroup())
+//				System.out.println("##### BEGIN GRADELEVELS #####");
+//				for (String gl : school.getGradeLevels().getGradeLevel())
 //				{
-//					System.out.println("yearGroup: " + yg);
+//					System.out.println("gradeLevel: " + gl);
 //				}
-//				System.out.println("##### END YEARGROUPS #####");
+//				System.out.println("##### END GRADELEVELS #####");
 //				System.out.println("##### BEGIN ADDRESS #####");
 //				System.out.println("addressType: " + school.getAddress().getAddressType());
 //				System.out.println("city: " + school.getAddress().getCity());
@@ -4642,12 +4622,12 @@ public class RicOneApiTests
 //				}
 //				System.out.println("##### END OTHERIDS #####");
 //				System.out.println("schoolName: " + school.getSchoolName());
-//				System.out.println("##### BEGIN YEARGROUPS #####");
-//				for (String yg : school.getYearGroups().getYearGroup())
+//				System.out.println("##### BEGIN GRADELEVELS #####");
+//				for (String gl : school.getGradeLevels().getGradeLevel())
 //				{
-//					System.out.println("yearGroup: " + yg);
+//					System.out.println("gradeLevel: " + gl);
 //				}
-//				System.out.println("##### END YEARGROUPS #####");
+//				System.out.println("##### END GRADELEVELS #####");
 //				System.out.println("##### BEGIN ADDRESS #####");
 //				System.out.println("addressType: " + school.getAddress().getAddressType());
 //				System.out.println("city: " + school.getAddress().getCity());
@@ -4695,12 +4675,12 @@ public class RicOneApiTests
 //				}
 //				System.out.println("##### END OTHERIDS #####");
 //				System.out.println("schoolName: " + school.getSchoolName());
-//				System.out.println("##### BEGIN YEARGROUPS #####");
-//				for (String yg : school.getYearGroups().getYearGroup())
+//				System.out.println("##### BEGIN GRADELEVELS #####");
+//				for (String gl : school.getGradeLevels().getGradeLevel())
 //				{
-//					System.out.println("yearGroup: " + yg);
+//					System.out.println("yearGroup: " + gl);
 //				}
-//				System.out.println("##### END YEARGROUPS #####");
+//				System.out.println("##### END GRADELEVELS #####");
 //				System.out.println("##### BEGIN ADDRESS #####");
 //				System.out.println("addressType: " + school.getAddress().getAddressType());
 //				System.out.println("city: " + school.getAddress().getCity());
@@ -4748,12 +4728,12 @@ public class RicOneApiTests
 //				}
 //				System.out.println("##### END OTHERIDS #####");
 //				System.out.println("schoolName: " + school.getSchoolName());
-//				System.out.println("##### BEGIN YEARGROUPS #####");
-//				for (String yg : school.getYearGroups().getYearGroup())
+//				System.out.println("##### BEGIN GRADELEVELS #####");
+//				for (String gl : school.getGradeLevels().getGradeLevel())
 //				{
-//					System.out.println("yearGroup: " + yg);
+//					System.out.println("gradeLevel: " + gl);
 //				}
-//				System.out.println("##### END YEARGROUPS #####");
+//				System.out.println("##### END GRADELEVELS #####");
 //				System.out.println("##### BEGIN ADDRESS #####");
 //				System.out.println("addressType: " + school.getAddress().getAddressType());
 //				System.out.println("city: " + school.getAddress().getCity());
@@ -4801,12 +4781,12 @@ public class RicOneApiTests
 //				}
 //				System.out.println("##### END OTHERIDS #####");
 //				System.out.println("schoolName: " + school.getSchoolName());
-//				System.out.println("##### BEGIN YEARGROUPS #####");
-//				for (String yg : school.getYearGroups().getYearGroup())
+//				System.out.println("##### BEGIN GRADELEVELS #####");
+//				for (String gl : school.getYearGroups().getYearGroup())
 //				{
-//					System.out.println("yearGroup: " + yg);
+//					System.out.println("gradeLevel: " + gl);
 //				}
-//				System.out.println("##### END YEARGROUPS #####");
+//				System.out.println("##### END GRADELEVELS #####");
 //				System.out.println("##### BEGIN ADDRESS #####");
 //				System.out.println("addressType: " + school.getAddress().getAddressType());
 //				System.out.println("city: " + school.getAddress().getCity());
@@ -4854,12 +4834,12 @@ public class RicOneApiTests
 //				}
 //				System.out.println("##### END OTHERIDS #####");
 //				System.out.println("schoolName: " + school.getSchoolName());
-//				System.out.println("##### BEGIN YEARGROUPS #####");
-//				for (String yg : school.getYearGroups().getYearGroup())
+//				System.out.println("##### BEGIN GRADELEVELS #####");
+//				for (String gl : school.getGradeLevels().getGradeLevel())
 //				{
-//					System.out.println("yearGroup: " + yg);
+//					System.out.println("gradeLevel: " + gl);
 //				}
-//				System.out.println("##### END YEARGROUPS #####");
+//				System.out.println("##### END GRADELEVELS #####");
 //				System.out.println("##### BEGIN ADDRESS #####");
 //				System.out.println("addressType: " + school.getAddress().getAddressType());
 //				System.out.println("city: " + school.getAddress().getCity());
@@ -4907,12 +4887,12 @@ public class RicOneApiTests
 //				}
 //				System.out.println("##### END OTHERIDS #####");
 //				System.out.println("schoolName: " + school.getSchoolName());
-//				System.out.println("##### BEGIN YEARGROUPS #####");
-//				for (String yg : school.getYearGroups().getYearGroup())
+//				System.out.println("##### BEGIN GRADELEVELS #####");
+//				for (String gl : school.getGradeLevels().getGradeLevel())
 //				{
-//					System.out.println("yearGroup: " + yg);
+//					System.out.println("gradeLevel: " + gl);
 //				}
-//				System.out.println("##### END YEARGROUPS #####");
+//				System.out.println("##### END GRADELEVELS #####");
 //				System.out.println("##### BEGIN ADDRESS #####");
 //				System.out.println("addressType: " + school.getAddress().getAddressType());
 //				System.out.println("city: " + school.getAddress().getCity());

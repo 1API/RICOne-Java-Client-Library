@@ -23,9 +23,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;sequence>
  *         &lt;element name="name" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonNameType" minOccurs="0"/>
  *         &lt;element name="localId" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonIdType" minOccurs="0"/>
- *         &lt;element name="loginId" type="{http://www.sifassociation.org/datamodel/na/3.2}xLoginIdType" minOccurs="0"/>
  *         &lt;element name="stateProvinceId" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonIdType" minOccurs="0"/>
  *         &lt;element name="otherIds" type="{http://www.sifassociation.org/datamodel/na/3.2}xOtherPersonIdListType" minOccurs="0"/>
+ *         &lt;element name="appProvisioningInfo" type="{http://www.sifassociation.org/datamodel/na/3.2}xAppProvisioningInfoType" minOccurs="0"/>
  *         &lt;element name="sex" type="{http://www.sifassociation.org/datamodel/na/3.2}xSexType" minOccurs="0"/>
  *         &lt;element name="email" type="{http://www.sifassociation.org/datamodel/na/3.2}xEmailType" minOccurs="0"/>
  *         &lt;element name="primaryAssignment" type="{http://www.sifassociation.org/datamodel/na/3.2}xStaffPersonAssignmentType" minOccurs="0"/>
@@ -42,9 +42,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlType(name = "xStaffType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
     "name",
     "localId",
-    "loginId",
     "stateProvinceId",
     "otherIds",
+    "appProvisioningInfo",
     "sex",
     "email",
     "primaryAssignment",
@@ -55,16 +55,16 @@ public class XStaffType
 {
 	public XStaffType()
     {
-        refId = null;
-        name = new XPersonNameType();
-        localId = null;
-        loginId = null;
-        stateProvinceId = null;
-        otherIds = new XOtherPersonIdListType();
-        sex = null;
-        email = new XEmailType();
-        primaryAssignment = new XStaffPersonAssignmentType();
-        otherAssignments = new XStaffPersonAssignmentListType();
+	    refId = null;
+	    name = new XPersonNameType();
+	    localId = null;
+	    stateProvinceId = null;
+	    otherIds = new XOtherPersonIdListType();
+	    appProvisioningInfo = new XAppProvisioningInfoType();
+	    sex = null;
+	    email = new XEmailType();
+	    primaryAssignment = new XStaffPersonAssignmentType();
+	    otherAssignments = new XStaffPersonAssignmentListType();
     }
 
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
@@ -74,12 +74,11 @@ public class XStaffType
     protected String localId;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String loginId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String stateProvinceId;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XOtherPersonIdListType otherIds;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XAppProvisioningInfoType appProvisioningInfo;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String sex;
@@ -139,30 +138,6 @@ public class XStaffType
     }
 
     /**
-     * Gets the value of the loginId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getLoginId() {
-        return loginId;
-    }
-
-    /**
-     * Sets the value of the loginId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLoginId(String value) {
-        this.loginId = value;
-    }
-
-    /**
      * Gets the value of the stateProvinceId property.
      * 
      * @return
@@ -208,6 +183,30 @@ public class XStaffType
      */
     public void setOtherIds(XOtherPersonIdListType value) {
         this.otherIds = value;
+    }
+
+    /**
+     * Gets the value of the appProvisioningInfo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XAppProvisioningInfoType }
+     *     
+     */
+    public XAppProvisioningInfoType getAppProvisioningInfo() {
+        return appProvisioningInfo;
+    }
+
+    /**
+     * Sets the value of the appProvisioningInfo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XAppProvisioningInfoType }
+     *     
+     */
+    public void setAppProvisioningInfo(XAppProvisioningInfoType value) {
+        this.appProvisioningInfo = value;
     }
 
     /**

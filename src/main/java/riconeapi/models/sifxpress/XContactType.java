@@ -22,8 +22,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *         &lt;element name="name" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonNameType"/>
  *         &lt;element name="otherNames" type="{http://www.sifassociation.org/datamodel/na/3.2}xOtherPersonNameListType" minOccurs="0"/>
  *         &lt;element name="localId" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonIdType" minOccurs="0"/>
- *         &lt;element name="loginId" type="{http://www.sifassociation.org/datamodel/na/3.2}xLoginIdType" minOccurs="0"/>
  *         &lt;element name="otherIds" type="{http://www.sifassociation.org/datamodel/na/3.2}xOtherPersonIdListType" minOccurs="0"/>
+ *         &lt;element name="appProvisioningInfo" type="{http://www.sifassociation.org/datamodel/na/3.2}xAppProvisioningInfoType" minOccurs="0"/>
  *         &lt;element name="address" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonAddressType" minOccurs="0"/>
  *         &lt;element name="phoneNumber" type="{http://www.sifassociation.org/datamodel/na/3.2}xTelephoneType" minOccurs="0"/>
  *         &lt;element name="otherPhoneNumbers" type="{http://www.sifassociation.org/datamodel/na/3.2}xTelephoneListType" minOccurs="0"/>
@@ -45,8 +45,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "name",
     "otherNames",
     "localId",
-    "loginId",
     "otherIds",
+    "appProvisioningInfo",
     "address",
     "phoneNumber",
     "otherPhoneNumbers",
@@ -65,8 +65,8 @@ public class XContactType
         name = new XPersonNameType();
         otherNames = new XOtherPersonNameListType();
         localId = null;
-        loginId = null;
         otherIds = new XOtherPersonIdListType();
+        appProvisioningInfo = new XAppProvisioningInfoType();
         address = new XPersonAddressType();
         phoneNumber = new XTelephoneType();
         otherPhoneNumbers = new XTelephoneListType();
@@ -85,10 +85,9 @@ public class XContactType
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String localId;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String loginId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XOtherPersonIdListType otherIds;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XAppProvisioningInfoType appProvisioningInfo;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XPersonAddressType address;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
@@ -181,30 +180,6 @@ public class XContactType
     }
 
     /**
-     * Gets the value of the loginId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getLoginId() {
-        return loginId;
-    }
-
-    /**
-     * Sets the value of the loginId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLoginId(String value) {
-        this.loginId = value;
-    }
-
-    /**
      * Gets the value of the otherIds property.
      * 
      * @return
@@ -226,6 +201,30 @@ public class XContactType
      */
     public void setOtherIds(XOtherPersonIdListType value) {
         this.otherIds = value;
+    }
+
+    /**
+     * Gets the value of the appProvisioningInfo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XAppProvisioningInfoType }
+     *     
+     */
+    public XAppProvisioningInfoType getAppProvisioningInfo() {
+        return appProvisioningInfo;
+    }
+
+    /**
+     * Sets the value of the appProvisioningInfo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XAppProvisioningInfoType }
+     *     
+     */
+    public void setAppProvisioningInfo(XAppProvisioningInfoType value) {
+        this.appProvisioningInfo = value;
     }
 
     /**

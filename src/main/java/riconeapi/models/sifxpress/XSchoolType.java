@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *         &lt;element name="stateProvinceId" type="{http://www.sifassociation.org/datamodel/na/3.2}xOrganizationIdType" minOccurs="0"/>
  *         &lt;element name="otherIds" type="{http://www.sifassociation.org/datamodel/na/3.2}xOtherOrganizationIdListType" minOccurs="0"/>
  *         &lt;element name="schoolName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="yearGroups" type="{http://www.sifassociation.org/datamodel/na/3.2}xYearGroupListType" minOccurs="0"/>
+ *         &lt;element name="gradeLevels" type="{http://www.sifassociation.org/datamodel/na/3.2}xGradeLevelListType" minOccurs="0"/>
  *         &lt;element name="address" type="{http://www.sifassociation.org/datamodel/na/3.2}xOrganizationAddressType" minOccurs="0"/>
  *         &lt;element name="phoneNumber" type="{http://www.sifassociation.org/datamodel/na/3.2}xTelephoneType" minOccurs="0"/>
  *         &lt;element name="otherPhoneNumbers" type="{http://www.sifassociation.org/datamodel/na/3.2}xTelephoneListType" minOccurs="0"/>
@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "stateProvinceId",
     "otherIds",
     "schoolName",
-    "yearGroups",
+    "gradeLevels",
     "address",
     "phoneNumber",
     "otherPhoneNumbers"
@@ -53,7 +53,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class XSchoolType
     extends GSIFCompositeType
 {
-
 	public XSchoolType()
     {
         refId = null;
@@ -62,12 +61,12 @@ public class XSchoolType
         stateProvinceId = null;
         otherIds = new XOtherOrganizationIdListType();
         schoolName = null;
-        yearGroups = new XYearGroupListType();
+        gradeLevels = new XGradeLevelListType();
         address = new XOrganizationAddressType();
         phoneNumber = new XTelephoneType();
         otherPhoneNumbers = new XTelephoneListType();
     }
-	
+
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String leaRefId;
@@ -82,7 +81,7 @@ public class XSchoolType
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected String schoolName;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XYearGroupListType yearGroups;
+    protected XGradeLevelListType gradeLevels;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XOrganizationAddressType address;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
@@ -211,27 +210,27 @@ public class XSchoolType
     }
 
     /**
-     * Gets the value of the yearGroups property.
+     * Gets the value of the gradeLevels property.
      * 
      * @return
      *     possible object is
-     *     {@link XYearGroupListType }
+     *     {@link XGradeLevelListType }
      *     
      */
-    public XYearGroupListType getYearGroups() {
-        return yearGroups;
+    public XGradeLevelListType getGradeLevels() {
+        return gradeLevels;
     }
 
     /**
-     * Sets the value of the yearGroups property.
+     * Sets the value of the gradeLevels property.
      * 
      * @param value
      *     allowed object is
-     *     {@link XYearGroupListType }
+     *     {@link XGradeLevelListType }
      *     
      */
-    public void setYearGroups(XYearGroupListType value) {
-        this.yearGroups = value;
+    public void setGradeLevels(XGradeLevelListType value) {
+        this.gradeLevels = value;
     }
 
     /**
