@@ -12,28 +12,28 @@ import java.util.List;
 
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import riconeapi.models.xpress.XCalendarCollectionType;
+import riconeapi.models.xpress.XCalendarType;
+import riconeapi.models.xpress.XContactCollectionType;
+import riconeapi.models.xpress.XContactType;
+import riconeapi.models.xpress.XCourseCollectionType;
+import riconeapi.models.xpress.XCourseType;
+import riconeapi.models.xpress.XLeaCollectionType;
+import riconeapi.models.xpress.XLeaType;
+import riconeapi.models.xpress.XRosterCollectionType;
+import riconeapi.models.xpress.XRosterType;
+import riconeapi.models.xpress.XSchoolCollectionType;
+import riconeapi.models.xpress.XSchoolType;
+import riconeapi.models.xpress.XStaffCollectionType;
+import riconeapi.models.xpress.XStaffType;
+import riconeapi.models.xpress.XStudentCollectionType;
+import riconeapi.models.xpress.XStudentType;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-
-import riconeapi.models.sifxpress.BaseXObject;
-import riconeapi.models.sifxpress.XCalendarCollectionType;
-import riconeapi.models.sifxpress.XCalendarType;
-import riconeapi.models.sifxpress.XContactCollectionType;
-import riconeapi.models.sifxpress.XContactType;
-import riconeapi.models.sifxpress.XCourseCollectionType;
-import riconeapi.models.sifxpress.XCourseType;
-import riconeapi.models.sifxpress.XLeaCollectionType;
-import riconeapi.models.sifxpress.XLeaType;
-import riconeapi.models.sifxpress.XRosterCollectionType;
-import riconeapi.models.sifxpress.XRosterType;
-import riconeapi.models.sifxpress.XSchoolCollectionType;
-import riconeapi.models.sifxpress.XSchoolType;
-import riconeapi.models.sifxpress.XStaffCollectionType;
-import riconeapi.models.sifxpress.XStaffType;
-import riconeapi.models.sifxpress.XStudentCollectionType;
-import riconeapi.models.sifxpress.XStudentType;
 
 /**
  * Static class built off of RICOne client to allow access to SIFxPress data model objects
@@ -58,7 +58,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Leas with paging
 	 */
-	public List<XLeaType> getXLeas(int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -66,58 +66,54 @@ public class XPress
     		headers.set("Authorization", "Bearer " + this.token);
     		headers.set("navigationPage", Integer.toString(navigationPage));
     		headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+    		//headers.set("Content-Type", "application/json");
 			
     		HttpEntity<?> entity = new HttpEntity<Object>(headers);
 
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionType.class);
 			
-			Util.ResponseHandler(response.getStatusCode());			
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
 	/**
 	 * @return All Leas
 	 */
-	public List<XLeaType> getXLeas()
+	public RestResponseMulti<XLeaType> getXLeas()
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			////headers.set("Content-Type", "application/json");
 			
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
-			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionType.class);
+			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xLeas.json", HttpMethod.GET, entity, XLeaCollectionType.class);
 			
-			Util.ResponseHandler(response.getStatusCode());
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
 			
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}	
 	}
 
@@ -128,7 +124,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Lea by refId with paging
 	 */
-	public XLeaType getXLea(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseSingle<XLeaType> getXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -136,27 +132,25 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaType> response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XLeaType> output = new RestResponseSingle<XLeaType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
-		}	
+			
+			return new RestResponseSingle<XLeaType>();
+		}
 	}
 
 	/**
@@ -164,32 +158,30 @@ public class XPress
 	 * @param refId
 	 * @return Single Lea by refId
 	 */
-	public XLeaType getXLea(String refId)
+	public RestResponseSingle<XLeaType> getXLea(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaType> response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XLeaType> output = new RestResponseSingle<XLeaType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XLeaType>();
 		}
 	}
 
@@ -200,7 +192,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific School by refId with paging
 	 */
-	public List<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -208,26 +200,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
@@ -236,32 +226,30 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific School by refId
 	 */
-	public List<XLeaType> getXLeasByXSchool(String refId)
+	public RestResponseMulti<XLeaType> getXLeasByXSchool(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 	
@@ -272,7 +260,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Roster by refId with paging
 	 */
-	public List<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -280,26 +268,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
@@ -308,32 +294,30 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific Roster by refId
 	 */
-	public List<XLeaType> getXLeasByXRoster(String refId)
+	public RestResponseMulti<XLeaType> getXLeasByXRoster(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
@@ -344,7 +328,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Staff by refId with paging
 	 */
-	public List<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -352,26 +336,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
@@ -380,32 +362,30 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific Staff by refId
 	 */
-	public List<XLeaType> getXLeasByXStaff(String refId)
+	public RestResponseMulti<XLeaType> getXLeasByXStaff(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 	/**
@@ -415,7 +395,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Student by refId with paging
 	 */
-	public List<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -423,26 +403,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
@@ -451,32 +429,30 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific Student by refId
 	 */
-	public List<XLeaType> getXLeasByXStudent(String refId)
+	public RestResponseMulti<XLeaType> getXLeasByXStudent(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
@@ -487,7 +463,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Contact by refId with paging
 	 */
-	public List<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -495,26 +471,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
@@ -523,32 +497,30 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific Contact by refId
 	 */
-	public List<XLeaType> getXLeasByXContact(String refId)
+	public RestResponseMulti<XLeaType> getXLeasByXContact(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXLea();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+			output.setData(response.getBody().getXLea());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XLeaType>();
 		}
 	}
 
@@ -559,7 +531,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Schools with paging
 	 */
-	public List<XSchoolType> getXSchools(int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -567,26 +539,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -594,32 +564,30 @@ public class XPress
 	 * 
 	 * @return All Schools
 	 */
-	public List<XSchoolType> getXSchools()
+	public RestResponseMulti<XSchoolType> getXSchools()
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}		
 	}
 
@@ -630,7 +598,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single School by refId with paging
 	 */
-	public XSchoolType getXSchool(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseSingle<XSchoolType> getXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -638,26 +606,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 			
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolType> response = rt.exchange(baseApiUrl + "xSchools/{refId}", HttpMethod.GET, entity, XSchoolType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XSchoolType> output = new RestResponseSingle<XSchoolType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XSchoolType>();
 		}
 	}
 
@@ -666,32 +632,30 @@ public class XPress
 	 * @param refId
 	 * @return Single School by refId
 	 */
-	public XSchoolType getXSchool(String refId)
+	public RestResponseSingle<XSchoolType> getXSchool(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolType> response = rt.exchange(baseApiUrl + "xSchools/{refId}", HttpMethod.GET, entity, XSchoolType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XSchoolType> output = new RestResponseSingle<XSchoolType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XSchoolType>();
 		}
 	}
 
@@ -702,7 +666,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Lea by refId with paging
 	 */
-	public List<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -710,26 +674,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -738,32 +700,30 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Lea by refId
 	 */
-	public List<XSchoolType> getXSchoolsByXLea(String refId)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXLea(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -774,7 +734,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Calendar by refId with paging
 	 */
-	public List<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -782,26 +742,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xCalendars/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -810,32 +768,30 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Calendar by refId
 	 */
-	public List<XSchoolType> getXSchoolsByXCalendar(String refId)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xCalendars/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -846,7 +802,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Course by refId with paging
 	 */
-	public List<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{	
@@ -854,26 +810,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xCourses/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -882,32 +836,30 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Course by refId
 	 */
-	public List<XSchoolType> getXSchoolsByXCourse(String refId)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xCourses/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -918,7 +870,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Roster by refId with paging
 	 */
-	public List<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -926,26 +878,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -954,32 +904,30 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Roster by refId
 	 */
-	public List<XSchoolType> getXSchoolsByXRoster(String refId)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -990,7 +938,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Staff by refId with paging
 	 */
-	public List<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -998,26 +946,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -1026,32 +972,30 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Staff by refId
 	 */
-	public List<XSchoolType> getXSchoolsByXStaff(String refId)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -1062,7 +1006,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Student by refId with paging
 	 */
-	public List<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1070,26 +1014,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -1098,32 +1040,30 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Student by refId
 	 */
-	public List<XSchoolType> getXSchoolsByXStudent(String refId)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -1134,7 +1074,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Contact by refId with paging
 	 */
-	public List<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1142,26 +1082,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xContacts/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -1170,32 +1108,30 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Contact by refId
 	 */
-	public List<XSchoolType> getXSchoolsByXContact(String refId)
+	public RestResponseMulti<XSchoolType> getXSchoolsByXContact(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + "xContacts/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXSchool();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+			output.setData(response.getBody().getXSchool());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XSchoolType>();
 		}
 	}
 
@@ -1206,7 +1142,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Calendars with paging
 	 */
-	public List<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1214,26 +1150,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + "xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
+			RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+			output.setData(response.getBody().getXCalendar());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
 			
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCalendar();
-			}
-			else
-			{
-				return null;
-			}		
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCalendarType>();
 		}
 	}
 
@@ -1241,32 +1175,30 @@ public class XPress
 	 * 
 	 * @return All Calendars
 	 */
-	public List<XCalendarType> getXCalendars()
+	public RestResponseMulti<XCalendarType> getXCalendars()
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + "xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCalendar();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+			output.setData(response.getBody().getXCalendar());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCalendarType>();
 		}
 	}
 
@@ -1277,7 +1209,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Calendar by refId with paging
 	 */
-	public XCalendarType getXCalendar(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseSingle<XCalendarType> getXCalendar(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1285,26 +1217,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCalendarType> response = rt.exchange(baseApiUrl + "xCalendars/{refId}", HttpMethod.GET, entity, XCalendarType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseSingle<XCalendarType> output = new RestResponseSingle<XCalendarType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XCalendarType>();
 		}
 	}
 
@@ -1313,32 +1243,30 @@ public class XPress
 	 * @param refId
 	 * @return Single Calendar by refId
 	 */
-	public XCalendarType getXCalendar(String refId)
+	public RestResponseSingle<XCalendarType> getXCalendar(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCalendarType> response = rt.exchange(baseApiUrl + "xCalendars/{refId}", HttpMethod.GET, entity, XCalendarType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseSingle<XCalendarType> output = new RestResponseSingle<XCalendarType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XCalendarType>();
 		}
 	}
 	
@@ -1349,7 +1277,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Calendars associated to a specific Lea by refId with paging
 	 */
-	public List<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1357,26 +1285,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCalendar();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+			output.setData(response.getBody().getXCalendar());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCalendarType>();
 		}
 	}
 
@@ -1385,32 +1311,30 @@ public class XPress
 	 * @param refId
 	 * @return Calendars associated to a specific Lea by refId
 	 */
-	public List<XCalendarType> getXCalendarsByXLea(String refId)
+	public RestResponseMulti<XCalendarType> getXCalendarsByXLea(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCalendar();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+			output.setData(response.getBody().getXCalendar());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCalendarType>();
 		}
 	}
 
@@ -1421,7 +1345,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Calendars associated to a specific School by refId with paging
 	 */
-	public List<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1429,26 +1353,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCalendar();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+			output.setData(response.getBody().getXCalendar());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCalendarType>();
 		}
 	}
 
@@ -1457,32 +1379,30 @@ public class XPress
 	 * @param refId
 	 * @return Calendars associated to a specific School by refId
 	 */
-	public List<XCalendarType> getXCalendarsByXSchool(String refId)
+	public RestResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCalendar();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+			output.setData(response.getBody().getXCalendar());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCalendarType>();
 		}
 	}
 
@@ -1493,7 +1413,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Courses with paging
 	 */
-	public List<XCourseType> getXCourses(int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XCourseType> getXCourses(int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1501,26 +1421,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + "xCourses", HttpMethod.GET, entity, XCourseCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCourse();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+			output.setData(response.getBody().getXCourse());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCourseType>();
 		}
 	}
 
@@ -1528,32 +1446,30 @@ public class XPress
 	 * 
 	 * @return All Courses
 	 */
-	public List<XCourseType> getXCourses()
+	public RestResponseMulti<XCourseType> getXCourses()
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + "xCourses", HttpMethod.GET, entity, XCourseCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCourse();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+			output.setData(response.getBody().getXCourse());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCourseType>();
 		}
 	}
 
@@ -1564,7 +1480,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Course by refId with paging
 	 */
-	public XCourseType getXCourse(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseSingle<XCourseType> getXCourse(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1572,26 +1488,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseType> response = rt.exchange(baseApiUrl + "xCourses/{refId}", HttpMethod.GET, entity, XCourseType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseSingle<XCourseType> output = new RestResponseSingle<XCourseType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XCourseType>();
 		}
 	}
 
@@ -1600,32 +1514,30 @@ public class XPress
 	 * @param refId
 	 * @return Single Course by refId
 	 */
-	public XCourseType getXCourse(String refId)
+	public RestResponseSingle<XCourseType> getXCourse(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseType> response = rt.exchange(baseApiUrl + "xCourses/{refId}", HttpMethod.GET, entity, XCourseType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseSingle<XCourseType> output = new RestResponseSingle<XCourseType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XCourseType>();
 		}
 	}
 
@@ -1636,7 +1548,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific Lea by refId with paging
 	 */
-	public List<XCourseType> getXCoursesByXLea(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XCourseType> getXCoursesByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1644,26 +1556,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCourse();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+			output.setData(response.getBody().getXCourse());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCourseType>();
 		}
 	}
 
@@ -1672,32 +1582,30 @@ public class XPress
 	 * @param refId
 	 * @return Courses associated to a specific Lea by refId
 	 */
-	public List<XCourseType> getXCoursesByXLea(String refId)
+	public RestResponseMulti<XCourseType> getXCoursesByXLea(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCourse();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+			output.setData(response.getBody().getXCourse());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCourseType>();
 		}
 	}
 	
@@ -1708,7 +1616,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific School by refId with paging
 	 */
-	public List<XCourseType> getXCoursesByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XCourseType> getXCoursesByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1716,26 +1624,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCourse();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+			output.setData(response.getBody().getXCourse());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCourseType>();
 		}
 	}
 
@@ -1744,32 +1650,30 @@ public class XPress
 	 * @param refId
 	 * @return Courses associated to a specific School by refId
 	 */
-	public List<XCourseType> getXCoursesByXSchool(String refId)
+	public RestResponseMulti<XCourseType> getXCoursesByXSchool(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCourse();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+			output.setData(response.getBody().getXCourse());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCourseType>();
 		}
 	}
 	
@@ -1780,7 +1684,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific Roster by refId with paging
 	 */
-	public List<XCourseType> getXCoursesByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XCourseType> getXCoursesByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1788,26 +1692,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCourse();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+			output.setData(response.getBody().getXCourse());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCourseType>();
 		}
 	}
 
@@ -1816,32 +1718,30 @@ public class XPress
 	 * @param refId
 	 * @return Courses associated to a specific Roster by refId
 	 */
-	public List<XCourseType> getXCoursesByXRoster(String refId)
+	public RestResponseMulti<XCourseType> getXCoursesByXRoster(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXCourse();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+			output.setData(response.getBody().getXCourse());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XCourseType>();
 		}
 	}
 
@@ -1852,7 +1752,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Rosters with paging
 	 */
-	public List<XRosterType> getXRosters(int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XRosterType> getXRosters(int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1860,26 +1760,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -1887,32 +1785,30 @@ public class XPress
 	 * 
 	 * @return All Rosters
 	 */
-	public List<XRosterType> getXRosters()
+	public RestResponseMulti<XRosterType> getXRosters()
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -1923,7 +1819,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Roster by refId with paging
 	 */
-	public XRosterType getXRoster(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseSingle<XRosterType> getXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -1931,26 +1827,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterType> response = rt.exchange(baseApiUrl + "xRosters/{refId}", HttpMethod.GET, entity, XRosterType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XRosterType> output = new RestResponseSingle<XRosterType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XRosterType>();
 		}
 	}
 
@@ -1959,32 +1853,30 @@ public class XPress
 	 * @param refId
 	 * @return Single Roster by refId
 	 */
-	public XRosterType getXRoster(String refId)
+	public RestResponseSingle<XRosterType> getXRoster(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterType> response = rt.exchange(baseApiUrl + "xRosters/{refId}", HttpMethod.GET, entity, XRosterType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XRosterType> output = new RestResponseSingle<XRosterType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XRosterType>();
 		}
 	}
 
@@ -1995,7 +1887,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Lea by refId with paging
 	 */
-	public List<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2003,26 +1895,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2031,32 +1921,30 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific Lea by refId
 	 */
-	public List<XRosterType> getXRostersByXLea(String refId)
+	public RestResponseMulti<XRosterType> getXRostersByXLea(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2067,7 +1955,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific School by refId with paging
 	 */
-	public List<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2075,26 +1963,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2103,32 +1989,30 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific School by refId
 	 */
-	public List<XRosterType> getXRostersByXSchool(String refId)
+	public RestResponseMulti<XRosterType> getXRostersByXSchool(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2139,7 +2023,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Course by refId with paging
 	 */
-	public List<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2147,26 +2031,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xCourses/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2175,32 +2057,30 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific Course by refId
 	 */
-	public List<XRosterType> getXRostersByXCourse(String refId)
+	public RestResponseMulti<XRosterType> getXRostersByXCourse(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xCourses/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2211,7 +2091,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Staff by refId with paging
 	 */
-	public List<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2219,26 +2099,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2247,32 +2125,30 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific Staff by refId
 	 */
-	public List<XRosterType> getXRostersByXStaff(String refId)
+	public RestResponseMulti<XRosterType> getXRostersByXStaff(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2283,7 +2159,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Student by refId with paging
 	 */
-	public List<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2291,26 +2167,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2319,32 +2193,30 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific Student by refId
 	 */
-	public List<XRosterType> getXRostersByXStudent(String refId)
+	public RestResponseMulti<XRosterType> getXRostersByXStudent(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXRoster();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+			output.setData(response.getBody().getXRoster());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XRosterType>();
 		}
 	}
 
@@ -2355,7 +2227,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Staffs with paging
 	 */
-	public List<XStaffType> getXStaffs(int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStaffType> getXStaffs(int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2363,26 +2235,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class);
 			
-			Util.ResponseHandler(response.getStatusCode());
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
 			
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2390,32 +2260,30 @@ public class XPress
 	 * 
 	 * @return All Staffs
 	 */
-	public List<XStaffType> getXStaffs()
+	public RestResponseMulti<XStaffType> getXStaffs()
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class);
 			
-			Util.ResponseHandler(response.getStatusCode());
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
 			
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2426,7 +2294,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Staffs by refId with paging
 	 */
-	public XStaffType getXStaff(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseSingle<XStaffType> getXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2434,26 +2302,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}", HttpMethod.GET, entity, XStaffType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XStaffType> output = new RestResponseSingle<XStaffType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XStaffType>();
 		}
 	}
 
@@ -2462,32 +2328,30 @@ public class XPress
 	 * @param refId
 	 * @return Single Staffs by refId
 	 */
-	public XStaffType getXStaff(String refId)
+	public RestResponseSingle<XStaffType> getXStaff(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}", HttpMethod.GET, entity, XStaffType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XStaffType> output = new RestResponseSingle<XStaffType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XStaffType>();
 		}
 	}
 
@@ -2498,7 +2362,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Lea by refId with paging
 	 */
-	public List<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2506,26 +2370,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2534,32 +2396,30 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific Lea by refId
 	 */
-	public List<XStaffType> getXStaffsByXLea(String refId)
+	public RestResponseMulti<XStaffType> getXStaffsByXLea(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2570,7 +2430,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific School by refId with paging
 	 */
-	public List<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2578,26 +2438,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2606,12 +2464,13 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific School by refId
 	 */
-	public List<XStaffType> getXStaffsByXSchool(String refId)
+	public RestResponseMulti<XStaffType> getXStaffsByXSchool(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
@@ -2619,19 +2478,18 @@ public class XPress
 
 			Util.ResponseHandler(response.getStatusCode());
 
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2642,7 +2500,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Course by refId with paging
 	 */
-	public List<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2650,26 +2508,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xCourses/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2678,32 +2534,30 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific Course by refId
 	 */
-	public List<XStaffType> getXStaffsByXCourse(String refId)
+	public RestResponseMulti<XStaffType> getXStaffsByXCourse(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xCourses/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2714,7 +2568,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Roster by refId with paging
 	 */
-	public List<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2722,26 +2576,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2750,7 +2602,7 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific Roster by refId
 	 */
-	public List<XStaffType> getXStaffsByXRoster(String refId)
+	public RestResponseMulti<XStaffType> getXStaffsByXRoster(String refId)
 	{
 		try
 		{
@@ -2758,24 +2610,22 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			//headers.set("Content-Type", "application/json");
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 	
@@ -2786,7 +2636,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Student by refId with paging
 	 */
-	public List<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2794,26 +2644,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2822,7 +2670,7 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific Student by refId
 	 */
-	public List<XStaffType> getXStaffsByXStudent(String refId)
+	public RestResponseMulti<XStaffType> getXStaffsByXStudent(String refId)
 	{
 		try
 		{
@@ -2830,24 +2678,22 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			//headers.set("Content-Type", "application/json");
 			
 			ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStaff();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+			output.setData(response.getBody().getXStaff());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStaffType>();
 		}
 	}
 
@@ -2858,7 +2704,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Students with paging
 	 */
-	public List<XStudentType> getXStudents(int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStudentType> getXStudents(int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2866,28 +2712,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xStudents", HttpMethod.GET, entity, XStudentCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-//			if(response.getBody() != null)
-//			{
-//				return response.getBody().getXStudent();
-			return response.getBody().getXStudent();
-//			}
-//			else
-//			{
-//				return null;
-//			}
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			List<XStudentType> list = new ArrayList<XStudentType>();
-			return list;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -2895,48 +2737,30 @@ public class XPress
 	 * 
 	 * @return All Students
 	 */
-	public RestResponse getXStudents()
+	public RestResponseMulti<XStudentType> getXStudents()
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xStudents", HttpMethod.GET, entity, XStudentCollectionType.class);
-
-			Util.ResponseHandler(response.getStatusCode());
-
-//			if(response.getBody() != null)
-//			{	
 			
-			RestResponse out = new RestResponse();
-			out.setData((XStudentType[]) response.getBody().getXStudent().toArray());
-			out.setStatus(response.getStatusCode());
-			return out;
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
 			
-//			List<BaseXObject> blah = new ArrayList<BaseXObject>();
-//			for(XStudentType s : response.getBody().getXStudent())
-//			{
-//				BaseXObject poop = s;
-//				blah.add(poop);
-//			}
-			
-//			BaseXObject poop = response.getBody().getXStudent().get(0);
-//			blah = new ArrayList<BaseXObject>();
-//			List<BaseXObject> bxo = blah;
-				
-//			}
-//			else
-//			{
-//				return null;
-//			}
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	} 
 	
@@ -2947,7 +2771,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Student by refId with paging
 	 */
-	public XStudentType getXStudent(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseSingle<XStudentType> getXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -2955,26 +2779,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentType> response = rt.exchange(baseApiUrl + "xStudents/{refId}", HttpMethod.GET, entity, XStudentType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseSingle<XStudentType> output = new RestResponseSingle<XStudentType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XStudentType>();
 		}
 	}
 
@@ -2983,32 +2805,30 @@ public class XPress
 	 * @param refId
 	 * @return Single Student by refId
 	 */
-	public XStudentType getXStudent(String refId)
+	public RestResponseSingle<XStudentType> getXStudent(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentType> response = rt.exchange(baseApiUrl + "xStudents/{refId}", HttpMethod.GET, entity, XStudentType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XStudentType> output = new RestResponseSingle<XStudentType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XStudentType>();
 		}
 	}
 
@@ -3019,7 +2839,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Lea by refId with paging
 	 */
-	public List<XStudentType> getXStudentsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStudentType> getXStudentsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3027,26 +2847,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3055,32 +2873,30 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific Lea by refId
 	 */
-	public List<XStudentType> getXStudentsByXLea(String refId)
+	public RestResponseMulti<XStudentType> getXStudentsByXLea(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3091,7 +2907,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific School by refId with paging
 	 */
-	public List<XStudentType> getXStudentsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStudentType> getXStudentsByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3099,26 +2915,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3127,32 +2941,30 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific School by refId
 	 */
-	public List<XStudentType> getXStudentsByXSchool(String refId)
+	public RestResponseMulti<XStudentType> getXStudentsByXSchool(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3163,7 +2975,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Roster by refId with paging
 	 */
-	public List<XStudentType> getXStudentsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStudentType> getXStudentsByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3171,26 +2983,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3199,32 +3009,30 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific Roster by refId
 	 */
-	public List<XStudentType> getXStudentsByXRoster(String refId)
+	public RestResponseMulti<XStudentType> getXStudentsByXRoster(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xRosters/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3235,7 +3043,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Staff by refId with paging
 	 */
-	public List<XStudentType> getXStudentsByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStudentType> getXStudentsByXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3243,26 +3051,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3271,32 +3077,30 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific Staff by refId
 	 */
-	public List<XStudentType> getXStudentsByXStaff(String refId)
+	public RestResponseMulti<XStudentType> getXStudentsByXStaff(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3307,7 +3111,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Contact by refId with paging
 	 */
-	public List<XStudentType> getXStudentsByXContact(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XStudentType> getXStudentsByXContact(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3315,26 +3119,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xContacts/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3343,32 +3145,30 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific Contact by refId
 	 */
-	public List<XStudentType> getXStudentsByXContact(String refId)
+	public RestResponseMulti<XStudentType> getXStudentsByXContact(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + "xContacts/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXStudent();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+			output.setData(response.getBody().getXStudent());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XStudentType>();
 		}
 	}
 
@@ -3379,7 +3179,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Contacts with paging
 	 */
-	public List<XContactType> getXContacts(int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XContactType> getXContacts(int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3387,26 +3187,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXContact();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+			output.setData(response.getBody().getXContact());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XContactType>();
 		}
 	}
 
@@ -3414,32 +3212,30 @@ public class XPress
 	 * 
 	 * @return All Contacts
 	 */
-	public List<XContactType> getXContacts()
+	public RestResponseMulti<XContactType> getXContacts()
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionType.class);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXContact();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+			output.setData(response.getBody().getXContact());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XContactType>();
 		}
 	}
 
@@ -3450,7 +3246,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Contact by refId with paging
 	 */
-	public XContactType getXContact(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseSingle<XContactType> getXContact(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3458,26 +3254,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactType> response = rt.exchange(baseApiUrl + "xContacts/{refId}", HttpMethod.GET, entity, XContactType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}
+			RestResponseSingle<XContactType> output = new RestResponseSingle<XContactType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseSingle<XContactType>();
 		}
 	}
 
@@ -3486,32 +3280,30 @@ public class XPress
 	 * @param refId
 	 * @return Single Contact by refId
 	 */
-	public XContactType getXContact(String refId)
+	public RestResponseSingle<XContactType> getXContact(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactType> response = rt.exchange(baseApiUrl + "xContacts/{refId}", HttpMethod.GET, entity, XContactType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseSingle<XContactType> output = new RestResponseSingle<XContactType>();
+			output.setData(response.getBody());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;	
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+
+			return new RestResponseSingle<XContactType>();
 		}
 	}
 
@@ -3522,7 +3314,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific Lea by refId wtih paging
 	 */
-	public List<XContactType> getXContactsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XContactType> getXContactsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3530,26 +3322,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXContact();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+			output.setData(response.getBody().getXContact());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XContactType>();
 		}
 	}
 
@@ -3558,32 +3348,30 @@ public class XPress
 	 * @param refId
 	 * @return Contacts associated to a specific Lea by refId
 	 */
-	public List<XContactType> getXContactsByXLea(String refId)
+	public RestResponseMulti<XContactType> getXContactsByXLea(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + "xLeas/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXContact();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+			output.setData(response.getBody().getXContact());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XContactType>();
 		}
 	}
 
@@ -3594,7 +3382,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific School by refId with paging
 	 */
-	public List<XContactType> getXContactsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XContactType> getXContactsByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3602,26 +3390,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXContact();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+			output.setData(response.getBody().getXContact());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XContactType>();
 		}
 	}
 
@@ -3630,32 +3416,30 @@ public class XPress
 	 * @param refId
 	 * @return Contacts associated to a specific School by refId
 	 */
-	public List<XContactType> getXContactsByXSchool(String refId)
+	public RestResponseMulti<XContactType> getXContactsByXSchool(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXContact();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+			output.setData(response.getBody().getXContact());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XContactType>();
 		}
 	}
 
@@ -3666,7 +3450,7 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific Student by refId with paging
 	 */
-	public List<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public RestResponseMulti<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		try
 		{
@@ -3674,26 +3458,24 @@ public class XPress
 			headers.set("Authorization", "Bearer " + this.token);
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXContact();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+			output.setData(response.getBody().getXContact());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XContactType>();
 		}
 	}
 
@@ -3702,32 +3484,30 @@ public class XPress
 	 * @param refId
 	 * @return Contacts associated to a specific Student by refId
 	 */
-	public List<XContactType> getXContactsByXStudent(String refId)
+	public RestResponseMulti<XContactType> getXContactsByXStudent(String refId)
 	{
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + "xStudents/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			Util.ResponseHandler(response.getStatusCode());
-
-			if(response.getBody() != null)
-			{
-				return response.getBody().getXContact();
-			}
-			else
-			{
-				return null;
-			}	
+			RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+			output.setData(response.getBody().getXContact());
+			output.setStatusCode(response.getStatusCode());
+			output.setHeaders(response.getHeaders());
+			
+			return output;
 		}
 		catch(RestClientException rce)
 		{
 			rce.printStackTrace();
-			return null;
+			
+			return new RestResponseMulti<XContactType>();
 		}
 	}
 
@@ -3778,6 +3558,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3794,6 +3575,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3809,6 +3591,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3824,6 +3607,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3839,6 +3623,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3854,6 +3639,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3869,6 +3655,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3884,6 +3671,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3922,6 +3710,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3937,6 +3726,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3952,6 +3742,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3967,6 +3758,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3982,6 +3774,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -3997,6 +3790,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -4018,6 +3812,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
@@ -4033,6 +3828,7 @@ public class XPress
 				headers.set("Authorization", "Bearer " + this.token);
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+				//headers.set("Content-Type", "application/json");
 
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				

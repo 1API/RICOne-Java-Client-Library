@@ -8,9 +8,9 @@ import riconeapi.common.Authenticator;
 import riconeapi.common.RicOneApiClient;
 import riconeapi.common.XPress;
 import riconeapi.models.authentication.Endpoint;
-import riconeapi.models.sifxpress.XLeaType;
-import riconeapi.models.sifxpress.XPersonReferenceType;
-import riconeapi.models.sifxpress.XRosterType;
+import riconeapi.models.xpress.XLeaType;
+import riconeapi.models.xpress.XPersonReferenceType;
+import riconeapi.models.xpress.XRosterType;
 
 public class SampleConsole
 {
