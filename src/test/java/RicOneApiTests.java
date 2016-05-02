@@ -40,6 +40,7 @@ public class RicOneApiTests
 	final static String authUrl = "http://auth.test.ricone.org/login";
 	final static String clientId = "dpademo";
 	final static String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+//	final static String clientSecret = "afklj";
 	
 //	final static String authUrl = "https://auth.ricone.org/login";
 //	final static String clientId = "STAR_Assessments";
@@ -51,11 +52,11 @@ public class RicOneApiTests
 //	static int navigationPageSize = 20000;
     
 	// Null:
-	static String refId = null;
+//	static String refId = null;
 	// Lea:
 //	static String refId = "EBC3675E-D2F4-457F-BD73-5F83B1FAFD62";
 	// School:
-//	static String refId = "1B378FC1-75BA-4108-AD04-B61E54C5DB4B";
+	static String refId = "1B378FC1-75BA-4108-AD04-B61E54C5DB4B";
 	// Calendar:
 //	static String refId = "1851D612-F245-4CBE-AF54-2A8B575866E4";
 	// Course:
@@ -82,7 +83,7 @@ public class RicOneApiTests
 
 			// xLeas
 //			XLeas_GetXLeas(ricOne);
-//			XLeas_GetXLea(ricOne);
+			XLeas_GetXLea(ricOne);
 //			XLeas_GetXLeasByXSchool(ricOne);
 //			XLeas_GetXLeasByXRoster(ricOne);
 //			XLeas_GetXLeasByXStaff(ricOne);
@@ -262,8 +263,10 @@ public class RicOneApiTests
 	//RETURN SINGLE LEA
 	public static void XLeas_GetXLea(RicOneApiClient ricOne)
     {
-		if(ricOne.xPress.getXLea(refId) != null)
+		System.out.println(ricOne.xPress.getXLea(refId).getMessage());
+		if(ricOne.xPress.getXLea(refId).getData() != null)
 		{
+			System.out.println(222);
 			XLeaType lea = ricOne.xPress.getXLea(refId).getData();
 			
 			System.out.println("refId: " + lea.getRefId());

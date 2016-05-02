@@ -14,6 +14,7 @@ public class RestResponseSingle<T>
 	private T data;
 	private HttpStatus statusCode;
 	private HttpHeaders headers;
+	private String message;
 	
 	public T getData()
 	{
@@ -38,5 +39,14 @@ public class RestResponseSingle<T>
 	public void setHeaders(HttpHeaders headers)
 	{
 		this.headers = headers;
-	}	
+	}
+	public String getMessage()
+	{
+		return message;
+	}
+	public void setMessage(String message)
+	{
+		this.message = message;
+	}
+	
 }

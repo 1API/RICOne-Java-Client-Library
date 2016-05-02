@@ -16,6 +16,7 @@ public class RestResponseMulti<T>
 	private List<T> data;
 	private HttpStatus statusCode;
 	private HttpHeaders headers;
+	private String message;
 	
 	public List<T> getData()
 	{	
@@ -40,5 +41,14 @@ public class RestResponseMulti<T>
 	public void setHeaders(HttpHeaders headers)
 	{
 		this.headers = headers;
-	}	
+	}
+	public String getMessage()
+	{
+		return message;
+	}
+	public void setMessage(String message)
+	{
+		this.message = message;
+	}
+	
 }

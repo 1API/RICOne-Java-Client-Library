@@ -21,26 +21,42 @@ import org.springframework.http.HttpStatus;
 
 
 public class Util
-{
+{	
+	public static String ResponseHandler(HttpStatus httpStatusCode)
+	{
+		String message = null;
+		
+		if (httpStatusCode == HttpStatus.OK)
+		{
+			message = HttpStatus.OK.toString();
+		}
+		else if(httpStatusCode == HttpStatus.NOT_FOUND)
+		{
+			message = HttpStatus.NOT_FOUND.toString();
+		}
+		
+		return message;
+	}
+	
 	/**
 	 * Response handler to return HTTP Status Codes if an error with a request
 	 * occurs
 	 * 
 	 * @param response
 	 */
-	public static void ResponseHandler(HttpStatus response)
-	{
-		HttpStatus httpStatusCode = response;
-
-		if (httpStatusCode == HttpStatus.OK)
-		{
-			// System.out.println(httpStatusCode);
-		}
-		else
-		{
-			System.out.println("HttpCode: " + httpStatusCode.toString());
-		}
-	}
+//	public static void ResponseHandler(HttpStatus response)
+//	{
+//		HttpStatus httpStatusCode = response;
+//
+//		if (httpStatusCode == HttpStatus.OK)
+//		{
+//			// System.out.println(httpStatusCode);
+//		}
+//		else
+//		{
+//			System.out.println("HttpCode: " + httpStatusCode.toString());
+//		}
+//	}
 	 
 	public static void disableSslVerification()
 	{
