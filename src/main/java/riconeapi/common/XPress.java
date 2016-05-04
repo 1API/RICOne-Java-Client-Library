@@ -73,7 +73,10 @@ public class XPress
 
     		response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionType.class);
 			
-			output.setData(response.getBody().getXLea());
+    		if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -103,9 +106,12 @@ public class XPress
 			
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
-			response = rt.exchange(baseApiUrl + "xLeas.json", HttpMethod.GET, entity, XLeaCollectionType.class);
+			response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionType.class);
 			
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -143,7 +149,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -177,7 +186,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaType.class, refId);
 			
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -215,7 +227,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -249,7 +264,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -287,7 +305,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -321,7 +342,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -359,7 +383,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -393,7 +420,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -430,7 +460,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -464,7 +497,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -502,7 +538,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -536,7 +575,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-			output.setData(response.getBody().getXLea());
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -574,7 +616,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -607,7 +652,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class);
 			
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -645,7 +693,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}", HttpMethod.GET, entity, XSchoolType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());	
 		}
@@ -679,7 +730,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}", HttpMethod.GET, entity, XSchoolType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -717,7 +771,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -751,7 +808,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -789,7 +849,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCalendars/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -823,7 +886,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCalendars/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -861,7 +927,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -895,7 +964,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 			
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -933,7 +1005,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -967,7 +1042,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1005,7 +1083,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1039,7 +1120,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1077,7 +1161,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1111,7 +1198,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1149,7 +1239,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1183,7 +1276,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-			output.setData(response.getBody().getXSchool());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1221,7 +1317,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class);
 
-			output.setData(response.getBody().getXCalendar());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1254,7 +1353,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class);
 
-			output.setData(response.getBody().getXCalendar());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1292,7 +1394,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCalendars/{refId}", HttpMethod.GET, entity, XCalendarType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1326,7 +1431,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCalendars/{refId}", HttpMethod.GET, entity, XCalendarType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1364,7 +1472,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCalendar());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1398,7 +1509,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCalendar());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1436,7 +1550,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCalendar());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1470,7 +1587,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCalendar());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1508,7 +1628,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses", HttpMethod.GET, entity, XCourseCollectionType.class);
 
-			output.setData(response.getBody().getXCourse());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1541,7 +1664,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses", HttpMethod.GET, entity, XCourseCollectionType.class);
 
-			output.setData(response.getBody().getXCourse());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1579,7 +1705,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses/{refId}", HttpMethod.GET, entity, XCourseType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1613,7 +1742,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses/{refId}", HttpMethod.GET, entity, XCourseType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1651,7 +1783,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCourse());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1685,7 +1820,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCourse());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1723,7 +1861,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCourse());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1757,7 +1898,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCourse());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1795,7 +1939,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCourse());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1829,7 +1976,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-			output.setData(response.getBody().getXCourse());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1867,7 +2017,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionType.class);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1900,7 +2053,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionType.class);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -1938,7 +2094,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}", HttpMethod.GET, entity, XRosterType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());	
 		}
@@ -1972,7 +2131,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}", HttpMethod.GET, entity, XRosterType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2010,7 +2172,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2044,7 +2209,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2082,7 +2250,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2116,7 +2287,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2154,7 +2328,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2188,7 +2365,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2226,7 +2406,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2260,7 +2443,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2298,7 +2484,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-			output.setData(response.getBody().getXRoster());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2331,8 +2520,11 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
-
-			output.setData(response.getBody().getXRoster());
+			
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2370,7 +2562,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class);
 			
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2403,7 +2598,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class);
 			
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2441,7 +2639,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}", HttpMethod.GET, entity, XStaffType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2475,7 +2676,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}", HttpMethod.GET, entity, XStaffType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2513,7 +2717,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2547,7 +2754,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2585,7 +2795,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2619,7 +2832,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2657,7 +2873,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2691,7 +2910,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2729,7 +2951,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2763,7 +2988,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2801,7 +3029,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2835,7 +3066,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStaff());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2906,7 +3140,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents", HttpMethod.GET, entity, XStudentCollectionType.class);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2944,7 +3181,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}", HttpMethod.GET, entity, XStudentType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -2978,7 +3218,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}", HttpMethod.GET, entity, XStudentType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3016,7 +3259,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3050,7 +3296,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3088,7 +3337,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3122,7 +3374,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3160,7 +3415,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3194,7 +3452,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3232,7 +3493,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3266,7 +3530,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3304,7 +3571,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3338,7 +3608,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-			output.setData(response.getBody().getXStudent());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3376,7 +3649,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionType.class);
 
-			output.setData(response.getBody().getXContact());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3409,7 +3685,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionType.class);
 
-			output.setData(response.getBody().getXContact());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3447,7 +3726,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}", HttpMethod.GET, entity, XContactType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3481,7 +3763,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}", HttpMethod.GET, entity, XContactType.class, refId);
 
-			output.setData(response.getBody());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3519,7 +3804,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			output.setData(response.getBody().getXContact());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3553,7 +3841,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			output.setData(response.getBody().getXContact());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3591,7 +3882,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			output.setData(response.getBody().getXContact());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3625,7 +3919,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			output.setData(response.getBody().getXContact());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3663,7 +3960,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 			
-			output.setData(response.getBody().getXContact());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3697,7 +3997,10 @@ public class XPress
 			
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-			output.setData(response.getBody().getXContact());
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
 			output.setStatusCode(response.getStatusCode());
 			output.setHeaders(response.getHeaders());
 		}
@@ -3917,7 +4220,8 @@ public class XPress
 				ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XLeaCollectionType.class);
 
 				Util.ResponseHandler(response.getStatusCode());
-
+				System.out.println(response.getHeaders());
+				System.out.println(response.getHeaders().getFirst("navigationLastPage"));
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 			else if (p.name().equals("GETXSCHOOLS"))
