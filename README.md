@@ -12,7 +12,7 @@ The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTe
 
 #### Basic Use
 ```java
-Authenticator auth = new Authenticator(authUrl, username, password);
+Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 
 for(Endpoint e : auth.GetEndpoints())
 {
@@ -30,13 +30,26 @@ for(Endpoint e : auth.GetEndpoints())
 2. Download the Project
 3. Get your OAuth server credentials
 4. Open SampleConsole
-5. Add the auth url and credentials to username and password
+5. Add the auth url and credentials to clientId and clientSecret
 ```java
 final static String authUrl = "AUTH URL"
-final static String username = "YOUR USERNAME";
-final static String password = "YOUR PASSWORD";
+final static String clientId = "YOUR USERNAME";
+final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.2
+* Token now passed via header
+* Paging passed via header
+* Refactored method names
+	* i.e. GetXStudents() now getXStudents()
+* Dropped SIF prefix from SIFXPress class, now XPress
+* Ability to access response status code, status message, and headers
+* Removed LoginId from XContactType, XStaffType, and XStudentType
+* Added XAppProvisioningInfoType
+	* Added to XContactType, XStaffType, and XStudentType
+* Changed XYearGroupListType to XGradeLevelListType
+	* Changed in XSchoolType
+
 ### v1.1.3.1
 * Auth url now configurable
 * Changed accessToken to access_token to reflect RFC 6750 specification

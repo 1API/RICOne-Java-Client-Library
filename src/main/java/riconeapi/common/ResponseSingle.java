@@ -9,11 +9,11 @@ package riconeapi.common;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
-public class RestResponseSingle<T>
+public class ResponseSingle<T>
 {
 	private T data;
-	private HttpStatus statusCode;
-	private HttpHeaders headers;
+	private int statusCode;
+	private String header;
 	private String message;
 	
 	/**
@@ -33,30 +33,30 @@ public class RestResponseSingle<T>
 	/**
 	 * @return the statusCode of the response
 	 */
-	public HttpStatus getStatusCode()
+	public int getStatusCode()
 	{
 		return statusCode;
 	}
 	/**
 	 * @param statusCode the statusCode to set
 	 */
-	public void setStatusCode(HttpStatus statusCode)
+	public void setStatusCode(int statusCode)
 	{
 		this.statusCode = statusCode;
 	}
 	/**
 	 * @return the headers of the response
 	 */
-	public HttpHeaders getHeaders()
+	public String getHeader()
 	{
-		return headers;
+		return header;
 	}
 	/**
 	 * @param headers the headers to set
 	 */
-	public void setHeaders(HttpHeaders headers)
+	public void setHeader(String header)
 	{
-		this.headers = headers;
+		this.header = header;
 	}
 	/**
 	 * @return the error message of the response

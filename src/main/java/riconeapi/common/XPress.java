@@ -1,14 +1,13 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.2
- * @since       Feb 08, 2016
+ * @since       May 16, 2016
  * Filename		XPress.java
  */
 
 package riconeapi.common;
 
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import riconeapi.models.xpress.XCalendarCollectionType;
@@ -56,10 +55,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Leas with paging
 	 */
-	public RestResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -77,14 +76,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -93,10 +92,10 @@ public class XPress
 	/**
 	 * @return All Leas
 	 */
-	public RestResponseMulti<XLeaType> getXLeas()
+	public ResponseMulti<XLeaType> getXLeas()
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -112,14 +111,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;	
@@ -132,10 +131,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Lea by refId with paging
 	 */
-	public RestResponseSingle<XLeaType> getXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XLeaType> getXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XLeaType> response = null;
-		RestResponseSingle<XLeaType> output = new RestResponseSingle<XLeaType>();
+		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
 		
 		try
 		{
@@ -153,14 +152,14 @@ public class XPress
 			{
     			output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -171,10 +170,10 @@ public class XPress
 	 * @param refId
 	 * @return Single Lea by refId
 	 */
-	public RestResponseSingle<XLeaType> getXLea(String refId)
+	public ResponseSingle<XLeaType> getXLea(String refId)
 	{
 		ResponseEntity<XLeaType> response = null;
-		RestResponseSingle<XLeaType> output = new RestResponseSingle<XLeaType>();
+		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
 		
 		try
 		{
@@ -190,14 +189,14 @@ public class XPress
 			{
     			output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;	
@@ -210,10 +209,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific School by refId with paging
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -231,14 +230,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -249,10 +248,10 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific School by refId
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXSchool(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -268,14 +267,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -288,10 +287,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Roster by refId with paging
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -309,14 +308,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -327,10 +326,10 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific Roster by refId
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXRoster(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -346,14 +345,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -366,10 +365,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Staff by refId with paging
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -387,14 +386,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -405,10 +404,10 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific Staff by refId
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXStaff(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -424,14 +423,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -443,10 +442,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Student by refId with paging
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -464,14 +463,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -482,10 +481,10 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific Student by refId
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXStudent(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -501,14 +500,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -521,10 +520,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Contact by refId with paging
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -542,14 +541,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -560,10 +559,10 @@ public class XPress
 	 * @param refId
 	 * @return Leas associated to a specific Contact by refId
 	 */
-	public RestResponseMulti<XLeaType> getXLeasByXContact(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXContact(String refId)
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
-		RestResponseMulti<XLeaType> output = new RestResponseMulti<XLeaType>();
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
 		try
 		{
@@ -579,14 +578,14 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -599,10 +598,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Schools with paging
 	 */
-	public RestResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 				
 		try
 		{
@@ -620,14 +619,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -637,10 +636,10 @@ public class XPress
 	 * 
 	 * @return All Schools
 	 */
-	public RestResponseMulti<XSchoolType> getXSchools()
+	public ResponseMulti<XSchoolType> getXSchools()
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -656,14 +655,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;	
@@ -676,10 +675,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single School by refId with paging
 	 */
-	public RestResponseSingle<XSchoolType> getXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XSchoolType> getXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolType> response = null;
-		RestResponseSingle<XSchoolType> output = new RestResponseSingle<XSchoolType>();
+		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
 		
 		try
 		{
@@ -697,14 +696,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());	
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());	
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -715,10 +714,10 @@ public class XPress
 	 * @param refId
 	 * @return Single School by refId
 	 */
-	public RestResponseSingle<XSchoolType> getXSchool(String refId)
+	public ResponseSingle<XSchoolType> getXSchool(String refId)
 	{
 		ResponseEntity<XSchoolType> response = null;
-		RestResponseSingle<XSchoolType> output = new RestResponseSingle<XSchoolType>();
+		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
 		
 		try
 		{
@@ -734,14 +733,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -754,10 +753,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Lea by refId with paging
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -775,14 +774,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -793,10 +792,10 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Lea by refId
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXLea(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -812,14 +811,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -832,10 +831,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Calendar by refId with paging
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -853,14 +852,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -871,10 +870,10 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Calendar by refId
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -890,14 +889,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -910,10 +909,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Course by refId with paging
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{	
@@ -931,14 +930,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -949,10 +948,10 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Course by refId
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -968,14 +967,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -988,10 +987,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Roster by refId with paging
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -1009,14 +1008,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1027,10 +1026,10 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Roster by refId
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -1046,14 +1045,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1066,10 +1065,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Staff by refId with paging
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -1087,14 +1086,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1105,10 +1104,10 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Staff by refId
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -1124,14 +1123,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1144,10 +1143,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Student by refId with paging
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -1165,14 +1164,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1183,10 +1182,10 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Student by refId
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -1202,14 +1201,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1222,10 +1221,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Contact by refId with paging
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -1243,14 +1242,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1261,10 +1260,10 @@ public class XPress
 	 * @param refId
 	 * @return Schools associated to a specific Contact by refId
 	 */
-	public RestResponseMulti<XSchoolType> getXSchoolsByXContact(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId)
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
-		RestResponseMulti<XSchoolType> output = new RestResponseMulti<XSchoolType>();
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
 		try
 		{
@@ -1280,14 +1279,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1300,10 +1299,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Calendars with paging
 	 */
-	public RestResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
-		RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
 		try
 		{
@@ -1321,14 +1320,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1338,10 +1337,10 @@ public class XPress
 	 * 
 	 * @return All Calendars
 	 */
-	public RestResponseMulti<XCalendarType> getXCalendars()
+	public ResponseMulti<XCalendarType> getXCalendars()
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
-		RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
 		try
 		{
@@ -1357,14 +1356,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1377,10 +1376,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Calendar by refId with paging
 	 */
-	public RestResponseSingle<XCalendarType> getXCalendar(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XCalendarType> getXCalendar(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCalendarType> response = null;
-		RestResponseSingle<XCalendarType> output = new RestResponseSingle<XCalendarType>();
+		ResponseSingle<XCalendarType> output = new ResponseSingle<XCalendarType>();
 		
 		try
 		{
@@ -1398,14 +1397,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1416,10 +1415,10 @@ public class XPress
 	 * @param refId
 	 * @return Single Calendar by refId
 	 */
-	public RestResponseSingle<XCalendarType> getXCalendar(String refId)
+	public ResponseSingle<XCalendarType> getXCalendar(String refId)
 	{
 		ResponseEntity<XCalendarType> response = null;
-		RestResponseSingle<XCalendarType> output = new RestResponseSingle<XCalendarType>();
+		ResponseSingle<XCalendarType> output = new ResponseSingle<XCalendarType>();
 		
 		try
 		{
@@ -1435,14 +1434,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1455,10 +1454,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Calendars associated to a specific Lea by refId with paging
 	 */
-	public RestResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
-		RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
 		try
 		{
@@ -1476,14 +1475,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1494,10 +1493,10 @@ public class XPress
 	 * @param refId
 	 * @return Calendars associated to a specific Lea by refId
 	 */
-	public RestResponseMulti<XCalendarType> getXCalendarsByXLea(String refId)
+	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId)
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
-		RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
 		try
 		{
@@ -1513,14 +1512,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1533,10 +1532,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Calendars associated to a specific School by refId with paging
 	 */
-	public RestResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
-		RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
 		try
 		{
@@ -1554,14 +1553,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1572,10 +1571,10 @@ public class XPress
 	 * @param refId
 	 * @return Calendars associated to a specific School by refId
 	 */
-	public RestResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId)
+	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId)
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
-		RestResponseMulti<XCalendarType> output = new RestResponseMulti<XCalendarType>();
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
 		try
 		{
@@ -1591,14 +1590,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1611,10 +1610,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Courses with paging
 	 */
-	public RestResponseMulti<XCourseType> getXCourses(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCourseType> getXCourses(int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
-		RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
 		try
 		{
@@ -1632,14 +1631,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1649,10 +1648,10 @@ public class XPress
 	 * 
 	 * @return All Courses
 	 */
-	public RestResponseMulti<XCourseType> getXCourses()
+	public ResponseMulti<XCourseType> getXCourses()
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
-		RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
 		try
 		{
@@ -1668,14 +1667,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1688,10 +1687,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Course by refId with paging
 	 */
-	public RestResponseSingle<XCourseType> getXCourse(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XCourseType> getXCourse(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCourseType> response = null;
-		RestResponseSingle<XCourseType> output = new RestResponseSingle<XCourseType>();
+		ResponseSingle<XCourseType> output = new ResponseSingle<XCourseType>();
 		
 		try
 		{
@@ -1709,14 +1708,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1727,10 +1726,10 @@ public class XPress
 	 * @param refId
 	 * @return Single Course by refId
 	 */
-	public RestResponseSingle<XCourseType> getXCourse(String refId)
+	public ResponseSingle<XCourseType> getXCourse(String refId)
 	{
 		ResponseEntity<XCourseType> response = null;
-		RestResponseSingle<XCourseType> output = new RestResponseSingle<XCourseType>();
+		ResponseSingle<XCourseType> output = new ResponseSingle<XCourseType>();
 		
 		try
 		{
@@ -1746,14 +1745,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1766,10 +1765,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific Lea by refId with paging
 	 */
-	public RestResponseMulti<XCourseType> getXCoursesByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCourseType> getXCoursesByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
-		RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
 		try
 		{
@@ -1787,14 +1786,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1805,10 +1804,10 @@ public class XPress
 	 * @param refId
 	 * @return Courses associated to a specific Lea by refId
 	 */
-	public RestResponseMulti<XCourseType> getXCoursesByXLea(String refId)
+	public ResponseMulti<XCourseType> getXCoursesByXLea(String refId)
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
-		RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
 		try
 		{
@@ -1824,14 +1823,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1844,10 +1843,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific School by refId with paging
 	 */
-	public RestResponseMulti<XCourseType> getXCoursesByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
-		RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
 		try
 		{
@@ -1865,14 +1864,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1883,10 +1882,10 @@ public class XPress
 	 * @param refId
 	 * @return Courses associated to a specific School by refId
 	 */
-	public RestResponseMulti<XCourseType> getXCoursesByXSchool(String refId)
+	public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId)
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
-		RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
 		try
 		{
@@ -1902,14 +1901,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1922,10 +1921,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific Roster by refId with paging
 	 */
-	public RestResponseMulti<XCourseType> getXCoursesByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
-		RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
 		try
 		{
@@ -1943,14 +1942,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -1961,10 +1960,10 @@ public class XPress
 	 * @param refId
 	 * @return Courses associated to a specific Roster by refId
 	 */
-	public RestResponseMulti<XCourseType> getXCoursesByXRoster(String refId)
+	public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId)
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
-		RestResponseMulti<XCourseType> output = new RestResponseMulti<XCourseType>();
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
 		try
 		{
@@ -1980,14 +1979,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2000,10 +1999,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Rosters with paging
 	 */
-	public RestResponseMulti<XRosterType> getXRosters(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRosters(int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2021,14 +2020,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2038,10 +2037,10 @@ public class XPress
 	 * 
 	 * @return All Rosters
 	 */
-	public RestResponseMulti<XRosterType> getXRosters()
+	public ResponseMulti<XRosterType> getXRosters()
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2057,14 +2056,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2077,10 +2076,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Roster by refId with paging
 	 */
-	public RestResponseSingle<XRosterType> getXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XRosterType> getXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XRosterType> response = null;
-		RestResponseSingle<XRosterType> output = new RestResponseSingle<XRosterType>();
+		ResponseSingle<XRosterType> output = new ResponseSingle<XRosterType>();
 		
 		try
 		{
@@ -2098,14 +2097,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());	
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());	
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2116,10 +2115,10 @@ public class XPress
 	 * @param refId
 	 * @return Single Roster by refId
 	 */
-	public RestResponseSingle<XRosterType> getXRoster(String refId)
+	public ResponseSingle<XRosterType> getXRoster(String refId)
 	{
 		ResponseEntity<XRosterType> response = null;
-		RestResponseSingle<XRosterType> output = new RestResponseSingle<XRosterType>();
+		ResponseSingle<XRosterType> output = new ResponseSingle<XRosterType>();
 		
 		try
 		{
@@ -2135,14 +2134,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2155,10 +2154,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Lea by refId with paging
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2176,14 +2175,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2194,10 +2193,10 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific Lea by refId
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXLea(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXLea(String refId)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2213,14 +2212,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2233,10 +2232,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific School by refId with paging
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2254,14 +2253,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2272,10 +2271,10 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific School by refId
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXSchool(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2291,14 +2290,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2311,10 +2310,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Course by refId with paging
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2332,14 +2331,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2350,10 +2349,10 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific Course by refId
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXCourse(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2369,14 +2368,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2389,10 +2388,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Staff by refId with paging
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2410,14 +2409,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2428,10 +2427,10 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific Staff by refId
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXStaff(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2447,14 +2446,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2467,10 +2466,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Student by refId with paging
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2488,14 +2487,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2506,10 +2505,10 @@ public class XPress
 	 * @param refId
 	 * @return Rosters associated to a specific Student by refId
 	 */
-	public RestResponseMulti<XRosterType> getXRostersByXStudent(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId)
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
-		RestResponseMulti<XRosterType> output = new RestResponseMulti<XRosterType>();
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
 		try
 		{
@@ -2525,14 +2524,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2545,10 +2544,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Staffs with paging
 	 */
-	public RestResponseMulti<XStaffType> getXStaffs(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffs(int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2566,14 +2565,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2583,10 +2582,10 @@ public class XPress
 	 * 
 	 * @return All Staffs
 	 */
-	public RestResponseMulti<XStaffType> getXStaffs()
+	public ResponseMulti<XStaffType> getXStaffs()
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2602,14 +2601,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2622,10 +2621,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Staffs by refId with paging
 	 */
-	public RestResponseSingle<XStaffType> getXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XStaffType> getXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStaffType> response = null;
-		RestResponseSingle<XStaffType> output = new RestResponseSingle<XStaffType>();
+		ResponseSingle<XStaffType> output = new ResponseSingle<XStaffType>();
 		
 		try
 		{
@@ -2643,14 +2642,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2661,10 +2660,10 @@ public class XPress
 	 * @param refId
 	 * @return Single Staffs by refId
 	 */
-	public RestResponseSingle<XStaffType> getXStaff(String refId)
+	public ResponseSingle<XStaffType> getXStaff(String refId)
 	{
 		ResponseEntity<XStaffType> response = null;
-		RestResponseSingle<XStaffType> output = new RestResponseSingle<XStaffType>();
+		ResponseSingle<XStaffType> output = new ResponseSingle<XStaffType>();
 		
 		try
 		{
@@ -2680,14 +2679,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2700,10 +2699,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Lea by refId with paging
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2721,14 +2720,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2739,10 +2738,10 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific Lea by refId
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXLea(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXLea(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2758,14 +2757,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2778,10 +2777,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific School by refId with paging
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2799,14 +2798,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2817,10 +2816,10 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific School by refId
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXSchool(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2836,14 +2835,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2856,10 +2855,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Course by refId with paging
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2877,14 +2876,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2895,10 +2894,10 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific Course by refId
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXCourse(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2914,14 +2913,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2934,10 +2933,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Roster by refId with paging
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2955,14 +2954,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -2973,10 +2972,10 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific Roster by refId
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXRoster(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -2992,14 +2991,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3012,10 +3011,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Student by refId with paging
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -3033,14 +3032,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3051,10 +3050,10 @@ public class XPress
 	 * @param refId
 	 * @return Staffs associated to a specific Student by refId
 	 */
-	public RestResponseMulti<XStaffType> getXStaffsByXStudent(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
-		RestResponseMulti<XStaffType> output = new RestResponseMulti<XStaffType>();
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
 		try
 		{
@@ -3070,14 +3069,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3090,10 +3089,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Students with paging
 	 */
-	public RestResponseMulti<XStudentType> getXStudents(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudents(int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3108,14 +3107,14 @@ public class XPress
 			response = rt.exchange(baseApiUrl + "xStudents", HttpMethod.GET, entity, XStudentCollectionType.class);
 
 			output.setData(response.getBody().getXStudent());
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3125,10 +3124,10 @@ public class XPress
 	 * 
 	 * @return All Students
 	 */
-	public RestResponseMulti<XStudentType> getXStudents()
+	public ResponseMulti<XStudentType> getXStudents()
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3144,14 +3143,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3164,10 +3163,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Student by refId with paging
 	 */
-	public RestResponseSingle<XStudentType> getXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XStudentType> getXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStudentType> response = null;
-		RestResponseSingle<XStudentType> output = new RestResponseSingle<XStudentType>();
+		ResponseSingle<XStudentType> output = new ResponseSingle<XStudentType>();
 		
 		try
 		{
@@ -3185,14 +3184,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3203,10 +3202,10 @@ public class XPress
 	 * @param refId
 	 * @return Single Student by refId
 	 */
-	public RestResponseSingle<XStudentType> getXStudent(String refId)
+	public ResponseSingle<XStudentType> getXStudent(String refId)
 	{
 		ResponseEntity<XStudentType> response = null;
-		RestResponseSingle<XStudentType> output = new RestResponseSingle<XStudentType>();
+		ResponseSingle<XStudentType> output = new ResponseSingle<XStudentType>();
 		
 		try
 		{
@@ -3222,14 +3221,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3242,10 +3241,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Lea by refId with paging
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3263,14 +3262,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3281,10 +3280,10 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific Lea by refId
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXLea(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXLea(String refId)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3300,14 +3299,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3320,10 +3319,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific School by refId with paging
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3341,14 +3340,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3359,10 +3358,10 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific School by refId
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXSchool(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXSchool(String refId)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3378,14 +3377,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3398,10 +3397,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Roster by refId with paging
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXRoster(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3419,14 +3418,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3437,10 +3436,10 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific Roster by refId
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXRoster(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXRoster(String refId)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3456,14 +3455,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3476,10 +3475,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Staff by refId with paging
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXStaff(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3497,14 +3496,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3515,10 +3514,10 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific Staff by refId
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXStaff(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXStaff(String refId)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3534,14 +3533,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3554,10 +3553,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Contact by refId with paging
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXContact(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXContact(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3575,14 +3574,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3593,10 +3592,10 @@ public class XPress
 	 * @param refId
 	 * @return Students associated to a specific Contact by refId
 	 */
-	public RestResponseMulti<XStudentType> getXStudentsByXContact(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXContact(String refId)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
-		RestResponseMulti<XStudentType> output = new RestResponseMulti<XStudentType>();
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
 		try
 		{
@@ -3612,14 +3611,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3632,10 +3631,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return All Contacts with paging
 	 */
-	public RestResponseMulti<XContactType> getXContacts(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XContactType> getXContacts(int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XContactCollectionType> response = null;
-		RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
 		try
 		{
@@ -3653,14 +3652,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3670,10 +3669,10 @@ public class XPress
 	 * 
 	 * @return All Contacts
 	 */
-	public RestResponseMulti<XContactType> getXContacts()
+	public ResponseMulti<XContactType> getXContacts()
 	{
 		ResponseEntity<XContactCollectionType> response = null;
-		RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
 		try
 		{
@@ -3689,14 +3688,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3709,10 +3708,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Single Contact by refId with paging
 	 */
-	public RestResponseSingle<XContactType> getXContact(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XContactType> getXContact(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XContactType> response = null;
-		RestResponseSingle<XContactType> output = new RestResponseSingle<XContactType>();
+		ResponseSingle<XContactType> output = new ResponseSingle<XContactType>();
 		
 		try
 		{
@@ -3730,14 +3729,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3748,10 +3747,10 @@ public class XPress
 	 * @param refId
 	 * @return Single Contact by refId
 	 */
-	public RestResponseSingle<XContactType> getXContact(String refId)
+	public ResponseSingle<XContactType> getXContact(String refId)
 	{
 		ResponseEntity<XContactType> response = null;
-		RestResponseSingle<XContactType> output = new RestResponseSingle<XContactType>();
+		ResponseSingle<XContactType> output = new ResponseSingle<XContactType>();
 		
 		try
 		{
@@ -3767,14 +3766,14 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3787,10 +3786,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific Lea by refId wtih paging
 	 */
-	public RestResponseMulti<XContactType> getXContactsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XContactType> getXContactsByXLea(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XContactCollectionType> response = null;
-		RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
 		try
 		{
@@ -3808,14 +3807,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3826,10 +3825,10 @@ public class XPress
 	 * @param refId
 	 * @return Contacts associated to a specific Lea by refId
 	 */
-	public RestResponseMulti<XContactType> getXContactsByXLea(String refId)
+	public ResponseMulti<XContactType> getXContactsByXLea(String refId)
 	{
 		ResponseEntity<XContactCollectionType> response = null;
-		RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
 		try
 		{
@@ -3845,14 +3844,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3865,10 +3864,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific School by refId with paging
 	 */
-	public RestResponseMulti<XContactType> getXContactsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XContactType> getXContactsByXSchool(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XContactCollectionType> response = null;
-		RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
 		try
 		{
@@ -3886,14 +3885,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3904,10 +3903,10 @@ public class XPress
 	 * @param refId
 	 * @return Contacts associated to a specific School by refId
 	 */
-	public RestResponseMulti<XContactType> getXContactsByXSchool(String refId)
+	public ResponseMulti<XContactType> getXContactsByXSchool(String refId)
 	{
 		ResponseEntity<XContactCollectionType> response = null;
-		RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
 		try
 		{
@@ -3923,14 +3922,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3943,10 +3942,10 @@ public class XPress
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific Student by refId with paging
 	 */
-	public RestResponseMulti<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize)
 	{
 		ResponseEntity<XContactCollectionType> response = null;
-		RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
 		try
 		{
@@ -3964,14 +3963,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -3982,10 +3981,10 @@ public class XPress
 	 * @param refId
 	 * @return Contacts associated to a specific Student by refId
 	 */
-	public RestResponseMulti<XContactType> getXContactsByXStudent(String refId)
+	public ResponseMulti<XContactType> getXContactsByXStudent(String refId)
 	{
 		ResponseEntity<XContactCollectionType> response = null;
-		RestResponseMulti<XContactType> output = new RestResponseMulti<XContactType>();
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
 		try
 		{
@@ -4001,14 +4000,14 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
-			output.setStatusCode(response.getStatusCode());
-			output.setHeaders(response.getHeaders());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
 		}
 		catch(HttpClientErrorException e)
 		{
 			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode());
-			output.setHeaders(e.getResponseHeaders());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
 		}
 
 		return output;
@@ -4067,8 +4066,6 @@ public class XPress
 				
 				ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));	
 			}
 			else if (p.name().equals("GETXSCHOOLSBYXLEA") || p.name().equals("GETXSCHOOLSBYXCALENDAR") || p.name().equals("GETXSCHOOLSBYXCOURSE") || p.name().equals("GETXSCHOOLSBYXROSTER") || p.name().equals("GETXSCHOOLSBYXSTAFF") || p.name().equals("GETXSCHOOLSBYXSTUDENT")
@@ -4084,8 +4081,6 @@ public class XPress
 				
 				ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 			else if (p.name().equals("GETXCALENDARSBYXLEA") || p.name().equals("GETXCALENDARSBYXSCHOOL"))
@@ -4099,8 +4094,6 @@ public class XPress
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
 				ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
-
-				Util.ResponseHandler(response.getStatusCode());
 
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
@@ -4116,8 +4109,6 @@ public class XPress
 				
 				ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));	
 			}
 			else if (p.name().equals("GETXROSTERSBYXLEA") || p.name().equals("GETXROSTERSBYXSCHOOL") || p.name().equals("GETXROSTERSBYXCOURSE") || p.name().equals("GETXROSTERSBYXSTAFF") || p.name().equals("GETXROSTERSBYXSTUDENT"))
@@ -4132,11 +4123,9 @@ public class XPress
 				
 				ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
-			else if (p.name().equals("GETXSTAFFSBYXLEA") || p.name().equals("GETXSTAFFSBYXSCHOOL") || p.name().equals("GETXSTAFFSBYXCOURSE") || p.name().equals("GETXSTAFFSBYXROSTER") || p.name().equals("GETXSTAFFSBYXSTUDNET"))
+			else if (p.name().equals("GETXSTAFFSBYXLEA") || p.name().equals("GETXSTAFFSBYXSCHOOL") || p.name().equals("GETXSTAFFSBYXCOURSE") || p.name().equals("GETXSTAFFSBYXROSTER") || p.name().equals("GETXSTAFFSBYXSTUDENT"))
 			{
 				HttpHeaders headers = new HttpHeaders();
 				headers.set("Authorization", "Bearer " + this.token);
@@ -4147,8 +4136,6 @@ public class XPress
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
 				ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStaffCollectionType.class, refId);
-
-				Util.ResponseHandler(response.getStatusCode());
 
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
@@ -4164,8 +4151,6 @@ public class XPress
 				
 				ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 			else if (p.name().equals("GETXCONTACTSBYXLEA") || p.name().equals("GETXCONTACTSBYXSCHOOL") || p.name().equals("GETXCONTACTSBYXSTUDENT"))
@@ -4180,16 +4165,13 @@ public class XPress
 				
 				ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 
 			return navigationLastPage;
 		}
-		catch(RestClientException rce)
+		catch(HttpClientErrorException e)
 		{
-			rce.printStackTrace();
 			return 0;
 		}
 	}
@@ -4219,9 +4201,6 @@ public class XPress
 				
 				ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XLeaCollectionType.class);
 
-				Util.ResponseHandler(response.getStatusCode());
-				System.out.println(response.getHeaders());
-				System.out.println(response.getHeaders().getFirst("navigationLastPage"));
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 			else if (p.name().equals("GETXSCHOOLS"))
@@ -4235,8 +4214,6 @@ public class XPress
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
 				ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XSchoolCollectionType.class);
-
-				Util.ResponseHandler(response.getStatusCode());
 
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
@@ -4252,8 +4229,6 @@ public class XPress
 				
 				ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCalendarCollectionType.class);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 			else if (p.name().equals("GETXCOURSES"))
@@ -4267,8 +4242,6 @@ public class XPress
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
 				ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCourseCollectionType.class);
-
-				Util.ResponseHandler(response.getStatusCode());
 
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
@@ -4284,8 +4257,6 @@ public class XPress
 				
 				ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XRosterCollectionType.class);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 			else if (p.name().equals("GETXSTAFFS"))
@@ -4299,8 +4270,6 @@ public class XPress
 				HttpEntity<?> entity = new HttpEntity<Object>(headers);
 				
 				ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStaffCollectionType.class);
-				
-				Util.ResponseHandler(response.getStatusCode());
 
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 				
@@ -4322,8 +4291,6 @@ public class XPress
 				
 				ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStudentCollectionType.class);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 			else if (p.name().equals("GETXCONTACTS"))
@@ -4338,16 +4305,13 @@ public class XPress
 				
 				ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XContactCollectionType.class);
 
-				Util.ResponseHandler(response.getStatusCode());
-
 				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 			}
 
 			return navigationLastPage;
 		}
-		catch(RestClientException rce)
+		catch(HttpClientErrorException e)
 		{
-			rce.printStackTrace();
 			return 0;
 		}
 	}

@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.2
- * @since       May 4, 2016
+ * @since       May 16, 2016
  * Filename		RicOneApiTests.java
  */
 
@@ -9,7 +9,6 @@ import riconeapi.common.Authenticator;
 import riconeapi.common.RicOneApiClient;
 import riconeapi.common.Util;
 import riconeapi.models.authentication.Endpoint;
-import riconeapi.models.xpress.XAppProvisioningInfoType;
 import riconeapi.models.xpress.XCalendarType;
 import riconeapi.models.xpress.XContactStudentRelationshipType;
 import riconeapi.models.xpress.XContactType;
@@ -40,39 +39,35 @@ public class RicOneApiTests
 	final static String authUrl = "http://auth.test.ricone.org/login";
 	final static String clientId = "dpademo";
 	final static String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
-//	final static String clientSecret = "afklj";
-	
-//	final static String authUrl = "https://auth.ricone.org/login";
-//	final static String clientId = "STAR_Assessments";
-//	final static String clientSecret = "STAR_Assessments";
 
 	final static String providerId = "workshop";
-//	static int navigationPage = 1;
-//	static int navigationPageSize = 1;
-//	static int navigationPageSize = 20000;
     
 	// Null:
 	static String refId = null;
-	// Lea:
-//	static String refId = "1098EFC6-5374-4D7D-AEAE-58E021CCB146";
-	// School:
+    // Lea:
+//  static String refId = "1098EFC6-5374-4D7D-AEAE-58E021CCB146";
+//  static String refId = "8DC360AF-5FC2-465C-94E4-EB9596F3F7C4";
+    // School:
 //	static String refId = "0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C";
 //	static String refId = "BAC59C6E-D8DD-4E21-938A-13A80E555B7E";
-	// Calendar:
+//	static String refId = "106E9449-3FF4-499E-B94F-BCE557C013CE";
+    // Calendar:
 //	static String refId = "0451AF50-40BA-4231-8656-AE4C28AF7426";
-	// Course:
+    // Course:
 //	static String refId = "A985F5AF-2139-4C5C-B253-00AEE896259E";
-	// Roster:
+//	static String refId = "01810477-3494-4EE8-87C7-19BE2BBDC524";
+    // Roster:
 //	static String refId = "9AEF7446-1B9F-4C2A-A7FF-0058C51C0E5F";
-//	 Staff:
+//	static String refId = "93C3E007-D29E-4096-A58C-645C620EC9B9";
+    //	 Staff:
 //	static String refId = "DDB25022-B78E-4C89-9A59-AE877E03CFE3";
-//	 Student:
+//	static String refId = "190C1A4B-AD63-469B-BF2B-9673C8AC312A";
+	//Student:
 //	static String refId = "4C4A57D5-ED2F-4AFC-8C20-2A309989ED71";
 //	static String refId = "62DF00BD-6A5A-4FE9-AD17-9A03189DAEA5";
-	// Contact 1:
+//	static String refId = "87B0AA0D-020A-4E0C-9010-AC1F4E315C74";
+    // Contact 1:
 //	static String refId = "F0BED6E9-8636-4BB3-8295-778D8930B2A1";
-
-	
 	
 	public static void main(String[] args)
 	{   	
@@ -149,7 +144,6 @@ public class RicOneApiTests
 //			XContacts_GetXContactsByXLea(ricOne);
 //			XContacts_GetXContactsByXSchool(ricOne);
 //			XContacts_GetXContactsByXStudent(ricOne);
-
 		}
 
 	}
