@@ -2,9 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.riconeapi</groupId>
 	<artifactId>riconeapi</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.2-RELEASE</version>
 	<name>RICOne API Client Library</name>
-	<description>Client library for the RICOne data api</description>
+	<description>Client library for the RIC One data api</description>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,4 +22,5 @@
 			<version>2.5.4</version>
 		</dependency>
 	</dependencies>
+	<url>http://www.ricone.org/</url>
 </project>
