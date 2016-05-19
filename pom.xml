@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.riconeapi</groupId>
 	<artifactId>riconeapi</artifactId>
-	<version>1.2-RELEASE</version>
+	<version>1.2.1-RELEASE</version>
 	<name>RICOne API Client Library</name>
 	<description>Client library for the RIC One data api</description>
 	
@@ -20,6 +20,11 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.4</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.auth0</groupId>
+    		<artifactId>java-jwt</artifactId>
+    		<version>2.1.0</version>
 		</dependency>
 	</dependencies>
 	<url>http://www.ricone.org/</url>
