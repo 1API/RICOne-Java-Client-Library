@@ -26,7 +26,7 @@ for(Endpoint e : auth.GetEndpoints())
 * SampleConsole - Simple console app showing use
 
 ### Getting Started
-1. View the library <a href="https://docs.google.com/document/d/1flatjQRT9epMQBWlDwgpCjKlsFEOsuonTlseafzgYDo/pub" target="_blank">documentation</a>
+1. View the library <a href="http://www.ricone.org/vendors/ric-one-api/java-client-developers-guide/" target="_blank">documentation</a>
 2. Download the Project
 3. Get your OAuth server credentials
 4. Open SampleConsole
