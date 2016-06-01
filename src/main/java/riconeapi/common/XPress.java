@@ -9,6 +9,7 @@ package riconeapi.common;
 
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import riconeapi.models.xpress.XCalendarCollectionType;
 import riconeapi.models.xpress.XCalendarType;
@@ -76,6 +77,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+    		output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -111,6 +113,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -152,6 +155,7 @@ public class XPress
 			{
     			output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -189,6 +193,7 @@ public class XPress
 			{
     			output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -230,6 +235,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -267,6 +273,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -308,6 +315,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -345,6 +353,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -386,6 +395,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -423,6 +433,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -463,6 +474,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -500,6 +512,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -541,6 +554,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -578,6 +592,7 @@ public class XPress
 			{
     			output.setData(response.getBody().getXLea());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -619,6 +634,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -655,6 +671,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -696,6 +713,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());	
 		}
@@ -733,6 +751,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -774,6 +793,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -811,6 +831,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -852,6 +873,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -889,6 +911,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -930,6 +953,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -967,6 +991,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1008,6 +1033,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1045,6 +1071,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1086,6 +1113,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1123,6 +1151,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1164,6 +1193,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1201,6 +1231,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1242,6 +1273,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1279,6 +1311,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXSchool());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1320,6 +1353,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1356,6 +1390,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1397,6 +1432,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1434,6 +1470,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1475,6 +1512,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1512,6 +1550,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1553,6 +1592,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1590,6 +1630,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCalendar());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1631,6 +1672,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1667,6 +1709,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1708,6 +1751,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1745,6 +1789,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1786,6 +1831,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1823,6 +1869,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1864,6 +1911,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1901,6 +1949,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1942,6 +1991,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1979,6 +2029,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXCourse());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2020,6 +2071,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2056,6 +2108,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2097,6 +2150,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());	
 		}
@@ -2134,6 +2188,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2175,6 +2230,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2212,6 +2268,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2253,6 +2310,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2290,6 +2348,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2331,6 +2390,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2368,6 +2428,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2409,6 +2470,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2446,6 +2508,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2487,6 +2550,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2524,6 +2588,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXRoster());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2565,6 +2630,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2601,6 +2667,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2642,6 +2709,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2679,6 +2747,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2720,6 +2789,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2757,6 +2827,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2798,6 +2869,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2835,6 +2907,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2847,7 +2920,7 @@ public class XPress
 
 		return output;
 	}
-
+	
 	/**
 	 * 
 	 * @param refId
@@ -2876,6 +2949,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2913,6 +2987,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2954,6 +3029,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -2991,6 +3067,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3032,6 +3109,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3069,6 +3147,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStaff());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3105,8 +3184,12 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xStudents", HttpMethod.GET, entity, XStudentCollectionType.class);
-
-			output.setData(response.getBody().getXStudent());
+			
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3143,6 +3226,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3184,6 +3268,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3221,6 +3306,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3262,6 +3348,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3299,6 +3386,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3340,6 +3428,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3377,6 +3466,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3418,6 +3508,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3455,6 +3546,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3496,6 +3588,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3533,6 +3626,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3574,6 +3668,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3611,6 +3706,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXStudent());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3652,6 +3748,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3688,6 +3785,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3729,6 +3827,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3766,6 +3865,7 @@ public class XPress
 			{
 				output.setData(response.getBody());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3807,6 +3907,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3844,6 +3945,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3885,6 +3987,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3922,6 +4025,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -3963,6 +4067,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -4000,6 +4105,7 @@ public class XPress
 			{
 				output.setData(response.getBody().getXContact());
 			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -4316,4 +4422,381 @@ public class XPress
 		}
 	}
 
+	/**
+	 * Create staff usernames and passwords by school
+	 * @param refId
+	 * @return 
+	 */
+	private ResponseMulti<XStaffType> createXStaffUsers(String refId)
+	{
+		ResponseEntity<XStaffCollectionType> response = null;
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xStaffs")
+					.queryParam("createUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Delete generated staff passwords by school
+	 * @param refId
+	 * @return
+	 */
+	private ResponseMulti<XStaffType> deleteXStaffUsers(String refId)
+	{
+		ResponseEntity<XStaffCollectionType> response = null;
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xStaffs")
+					.queryParam("deleteUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Return generated staff usernames and passwords by school
+	 * @param refId
+	 * @return
+	 */
+	private ResponseMulti<XStaffType> getXStaffUsers(String refId)
+	{
+		ResponseEntity<XStaffCollectionType> response = null;
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xStaffs")
+					.queryParam("getUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Create student usernames and passwords by school
+	 * @param refId
+	 * @return
+	 */
+	private ResponseMulti<XStudentType> createXStudentUsers(String refId)
+	{
+		ResponseEntity<XStudentCollectionType> response = null;
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xStudents")
+					.queryParam("createUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Delete generated student passwords by school
+	 * @param refId
+	 * @return
+	 */
+	private ResponseMulti<XStudentType> deleteXStudentUsers(String refId)
+	{
+		ResponseEntity<XStudentCollectionType> response = null;
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xStudents")
+					.queryParam("deleteUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Return generated student usernames and passwords by school
+	 * @param refId
+	 * @return
+	 */
+	private ResponseMulti<XStudentType> getXStudentUsers(String refId)
+	{
+		ResponseEntity<XStudentCollectionType> response = null;
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xStudents")
+					.queryParam("getUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Create contact usernames and passwords by school
+	 * @param refId
+	 * @return
+	 */
+	private ResponseMulti<XContactType> createXContactUsers(String refId)
+	{
+		ResponseEntity<XContactCollectionType> response = null;
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xContacts")
+					.queryParam("createUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Delete generated contact passwords by school
+	 * @param refId
+	 * @return
+	 */
+	private ResponseMulti<XContactType> deleteXContactUsers(String refId)
+	{
+		ResponseEntity<XContactCollectionType> response = null;
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xContacts")
+					.queryParam("deleteUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * Return generated contact usernames and passwords by school
+	 * @param refId
+	 * @return
+	 */
+	private ResponseMulti<XContactType> getXContactUsers(String refId)
+	{
+		ResponseEntity<XContactCollectionType> response = null;
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + this.token);
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xContacts")
+					.queryParam("getUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println(builder.build().encode().toUriString());
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 }
