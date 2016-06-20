@@ -36,11 +36,11 @@ import riconeapi.models.xpress.XTelephoneType;
 public class RicOneApiTests
 {
 	// Test Constants
-	final static String authUrl = "http://auth.test.ricone.org/login";
+	final static String authUrl = "https://auth.test.ricone.org/login";
 	final static String clientId = "dpademo";
 	final static String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
 
-	final static String providerId = "workshop";
+	final static String providerId = "sandbox";
     
 	// Null:
 	static String refId = null;
@@ -71,7 +71,7 @@ public class RicOneApiTests
 	
 	public static void main(String[] args)
 	{   	
-		Util.disableSslVerification();
+//		Util.disableSslVerification();
 		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 		
 		for (Endpoint e : auth.getEndpoints(providerId))
@@ -79,7 +79,7 @@ public class RicOneApiTests
 			RicOneApiClient ricOne = new RicOneApiClient(e);
 
 			// xLeas
-//			XLeas_GetXLeas(ricOne);
+			XLeas_GetXLeas(ricOne);
 //			XLeas_GetXLea(ricOne);
 //			XLeas_GetXLeasByXSchool(ricOne);
 //			XLeas_GetXLeasByXRoster(ricOne);

@@ -37,6 +37,9 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.2.2
+* Added xStaff and xStudent account provisioning methods
+
 ### v1.2.1
 * Added getToken() method to Authenticator
 * Added getDecodedToken() method to Authenticator

@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.2
- * @since       May 16, 2016
+ * @version     1.2.2
+ * @since       June 17, 2016
  * Filename		XPress.java
  */
 
@@ -4427,7 +4427,7 @@ public class XPress
 	 * @param refId
 	 * @return 
 	 */
-	private ResponseMulti<XStaffType> createXStaffUsers(String refId)
+	public ResponseMulti<XStaffType> createXStaffUsers(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -4469,7 +4469,7 @@ public class XPress
 	 * @param refId
 	 * @return
 	 */
-	private ResponseMulti<XStaffType> deleteXStaffUsers(String refId)
+	public ResponseMulti<XStaffType> deleteXStaffUsers(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -4511,7 +4511,7 @@ public class XPress
 	 * @param refId
 	 * @return
 	 */
-	private ResponseMulti<XStaffType> getXStaffUsers(String refId)
+	public ResponseMulti<XStaffType> getXStaffUsers(String refId)
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -4553,7 +4553,7 @@ public class XPress
 	 * @param refId
 	 * @return
 	 */
-	private ResponseMulti<XStudentType> createXStudentUsers(String refId)
+	public ResponseMulti<XStudentType> createXStudentUsers(String refId)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -4595,7 +4595,7 @@ public class XPress
 	 * @param refId
 	 * @return
 	 */
-	private ResponseMulti<XStudentType> deleteXStudentUsers(String refId)
+	public ResponseMulti<XStudentType> deleteXStudentUsers(String refId)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -4637,7 +4637,7 @@ public class XPress
 	 * @param refId
 	 * @return
 	 */
-	private ResponseMulti<XStudentType> getXStudentUsers(String refId)
+	public ResponseMulti<XStudentType> getXStudentUsers(String refId)
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
