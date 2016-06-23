@@ -16,7 +16,7 @@ Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 
 for(Endpoint e : auth.GetEndpoints())
 {
-	RicOneApiClient ricOne = new RicOneApiClient(e);
+	XPress xPress = new XPress(auth.getToken(), e.getHref());
 }
 ```
 
