@@ -37,6 +37,12 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.3
+* Code cleanup
+	* Removed RicOneApiClient.java
+	* Reworked Authenticator.java
+* Included example loading authentication properties from properties file
+
 ### v1.2.2
 * Added xStaff and xStudent account provisioning methods
 

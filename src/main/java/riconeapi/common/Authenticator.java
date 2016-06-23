@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.2
- * @since       Apr 25, 2016
+ * @version     1.3
+ * @since       Jun 23, 2016
  * Filename		Authenticator.java
  */
 
@@ -26,23 +26,37 @@ import riconeapi.models.authentication.*;
  */
 public class Authenticator
 {
-	private String authUrl;
-    private String clientId;
-    private String clientSecret;
+	private static Authenticator instance = null;
+    private UserInfo user = null;
+   
+    private Authenticator() 
+    {
+        // Exists only to defeat instantiation.
+    }
 
-    private final RestTemplate rt;
-    
+	public static Authenticator getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new Authenticator();
+		}
+		return instance;
+	}
+     
     /**
      * Establish connection to authenticate to auth server
      * @param clientId
      * @param clientSecret
      */
     public Authenticator(String authUrl, String clientId, String clientSecret)
-    {
-    	this.authUrl = authUrl;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;        
-        rt = new RestTemplate();
+    {        
+        RestTemplate rt = new RestTemplate();
+        
+        Map<String, String> vars = new HashMap<String, String>();
+
+        vars.put("username", clientId);
+        vars.put("password", clientSecret);
+        this.user = rt.postForObject(authUrl, vars, UserInfo.class);
         
     }
     
@@ -50,13 +64,7 @@ public class Authenticator
      * @return user id, user_name, token, and list of endpoints
      */
     public UserInfo getUserInfo()
-    {
-    	 Map<String, String> vars = new HashMap<String, String>();
-
-         vars.put("username", this.clientId);
-         vars.put("password", this.clientSecret);
-         UserInfo user = rt.postForObject(authUrl, vars, UserInfo.class);
-    	
+    {  	
     	return user;
     }
     
@@ -66,13 +74,8 @@ public class Authenticator
      */
     public String getToken()
     {
-    	 Map<String, String> vars = new HashMap<String, String>();
+    	return user.getToken();
 
-         vars.put("username", this.clientId);
-         vars.put("password", this.clientSecret);
-         UserInfo user = rt.postForObject(authUrl, vars, UserInfo.class);
-         
-         return user.getToken();
     }
 
 	/**
@@ -82,13 +85,6 @@ public class Authenticator
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Endpoint> getEndpoints(String providerId)
     {
-    	Map<String, String> vars = new HashMap<String, String>();
-
-        vars.put("username", this.clientId);
-        vars.put("password", this.clientSecret);
-       
-        UserInfo user = rt.postForObject(authUrl, vars, UserInfo.class);
-
 		List<Endpoint> endpoints = new ArrayList();
         
         for(Endpoint e : user.getEndpoint())
@@ -102,19 +98,11 @@ public class Authenticator
         return endpoints;
     }
 
-
     /**
      * @return All endpoints
      */
     public List<Endpoint> getEndpoints()
-    {
-    	Map<String, String> vars = new HashMap<String, String>();
-
-        vars.put("username", this.clientId);
-        vars.put("password", this.clientSecret);
-       
-        UserInfo user = rt.postForObject(authUrl, vars, UserInfo.class);
-           
+    {      
         return user.getEndpoint();
     }
     

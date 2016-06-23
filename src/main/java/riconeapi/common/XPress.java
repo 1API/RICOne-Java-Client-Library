@@ -43,11 +43,11 @@ public class XPress
 	private RestTemplate rt;
 	private String baseApiUrl;
 
-	public XPress(String token, String baseApiUrl, RestTemplate rt)
+	public XPress(String token, String baseApiUrl)
 	{
 		this.token = token;
 		this.baseApiUrl = baseApiUrl;
-		this.rt = rt;
+		this.rt = new RestTemplate();
 	}
 
 	// #################### xLeas ####################
