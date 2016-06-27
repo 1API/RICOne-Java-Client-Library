@@ -74,7 +74,7 @@ public class RicOneApiTests
 //		Util.disableSslVerification();
 		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 		
-		for (Endpoint e : auth.getEndpoints())
+		for (Endpoint e : auth.getEndpoints(providerId))
 		{
 			XPress xPress = new XPress(auth.getToken(), e.getHref());
 

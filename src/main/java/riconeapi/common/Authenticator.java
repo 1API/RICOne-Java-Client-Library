@@ -31,7 +31,7 @@ public class Authenticator
    
     private Authenticator() 
     {
-        // Exists only to defeat instantiation.
+        
     }
 
 	public static Authenticator getInstance()
