@@ -3,6 +3,8 @@ import riconeapi.common.Authenticator;
 import riconeapi.common.XPress;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XContactType;
+import riconeapi.models.xpress.XStaffType;
+import riconeapi.models.xpress.XStudentType;
 
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
@@ -13,10 +15,13 @@ import riconeapi.models.xpress.XContactType;
 
 public class AppAccountProvisioning
 {
-	final static String authUrl = "http://auth.test.ricone.org/login";
-	final static String clientId = "dpademo";
-	final static String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
-	static final String providerId = "sandbox";
+	final static String authUrl = AuthServiceProperties.getInstance().getProperty("auth.url");
+	final static String clientId = AuthServiceProperties.getInstance().getProperty("auth.clientId");
+	final static String clientSecret = AuthServiceProperties.getInstance().getProperty("auth.clientSecret");
+	final static String providerId = AuthServiceProperties.getInstance().getProperty("auth.providerId");
+	
+//	static String refId = "0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C";
+	static String refId = "106E9449-3FF4-499E-B94F-BCE557C013CE";
 	
 	public static void main(String[] args)
 	{
@@ -27,21 +32,47 @@ public class AppAccountProvisioning
             XPress xPress = new XPress(auth.getToken(), e.getHref());
             
             //Staff
-//            xPress.createXStaffUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
-//            xPress.deleteXStaffUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
-//            xPress.getXStaffUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
+//            xPress.createXStaffUsers(refId);
+//            xPress.deleteXStaffUsers(refId);
+//            XStaffs_GetXStaffsAccounts(xPress);
             
             //Student
-//            xPress.createXStudentUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
-//            xPress.deleteXStudentUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
-//            xPress.getXStudentUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
+//            xPress.createXStudentUsers(refId);
+//            xPress.deleteXStudentUsers(refId);
+//            XStudents_GetXStudentsAccounts(xPress);
             
             //Contact
-//            xPress.createXContactUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
-//            xPress.deleteXContactUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
+//            xPress.createXContactUsers(refId);
+//            xPress.deleteXContactUsers(refId);
 //            xPress.getXContactUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");    
 		}
 
+	}
+	
+	public static void XStaffs_GetXStaffsAccounts(XPress xPress)
+	{
+		if(xPress.getXStaffUsers(refId).getData() !=null)
+		{
+			for(XStaffType s : xPress.getXStaffUsers(refId).getData())
+			{
+				System.out.println("loginId: " + s.getAppProvisioningInfo().getLoginId());
+				System.out.println("tempPassword: " + s.getAppProvisioningInfo().getTempPassword());
+				System.out.println("tempExpiryDate: " + s.getAppProvisioningInfo().getTempPasswordExpiryDate());
+			}
+		}
+	}
+	
+	public static void XStudents_GetXStudentsAccounts(XPress xPress)
+	{
+		if(xPress.getXStudentUsers(refId).getData() !=null)
+		{
+			for(XStudentType s : xPress.getXStudentUsers(refId).getData())
+			{
+				System.out.println("loginId: " + s.getAppProvisioningInfo().getLoginId());
+				System.out.println("tempPassword: " + s.getAppProvisioningInfo().getTempPassword());
+				System.out.println("tempExpiryDate: " + s.getAppProvisioningInfo().getTempPasswordExpiryDate());
+			}
+		}
 	}
 
 }
