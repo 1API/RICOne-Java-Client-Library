@@ -1,13 +1,13 @@
 
-Copyright © 2014-2015 New York State Education Department. All rights reserved.
+Copyright © 2014-2016 New York State Education Department. All rights reserved.
 
 # RICOne API Java Client Library
 The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTemplate
 (http://projects.spring.io/spring-framework/), and FasterXML Jackson (http://wiki.fasterxml.com/JacksonHome).
 
 ### Features
-* Makes calls to the RICOne API using the SIFxPress model in Java projects
-* User can login to auth server using credentials to retrieve provider information
+* Makes calls to the RICOne API using the xPress model in Java projects
+* User can login to the authentication server using credentials to retrieve provider information
 * Uses POJO object responses
 
 #### Basic Use
@@ -16,13 +16,14 @@ Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
 
 for(Endpoint e : auth.GetEndpoints())
 {
-	XPress xPress = new XPress(auth.getToken(), e.getHref());
+	XPress xPress = new XPress(e.href);
 }
 ```
 
 ### Project Contents
 * RicOneApi - Client Library
 * RicOneApiTests - Test Console Outputs
+* RicOneApiTestsPaging - Test Console Outputs with paging
 * SampleConsole - Simple console app showing use
 
 ### Getting Started
@@ -37,6 +38,11 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.3.1
+* Modified Authenticator.java
+* Modified XPress.java
+	* Check token expiration and refresh if expired
+
 ### v1.3
 * Code cleanup
 	* Removed RicOneApiClient.java

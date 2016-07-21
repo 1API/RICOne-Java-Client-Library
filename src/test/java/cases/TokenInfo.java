@@ -8,6 +8,7 @@ package cases;
  */
 
 import riconeapi.common.Authenticator;
+import riconeapi.common.Authenticator;
 
 public class TokenInfo
 {

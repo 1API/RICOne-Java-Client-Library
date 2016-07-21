@@ -1,10 +1,9 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3
- * @since       Jun 23, 2016
- * Filename		Authenticator.java
+ * @version     1.3.1
+ * @since       Jul 20, 2016
+ * @filename	Authenticator2.java
  */
-
 package riconeapi.common;
 
 import java.util.ArrayList;
@@ -12,28 +11,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.DateTime;
 import org.springframework.web.client.RestTemplate;
 
-import com.auth0.jwt.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import com.auth0.jwt.internal.org.apache.commons.codec.binary.Base64;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import riconeapi.models.authentication.DecodedToken;
-import riconeapi.models.authentication.*;
+import riconeapi.models.authentication.Endpoint;
+import riconeapi.models.authentication.UserInfo;
 
-/**
- * Contains methods to authenticate and pull data from auth server
- *
- */
 public class Authenticator
 {
 	private static Authenticator instance = null;
-    private UserInfo user = null;
-   
-    private Authenticator() 
-    {
-        
-    }
+	private static UserInfo user = null;
+	private static String authUrl;
+	private static String clientId;
+	private static String clientSecret;
 
+	private Authenticator() 
+    {}
+	
 	public static Authenticator getInstance()
 	{
 		if (instance == null)
@@ -42,31 +40,51 @@ public class Authenticator
 		}
 		return instance;
 	}
-     
-    /**
-     * Establish connection to authenticate to auth server
-     * @param clientId
-     * @param clientSecret
-     */
+	
+	/**
+	 * Establish connection to authenticate to authentication server
+	 * @param authUrl
+	 * @param clientId
+	 * @param clientSecret
+	 */
     public Authenticator(String authUrl, String clientId, String clientSecret)
-    {        
-        RestTemplate rt = new RestTemplate();
-        
-        Map<String, String> vars = new HashMap<String, String>();
-
-        vars.put("username", clientId);
-        vars.put("password", clientSecret);
-        this.user = rt.postForObject(authUrl, vars, UserInfo.class);
-        
+    {    
+    	Authenticator.authUrl = authUrl;
+    	Authenticator.clientId = clientId;
+    	Authenticator.clientSecret = clientSecret;
+    	login(authUrl, clientId, clientSecret);
     }
     
     /**
-     * @return user id, user_name, token, and list of endpoints
+     * Post to authentication server with provided credentials
+     * @param authUrl
+     * @param clientId
+     * @param clientSecret
      */
-    public UserInfo getUserInfo()
-    {  	
-    	return user;
+    public void login(String authUrl, String clientId, String clientSecret)
+    {
+    	RestTemplate rt = new RestTemplate();
+
+    	Map<String, String> vars = new HashMap<String, String>();
+        vars.put("username", clientId);
+        vars.put("password", clientSecret);
+
+        Authenticator.user = rt.postForObject(authUrl, vars, UserInfo.class);    
     }
+    
+    /**
+     * Re-authenticates with authentication server if token is expired
+     * @param token
+     */
+	public void refreshToken(String token)
+	{
+		DateTime dt = new DateTime(getDecodedToken(token).getExp() * 1000);
+		System.out.println(dt);
+		if(dt.isBeforeNow())
+		{
+			Authenticator.getInstance().login(authUrl, clientId, clientSecret);
+		}
+	}
     
     /**
      * 
@@ -77,8 +95,8 @@ public class Authenticator
     	return user.getToken();
 
     }
-
-	/**
+    
+    /**
 	 * @param providerId
 	 * @return Endpoint by specified providerId 
 	 */
@@ -111,7 +129,7 @@ public class Authenticator
      * @param token
      * @return Payload data inside an encrypted JWT token
      */
-    public DecodedToken getDecodedToken(String token)
+    public static DecodedToken getDecodedToken(String token)
 	{
 		try
 		{				
@@ -126,7 +144,7 @@ public class Authenticator
 		}			
 	}
 
-	public String base64UrlDecode(String input)
+	public static String base64UrlDecode(String input)
 	{
 		String result = null;
 		Base64 decoder = new Base64(true);
@@ -134,5 +152,4 @@ public class Authenticator
 		result = new String(decodedBytes);
 		return result;
 	}
-
 }

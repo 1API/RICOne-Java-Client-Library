@@ -29,8 +29,8 @@ import riconeapi.models.xpress.XTelephoneType;
 
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3
- * @since       Jun 23, 2016
+ * @version     1.3.1
+ * @since       Jul 20, 2016
  * @filename	RicOneApiTestsPaging.java
  */
 
@@ -80,7 +80,7 @@ public class RicOneApiTestsPaging
 		
 		for (Endpoint e : auth.getEndpoints(providerId))
 		{
-			XPress xPress = new XPress(auth.getToken(), e.getHref());
+			XPress xPress = new XPress(e.getHref());
 
 			// #################### navigatonLastPage ####################
 			// xLeas

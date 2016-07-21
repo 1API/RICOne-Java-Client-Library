@@ -1,8 +1,8 @@
 package cases;
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3
- * @since       Jun 23, 2016
+ * @version     1.3.1
+ * @since       Jul 20, 2016
  * Filename		RicOneApiTests.java
  */
 
@@ -76,7 +76,7 @@ public class RicOneApiTests
 		
 		for (Endpoint e : auth.getEndpoints(providerId))
 		{
-			XPress xPress = new XPress(auth.getToken(), e.getHref());
+			XPress xPress = new XPress(e.getHref());
 
 			// xLeas
 			XLeas_GetXLeas(xPress);

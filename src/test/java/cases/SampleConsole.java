@@ -1,8 +1,8 @@
 package cases;
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3
- * @since       Jun 23, 2016
+ * @version     1.3.1
+ * @since       Jul 20, 2016
  * Filename		SampleConsole.java
  */
 import riconeapi.common.Authenticator;
@@ -29,7 +29,7 @@ public class SampleConsole
 
         for(Endpoint e : auth.getEndpoints(providerId)) //For the provided endpoint
         {
-            XPress xPress = new XPress(auth.getToken(), e.getHref()); //Pass endpoint info to data API (token, href)
+            XPress xPress = new XPress(e.getHref()); //Pass endpoint info to data API (token, href)
             
             for(XLeaType l : xPress.getXLeas().getData()) //Iterate through each xLea
             {

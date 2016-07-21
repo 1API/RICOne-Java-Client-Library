@@ -8,8 +8,8 @@ import riconeapi.models.xpress.XStudentType;
 
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3
- * @since       Jun 23, 2016
+ * @version     1.3.1
+ * @since       Jul 20, 2016
  * @filename	AppAccountProvisioning.java
  */
 
@@ -29,7 +29,7 @@ public class AppAccountProvisioning
 		
 		for(Endpoint e : auth.getEndpoints(providerId))
 		{
-            XPress xPress = new XPress(auth.getToken(), e.getHref());
+            XPress xPress = new XPress(e.getHref());
             
             //Staff
 //            xPress.createXStaffUsers(refId);

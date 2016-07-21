@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.2.2
- * @since       June 17, 2016
+ * @version     1.3.1
+ * @since       Jul 20, 2016
  * Filename		XPress.java
  */
 
@@ -34,18 +34,16 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Static class built off of RICOne client to allow access to SIFxPress data model objects
+ * Static class allowing access to xPress data model objects
  * 
  */
 public class XPress
 {
-	private String token;
 	private RestTemplate rt;
 	private String baseApiUrl;
 
-	public XPress(String token, String baseApiUrl)
+	public XPress(String baseApiUrl)
 	{
-		this.token = token;
 		this.baseApiUrl = baseApiUrl;
 		this.rt = new RestTemplate();
 	}
@@ -61,10 +59,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-    		headers.set("Authorization", "Bearer " + this.token);
+    		headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
     		headers.set("navigationPage", Integer.toString(navigationPage));
     		headers.set("navigationPageSize", Integer.toString(navigationPageSize));
     		//headers.set("Content-Type", "application/json");
@@ -99,10 +99,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			////headers.set("Content-Type", "application/json");
 			
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -139,10 +141,12 @@ public class XPress
 		ResponseEntity<XLeaType> response = null;
 		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -179,10 +183,12 @@ public class XPress
 		ResponseEntity<XLeaType> response = null;
 		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -219,10 +225,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -259,10 +267,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -299,10 +309,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -339,10 +351,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -379,10 +393,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -419,10 +435,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -458,10 +476,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -498,10 +518,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -538,10 +560,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -578,10 +602,12 @@ public class XPress
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -617,11 +643,13 @@ public class XPress
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
-				
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -657,10 +685,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -697,10 +727,12 @@ public class XPress
 		ResponseEntity<XSchoolType> response = null;
 		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -737,10 +769,12 @@ public class XPress
 		ResponseEntity<XSchoolType> response = null;
 		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -777,10 +811,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -817,10 +853,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -857,10 +895,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -897,10 +937,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -937,10 +979,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{	
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -977,10 +1021,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1017,10 +1063,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1057,10 +1105,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1097,10 +1147,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1137,10 +1189,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1177,10 +1231,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1217,10 +1273,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1257,10 +1315,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1297,10 +1357,12 @@ public class XPress
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1337,10 +1399,12 @@ public class XPress
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1376,10 +1440,12 @@ public class XPress
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1416,10 +1482,12 @@ public class XPress
 		ResponseEntity<XCalendarType> response = null;
 		ResponseSingle<XCalendarType> output = new ResponseSingle<XCalendarType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1456,10 +1524,12 @@ public class XPress
 		ResponseEntity<XCalendarType> response = null;
 		ResponseSingle<XCalendarType> output = new ResponseSingle<XCalendarType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1496,10 +1566,12 @@ public class XPress
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1536,10 +1608,12 @@ public class XPress
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1576,10 +1650,12 @@ public class XPress
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1616,10 +1692,12 @@ public class XPress
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1656,10 +1734,12 @@ public class XPress
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1695,10 +1775,12 @@ public class XPress
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1735,10 +1817,12 @@ public class XPress
 		ResponseEntity<XCourseType> response = null;
 		ResponseSingle<XCourseType> output = new ResponseSingle<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1775,10 +1859,12 @@ public class XPress
 		ResponseEntity<XCourseType> response = null;
 		ResponseSingle<XCourseType> output = new ResponseSingle<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1815,10 +1901,12 @@ public class XPress
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1855,10 +1943,12 @@ public class XPress
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1895,10 +1985,12 @@ public class XPress
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -1935,10 +2027,12 @@ public class XPress
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -1975,10 +2069,12 @@ public class XPress
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2015,10 +2111,12 @@ public class XPress
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2055,10 +2153,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2094,10 +2194,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2134,10 +2236,12 @@ public class XPress
 		ResponseEntity<XRosterType> response = null;
 		ResponseSingle<XRosterType> output = new ResponseSingle<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2174,10 +2278,12 @@ public class XPress
 		ResponseEntity<XRosterType> response = null;
 		ResponseSingle<XRosterType> output = new ResponseSingle<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2214,10 +2320,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2254,10 +2362,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2294,10 +2404,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2334,10 +2446,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2374,10 +2488,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2414,10 +2530,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2454,10 +2572,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2494,10 +2614,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2534,10 +2656,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2574,10 +2698,12 @@ public class XPress
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2614,10 +2740,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2653,10 +2781,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2693,10 +2823,12 @@ public class XPress
 		ResponseEntity<XStaffType> response = null;
 		ResponseSingle<XStaffType> output = new ResponseSingle<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2733,10 +2865,12 @@ public class XPress
 		ResponseEntity<XStaffType> response = null;
 		ResponseSingle<XStaffType> output = new ResponseSingle<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2773,10 +2907,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2813,10 +2949,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2853,10 +2991,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2893,10 +3033,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -2933,10 +3075,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -2973,10 +3117,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3013,10 +3159,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3053,10 +3201,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			//headers.set("Content-Type", "application/json");
@@ -3093,10 +3243,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3133,10 +3285,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			//headers.set("Content-Type", "application/json");
@@ -3173,10 +3327,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3212,10 +3368,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3252,10 +3410,12 @@ public class XPress
 		ResponseEntity<XStudentType> response = null;
 		ResponseSingle<XStudentType> output = new ResponseSingle<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3292,10 +3452,12 @@ public class XPress
 		ResponseEntity<XStudentType> response = null;
 		ResponseSingle<XStudentType> output = new ResponseSingle<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3332,10 +3494,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3372,10 +3536,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3412,10 +3578,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3452,10 +3620,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3492,10 +3662,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3532,10 +3704,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3572,10 +3746,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3612,10 +3788,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3652,10 +3830,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3692,10 +3872,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3732,10 +3914,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3771,10 +3955,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3811,10 +3997,12 @@ public class XPress
 		ResponseEntity<XContactType> response = null;
 		ResponseSingle<XContactType> output = new ResponseSingle<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3851,10 +4039,12 @@ public class XPress
 		ResponseEntity<XContactType> response = null;
 		ResponseSingle<XContactType> output = new ResponseSingle<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3891,10 +4081,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -3931,10 +4123,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -3971,10 +4165,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -4011,10 +4207,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -4051,10 +4249,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			//headers.set("Content-Type", "application/json");
@@ -4091,10 +4291,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
@@ -4163,7 +4365,7 @@ public class XPress
 			if (p.name().equals("GETXLEASBYXSCHOOL") || p.name().equals("GETXLEASBYXROSTER") || p.name().equals("GETXLEASBYXSTAFF") || p.name().equals("GETXLEASBYXSTUDENT") || p.name().equals("GETXLEASBYXCONTACT"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4178,7 +4380,7 @@ public class XPress
 					|| p.name().equals("GETXSCHOOLSBYXCONTACT"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4192,7 +4394,7 @@ public class XPress
 			else if (p.name().equals("GETXCALENDARSBYXLEA") || p.name().equals("GETXCALENDARSBYXSCHOOL"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4206,7 +4408,7 @@ public class XPress
 			else if (p.name().equals("GETXCOURSESBYXLEA") || p.name().equals("GETXCOURSESBYXSCHOOL") || p.name().equals("GETXCOURSESBYXROSTER"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4220,7 +4422,7 @@ public class XPress
 			else if (p.name().equals("GETXROSTERSBYXLEA") || p.name().equals("GETXROSTERSBYXSCHOOL") || p.name().equals("GETXROSTERSBYXCOURSE") || p.name().equals("GETXROSTERSBYXSTAFF") || p.name().equals("GETXROSTERSBYXSTUDENT"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4234,7 +4436,7 @@ public class XPress
 			else if (p.name().equals("GETXSTAFFSBYXLEA") || p.name().equals("GETXSTAFFSBYXSCHOOL") || p.name().equals("GETXSTAFFSBYXCOURSE") || p.name().equals("GETXSTAFFSBYXROSTER") || p.name().equals("GETXSTAFFSBYXSTUDENT"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4248,7 +4450,7 @@ public class XPress
 			else if (p.name().equals("GETXSTUDENTSBYXLEA") || p.name().equals("GETXSTUDENTSBYXSCHOOL") || p.name().equals("GETXSTUDENTSBYXROSTER") || p.name().equals("GETXSTUDENTSBYXSTAFF") || p.name().equals("GETXSTUDENTSBYXCONTACT"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4262,7 +4464,7 @@ public class XPress
 			else if (p.name().equals("GETXCONTACTSBYXLEA") || p.name().equals("GETXCONTACTSBYXSCHOOL") || p.name().equals("GETXCONTACTSBYXSTUDENT"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4298,7 +4500,7 @@ public class XPress
 			if (p.name().equals("GETXLEAS"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4312,7 +4514,7 @@ public class XPress
 			else if (p.name().equals("GETXSCHOOLS"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4326,7 +4528,7 @@ public class XPress
 			else if (p.name().equals("GETXCALENDARS"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4340,7 +4542,7 @@ public class XPress
 			else if (p.name().equals("GETXCOURSES"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4354,7 +4556,7 @@ public class XPress
 			else if (p.name().equals("GETXROSTERS"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4368,7 +4570,7 @@ public class XPress
 			else if (p.name().equals("GETXSTAFFS"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4388,7 +4590,7 @@ public class XPress
 			else if (p.name().equals("GETXSTUDENTS"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4402,7 +4604,7 @@ public class XPress
 			else if (p.name().equals("GETXCONTACTS"))
 			{
 				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + this.token);
+				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 				headers.set("navigationPage", Integer.toString(navigationPage));
 				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 				//headers.set("Content-Type", "application/json");
@@ -4432,10 +4634,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
@@ -4474,10 +4678,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
@@ -4516,10 +4722,12 @@ public class XPress
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
@@ -4558,10 +4766,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
@@ -4600,10 +4810,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
@@ -4642,10 +4854,12 @@ public class XPress
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
@@ -4684,10 +4898,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
@@ -4726,10 +4942,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
@@ -4768,10 +4986,12 @@ public class XPress
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
 		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
-			headers.set("Authorization", "Bearer " + this.token);
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			//headers.set("Content-Type", "application/json");
 			
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
