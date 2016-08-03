@@ -61,7 +61,7 @@ public class Authenticator
      * @param clientId
      * @param clientSecret
      */
-    public void login(String authUrl, String clientId, String clientSecret)
+    private void login(String authUrl, String clientId, String clientSecret)
     {
     	RestTemplate rt = new RestTemplate();
 
@@ -76,7 +76,7 @@ public class Authenticator
      * Re-authenticates with authentication server if token is expired
      * @param token
      */
-	public void refreshToken(String token)
+	protected void refreshToken(String token)
 	{
 		DateTime dt = new DateTime(getDecodedToken(token).getExp() * 1000);
 		System.out.println(dt);
