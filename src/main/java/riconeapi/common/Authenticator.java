@@ -144,7 +144,7 @@ public class Authenticator
 		}			
 	}
 
-	public static String base64UrlDecode(String input)
+	protected static String base64UrlDecode(String input)
 	{
 		String result = null;
 		Base64 decoder = new Base64(true);
