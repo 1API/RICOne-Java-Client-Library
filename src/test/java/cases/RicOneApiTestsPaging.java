@@ -39,7 +39,7 @@ public class RicOneApiTestsPaging
 	// Test Constants
 	final static String authUrl = "http://auth.test.ricone.org/login";
 	final static String clientId = "dpademo";
-	final static String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
 
 	final static String providerId = "workshop";
 	static int navigationPageSize = 10;
@@ -76,7 +76,8 @@ public class RicOneApiTestsPaging
 	public static void main(String[] args)
 	{   	
 		Util.disableSslVerification();
-		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+		Authenticator auth = Authenticator.getInstance();
+		auth.authenticate(authUrl, clientId, clientSecret);
 		
 		for (Endpoint e : auth.getEndpoints(providerId))
 		{

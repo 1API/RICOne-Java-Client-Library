@@ -72,7 +72,8 @@ public class RicOneApiTests
 	public static void main(String[] args)
 	{   	
 //		Util.disableSslVerification();
-		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+		Authenticator auth = Authenticator.getInstance();
+		auth.authenticate(authUrl, clientId, clientSecret);
 		
 		for (Endpoint e : auth.getEndpoints(providerId))
 		{

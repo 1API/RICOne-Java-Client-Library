@@ -4911,7 +4911,7 @@ public class XPress
 					.queryParam("createUsers", "true");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			System.out.println(builder.build().encode().toUriString());
+//			System.out.println(builder.build().encode().toUriString());
 			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
 
 			if(response.getBody() != null)
@@ -4955,7 +4955,7 @@ public class XPress
 					.queryParam("deleteUsers", "true");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			System.out.println(builder.build().encode().toUriString());
+//			System.out.println(builder.build().encode().toUriString());
 			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
 
 			if(response.getBody() != null)
@@ -4999,7 +4999,7 @@ public class XPress
 					.queryParam("getUsers", "true");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			System.out.println(builder.build().encode().toUriString());
+//			System.out.println(builder.build().encode().toUriString());
 			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
 
 			if(response.getBody() != null)

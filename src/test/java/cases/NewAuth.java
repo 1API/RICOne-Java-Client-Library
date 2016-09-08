@@ -19,12 +19,13 @@ public class NewAuth
 {
 	final static String authUrl = "https://auth.test.ricone.org/login";
 	final static String clientId = "dpaDemo";
-	final static String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
 	final static String providerId = "workshop";
 
 	public static void main(String[] args) throws InterruptedException
 	{
-		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+		Authenticator auth = Authenticator.getInstance();
+		auth.authenticate(authUrl, clientId, clientSecret);
 		
 		while(true)
 		{

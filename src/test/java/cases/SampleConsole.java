@@ -25,7 +25,8 @@ public class SampleConsole
 
 	public static void main(String[] args)
 	{
-		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret); //Pass auth url, username, and password to authenticate to auth server
+		Authenticator auth = Authenticator.getInstance(); // Get instance of Authenticator
+		auth.authenticate(authUrl, clientId, clientSecret); //Pass auth url, username, and password to authenticate to auth server
 
         for(Endpoint e : auth.getEndpoints(providerId)) //For the provided endpoint
         {

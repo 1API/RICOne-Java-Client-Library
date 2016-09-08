@@ -2,29 +2,42 @@ package cases;
 
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.2.1
- * @since       May 17, 2016
+ * @version     1.4
+ * @since       Aug 30, 2016
  * @filename	TokenInfo.java
  */
 
 import riconeapi.common.Authenticator;
-import riconeapi.common.Authenticator;
+import riconeapi.models.authentication.DecodedToken;
 
 public class TokenInfo
 {
 	final static String authUrl = "https://auth.test.ricone.org/login";
 	final static String clientId = "dpaDemo";
-	final static String clientSecret = "65ee6dc913d9023f1ee94ab33c3cae38c57";
+	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
 	
 	public static void main(String[] args)
 	{
-		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+		Authenticator auth = Authenticator.getInstance();
+		auth.authenticate(authUrl, clientId, clientSecret);
 		
-		String myToken = auth.getToken();
+//		String myToken = auth.getToken();
+//		System.out.println(auth.getToken());
+		DecodedToken dt = new DecodedToken(auth.getToken());
 		
-		System.out.println(auth.getDecodedToken(myToken).getApplication_id());
-		System.out.println(auth.getDecodedToken(myToken).getIat());
-		System.out.println(auth.getDecodedToken(myToken).getExp());
-		System.out.println(auth.getDecodedToken(myToken).getIss());
+		if(dt.getDecodedToken() != null)
+		{
+			System.out.println(true);
+			
+		}
+		else
+		{
+			System.out.println(false);
+		}
+		
+		System.out.println(dt.getDecodedToken().getApplication_id());
+		System.out.println(dt.getDecodedToken().getIat());
+		System.out.println(dt.getDecodedToken().getExp());
+		System.out.println(dt.getDecodedToken().getIss());
 	}
 }

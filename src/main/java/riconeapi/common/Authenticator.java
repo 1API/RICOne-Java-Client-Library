@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3.1
- * @since       Jul 20, 2016
+ * @version     1.4
+ * @since       Aug 30, 2016
  * @filename	Authenticator2.java
  */
 package riconeapi.common;
@@ -13,9 +13,6 @@ import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.springframework.web.client.RestTemplate;
-
-import com.auth0.jwt.internal.org.apache.commons.codec.binary.Base64;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import riconeapi.models.authentication.DecodedToken;
 import riconeapi.models.authentication.Endpoint;
@@ -47,7 +44,7 @@ public class Authenticator
 	 * @param clientId
 	 * @param clientSecret
 	 */
-    public Authenticator(String authUrl, String clientId, String clientSecret)
+    public void authenticate(String authUrl, String clientId, String clientSecret)
     {    
     	Authenticator.authUrl = authUrl;
     	Authenticator.clientId = clientId;
@@ -78,8 +75,8 @@ public class Authenticator
      */
 	protected void refreshToken(String token)
 	{
-		DateTime dt = new DateTime(getDecodedToken(token).getExp() * 1000);
-		System.out.println(dt);
+		DecodedToken decoded = new DecodedToken(token);
+		DateTime dt = new DateTime(decoded.getDecodedToken().getExp() * 1000);
 		if(dt.isBeforeNow())
 		{
 			Authenticator.getInstance().login(authUrl, clientId, clientSecret);
@@ -123,33 +120,4 @@ public class Authenticator
     {      
         return user.getEndpoint();
     }
-    
-    /**
-     * 
-     * @param token
-     * @return Payload data inside an encrypted JWT token
-     */
-    public static DecodedToken getDecodedToken(String token)
-	{
-		try
-		{				
-			ObjectMapper map = new ObjectMapper();	
-			String[] base64EncodedSegments = token.split("\\.");
-			DecodedToken dt = map.readValue(base64UrlDecode(base64EncodedSegments[1]), DecodedToken.class);	
-			return dt;	
-		}
-		catch(Exception e)
-		{
-			return null;
-		}			
-	}
-
-	protected static String base64UrlDecode(String input)
-	{
-		String result = null;
-		Base64 decoder = new Base64(true);
-		byte[] decodedBytes = decoder.decode(input);
-		result = new String(decodedBytes);
-		return result;
-	}
 }

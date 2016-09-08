@@ -25,7 +25,8 @@ public class AppAccountProvisioning
 	
 	public static void main(String[] args)
 	{
-		Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+		Authenticator auth = Authenticator.getInstance();
+		auth.authenticate(authUrl, clientId, clientSecret);
 		
 		for(Endpoint e : auth.getEndpoints(providerId))
 		{

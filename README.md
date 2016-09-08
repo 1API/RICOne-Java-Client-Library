@@ -12,11 +12,12 @@ The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTe
 
 #### Basic Use
 ```java
-Authenticator auth = new Authenticator(authUrl, clientId, clientSecret);
+Authenticator auth = auth.getInstance(); 
+auth.authenticate(authUrl, clientId, clientSecret);
 
 for(Endpoint e : auth.GetEndpoints())
 {
-	XPress xPress = new XPress(e.href);
+	XPress xPress = new XPress(e.getHref());
 }
 ```
 
@@ -38,6 +39,10 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.4
+* Updated Authenticator class to include authenticate() where the auth server url and credentials are passed
+* Removed getDecodedToken from Authenticator class and moved it to the DecodedToken class
+
 ### v1.3.1
 * Modified Authenticator.java
 * Modified XPress.java
