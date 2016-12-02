@@ -106,9 +106,19 @@ public class XRosterType
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlSchemaType(name = "token")
+	/**
+	 * @deprecated 
+     * Use sessionCode in XMeetingTimeType
+	 */
+    @Deprecated
     protected String sessionCode;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    /**
+	 * @deprecated 
+     * Use schoolCalendarRefId in XMeetingTimeType
+	 */
+    @Deprecated
     protected String schoolCalendarRefId;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XMeetingTimeListType meetingTimes;
@@ -286,51 +296,58 @@ public class XRosterType
     public void setSchoolYear(XMLGregorianCalendar value) {
         this.schoolYear = value;
     }
-
+    
     /**
      * Gets the value of the sessionCode property.
-     * 
+     * @deprecated 
+     * Use sessionCode in XMeetingTimeType
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
+    @Deprecated
     public String getSessionCode() {
         return sessionCode;
     }
 
     /**
      * Sets the value of the sessionCode property.
-     * 
+     * @deprecated
+     * Use sessionCode in XMeetingTimeType
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
      */
+    @Deprecated
     public void setSessionCode(String value) {
         this.sessionCode = value;
     }
 
     /**
      * Gets the value of the schoolCalendarRefId property.
+     * @deprecated
+     * Use schoolCalendarRefId in XMeetingTimeType  
      * 
      * @return
      *     possible object is
-     *     {@link String }
-     *     
+     *     {@link String }  
      */
+    @Deprecated
     public String getSchoolCalendarRefId() {
         return schoolCalendarRefId;
     }
 
     /**
      * Sets the value of the schoolCalendarRefId property.
+     * @deprecated
+     * Use schoolCalendarRefId in XMeetingTimeType
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
-     *     
+     *     {@link String }    
      */
+    @Deprecated
     public void setSchoolCalendarRefId(String value) {
         this.schoolCalendarRefId = value;
     }

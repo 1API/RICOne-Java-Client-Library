@@ -42,7 +42,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "timeTablePeriod",
     "roomNumber",
     "classBeginningTime",
-    "classEndingTime"
+    "classEndingTime",
+    "sessionCode",
+    "schoolCalendarRefId"
 })
 public class XMeetingTimeType {
 
@@ -54,6 +56,8 @@ public class XMeetingTimeType {
         roomNumber = null;
         classBeginningTime = null;
         classEndingTime = null;
+        sessionCode = null;
+        schoolCalendarRefId = null;
 
     }
 	
@@ -77,6 +81,13 @@ public class XMeetingTimeType {
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     @XmlSchemaType(name = "time")
     protected XMLGregorianCalendar classEndingTime;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    @XmlSchemaType(name = "token")
+    protected String sessionCode;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String schoolCalendarRefId;
 
     /**
      * Gets the value of the timeTableDay property.
@@ -220,6 +231,54 @@ public class XMeetingTimeType {
      */
     public void setClassEndingTime(XMLGregorianCalendar value) {
         this.classEndingTime = value;
+    }
+    
+    /**
+     * Gets the value of the sessionCode property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSessionCode() {
+        return sessionCode;
+    }
+
+    /**
+     * Sets the value of the sessionCode property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSessionCode(String value) {
+        this.sessionCode = value;
+    }
+
+    /**
+     * Gets the value of the schoolCalendarRefId property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSchoolCalendarRefId() {
+        return schoolCalendarRefId;
+    }
+
+    /**
+     * Sets the value of the schoolCalendarRefId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSchoolCalendarRefId(String value) {
+        this.schoolCalendarRefId = value;
     }
 
 }

@@ -39,6 +39,11 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.4.1
+* Modifications to the xPress data model
+	* Deprecated schoolCalendarRefId and sessionCode in XRosterType
+	* Added schoolCalendarRefId and sessionCode to XMeetingTimeType
+
 ### v1.4
 * Updated Authenticator class to include authenticate() where the auth server url and credentials are passed
 * Removed getDecodedToken from Authenticator class and moved it to the DecodedToken class
