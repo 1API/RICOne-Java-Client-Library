@@ -75,7 +75,6 @@ public class RicOneApiTestsPaging
 	
 	public static void main(String[] args)
 	{   	
-		Util.disableSslVerification();
 		Authenticator auth = Authenticator.getInstance();
 		auth.authenticate(authUrl, clientId, clientSecret);
 		

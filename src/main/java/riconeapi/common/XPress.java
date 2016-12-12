@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3.1
- * @since       Jul 20, 2016
+ * @version     1.5
+ * @since       Dec 22, 2016
  * Filename		XPress.java
  */
 
@@ -72,6 +72,49 @@ public class XPress
     		HttpEntity<?> entity = new HttpEntity<Object>(headers);
 
     		response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionType.class);
+			
+    		if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
+    		output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	/**
+	 * 
+	 * @param opaqueMarker
+	 * @return All Lea value changes from a given point
+	 */
+	public ResponseMulti<XLeaType> getXLeas(String opaqueMarker)
+	{
+		ResponseEntity<XLeaCollectionType> response = null;
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+    		headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+    		//headers.set("Content-Type", "application/json");
+    		
+    		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+    				.path("xLeas")
+    				.queryParam("changesSinceMarker", opaqueMarker);
+			
+    		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+
+    		response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XLeaCollectionType.class);
 			
     		if(response.getBody() != null)
 			{
@@ -663,6 +706,50 @@ public class XPress
 				output.setData(response.getBody().getXSchool());
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param opaqueMarker
+	 * @return All School value changes from a given point
+	 */
+	public ResponseMulti<XSchoolType> getXSchools(String opaqueMarker)
+	{
+		ResponseEntity<XSchoolCollectionType> response = null;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+    		headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+    		//headers.set("Content-Type", "application/json");
+    		
+    		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+    				.path("xSchools")
+    				.queryParam("changesSinceMarker", opaqueMarker);
+			
+    		HttpEntity<?> entity = new HttpEntity<Object>(headers);
+
+    		response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XSchoolCollectionType.class);
+			
+    		if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXSchool());
+			}
+    		output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
@@ -1430,6 +1517,49 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param opaqueMarker
+	 * @return All Calendar value changes from a given point
+	 */
+	public ResponseMulti<XCalendarType> getXCalendars(String opaqueMarker)
+	{
+		ResponseEntity<XCalendarCollectionType> response = null;
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+    				.path("xCalendars")
+    				.queryParam("changesSinceMarker", opaqueMarker);
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XCalendarCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -1747,6 +1877,50 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xCourses", HttpMethod.GET, entity, XCourseCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param opaqueMarker
+	 * @return All Course value changes from a given point
+	 */
+	public ResponseMulti<XCourseType> getXCourses(String opaqueMarker)
+	{
+		ResponseEntity<XCourseCollectionType> response = null;
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			//headers.set("Content-Type", "application/json");
+
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+    				.path("xCourses")
+    				.queryParam("changesSinceMarker", opaqueMarker);
+			
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XCourseCollectionType.class);
 
 			if(response.getBody() != null)
 			{
@@ -2166,6 +2340,50 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param opaqueMarker
+	 * @return All Roster value changes from a given point
+	 */
+	public ResponseMulti<XRosterType> getXRosters(String opaqueMarker)
+	{
+		ResponseEntity<XRosterCollectionType> response = null;
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			//headers.set("Content-Type", "application/json");
+
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+    				.path("xRosters")
+    				.queryParam("changesSinceMarker", opaqueMarker);
+			
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XRosterCollectionType.class);
 
 			if(response.getBody() != null)
 			{
@@ -2771,6 +2989,50 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param opaqueMarker
+	 * @return All Staff value changes from a given point
+	 */
+	public ResponseMulti<XStaffType> getXStaffs(String opaqueMarker)
+	{
+		ResponseEntity<XStaffCollectionType> response = null;
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			//headers.set("Content-Type", "application/json");
+			
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+    				.path("xStaffs")
+    				.queryParam("changesSinceMarker", opaqueMarker);
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionType.class);
+			
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -3358,6 +3620,50 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param opaqueMarker
+	 * @return All Student value changes from a given point
+	 */
+	public ResponseMulti<XStudentType> getXStudents(String opaqueMarker)
+	{
+		ResponseEntity<XStudentCollectionType> response = null;
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			//headers.set("Content-Type", "application/json");
+
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+    				.path("xStudents")
+    				.queryParam("changesSinceMarker", opaqueMarker);
+			
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionType.class);
+			
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -3927,6 +4233,50 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param opaqueMarker
+	 * @return All Contact value changes from a given point
+	 */
+	public ResponseMulti<XContactType> getXContacts(String opaqueMarker)
+	{
+		ResponseEntity<XContactCollectionType> response = null;
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			//headers.set("Content-Type", "application/json");
+
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+    				.path("xContacts")
+    				.queryParam("changesSinceMarker", opaqueMarker);
+			
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
 
 			if(response.getBody() != null)
 			{

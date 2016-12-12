@@ -39,6 +39,12 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.5
+* Added Changes Since support to XPress.java
+	* Supported calls include: getXLeas(String), getXSchools(String), getXCalendars(String), getXCoursess(String), getXRosters(String), getXStaffs(String), getXStudents(String), getXContactss(String)
+	* More info on Changes Since can be found in the API Developer's Guide <a href="http://www.ricone.org/vendors/ric-one-api/api-developers-guide/" target="_blank">here</a>
+* Added TimestampToISO8601(Date) to Util.java
+	 
 ### v1.4.1
 * Modifications to the xPress data model
 	* Deprecated schoolCalendarRefId and sessionCode in XRosterType

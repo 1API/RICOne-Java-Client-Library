@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.0
- * @since       Jul 7, 2015
+ * @version     1.5
+ * @since       Dec 22, 2016
  * Filename		Util.java
  */
 
@@ -10,6 +10,8 @@ package riconeapi.common;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -17,11 +19,28 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.X509TrustManager;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.http.HttpStatus;
 
 
 public class Util
 {
+	/**
+	 * Convert a Date value to an ISO8601 date/timestamp String value
+	 * @param date
+	 * @return An ISO8601 String date/timestamp
+	 */
+	public static String TimestampToISO8601(Date date)
+	{				
+		DateTime dt = new DateTime(date);
+		DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+		String str = fmt.print(dt);
+		return str;
+	}
+	
 	/**
 	 * Response handler to return HTTP Status Codes if an error with a request
 	 * occurs
@@ -42,7 +61,7 @@ public class Util
 		}
 	}
 	 
-	public static void disableSslVerification()
+	protected static void disableSslVerification()
 	{
 		try
 		{
