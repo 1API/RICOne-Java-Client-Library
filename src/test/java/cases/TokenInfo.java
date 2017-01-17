@@ -8,6 +8,7 @@ package cases;
  */
 
 import riconeapi.common.Authenticator;
+import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.DecodedToken;
 
 public class TokenInfo
@@ -16,7 +17,7 @@ public class TokenInfo
 	final static String clientId = "dpaDemo";
 	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws AuthenticationException
 	{
 		Authenticator auth = Authenticator.getInstance();
 		auth.authenticate(authUrl, clientId, clientSecret);

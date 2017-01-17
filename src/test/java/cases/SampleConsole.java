@@ -7,6 +7,7 @@ package cases;
  */
 import riconeapi.common.Authenticator;
 import riconeapi.common.XPress;
+import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XLeaType;
 import riconeapi.models.xpress.XPersonReferenceType;
@@ -23,7 +24,7 @@ public class SampleConsole
 //	static final int navigationPage = 1;
 	static final int navigationPageSize = 500;
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws AuthenticationException
 	{
 		Authenticator auth = Authenticator.getInstance(); // Get instance of Authenticator
 		auth.authenticate(authUrl, clientId, clientSecret); //Pass auth url, username, and password to authenticate to auth server

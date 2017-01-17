@@ -8,6 +8,7 @@ package cases;
 
 import riconeapi.common.Authenticator;
 import riconeapi.common.XPress;
+import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XCalendarType;
 import riconeapi.models.xpress.XContactStudentRelationshipType;
@@ -69,7 +70,7 @@ public class RicOneApiTests
     // Contact 1:
 //	static String refId = "F0BED6E9-8636-4BB3-8295-778D8930B2A1";
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws AuthenticationException
 	{   	
 //		Util.disableSslVerification();
 		Authenticator auth = Authenticator.getInstance();
@@ -151,7 +152,7 @@ public class RicOneApiTests
 	
 	// #################### xLeas ####################
 	//RETURN ALL LEAS
-	public static void XLeas_GetXLeas(XPress xPress)
+	public static void XLeas_GetXLeas(XPress xPress) throws AuthenticationException
 	{
 		if(xPress.getXLeas().getData() != null)
 		{
@@ -196,7 +197,7 @@ public class RicOneApiTests
 		
 	}
 	//RETURN SINGLE LEA
-	public static void XLeas_GetXLea(XPress xPress)
+	public static void XLeas_GetXLea(XPress xPress) throws AuthenticationException
     {
 		if(xPress.getXLea(refId).getData() != null)
 		{
@@ -240,7 +241,7 @@ public class RicOneApiTests
     }
 
 	 //RETURN LEAS BY SCHOOL
-    public static void XLeas_GetXLeasByXSchool(XPress xPress)
+    public static void XLeas_GetXLeasByXSchool(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXLeasByXSchool(refId).getData() != null)
     	{
@@ -285,7 +286,7 @@ public class RicOneApiTests
     }
     
     //RETURN LEAS BY ROSTER
-    public static void XLeas_GetXLeasByXRoster(XPress xPress)
+    public static void XLeas_GetXLeasByXRoster(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXLeasByXRoster(refId).getData() != null)
     	{
@@ -330,7 +331,7 @@ public class RicOneApiTests
     }
     
     //RETURN LEAS BY STAFF
-    public static void XLeas_GetXLeasByXStaff(XPress xPress)
+    public static void XLeas_GetXLeasByXStaff(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXLeasByXStaff(refId).getData() != null)
     	{
@@ -375,7 +376,7 @@ public class RicOneApiTests
     }
     
     //RETURN LEAS BY STUDENT
-    public static void XLeas_GetXLeasByXStudent(XPress xPress)
+    public static void XLeas_GetXLeasByXStudent(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXLeasByXStudent(refId).getData() != null)
     	{
@@ -420,7 +421,7 @@ public class RicOneApiTests
     }
     
     //RETURN LEAS BY CONTACT
-    public static void XLeas_GetXLeasByXContact(XPress xPress)
+    public static void XLeas_GetXLeasByXContact(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXLeasByXContact(refId).getData() != null)
     	{
@@ -467,7 +468,7 @@ public class RicOneApiTests
     // #################### xSchools ####################
     //RETURN ALL SCHOOLS
  
-    public static void XSchools_GetXSchools(XPress xPress)
+    public static void XSchools_GetXSchools(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXSchools().getData() != null)
     	{
@@ -518,7 +519,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SINGLE SCHOOL
-    public static void XSchools_GetXSchool(XPress xPress)
+    public static void XSchools_GetXSchool(XPress xPress) throws AuthenticationException
     {
         if(xPress.getXSchool(refId).getData() != null)
         {
@@ -568,7 +569,7 @@ public class RicOneApiTests
         }
     }
     //RETURN SCHOOLS BY LEA
-    public static void XSchools_GetXSchoolsByXLea(XPress xPress)
+    public static void XSchools_GetXSchoolsByXLea(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXSchoolsByXLea(refId).getData() != null)
     	{
@@ -619,7 +620,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SCHOOLS BY CALENDAR
-    public static void XSchools_GetXSchoolsByXCalendar(XPress xPress)
+    public static void XSchools_GetXSchoolsByXCalendar(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXSchoolsByXCalendar(refId).getData() !=null)
     	{
@@ -670,7 +671,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SCHOOLS BY COURSE
-    public static void XSchools_GetXSchoolsByXCourse(XPress xPress)
+    public static void XSchools_GetXSchoolsByXCourse(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXSchoolsByXCourse(refId).getData() != null)
     	{
@@ -722,7 +723,7 @@ public class RicOneApiTests
      }
     
     //RETURN SCHOOLS BY ROSTER
-    public static void XSchools_GetXSchoolsByXRoster(XPress xPress)
+    public static void XSchools_GetXSchoolsByXRoster(XPress xPress) throws AuthenticationException
      {
     	if(xPress.getXSchoolsByXRoster(refId).getData() != null)
     	{
@@ -773,7 +774,7 @@ public class RicOneApiTests
     	}
      }
     //RETURN SCHOOLS BY STAFF
-    public static void XSchools_GetXSchoolsByXStaff(XPress xPress)
+    public static void XSchools_GetXSchoolsByXStaff(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXSchoolsByXStaff(refId).getData() != null)
     	{
@@ -824,7 +825,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SCHOOLS BY STUDENT
-    public static void XSchools_GetXSchoolsByXStudent(XPress xPress)
+    public static void XSchools_GetXSchoolsByXStudent(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXSchoolsByXStudent(refId).getData() != null)
     	{
@@ -875,7 +876,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SCHOOLS BY CONTACT
-    public static void XSchools_GetXSchoolsByXContact(XPress xPress)
+    public static void XSchools_GetXSchoolsByXContact(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXSchoolsByXContact(refId).getData() != null)
     	{
@@ -928,7 +929,7 @@ public class RicOneApiTests
     
     // #################### xCalendars ####################
     //RETURN ALL CALENDARS
-    public static void XCalendars_GetXCalendars(XPress xPress)
+    public static void XCalendars_GetXCalendars(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCalendars().getData() != null)
     	{
@@ -955,7 +956,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SINGLE CALENDAR
-    public static void XCalendars_GetXCalendar(XPress xPress)
+    public static void XCalendars_GetXCalendar(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCalendar(refId).getData() != null)
     	{
@@ -981,7 +982,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN CALENDARS BY LEA
-    public static void XCalendars_GetXCalendarsByXLea(XPress xPress)
+    public static void XCalendars_GetXCalendarsByXLea(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCalendarsByXLea(refId).getData() != null)
     	{
@@ -1008,7 +1009,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN CALENDARS BY SCHOOL
-    public static void XCalendars_GetXCalendarsByXSchool(XPress xPress)
+    public static void XCalendars_GetXCalendarsByXSchool(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCalendarsByXSchool(refId).getData() != null)
     	{
@@ -1037,7 +1038,7 @@ public class RicOneApiTests
     
     // #################### xCourses ####################
     //RETURN ALL COURSES
-    public static void XCourses_GetXCourses(XPress xPress)
+    public static void XCourses_GetXCourses(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCourses().getData() != null)
     	{
@@ -1072,7 +1073,7 @@ public class RicOneApiTests
     	}      
     }
     //RETURN SINGLE COURSE
-    public static void XCourses_GetXCourse(XPress xPress)
+    public static void XCourses_GetXCourse(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCourse(refId).getData() != null)
     	{
@@ -1106,7 +1107,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN COURSES BY LEA
-    public static void XCourses_GetXCoursesByXLea(XPress xPress)
+    public static void XCourses_GetXCoursesByXLea(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCoursesByXLea(refId).getData() != null)
     	{
@@ -1141,7 +1142,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN COURSES BY School
-    public static void XCourses_GetXCoursesByXSchool(XPress xPress)
+    public static void XCourses_GetXCoursesByXSchool(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCoursesByXSchool(refId).getData() != null)
     	{
@@ -1176,7 +1177,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN COURSES BY ROSTER
-    public static void XCourses_GetXCoursesByXRoster(XPress xPress)
+    public static void XCourses_GetXCoursesByXRoster(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXCoursesByXRoster(refId).getData() != null)
     	{
@@ -1213,7 +1214,7 @@ public class RicOneApiTests
  	
     // #################### xRosters ####################
     //RETURN ALL ROSTERS
-    public static void XRosters_GetXRosters(XPress xPress)
+    public static void XRosters_GetXRosters(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXRosters().getData() != null)
     	{
@@ -1278,7 +1279,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SINGLE ROSTER
-    public static void XRosters_GetXRoster(XPress xPress)
+    public static void XRosters_GetXRoster(XPress xPress) throws AuthenticationException
     {
         if(xPress.getXRoster(refId).getData() != null)
         {
@@ -1342,7 +1343,7 @@ public class RicOneApiTests
         }
     }
     //RETURN ROSTERS BY LEA
-    public static void XRosters_GetXRostersByXLea(XPress xPress)
+    public static void XRosters_GetXRostersByXLea(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXRostersByXLea(refId).getData() != null)
     	{
@@ -1407,7 +1408,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN ROSTERS BY SCHOOL
-    public static void XRosters_GetXRostersByXSchool(XPress xPress)
+    public static void XRosters_GetXRostersByXSchool(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXRostersByXSchool(refId).getData() != null)
     	{
@@ -1472,7 +1473,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN ROSTERS BY CROUSE
-    public static void XRosters_GetXRostersByXCourse(XPress xPress)
+    public static void XRosters_GetXRostersByXCourse(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXRostersByXCourse(refId).getData() != null)
     	{
@@ -1537,7 +1538,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN ROSTERS BY STAFF
-    public static void XRosters_GetXRostersByXStaff(XPress xPress)
+    public static void XRosters_GetXRostersByXStaff(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXRostersByXStaff(refId).getData() != null)
     	{
@@ -1602,7 +1603,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN ROSTERS BY STUDENT
-    public static void XRosters_GetXRostersByXStudent(XPress xPress)
+    public static void XRosters_GetXRostersByXStudent(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXRostersByXStudent(refId).getData() != null)
     	{
@@ -1669,7 +1670,7 @@ public class RicOneApiTests
  	
     // #################### xStaffs ####################
     //RETURN ALL STAFFS
-    public static void XStaffs_GetXStaffs(XPress xPress)
+    public static void XStaffs_GetXStaffs(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStaffs().getData() != null)
     	{
@@ -1716,7 +1717,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SINGLE STAFF
-    public static void XStaffs_GetXStaff(XPress xPress)
+    public static void XStaffs_GetXStaff(XPress xPress) throws AuthenticationException
     {
         if(xPress.getXStaff(refId).getData() != null)
         {  		
@@ -1762,7 +1763,7 @@ public class RicOneApiTests
         }
     }
     //RETURN STAFFS BY LEA
-    public static void XStaffs_GetXStaffsByXLea(XPress xPress)
+    public static void XStaffs_GetXStaffsByXLea(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStaffsByXLea(refId).getData() != null)
     	{
@@ -1809,7 +1810,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN STAFFS BY SCHOOL
-    public static void XStaffs_GetXStaffsByXSchool(XPress xPress)
+    public static void XStaffs_GetXStaffsByXSchool(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStaffsByXSchool(refId).getData() != null)
     	{
@@ -1856,7 +1857,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN STAFFS BY COURSE
-    public static void XStaffs_GetXStaffsByXCourse(XPress xPress)
+    public static void XStaffs_GetXStaffsByXCourse(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStaffsByXCourse(refId).getData() != null)
     	{
@@ -1903,7 +1904,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN STAFFS BY ROSTER
-    public static void XStaffs_GetXStaffsByXRoster(XPress xPress)
+    public static void XStaffs_GetXStaffsByXRoster(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStaffsByXRoster(refId).getData() != null)
     	{
@@ -1950,7 +1951,7 @@ public class RicOneApiTests
     	}
     }
   //RETURN STAFFS BY ROSTER
-    public static void XStaffs_GetXStaffsByXStudent(XPress xPress)
+    public static void XStaffs_GetXStaffsByXStudent(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStaffsByXStudent(refId).getData() != null)
     	{
@@ -1998,7 +1999,7 @@ public class RicOneApiTests
     }
  	// #################### xStudents ####################
     //RETURN ALL STUDENTS
-    public static void XStudents_GetXStudents(XPress xPress)
+    public static void XStudents_GetXStudents(XPress xPress) throws AuthenticationException
     { 
     	if(xPress.getXStudents().getData() != null)
     	{
@@ -2240,7 +2241,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SINGLE STUDENT
-    public static void XStudents_GetXStudent(XPress xPress)
+    public static void XStudents_GetXStudent(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStudent(refId).getData() != null)
     	{	
@@ -2481,7 +2482,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN STUDENTS BY LEA
-    public static void XStudents_GetXStudentsByXLea(XPress xPress)
+    public static void XStudents_GetXStudentsByXLea(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStudentsByXLea(refId).getData() != null)
     	{
@@ -2723,7 +2724,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN STUDENTS BY SCHOOL
-    public static void XStudents_GetXStudentsByXSchool(XPress xPress) 
+    public static void XStudents_GetXStudentsByXSchool(XPress xPress) throws AuthenticationException 
     {
     	if(xPress.getXStudentsByXSchool(refId).getData() != null)
     	{
@@ -2965,7 +2966,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN STUDENTS BY ROSTER
-    public static void XStudents_GetXStudentsByXRoster(XPress xPress)
+    public static void XStudents_GetXStudentsByXRoster(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStudentsByXRoster(refId).getData() != null)
     	{
@@ -3207,7 +3208,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN STUDENTS BY STAFF
-    public static void XStudents_GetXStudentsByXStaff(XPress xPress)
+    public static void XStudents_GetXStudentsByXStaff(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStudentsByXStaff(refId).getData() != null)
     	{
@@ -3449,7 +3450,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN STUDENTS BY CONTACT
-    public static void XStudents_GetXStudentsByXContact(XPress xPress)
+    public static void XStudents_GetXStudentsByXContact(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXStudentsByXContact(refId).getData() != null)
     	{
@@ -3693,7 +3694,7 @@ public class RicOneApiTests
 
  	// #################### xContacts ####################
     //RETURN ALL CONTACTS
-    public static void XContacts_GetXSContacts(XPress xPress)
+    public static void XContacts_GetXSContacts(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXContacts().getData() != null)
     	{
@@ -3786,7 +3787,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN SINGLE CONTACT
-    public static void XContacts_GetXSContact(XPress xPress)
+    public static void XContacts_GetXSContact(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXContact(refId).getData() != null)
     	{
@@ -3878,7 +3879,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN CONTACTS BY LEA
-    public static void XContacts_GetXContactsByXLea(XPress xPress)
+    public static void XContacts_GetXContactsByXLea(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXContactsByXLea(refId).getData() != null)
     	{
@@ -3971,7 +3972,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN CONTACTS BY SCHOOL
-    public static void XContacts_GetXContactsByXSchool(XPress xPress)
+    public static void XContacts_GetXContactsByXSchool(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXContactsByXSchool(refId).getData() != null)
     	{
@@ -4064,7 +4065,7 @@ public class RicOneApiTests
     	}
     }
     //RETURN CONTACTS BY STUDENT
-    public static void XContacts_GetXContactsByXStudent(XPress xPress)
+    public static void XContacts_GetXContactsByXStudent(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXContactsByXStudent(refId).getData() != null)
     	{

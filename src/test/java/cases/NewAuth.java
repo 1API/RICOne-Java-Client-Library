@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 
 import riconeapi.common.Authenticator;
 import riconeapi.common.XPress;
+import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XLeaType;
 import riconeapi.models.xpress.XRosterType;
@@ -22,7 +23,7 @@ public class NewAuth
 	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
 	final static String providerId = "workshop";
 
-	public static void main(String[] args) throws InterruptedException
+	public static void main(String[] args) throws InterruptedException, AuthenticationException
 	{
 		Authenticator auth = Authenticator.getInstance();
 		auth.authenticate(authUrl, clientId, clientSecret);

@@ -44,6 +44,11 @@ final static String clientSecret = "YOUR PASSWORD";
 	* Supported calls include: getXLeas(String), getXSchools(String), getXCalendars(String), getXCoursess(String), getXRosters(String), getXStaffs(String), getXStudents(String), getXContactss(String)
 	* More info on Changes Since can be found in the API Developer's Guide <a href="http://www.ricone.org/vendors/ric-one-api/api-developers-guide/" target="_blank">here</a>
 * Added TimestampToISO8601(Date) to Util.java
+* Added custom exception class for failed authentication - AuthenticationException.java 
+* Modified Athenticator.java 
+	* Throws AuthenticationException and will return 401 UNAUTHORIZED message on a failed login attempt
+* Modified XPress.java
+	* Throws AuthenticationException and will return 401 UNAUTHORIZED message on a failed login attempt
 	 
 ### v1.4.1
 * Modifications to the xPress data model

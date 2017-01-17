@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.riconeapi</groupId>
 	<artifactId>riconeapi</artifactId>
-	<version>1.4.1-RELEASE</version>
+	<version>1.5-RELEASE</version>
 	<name>RICOne API Client Library</name>
 	<description>Client library for the RIC One data api</description>
 	<url>http://www.ricone.org/</url>
@@ -14,6 +14,7 @@
 			<directory>dist</directory>
 			<excludes>
 				<exclude>dist/**</exclude>
+				<exclude>src/test/**</exclude>
 			</excludes>
 			</resource>
 		</resources>
@@ -32,8 +33,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-<!-- 			<version>2.5.4</version> -->
-			<version>2.8.1</version>
+			<version>2.8.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.auth0</groupId>

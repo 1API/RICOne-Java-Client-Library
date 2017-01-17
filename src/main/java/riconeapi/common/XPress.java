@@ -1,16 +1,25 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.5
- * @since       Dec 22, 2016
+ * @since       Jan 13, 2017
  * Filename		XPress.java
  */
 
 package riconeapi.common;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
+
+import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XCalendarCollectionType;
 import riconeapi.models.xpress.XCalendarType;
 import riconeapi.models.xpress.XContactCollectionType;
@@ -27,11 +36,6 @@ import riconeapi.models.xpress.XStaffCollectionType;
 import riconeapi.models.xpress.XStaffType;
 import riconeapi.models.xpress.XStudentCollectionType;
 import riconeapi.models.xpress.XStudentType;
-
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 
 /**
  * Static class allowing access to xPress data model objects
@@ -53,8 +57,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Leas with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -94,8 +99,9 @@ public class XPress
 	 * 
 	 * @param opaqueMarker
 	 * @return All Lea value changes from a given point
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeas(String opaqueMarker)
+	public ResponseMulti<XLeaType> getXLeas(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -136,8 +142,9 @@ public class XPress
 
 	/**
 	 * @return All Leas
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeas()
+	public ResponseMulti<XLeaType> getXLeas() throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -153,10 +160,23 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionType.class);
-			
+
 			if(response.getBody() != null)
 			{
     			output.setData(response.getBody().getXLea());
+
+//    			ObjectMapper jsonMapper = new ObjectMapper();
+//    			String json = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response.getBody());
+//    			output.setJson(json);
+
+//    			JaxbAnnotationModule module = new JaxbAnnotationModule();
+//    			ObjectMapper xmlMapper = new XmlMapper();
+//    			xmlMapper.registerModule(module);
+//    			String xml = xmlMapper.writeValueAsString(response.getBody());
+//    			output.setXml(xml);
+    			
+//    			output.setXml(response.getBody().toString());
+
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -164,9 +184,9 @@ public class XPress
 		}
 		catch(HttpClientErrorException e)
 		{
-			output.setMessage(e.getStatusText());
-			output.setStatusCode(e.getStatusCode().value());
-			output.setHeader(e.getResponseHeaders().toString());
+			output.setMessage(((HttpStatusCodeException) e).getStatusText());
+			output.setStatusCode(((HttpStatusCodeException) e).getStatusCode().value());
+			output.setHeader(((HttpStatusCodeException) e).getResponseHeaders().toString());
 		}
 
 		return output;	
@@ -178,8 +198,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single Lea by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XLeaType> getXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XLeaType> getXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaType> response = null;
 		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
@@ -220,8 +241,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Single Lea by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XLeaType> getXLea(String refId)
+	public ResponseSingle<XLeaType> getXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaType> response = null;
 		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
@@ -262,8 +284,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific School by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -304,8 +327,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Leas associated to a specific School by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -346,8 +370,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Roster by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -388,8 +413,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Leas associated to a specific Roster by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -430,8 +456,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Staff by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -472,8 +499,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Leas associated to a specific Staff by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -513,8 +541,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Student by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -555,8 +584,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Leas associated to a specific Student by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -597,8 +627,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Contact by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -639,8 +670,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Leas associated to a specific Contact by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XLeaType> getXLeasByXContact(String refId)
+	public ResponseMulti<XLeaType> getXLeasByXContact(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
@@ -681,8 +713,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Schools with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -723,8 +756,9 @@ public class XPress
 	 * 
 	 * @param opaqueMarker
 	 * @return All School value changes from a given point
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchools(String opaqueMarker)
+	public ResponseMulti<XSchoolType> getXSchools(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -766,8 +800,9 @@ public class XPress
 	/**
 	 * 
 	 * @return All Schools
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchools()
+	public ResponseMulti<XSchoolType> getXSchools() throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -808,8 +843,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single School by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XSchoolType> getXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XSchoolType> getXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolType> response = null;
 		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
@@ -850,8 +886,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Single School by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XSchoolType> getXSchool(String refId)
+	public ResponseSingle<XSchoolType> getXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolType> response = null;
 		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
@@ -892,8 +929,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Lea by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -934,8 +972,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Schools associated to a specific Lea by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -976,8 +1015,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Calendar by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1018,8 +1058,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Schools associated to a specific Calendar by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1060,8 +1101,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Course by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1102,8 +1144,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Schools associated to a specific Course by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1144,8 +1187,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Roster by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1186,8 +1230,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Schools associated to a specific Roster by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1228,8 +1273,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Staff by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1270,8 +1316,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Schools associated to a specific Staff by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1312,8 +1359,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Student by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1354,8 +1402,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Schools associated to a specific Student by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1396,8 +1445,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Schools associated to a specific Contact by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1438,8 +1488,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Schools associated to a specific Contact by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId)
+	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XSchoolCollectionType> response = null;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
@@ -1480,8 +1531,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Calendars with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
@@ -1522,8 +1574,9 @@ public class XPress
 	 * 
 	 * @param opaqueMarker
 	 * @return All Calendar value changes from a given point
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCalendarType> getXCalendars(String opaqueMarker)
+	public ResponseMulti<XCalendarType> getXCalendars(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
@@ -1564,8 +1617,9 @@ public class XPress
 	/**
 	 * 
 	 * @return All Calendars
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCalendarType> getXCalendars()
+	public ResponseMulti<XCalendarType> getXCalendars() throws AuthenticationException
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
@@ -1606,8 +1660,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single Calendar by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XCalendarType> getXCalendar(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XCalendarType> getXCalendar(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCalendarType> response = null;
 		ResponseSingle<XCalendarType> output = new ResponseSingle<XCalendarType>();
@@ -1648,8 +1703,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Single Calendar by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XCalendarType> getXCalendar(String refId)
+	public ResponseSingle<XCalendarType> getXCalendar(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XCalendarType> response = null;
 		ResponseSingle<XCalendarType> output = new ResponseSingle<XCalendarType>();
@@ -1690,8 +1746,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Calendars associated to a specific Lea by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
@@ -1732,8 +1789,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Calendars associated to a specific Lea by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId)
+	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
@@ -1774,8 +1832,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Calendars associated to a specific School by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
@@ -1816,8 +1875,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Calendars associated to a specific School by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId)
+	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XCalendarCollectionType> response = null;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
@@ -1858,8 +1918,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Courses with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCourses(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCourseType> getXCourses(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -1900,8 +1961,9 @@ public class XPress
 	 * 
 	 * @param opaqueMarker
 	 * @return All Course value changes from a given point
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCourses(String opaqueMarker)
+	public ResponseMulti<XCourseType> getXCourses(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -1943,8 +2005,9 @@ public class XPress
 	/**
 	 * 
 	 * @return All Courses
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCourses()
+	public ResponseMulti<XCourseType> getXCourses() throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -1985,8 +2048,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single Course by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XCourseType> getXCourse(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XCourseType> getXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCourseType> response = null;
 		ResponseSingle<XCourseType> output = new ResponseSingle<XCourseType>();
@@ -2027,8 +2091,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Single Course by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XCourseType> getXCourse(String refId)
+	public ResponseSingle<XCourseType> getXCourse(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XCourseType> response = null;
 		ResponseSingle<XCourseType> output = new ResponseSingle<XCourseType>();
@@ -2069,8 +2134,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific Lea by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCoursesByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCourseType> getXCoursesByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -2111,8 +2177,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Courses associated to a specific Lea by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCoursesByXLea(String refId)
+	public ResponseMulti<XCourseType> getXCoursesByXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -2153,8 +2220,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific School by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -2195,8 +2263,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Courses associated to a specific School by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId)
+	public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -2237,8 +2306,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Courses associated to a specific Roster by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -2279,8 +2349,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Courses associated to a specific Roster by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId)
+	public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XCourseCollectionType> response = null;
 		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
@@ -2321,8 +2392,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Rosters with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRosters(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRosters(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2363,8 +2435,9 @@ public class XPress
 	 * 
 	 * @param opaqueMarker
 	 * @return All Roster value changes from a given point
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRosters(String opaqueMarker)
+	public ResponseMulti<XRosterType> getXRosters(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2406,8 +2479,9 @@ public class XPress
 	/**
 	 * 
 	 * @return All Rosters
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRosters()
+	public ResponseMulti<XRosterType> getXRosters() throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2448,8 +2522,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single Roster by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XRosterType> getXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XRosterType> getXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XRosterType> response = null;
 		ResponseSingle<XRosterType> output = new ResponseSingle<XRosterType>();
@@ -2490,8 +2565,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Single Roster by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XRosterType> getXRoster(String refId)
+	public ResponseSingle<XRosterType> getXRoster(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XRosterType> response = null;
 		ResponseSingle<XRosterType> output = new ResponseSingle<XRosterType>();
@@ -2532,8 +2608,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Lea by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2574,8 +2651,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Rosters associated to a specific Lea by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXLea(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2616,8 +2694,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific School by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2658,8 +2737,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Rosters associated to a specific School by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2700,8 +2780,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Course by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2742,8 +2823,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Rosters associated to a specific Course by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2784,8 +2866,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Staff by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2826,8 +2909,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Rosters associated to a specific Staff by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2868,8 +2952,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Rosters associated to a specific Student by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2910,8 +2995,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Rosters associated to a specific Student by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId)
+	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XRosterCollectionType> response = null;
 		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
@@ -2952,8 +3038,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Staffs with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffs(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffs(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -2994,8 +3081,9 @@ public class XPress
 	 * 
 	 * @param opaqueMarker
 	 * @return All Staff value changes from a given point
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffs(String opaqueMarker)
+	public ResponseMulti<XStaffType> getXStaffs(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3037,8 +3125,9 @@ public class XPress
 	/**
 	 * 
 	 * @return All Staffs
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffs()
+	public ResponseMulti<XStaffType> getXStaffs() throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3079,8 +3168,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single Staffs by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XStaffType> getXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XStaffType> getXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStaffType> response = null;
 		ResponseSingle<XStaffType> output = new ResponseSingle<XStaffType>();
@@ -3121,8 +3211,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Single Staffs by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XStaffType> getXStaff(String refId)
+	public ResponseSingle<XStaffType> getXStaff(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffType> response = null;
 		ResponseSingle<XStaffType> output = new ResponseSingle<XStaffType>();
@@ -3163,8 +3254,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Lea by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3205,8 +3297,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Staffs associated to a specific Lea by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXLea(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3247,8 +3340,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific School by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3289,8 +3383,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Staffs associated to a specific School by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3331,8 +3426,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Course by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3373,8 +3469,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Staffs associated to a specific Course by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3415,8 +3512,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Roster by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3457,8 +3555,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Staffs associated to a specific Roster by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3499,8 +3598,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Staffs associated to a specific Student by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3541,8 +3641,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Staffs associated to a specific Student by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId)
+	public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -3583,8 +3684,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Students with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudents(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudents(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -3625,8 +3727,9 @@ public class XPress
 	 * 
 	 * @param opaqueMarker
 	 * @return All Student value changes from a given point
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudents(String opaqueMarker)
+	public ResponseMulti<XStudentType> getXStudents(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -3668,8 +3771,9 @@ public class XPress
 	/**
 	 * 
 	 * @return All Students
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudents()
+	public ResponseMulti<XStudentType> getXStudents() throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -3710,8 +3814,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single Student by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XStudentType> getXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XStudentType> getXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStudentType> response = null;
 		ResponseSingle<XStudentType> output = new ResponseSingle<XStudentType>();
@@ -3752,8 +3857,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Single Student by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XStudentType> getXStudent(String refId)
+	public ResponseSingle<XStudentType> getXStudent(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentType> response = null;
 		ResponseSingle<XStudentType> output = new ResponseSingle<XStudentType>();
@@ -3794,8 +3900,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Lea by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -3836,8 +3943,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Students associated to a specific Lea by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXLea(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -3878,8 +3986,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Students associated to a specific School by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -3920,8 +4029,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Students associated to a specific School by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXSchool(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -3962,8 +4072,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Roster by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXRoster(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -4004,8 +4115,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Students associated to a specific Roster by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXRoster(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXRoster(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -4046,8 +4158,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Staff by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXStaff(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -4088,8 +4201,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Students associated to a specific Staff by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXStaff(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXStaff(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -4130,8 +4244,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Students associated to a specific Contact by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXContact(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XStudentType> getXStudentsByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -4172,8 +4287,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Students associated to a specific Contact by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentsByXContact(String refId)
+	public ResponseMulti<XStudentType> getXStudentsByXContact(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -4214,8 +4330,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Contacts with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContacts(int navigationPage, int navigationPageSize)
+	public ResponseMulti<XContactType> getXContacts(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4256,8 +4373,9 @@ public class XPress
 	 * 
 	 * @param opaqueMarker
 	 * @return All Contact value changes from a given point
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContacts(String opaqueMarker)
+	public ResponseMulti<XContactType> getXContacts(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4299,8 +4417,9 @@ public class XPress
 	/**
 	 * 
 	 * @return All Contacts
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContacts()
+	public ResponseMulti<XContactType> getXContacts() throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4341,8 +4460,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single Contact by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XContactType> getXContact(String refId, int navigationPage, int navigationPageSize)
+	public ResponseSingle<XContactType> getXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XContactType> response = null;
 		ResponseSingle<XContactType> output = new ResponseSingle<XContactType>();
@@ -4383,8 +4503,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Single Contact by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseSingle<XContactType> getXContact(String refId)
+	public ResponseSingle<XContactType> getXContact(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XContactType> response = null;
 		ResponseSingle<XContactType> output = new ResponseSingle<XContactType>();
@@ -4425,8 +4546,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific Lea by refId wtih paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContactsByXLea(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XContactType> getXContactsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4467,8 +4589,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Contacts associated to a specific Lea by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContactsByXLea(String refId)
+	public ResponseMulti<XContactType> getXContactsByXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4509,8 +4632,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific School by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContactsByXSchool(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XContactType> getXContactsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4551,8 +4675,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Contacts associated to a specific School by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContactsByXSchool(String refId)
+	public ResponseMulti<XContactType> getXContactsByXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4593,8 +4718,9 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Contacts associated to a specific Student by refId with paging
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize)
+	public ResponseMulti<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4635,8 +4761,9 @@ public class XPress
 	 * 
 	 * @param refId
 	 * @return Contacts associated to a specific Student by refId
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XContactType> getXContactsByXStudent(String refId)
+	public ResponseMulti<XContactType> getXContactsByXStudent(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -4978,8 +5105,9 @@ public class XPress
 	 * Create staff usernames and passwords by school
 	 * @param refId
 	 * @return 
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> createXStaffUsers(String refId)
+	public ResponseMulti<XStaffType> createXStaffUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -5022,8 +5150,9 @@ public class XPress
 	 * Delete generated staff passwords by school
 	 * @param refId
 	 * @return
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> deleteXStaffUsers(String refId)
+	public ResponseMulti<XStaffType> deleteXStaffUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -5066,8 +5195,9 @@ public class XPress
 	 * Return generated staff usernames and passwords by school
 	 * @param refId
 	 * @return
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStaffType> getXStaffUsers(String refId)
+	public ResponseMulti<XStaffType> getXStaffUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStaffCollectionType> response = null;
 		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
@@ -5110,8 +5240,9 @@ public class XPress
 	 * Create student usernames and passwords by school
 	 * @param refId
 	 * @return
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> createXStudentUsers(String refId)
+	public ResponseMulti<XStudentType> createXStudentUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -5154,8 +5285,9 @@ public class XPress
 	 * Delete generated student passwords by school
 	 * @param refId
 	 * @return
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> deleteXStudentUsers(String refId)
+	public ResponseMulti<XStudentType> deleteXStudentUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -5198,8 +5330,9 @@ public class XPress
 	 * Return generated student usernames and passwords by school
 	 * @param refId
 	 * @return
+	 * @throws AuthenticationException 
 	 */
-	public ResponseMulti<XStudentType> getXStudentUsers(String refId)
+	public ResponseMulti<XStudentType> getXStudentUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XStudentCollectionType> response = null;
 		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
@@ -5242,8 +5375,9 @@ public class XPress
 	 * Create contact usernames and passwords by school
 	 * @param refId
 	 * @return
+	 * @throws AuthenticationException 
 	 */
-	private ResponseMulti<XContactType> createXContactUsers(String refId)
+	private ResponseMulti<XContactType> createXContactUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -5286,8 +5420,9 @@ public class XPress
 	 * Delete generated contact passwords by school
 	 * @param refId
 	 * @return
+	 * @throws AuthenticationException 
 	 */
-	private ResponseMulti<XContactType> deleteXContactUsers(String refId)
+	private ResponseMulti<XContactType> deleteXContactUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
@@ -5330,8 +5465,9 @@ public class XPress
 	 * Return generated contact usernames and passwords by school
 	 * @param refId
 	 * @return
+	 * @throws AuthenticationException 
 	 */
-	private ResponseMulti<XContactType> getXContactUsers(String refId)
+	private ResponseMulti<XContactType> getXContactUsers(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XContactCollectionType> response = null;
 		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
