@@ -1,7 +1,7 @@
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.5
- * @since       Jan 13, 2017
+ * @version     1.5.1
+ * @since       Jan 27, 2017
  * Filename		XPress.java
  */
 
@@ -277,6 +277,49 @@ public class XPress
 
 		return output;	
 	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Single Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseSingle<XLeaType> getXLea(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XLeaType> response = null;
+		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xLeas/{id}", HttpMethod.GET, entity, XLeaType.class, id);
+			
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;	
+	}
 
 	/**
 	 * 
@@ -345,6 +388,49 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+
+			if(response.getBody() != null)
+			{
+    			output.setData(response.getBody().getXLea());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Leas associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XLeaType> getXLeasByXSchool(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XLeaCollectionType> response = null;
+		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, id);
 
 			if(response.getBody() != null)
 			{
@@ -922,6 +1008,49 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Single School by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseSingle<XSchoolType> getXSchool(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XSchoolType> response = null;
+		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xSchools/{id}", HttpMethod.GET, entity, XSchoolType.class, id);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -990,6 +1119,49 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXSchool());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Schools associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XSchoolCollectionType> response = null;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, id);
 
 			if(response.getBody() != null)
 			{
@@ -1825,6 +1997,49 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Calendars associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XCalendarCollectionType> response = null;
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, id);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -1893,6 +2108,49 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCalendar());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Calendars associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XCalendarCollectionType> response = null;
+		ResponseMulti<XCalendarType> output = new ResponseMulti<XCalendarType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, id);
 
 			if(response.getBody() != null)
 			{
@@ -2216,6 +2474,49 @@ public class XPress
 	
 	/**
 	 * 
+	 * @param idType
+	 * @param id
+	 * @return Courses associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XCourseType> getXCoursesByXLea(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XCourseCollectionType> response = null;
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, id);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
 	 * @param refId
 	 * @param navigationPage
 	 * @param navigationPageSize
@@ -2281,6 +2582,49 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, refId);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXCourse());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Courses associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XCourseType> getXCoursesByXSchool(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XCourseCollectionType> response = null;
+		ResponseMulti<XCourseType> output = new ResponseMulti<XCourseType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xCourses", HttpMethod.GET, entity, XCourseCollectionType.class, id);
 
 			if(response.getBody() != null)
 			{
@@ -2687,6 +3031,49 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Rosters associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XRosterType> getXRostersByXLea(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XRosterCollectionType> response = null;
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, id);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -2755,6 +3142,49 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXRoster());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Rosters associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XRosterType> getXRostersByXSchool(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XRosterCollectionType> response = null;
+		ResponseMulti<XRosterType> output = new ResponseMulti<XRosterType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, id);
 
 			if(response.getBody() != null)
 			{
@@ -3333,6 +3763,49 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Staff associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XStaffType> getXStaffsByXLea(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XStaffCollectionType> response = null;
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, id);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -3401,6 +3874,49 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, refId);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Staff associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XStaffType> getXStaffsByXSchool(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XStaffCollectionType> response = null;
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xStaffs", HttpMethod.GET, entity, XStaffCollectionType.class, id);
 
 			if(response.getBody() != null)
 			{
@@ -3979,6 +4495,49 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Students associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XStudentType> getXStudentsByXLea(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XStudentCollectionType> response = null;
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, id);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -4047,6 +4606,49 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, refId);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Students associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XStudentType> getXStudentsByXSchool(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XStudentCollectionType> response = null;
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xStudents", HttpMethod.GET, entity, XStudentCollectionType.class, id);
 
 			if(response.getBody() != null)
 			{
@@ -4625,6 +5227,49 @@ public class XPress
 
 		return output;
 	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Contacts associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XContactType> getXContactsByXLea(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XContactCollectionType> response = null;
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, id);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
 
 	/**
 	 * 
@@ -4693,6 +5338,49 @@ public class XPress
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXContact());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+	
+	/**
+	 * 
+	 * @param idType
+	 * @param id
+	 * @return Contacts associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XContactType> getXContactsByXSchool(String idType, String id) throws AuthenticationException
+	{
+		ResponseEntity<XContactCollectionType> response = null;
+		ResponseMulti<XContactType> output = new ResponseMulti<XContactType>();
+		
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+		
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("IdType", idType);
+			//headers.set("Content-Type", "application/json");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, id);
 
 			if(response.getBody() != null)
 			{

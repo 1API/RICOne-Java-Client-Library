@@ -39,6 +39,13 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.5.1
+* Added ability to request xLea or xSchool objects by BEDS or Local Id code.
+	* xLeas/{id}
+	* xSchools/{id}
+	* xLeas/{id}/xObject
+	* xSchools/{id}/xObject
+
 ### v1.5
 * Added Changes Since support to XPress.java
 	* Supported calls include: getXLeas(String), getXSchools(String), getXCalendars(String), getXCoursess(String), getXRosters(String), getXStaffs(String), getXStudents(String), getXContactss(String)
