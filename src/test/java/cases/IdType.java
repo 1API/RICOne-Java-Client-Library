@@ -28,16 +28,14 @@ public class IdType
 		{
 			XPress xPress = new XPress(e.getHref());
 			
+			//IdType=beds or local
+			//beds:738121
+			//local:BT101
 			XLeaType l = xPress.getXLea("beds", "738121").getData();
 			System.err.println(l.getRefId());
 			System.out.println(l.getLocalId());
 			System.out.println(l.getStateProvinceId());
 			System.out.println(l.getLeaName());
-//			for(XLeaType l : xPress.getXLeas().getData())
-//			{
-//				System.err.println(l.getRefId());
-//				System.out.println(l.getLeaName());
-//			}
 		}
 
 	}
