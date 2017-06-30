@@ -55,7 +55,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "responsibleSchoolType",
     "membershipType",
     "entryDate",
+    "entryType",
     "exitDate",
+    "exitType",
     "homeRoomNumber",
     "homeRoomTeacher",
     "gradeLevel",
@@ -73,7 +75,9 @@ public class XEnrollmentType {
         responsibleSchoolType = null;
         membershipType = null;
         entryDate = null;
+        entryType = null;
         exitDate = null;
+        exitType = null;
         homeRoomNumber = null;
         homeRoomTeacher = new XPersonReferenceType();
         gradeLevel = null;
@@ -100,8 +104,12 @@ public class XEnrollmentType {
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar entryDate;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XOtherCodeListType entryType;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar exitDate;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XOtherCodeListType exitType;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlSchemaType(name = "token")
@@ -264,6 +272,30 @@ public class XEnrollmentType {
     }
 
     /**
+     * Gets the value of the entryType property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XOtherCodeListType }
+     *
+     */
+    public XOtherCodeListType getEntryType() {
+        return entryType;
+    }
+
+    /**
+     * Sets the value of the entryType property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link XOtherCodeListType }
+     *
+     */
+    public void setEntryType(XOtherCodeListType value) {
+        this.entryType = value;
+    }
+
+    /**
      * Gets the value of the exitDate property.
      * 
      * @return
@@ -287,6 +319,29 @@ public class XEnrollmentType {
         this.exitDate = value;
     }
 
+    /**
+     * Gets the value of the exitType property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XOtherCodeListType }
+     *
+     */
+    public XOtherCodeListType getExitType() {
+        return exitType;
+    }
+
+    /**
+     * Sets the value of the exitType property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link XOtherCodeListType }
+     *
+     */
+    public void setExitType(XOtherCodeListType value) {
+        this.exitType = value;
+    }
     /**
      * Gets the value of the homeRoomNumber property.
      * 

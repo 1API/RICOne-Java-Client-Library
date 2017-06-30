@@ -39,6 +39,11 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.5.2
+* Entry/Exit Codes now available
+    * Added XOtherCodeListType & XOtherCodeType POJOs
+    * Added entryType & exitType to XEnrollmentType
+
 ### v1.5.1
 * Added ability to request xLea or xSchool objects by BEDS or Local Id code.
 	* xLeas/{id}
