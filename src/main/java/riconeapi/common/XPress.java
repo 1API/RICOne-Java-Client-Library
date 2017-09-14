@@ -5878,7 +5878,56 @@ public class XPress
 
 		return output;
 	}
-	
+
+	/**
+	 * Return generated staff usernames and passwords by school with paging
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Return generated staff usernames and passwords by school with paging
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XStaffType> getXStaffUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
+	{
+		ResponseEntity<XStaffCollectionType> response = null;
+		ResponseMulti<XStaffType> output = new ResponseMulti<XStaffType>();
+
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("navigationPage", Integer.toString(navigationPage));
+			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
+
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xStaffs")
+					.queryParam("getUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStaff());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+
 	/**
 	 * Return generated staff usernames and passwords by school
 	 * @param refId
@@ -6013,7 +6062,56 @@ public class XPress
 
 		return output;
 	}
-	
+
+	/**
+	 * Return generated student usernames and passwords by school with paging
+	 * @param refId
+	 * @param navigationPage
+	 * @param navigationPageSize
+	 * @return Return generated student usernames and passwords by school with paging
+	 * @throws AuthenticationException
+	 */
+	public ResponseMulti<XStudentType> getXStudentUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
+	{
+		ResponseEntity<XStudentCollectionType> response = null;
+		ResponseMulti<XStudentType> output = new ResponseMulti<XStudentType>();
+
+		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+
+		try
+		{
+			HttpHeaders headers = new HttpHeaders();
+			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+			headers.set("navigationPage", Integer.toString(navigationPage));
+			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+			//headers.set("Content-Type", "application/json");
+
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
+					.path("xSchools/" + refId + "/xStudents")
+					.queryParam("getUsers", "true");
+
+			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionType.class);
+
+			if(response.getBody() != null)
+			{
+				output.setData(response.getBody().getXStudent());
+			}
+			output.setMessage(response.getStatusCode().getReasonPhrase());
+			output.setStatusCode(response.getStatusCode().value());
+			output.setHeader(response.getHeaders().toString());
+		}
+		catch(HttpClientErrorException e)
+		{
+			output.setMessage(e.getStatusText());
+			output.setStatusCode(e.getStatusCode().value());
+			output.setHeader(e.getResponseHeaders().toString());
+		}
+
+		return output;
+	}
+
 	/**
 	 * Return generated student usernames and passwords by school
 	 * @param refId

@@ -3,22 +3,22 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.riconeapi</groupId>
 	<artifactId>riconeapi</artifactId>
-	<version>1.5.2-SNAPSHOT</version>
+	<version>1.5.2-RELEASE</version>
 	<name>RICOne API Client Library</name>
 	<description>Client library for the RIC One data api</description>
 	<url>http://www.ricone.org/</url>
 
-	<build>
-		<resources>
-			<resource>
-			<directory>dist</directory>
-			<excludes>
-				<exclude>dist/**</exclude>
-				<exclude>src/test/**</exclude>
-			</excludes>
-			</resource>
-		</resources>
-	</build>
+	<!--<build>-->
+		<!--<resources>-->
+			<!--<resource>-->
+			<!--<directory>dist</directory>-->
+			<!--<excludes>-->
+				<!--<exclude>dist/**</exclude>-->
+				<!--<exclude>src/test/**</exclude>-->
+			<!--</excludes>-->
+			<!--</resource>-->
+		<!--</resources>-->
+	<!--</build>-->
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
