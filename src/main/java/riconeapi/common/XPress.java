@@ -1,10 +1,3 @@
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.5.1
- * @since       Jan 27, 2017
- * Filename		XPress.java
- */
-
 package riconeapi.common;
 
 import org.springframework.http.HttpEntity;
@@ -19,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 //import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
+import riconeapi.authentication.Authenticator;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XCalendarCollectionType;
 import riconeapi.models.xpress.XCalendarType;
@@ -38,8 +32,11 @@ import riconeapi.models.xpress.XStudentCollectionType;
 import riconeapi.models.xpress.XStudentType;
 
 /**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.6
+ * @since       Sep 21, 2017
+ *
  * Static class allowing access to xPress data model objects
- * 
  */
 public class XPress
 {

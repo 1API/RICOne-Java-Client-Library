@@ -1,5 +1,5 @@
 package cases;
-import riconeapi.common.Authenticator;
+import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XContactType;

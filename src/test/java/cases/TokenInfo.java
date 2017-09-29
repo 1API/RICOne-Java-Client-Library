@@ -7,7 +7,7 @@ package cases;
  * @filename	TokenInfo.java
  */
 
-import riconeapi.common.Authenticator;
+import riconeapi.authentication.Authenticator;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.DecodedToken;
 

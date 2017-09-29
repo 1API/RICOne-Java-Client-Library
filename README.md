@@ -12,7 +12,7 @@ The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTe
 
 #### Basic Use
 ```java
-Authenticator auth = auth.getInstance(); 
+Authenticator auth = Authenticator.getInstance();
 auth.authenticate(authUrl, clientId, clientSecret);
 
 for(Endpoint e : auth.GetEndpoints())
@@ -39,6 +39,20 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.6
+* Added the RIC One API-AuthenticationClientLibrary-Java jar into the project
+    * Authentication classes now moved into seperate repository: <a href="https://github.com/RIConeorg/API-AuthenticationClientLibrary-Java" target="blank">API-AuthenticationClientLibrary-Java</a>
+    * import statement change, example below
+
+        Old:
+        ```java
+        import riconeapi.common.Authenticator;
+        ```
+        New:
+        ```java
+        import riconeapi.authentication.Authenticator;
+        ```
+
 ### v1.5.2
 * Entry/Exit Codes now available
     * Added XOtherCodeListType & XOtherCodeType POJOs
