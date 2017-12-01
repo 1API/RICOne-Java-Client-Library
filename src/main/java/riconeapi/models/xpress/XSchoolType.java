@@ -238,7 +238,7 @@ public class XSchoolType
      * 
      * @return
      *     possible object is
-     *     {@link XOrganizationAddressType }
+     *     {@link XTelephoneListType }
      *     
      */
     public XOrganizationAddressType getAddress() {
@@ -250,7 +250,7 @@ public class XSchoolType
      * 
      * @param value
      *     allowed object is
-     *     {@link XOrganizationAddressType }
+     *     {@link XTelephoneListType }
      *     
      */
     public void setAddress(XOrganizationAddressType value) {

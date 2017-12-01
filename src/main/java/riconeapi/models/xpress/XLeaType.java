@@ -1,281 +1,158 @@
-
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-
-/**
- * xLea is a composite object that provides core information about a Local Educuation Agency (e.g. district, division, intermediate agency). The refId of a xLea object coincides with the refId of a corresponding lea object.
- * 
- * <p>Java class for xLeaType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xLeaType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.sifassociation.org/datamodel/na/3.2}gSIF_CompositeType">
- *       &lt;sequence>
- *         &lt;element name="localId" type="{http://www.sifassociation.org/datamodel/na/3.2}xOrganizationIdType" minOccurs="0"/>
- *         &lt;element name="leaRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType" minOccurs="0"/>
- *         &lt;element name="stateProvinceId" type="{http://www.sifassociation.org/datamodel/na/3.2}xOrganizationIdType" minOccurs="0"/>
- *         &lt;element name="ncesId" type="{http://www.sifassociation.org/datamodel/na/3.2}xOrganizationIdType" minOccurs="0"/>
- *         &lt;element name="leaName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="address" type="{http://www.sifassociation.org/datamodel/na/3.2}xOrganizationAddressType" minOccurs="0"/>
- *         &lt;element name="phoneNumber" type="{http://www.sifassociation.org/datamodel/na/3.2}xTelephoneType" minOccurs="0"/>
- *         &lt;element name="otherPhoneNumbers" type="{http://www.sifassociation.org/datamodel/na/3.2}xTelephoneListType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xLeaType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "localId",
-    "leaRefId",
-    "stateProvinceId",
-    "ncesId",
-    "leaName",
-    "address",
-    "phoneNumber",
-    "otherPhoneNumbers"
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "@refId",
+        "localId",
+        "leaRefId",
+        "stateProvinceId",
+        "ncesId",
+        "leaName",
+        "address",
+        "phoneNumber",
+        "otherPhoneNumbers"
 })
 
 public class XLeaType
-    extends GSIFCompositeType
 {
-	public XLeaType()
-	{
-		refId = null;
-		localId = null;
-	    leaRefId = null;
-	    stateProvinceId = null;
-	    ncesId = null;
-	    leaName = null;
-	    address = new XOrganizationAddressType();
-	    phoneNumber = new XTelephoneType();
-	    otherPhoneNumbers = new XTelephoneListType();
-	}
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    @JsonProperty("@refId")
+    private String refId;
+    @JsonProperty("localId")
+    private String localId;
+    @JsonProperty("leaRefId")
+    private String leaRefId;
+    @JsonProperty("stateProvinceId")
+    private String stateProvinceId;
+    @JsonProperty("ncesId")
+    private String ncesId;
+    @JsonProperty("leaName")
+    private String leaName;
+    @JsonProperty("address")
+    private XOrganizationAddressType address;
+    @JsonProperty("phoneNumber")
+    private XTelephoneType phoneNumber;
+    @JsonProperty("otherPhoneNumbers")
+    private XTelephoneListType otherPhoneNumbers;
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String localId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String leaRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String stateProvinceId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String ncesId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected String leaName;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XOrganizationAddressType address;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XTelephoneType phoneNumber;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XTelephoneListType otherPhoneNumbers;
+    public XLeaType() {
+    }
 
-    /**
-     * Gets the value of the localId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    public XLeaType(String refId, String localId, String leaRefId, String stateProvinceId, String ncesId, String leaName, XOrganizationAddressType address, XTelephoneType phoneNumber, XTelephoneListType otherPhoneNumbers) {
+        super();
+        this.refId = refId;
+        this.localId = localId;
+        this.leaRefId = leaRefId;
+        this.stateProvinceId = stateProvinceId;
+        this.ncesId = ncesId;
+        this.leaName = leaName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.otherPhoneNumbers = otherPhoneNumbers;
+    }
+
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    @JsonProperty("@refId")
+    public String getRefId() {
+        return refId;
+    }
+
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    @JsonProperty("@refId")
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+    @JsonProperty("localId")
     public String getLocalId() {
         return localId;
     }
 
-    /**
-     * Sets the value of the localId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLocalId(String value) {
-        this.localId = value;
+    @JsonProperty("localId")
+    public void setLocalId(String localId) {
+        this.localId = localId;
     }
 
-    /**
-     * Gets the value of the leaRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("leaRefId")
     public String getLeaRefId() {
         return leaRefId;
     }
 
-    /**
-     * Sets the value of the leaRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLeaRefId(String value) {
-        this.leaRefId = value;
+    @JsonProperty("leaRefId")
+    public void setLeaRefId(String leaRefId) {
+        this.leaRefId = leaRefId;
     }
 
-    /**
-     * Gets the value of the stateProvinceId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("stateProvinceId")
     public String getStateProvinceId() {
         return stateProvinceId;
     }
 
-    /**
-     * Sets the value of the stateProvinceId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStateProvinceId(String value) {
-        this.stateProvinceId = value;
+    @JsonProperty("stateProvinceId")
+    public void setStateProvinceId(String stateProvinceId) {
+        this.stateProvinceId = stateProvinceId;
     }
 
-    /**
-     * Gets the value of the ncesId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("ncesId")
     public String getNcesId() {
         return ncesId;
     }
 
-    /**
-     * Sets the value of the ncesId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setNcesId(String value) {
-        this.ncesId = value;
+    @JsonProperty("ncesId")
+    public void setNcesId(String ncesId) {
+        this.ncesId = ncesId;
     }
 
-    /**
-     * Gets the value of the leaName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("leaName")
     public String getLeaName() {
         return leaName;
     }
 
-    /**
-     * Sets the value of the leaName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLeaName(String value) {
-        this.leaName = value;
+    @JsonProperty("leaName")
+    public void setLeaName(String leaName) {
+        this.leaName = leaName;
     }
 
-    /**
-     * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XOrganizationAddressType }
-     *     
-     */
+    @JsonProperty("address")
     public XOrganizationAddressType getAddress() {
         return address;
     }
 
-    /**
-     * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XOrganizationAddressType }
-     *     
-     */
-    public void setAddress(XOrganizationAddressType value) {
-        this.address = value;
+    @JsonProperty("address")
+    public void setAddress(XOrganizationAddressType address) {
+        this.address = address;
     }
 
-    /**
-     * Gets the value of the phoneNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XTelephoneType }
-     *     
-     */
+    @JsonProperty("phoneNumber")
     public XTelephoneType getPhoneNumber() {
         return phoneNumber;
     }
 
-    /**
-     * Sets the value of the phoneNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XTelephoneType }
-     *     
-     */
-    public void setPhoneNumber(XTelephoneType value) {
-        this.phoneNumber = value;
+    @JsonProperty("phoneNumber")
+    public void setPhoneNumber(XTelephoneType phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    /**
-     * Gets the value of the otherPhoneNumbers property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XTelephoneListType }
-     *     
-     */
+    @JsonProperty("otherPhoneNumbers")
     public XTelephoneListType getOtherPhoneNumbers() {
         return otherPhoneNumbers;
     }
 
-    /**
-     * Sets the value of the otherPhoneNumbers property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XTelephoneListType }
-     *     
-     */
-    public void setOtherPhoneNumbers(XTelephoneListType value) {
-        this.otherPhoneNumbers = value;
+    @JsonProperty("otherPhoneNumbers")
+    public void setOtherPhoneNumbers(XTelephoneListType otherPhoneNumbers) {
+        this.otherPhoneNumbers = otherPhoneNumbers;
     }
 
+    @Override public String toString()
+    {
+        return "XLeaType{" + "refId='" + refId + '\'' + ", localId='" + localId + '\'' + ", leaRefId='" + leaRefId + '\'' + ", stateProvinceId='" + stateProvinceId + '\'' + ", ncesId='" + ncesId + '\'' + ", leaName='" + leaName + '\'' + ", address=" + address + ", phoneNumber=" + phoneNumber
+                + ", otherPhoneNumbers=" + otherPhoneNumbers + '}';
+    }
 }

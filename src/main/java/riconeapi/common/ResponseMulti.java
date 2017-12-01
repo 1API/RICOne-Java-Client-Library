@@ -14,8 +14,8 @@ import org.springframework.http.HttpStatus;
 public class ResponseMulti<T>
 {	
 	private List<T> data;
-//	private String json;
-//	private String xml;
+	private String json;
+	private String xml;
 	private int statusCode;
 	private String header;
 	private String message;
@@ -28,40 +28,40 @@ public class ResponseMulti<T>
 		return data;
 	}
 	/**
-	 * @param data the data to set
+	 * @param list the data to set
 	 */
 	public void setData(List<T> list)
 	{
 		this.data = list;
 	}
-//	/**
-//	 * @return the json
-//	 */
-//	public String getJson()
-//	{
-//		return json;
-//	}
-//	/**
-//	 * @param json the json to set
-//	 */
-//	public void setJson(String json)
-//	{
-//		this.json = json;
-//	}
-//	/**
-//	 * @return the xml
-//	 */
-//	public String getXml()
-//	{
-//		return xml;
-//	}
-//	/**
-//	 * @param xml the xml to set
-//	 */
-//	public void setXml(String xml)
-//	{
-//		this.xml = xml;
-//	}
+	/**
+	 * @return the json
+	 */
+	public String getJson()
+	{
+		return json;
+	}
+	/**
+	 * @param json the json to set
+	 */
+	public void setJson(String json)
+	{
+		this.json = json;
+	}
+	/**
+	 * @return the xml
+	 */
+	public String getXml()
+	{
+		return xml;
+	}
+	/**
+	 * @param xml the xml to set
+	 */
+	public void setXml(String xml)
+	{
+		this.xml = xml;
+	}
 	/**
 	 * @return the statusCode of the response
 	 */
@@ -84,7 +84,7 @@ public class ResponseMulti<T>
 		return header;
 	}
 	/**
-	 * @param headers the headers to set
+	 * @param header the headers to set
 	 */
 	public void setHeader(String header)
 	{

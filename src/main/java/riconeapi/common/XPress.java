@@ -1,9 +1,16 @@
 package riconeapi.common;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.io.JsonEOFException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
@@ -14,22 +21,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import riconeapi.authentication.Authenticator;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.xpress.XCalendarCollectionType;
-import riconeapi.models.xpress.XCalendarType;
-import riconeapi.models.xpress.XContactCollectionType;
-import riconeapi.models.xpress.XContactType;
-import riconeapi.models.xpress.XCourseCollectionType;
-import riconeapi.models.xpress.XCourseType;
-import riconeapi.models.xpress.XLeaCollectionType;
-import riconeapi.models.xpress.XLeaType;
-import riconeapi.models.xpress.XRosterCollectionType;
-import riconeapi.models.xpress.XRosterType;
-import riconeapi.models.xpress.XSchoolCollectionType;
-import riconeapi.models.xpress.XSchoolType;
-import riconeapi.models.xpress.XStaffCollectionType;
-import riconeapi.models.xpress.XStaffType;
-import riconeapi.models.xpress.XStudentCollectionType;
-import riconeapi.models.xpress.XStudentType;
+import riconeapi.models.xpress.*;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import java.util.Collections;
 
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
@@ -54,15 +51,15 @@ public class XPress
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return All Leas with paging
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -70,11 +67,11 @@ public class XPress
     		headers.set("navigationPage", Integer.toString(navigationPage));
     		headers.set("navigationPageSize", Integer.toString(navigationPageSize));
     		//headers.set("Content-Type", "application/json");
-			
+
     		HttpEntity<?> entity = new HttpEntity<Object>(headers);
 
     		response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionType.class);
-			
+
     		if(response.getBody() != null)
 			{
     			output.setData(response.getBody().getXLea());
@@ -93,32 +90,32 @@ public class XPress
 		return output;
 	}
 	/**
-	 * 
+	 *
 	 * @param opaqueMarker
 	 * @return All Lea value changes from a given point
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeas(String opaqueMarker) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
     		headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
     		//headers.set("Content-Type", "application/json");
-    		
+
     		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
     				.path("xLeas")
     				.queryParam("changesSinceMarker", opaqueMarker);
-			
+
     		HttpEntity<?> entity = new HttpEntity<Object>(headers);
 
     		response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XLeaCollectionType.class);
-			
+
     		if(response.getBody() != null)
 			{
     			output.setData(response.getBody().getXLea());
@@ -139,39 +136,51 @@ public class XPress
 
 	/**
 	 * @return All Leas
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeas() throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
+		ResponseEntity<XLeaCollectionTypeResponse> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
+			ObjectMapper mapper = new ObjectMapper();
+			MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+			converter.setObjectMapper(mapper);
+			mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+			rt.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(converter));
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			////headers.set("Content-Type", "application/json");
-			
+			headers.set("Content-Type", "application/json");
+
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
-			response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionType.class);
+
+			response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionTypeResponse.class);
 
 			if(response.getBody() != null)
 			{
-    			output.setData(response.getBody().getXLea());
+    			output.setData(response.getBody().getXLeas().getXLea());
 
 //    			ObjectMapper jsonMapper = new ObjectMapper();
-//    			String json = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response.getBody());
-//    			output.setJson(json);
+    			String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(response.getBody());
+    			output.setJson(json);
 
-//    			JaxbAnnotationModule module = new JaxbAnnotationModule();
-//    			ObjectMapper xmlMapper = new XmlMapper();
-//    			xmlMapper.registerModule(module);
-//    			String xml = xmlMapper.writeValueAsString(response.getBody());
-//    			output.setXml(xml);
-    			
+				ObjectMapper module = new XmlMapper();
+				//module.setDefaultUseWrapper(false);
+    			//XmlMapper xmlMapper = new XmlMapper(module);
+    			String xml = module.writerWithDefaultPrettyPrinter().writeValueAsString(response.getBody().getXLeas().getXLea());
+    			output.setXml(xml);
+
+//				JAXBContext jaxbContext = JAXBContext.newInstance(XLeaCollectionType.class);
+//				Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+//				jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+//				jaxbMarshaller.marshal(response.getBody(), System.out);
+//				output.setXml(jaxbMarshaller.toString());
+
 //    			output.setXml(response.getBody().toString());
 
 			}
@@ -179,31 +188,31 @@ public class XPress
 			output.setStatusCode(response.getStatusCode().value());
 			output.setHeader(response.getHeaders().toString());
 		}
-		catch(HttpClientErrorException e)
+		catch(HttpClientErrorException | JsonProcessingException e)
 		{
-			output.setMessage(((HttpStatusCodeException) e).getStatusText());
-			output.setStatusCode(((HttpStatusCodeException) e).getStatusCode().value());
-			output.setHeader(((HttpStatusCodeException) e).getResponseHeaders().toString());
+//			output.setMessage(((HttpStatusCodeException) e).getStatusText());
+//			output.setStatusCode(((HttpStatusCodeException) e).getStatusCode().value());
+//			output.setHeader(((HttpStatusCodeException) e).getResponseHeaders().toString());
 		}
 
-		return output;	
+		return output;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Single Lea by refId with paging
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseSingle<XLeaType> getXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaType> response = null;
 		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -213,7 +222,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaType.class, refId);
 
 			if(response.getBody() != null)
@@ -235,18 +244,18 @@ public class XPress
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @return Single Lea by refId
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseSingle<XLeaType> getXLea(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaType> response = null;
 		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -254,9 +263,9 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaType.class, refId);
-			
+
 			if(response.getBody() != null)
 			{
     			output.setData(response.getBody());
@@ -272,11 +281,11 @@ public class XPress
 			output.setHeader(e.getResponseHeaders().toString());
 		}
 
-		return output;	
+		return output;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param idType
 	 * @param id
 	 * @return Single Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
@@ -286,9 +295,9 @@ public class XPress
 	{
 		ResponseEntity<XLeaType> response = null;
 		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -297,9 +306,9 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xLeas/{id}", HttpMethod.GET, entity, XLeaType.class, id);
-			
+
 			if(response.getBody() != null)
 			{
     			output.setData(response.getBody());
@@ -315,24 +324,24 @@ public class XPress
 			output.setHeader(e.getResponseHeaders().toString());
 		}
 
-		return output;	
+		return output;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific School by refId with paging
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -342,7 +351,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -364,18 +373,18 @@ public class XPress
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @return Leas associated to a specific School by refId
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -383,7 +392,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -403,9 +412,9 @@ public class XPress
 
 		return output;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param idType
 	 * @param id
 	 * @return Leas associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
@@ -415,9 +424,9 @@ public class XPress
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -426,7 +435,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xSchools/{id}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, id);
 
 			if(response.getBody() != null)
@@ -446,22 +455,22 @@ public class XPress
 
 		return output;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Roster by refId with paging
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -471,7 +480,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -493,18 +502,18 @@ public class XPress
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @return Leas associated to a specific Roster by refId
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -512,7 +521,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -534,20 +543,20 @@ public class XPress
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Staff by refId with paging
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -557,7 +566,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -579,18 +588,18 @@ public class XPress
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @return Leas associated to a specific Staff by refId
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -598,7 +607,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -619,20 +628,20 @@ public class XPress
 		return output;
 	}
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Student by refId with paging
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -642,7 +651,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -664,18 +673,18 @@ public class XPress
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @return Leas associated to a specific Student by refId
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -683,7 +692,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -705,20 +714,20 @@ public class XPress
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @param navigationPage
 	 * @param navigationPageSize
 	 * @return Leas associated to a specific Contact by refId with paging
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -728,7 +737,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)
@@ -750,18 +759,18 @@ public class XPress
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refId
 	 * @return Leas associated to a specific Contact by refId
-	 * @throws AuthenticationException 
+	 * @throws AuthenticationException
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXContact(String refId) throws AuthenticationException
 	{
 		ResponseEntity<XLeaCollectionType> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
-		
+
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
-		
+
 		try
 		{
 			HttpHeaders headers = new HttpHeaders();
@@ -769,7 +778,7 @@ public class XPress
 			//headers.set("Content-Type", "application/json");
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			
+
 			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
 			if(response.getBody() != null)

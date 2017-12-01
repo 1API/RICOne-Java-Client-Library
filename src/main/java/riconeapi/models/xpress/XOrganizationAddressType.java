@@ -1,256 +1,124 @@
-
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
-/**
- * <p>Java class for xOrganizationAddressType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xOrganizationAddressType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="addressType" type="{http://www.sifassociation.org/datamodel/na/3.2}xAddressTypeForOrganizationType" minOccurs="0"/>
- *         &lt;element name="line1" type="{http://www.w3.org/2001/XMLSchema}normalizedString" minOccurs="0"/>
- *         &lt;element name="line2" type="{http://www.w3.org/2001/XMLSchema}normalizedString" minOccurs="0"/>
- *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}normalizedString" minOccurs="0"/>
- *         &lt;element name="stateProvince" type="{http://www.sifassociation.org/datamodel/na/3.2}xStateCodeUSType" minOccurs="0"/>
- *         &lt;element name="countryCode" type="{http://www.sifassociation.org/datamodel/na/3.2}xCountryCodeType" minOccurs="0"/>
- *         &lt;element name="postalCode" type="{http://www.w3.org/2001/XMLSchema}normalizedString" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xOrganizationAddressType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "addressType",
-    "line1",
-    "line2",
-    "city",
-    "stateProvince",
-    "countryCode",
-    "postalCode"
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "addressType",
+        "line1",
+        "line2",
+        "city",
+        "stateProvince",
+        "countryCode",
+        "postalCode"
 })
-public class XOrganizationAddressType {
-	
-	public XOrganizationAddressType()
-    {
-        addressType = null;
-        line1 = null;
-        line2 = null;
-        city = null;
-        stateProvince = null;
-        countryCode = null;
-        postalCode = null;
+public class XOrganizationAddressType
+{
+
+    @JsonProperty("addressType")
+    private String addressType;
+    @JsonProperty("line1")
+    private String line1;
+    @JsonProperty("line2")
+    private String line2;
+    @JsonProperty("city")
+    private String city;
+    @JsonProperty("stateProvince")
+    private String stateProvince;
+    @JsonProperty("countryCode")
+    private String countryCode;
+    @JsonProperty("postalCode")
+    private String postalCode;
+
+    public XOrganizationAddressType() {
     }
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String addressType;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
-    @XmlSchemaType(name = "normalizedString")
-    protected String line1;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
-    @XmlSchemaType(name = "normalizedString")
-    protected String line2;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
-    @XmlSchemaType(name = "normalizedString")
-    protected String city;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String stateProvince;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String countryCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
-    @XmlSchemaType(name = "normalizedString")
-    protected String postalCode;
+    public XOrganizationAddressType(String addressType, String line1, String line2, String city, String stateProvince, String countryCode, String postalCode) {
+        super();
+        this.addressType = addressType;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.city = city;
+        this.stateProvince = stateProvince;
+        this.countryCode = countryCode;
+        this.postalCode = postalCode;
+    }
 
-    /**
-     * Gets the value of the addressType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("addressType")
     public String getAddressType() {
         return addressType;
     }
 
-    /**
-     * Sets the value of the addressType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAddressType(String value) {
-        this.addressType = value;
+    @JsonProperty("addressType")
+    public void setAddressType(String addressType) {
+        this.addressType = addressType;
     }
 
-    /**
-     * Gets the value of the line1 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("line1")
     public String getLine1() {
         return line1;
     }
 
-    /**
-     * Sets the value of the line1 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLine1(String value) {
-        this.line1 = value;
+    @JsonProperty("line1")
+    public void setLine1(String line1) {
+        this.line1 = line1;
     }
 
-    /**
-     * Gets the value of the line2 property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("line2")
     public String getLine2() {
         return line2;
     }
 
-    /**
-     * Sets the value of the line2 property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLine2(String value) {
-        this.line2 = value;
+    @JsonProperty("line2")
+    public void setLine2(String line2) {
+        this.line2 = line2;
     }
 
-    /**
-     * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("city")
     public String getCity() {
         return city;
     }
 
-    /**
-     * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCity(String value) {
-        this.city = value;
+    @JsonProperty("city")
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    /**
-     * Gets the value of the stateProvince property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("stateProvince")
     public String getStateProvince() {
         return stateProvince;
     }
 
-    /**
-     * Sets the value of the stateProvince property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStateProvince(String value) {
-        this.stateProvince = value;
+    @JsonProperty("stateProvince")
+    public void setStateProvince(String stateProvince) {
+        this.stateProvince = stateProvince;
     }
 
-    /**
-     * Gets the value of the countryCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("countryCode")
     public String getCountryCode() {
         return countryCode;
     }
 
-    /**
-     * Sets the value of the countryCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCountryCode(String value) {
-        this.countryCode = value;
+    @JsonProperty("countryCode")
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
-    /**
-     * Gets the value of the postalCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("postalCode")
     public String getPostalCode() {
         return postalCode;
     }
 
-    /**
-     * Sets the value of the postalCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPostalCode(String value) {
-        this.postalCode = value;
+    @JsonProperty("postalCode")
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
+    @Override public String toString()
+    {
+        return "XOrganizationAddressType{" + "addressType='" + addressType + '\'' + ", line1='" + line1 + '\'' + ", line2='" + line2 + '\'' + ", city='" + city + '\'' + ", stateProvince='" + stateProvince + '\'' + ", countryCode='" + countryCode + '\'' + ", postalCode='" + postalCode + '\'' + '}';
+    }
 }
