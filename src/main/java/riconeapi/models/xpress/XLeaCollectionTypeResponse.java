@@ -14,12 +14,12 @@ import java.util.List;
         "xLeas"
 })
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JacksonXmlRootElement(localName = "xLeas")
+@JacksonXmlRootElement(localName = "xLeas", namespace = "http://www.sifassociation.org/datamodel/na/3.2")
 @JsonRootName("xLeas")
 public class XLeaCollectionTypeResponse
 {
-    @JacksonXmlElementWrapper(localName = "xLeas")
-    @JacksonXmlProperty(localName = "xLeas")
+    @JacksonXmlElementWrapper(localName = "xLeas", useWrapping = false)
+//    @JacksonXmlProperty(localName = "xLeas")
     @JsonProperty("xLeas")
     private XLeaCollectionType xLeas;
 
@@ -31,15 +31,15 @@ public class XLeaCollectionTypeResponse
         this.xLeas = xLeas;
     }
 
-    @JacksonXmlElementWrapper(localName = "xLeas")
-    @JacksonXmlProperty(localName = "xLeas")
+    @JacksonXmlElementWrapper(localName = "xLeas", useWrapping = false)
+//    @JacksonXmlProperty(localName = "xLeas")
     @JsonProperty("xLeas")
     public XLeaCollectionType getXLeas() {
         return xLeas;
     }
 
-    @JacksonXmlElementWrapper(localName = "xLeas")
-    @JacksonXmlProperty(localName = "xLeas")
+    @JacksonXmlElementWrapper(localName = "xLeas", useWrapping = false)
+//    @JacksonXmlProperty(localName = "xLeas")
     @JsonProperty("xLeas")
     public void setxLeas(XLeaCollectionType xLeas) {
         this.xLeas = xLeas;

@@ -161,7 +161,7 @@ public class XLeaPath
 //				ObjectMapper module = new XmlMapper();
 //				//module.setDefaultUseWrapper(false);
 //				//XmlMapper xmlMapper = new XmlMapper(module);
-				String xml = xmlMapper.writeValueAsString(response.getBody().getXLeas().getXLea());
+				String xml = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response.getBody());
 				output.setXml(xml);
 
 				//				JAXBContext jaxbContext = JAXBContext.newInstance(XLeaCollectionType.class);

@@ -19,8 +19,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class XLeaCollectionType
 {
-    @JacksonXmlElementWrapper(localName = "xLea")
-    @JacksonXmlProperty(localName = "xLea")
+    @JacksonXmlElementWrapper(localName = "xLea", useWrapping = false)
+//    @JacksonXmlProperty(localName = "xLea")
     @JsonProperty("xLea")
     private List<XLeaType> xLea = new ArrayList<XLeaType>();
 
@@ -32,15 +32,15 @@ public class XLeaCollectionType
         this.xLea = xLea;
     }
 
-    @JacksonXmlElementWrapper(localName = "xLea")
-    @JacksonXmlProperty(localName = "xLea")
+    @JacksonXmlElementWrapper(localName = "xLea", useWrapping = false)
+//    @JacksonXmlProperty(localName = "xLea")
     @JsonProperty("xLea")
     public List<XLeaType> getXLea() {
         return xLea;
     }
 
-    @JacksonXmlElementWrapper(localName = "xLea")
-    @JacksonXmlProperty(localName = "xLea")
+    @JacksonXmlElementWrapper(localName = "xLea", useWrapping = false)
+//    @JacksonXmlProperty(localName = "xLea")
     @JsonProperty("xLea")
     public void setxLea(List<XLeaType> xLea) {
         this.xLea = xLea;
