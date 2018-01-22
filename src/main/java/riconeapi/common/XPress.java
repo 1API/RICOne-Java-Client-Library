@@ -1,7 +1,6 @@
 package riconeapi.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.io.JsonEOFException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -23,9 +21,6 @@ import riconeapi.authentication.Authenticator;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.*;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import java.util.Collections;
 
 /**
@@ -140,7 +135,7 @@ public class XPress
 	 */
 	public ResponseMulti<XLeaType> getXLeas() throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionTypeResponse> response = null;
+		ResponseEntity<XLeaCollectionTypeWrapper> response = null;
 		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -159,7 +154,7 @@ public class XPress
 
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 
-			response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionTypeResponse.class);
+			response = rt.exchange(baseApiUrl + "xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{

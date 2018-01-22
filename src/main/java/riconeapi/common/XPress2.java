@@ -2,6 +2,8 @@ package riconeapi.common;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -39,41 +41,58 @@ public class XPress2
 		this.baseApiUrl = baseApiUrl;
 		this.rt = new RestTemplate();
 
-		ObjectMapper xmlMapper = new XmlMapper();
-		ObjectMapper mapper = new ObjectMapper();
+
+		ObjectMapper jsonMapper = new ObjectMapper();
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converter.setObjectMapper(mapper);
-		mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		converter.setObjectMapper(jsonMapper);
+		jsonMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+
+		JacksonXmlModule module = new JacksonXmlModule();
+		module.setDefaultUseWrapper(false);
+		ObjectMapper xmlMapper = new XmlMapper(module);
+		xmlMapper.enable(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS);
+		xmlMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+
 		rt.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(converter));
 
-//		ObjectMapper xmlMapper = new XmlMapper();
-//		MappingJackson2XmlHttpMessageConverter xmlConverter = new MappingJackson2XmlHttpMessageConverter();
-//		xmlConverter.setObjectMapper(xmlMapper);
-//		xmlConverter.setSupportedMediaTypes(Arrays.asList(MediaType.ALL));
-//		xmlMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-//		rt.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(xmlConverter));
-
-
-		//module.setDefaultUseWrapper(false);
-		//XmlMapper xmlMapper = new XmlMapper(module);
-
-		xLeaPath = new XLeaPath(rt, baseApiUrl, mapper, xmlMapper);
+		xLeaPath = new XLeaPath(rt, baseApiUrl, jsonMapper, xmlMapper);
 	}
 
 	public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		return xLeaPath.getXLeas(navigationPage, navigationPageSize);
 	}
-
 	public ResponseMulti<XLeaType> getXLeas(String opaqueMarker) throws AuthenticationException
 	{
 		return xLeaPath.getXLeas(opaqueMarker);
 	}
-
 	public ResponseMulti<XLeaType> getXLeas() throws AuthenticationException
 	{
 		return xLeaPath.getXLeas();
 	}
+	public ResponseSingle<XLeaType> getXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
+	{
+		return xLeaPath.getXLea(refId, navigationPage, navigationPageSize);
+	}
+	public ResponseSingle<XLeaType> getXLea(String refId) throws AuthenticationException
+	{
+		return xLeaPath.getXLea(refId);
+	}
+	public ResponseSingle<XLeaType> getXLea(String idType, String id) throws AuthenticationException
+	{
+		return xLeaPath.getXLea(idType, id);
+	}
+//	getXLeasByXSchool(java.lang.String, int, int)
+//	getXLeasByXSchool(java.lang.String)
+//	getXLeasByXSchool(java.lang.String, java.lang.String)
+//	getXLeasByXRoster(java.lang.String, int, int)
+//	getXLeasByXRoster(java.lang.String)
+//	getXLeasByXStaff(java.lang.String, int, int)
+//	getXLeasByXStaff(java.lang.String)
+//	getXLeasByXStudent(java.lang.String, int, int)
+//	getXLeasByXStudent(java.lang.String)
+//	getXLeasByXContact(java.lang.String, int, int)
+//	getXLeasByXContact(java.lang.String)
 
 	// #################### xSchools ####################
 	/**

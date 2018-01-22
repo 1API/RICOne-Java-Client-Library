@@ -3,10 +3,7 @@ package riconeapi.models.xpress;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -16,11 +13,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
         "xLea"
 })
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonRootName(value = "xLeas")
 public class XLeaCollectionType
 {
-    @JacksonXmlElementWrapper(localName = "xLea", useWrapping = false)
-//    @JacksonXmlProperty(localName = "xLea")
+    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLea")
     private List<XLeaType> xLea = new ArrayList<XLeaType>();
 
@@ -32,15 +29,13 @@ public class XLeaCollectionType
         this.xLea = xLea;
     }
 
-    @JacksonXmlElementWrapper(localName = "xLea", useWrapping = false)
-//    @JacksonXmlProperty(localName = "xLea")
+    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLea")
     public List<XLeaType> getXLea() {
         return xLea;
     }
 
-    @JacksonXmlElementWrapper(localName = "xLea", useWrapping = false)
-//    @JacksonXmlProperty(localName = "xLea")
+    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLea")
     public void setxLea(List<XLeaType> xLea) {
         this.xLea = xLea;

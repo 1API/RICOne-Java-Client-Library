@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 public class ResponseSingle<T>
 {
 	private T data;
+	private String json;
+	private String xml;
 	private int statusCode;
 	private String header;
 	private String message;
@@ -30,6 +32,27 @@ public class ResponseSingle<T>
 	{
 		this.data = data;
 	}
+
+	public String getJson()
+	{
+		return json;
+	}
+
+	public void setJson(String json)
+	{
+		this.json = json;
+	}
+
+	public String getXml()
+	{
+		return xml;
+	}
+
+	public void setXml(String xml)
+	{
+		this.xml = xml;
+	}
+
 	/**
 	 * @return the statusCode of the response
 	 */
