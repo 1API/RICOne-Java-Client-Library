@@ -21,6 +21,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
         "phoneNumber",
         "otherPhoneNumbers"
 })
+
 public class XLeaType
 {
     @JacksonXmlProperty(localName = "refId", isAttribute = true)

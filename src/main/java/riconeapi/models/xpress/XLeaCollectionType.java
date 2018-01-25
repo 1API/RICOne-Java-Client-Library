@@ -14,7 +14,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 })
 
 //@JsonIgnoreProperties(ignoreUnknown = true)
-//@JsonRootName(value = "xLeas")
+@JsonRootName(value = "xLeas") // WHY DID THIS WORK?!?!?!??!
 public class XLeaCollectionType
 {
     @JacksonXmlElementWrapper(useWrapping = false)

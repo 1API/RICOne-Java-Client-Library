@@ -46,12 +46,15 @@ public class XPress2
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		converter.setObjectMapper(jsonMapper);
 		jsonMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+//		jsonMapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+//		jsonMapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 
 		JacksonXmlModule module = new JacksonXmlModule();
 		module.setDefaultUseWrapper(false);
 		ObjectMapper xmlMapper = new XmlMapper(module);
-		xmlMapper.enable(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS);
 		xmlMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+//		xmlMapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+//		xmlMapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 
 		rt.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(converter));
 

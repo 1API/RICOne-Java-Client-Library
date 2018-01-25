@@ -148,7 +148,7 @@ public class XLeaPath
 			{
 				output.setData(response.getBody().getXLeas().getXLea());
 				output.setJson(jsonMapper.writeValueAsString(response.getBody()));
-				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas().getXLea()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -234,13 +234,15 @@ public class XLeaPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
+			System.out.println("Crap1");
 			response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaType.class, refId);
-
+			System.out.println("Crap2");
 			if(response.getBody() != null)
 			{
-//				output.setData(response.getBody().getXLea());
-				output.setJson(jsonMapper.writeValueAsString(response.getBody()));
-				output.setXml(xmlMapper.writeValueAsString(response.getBody()));
+				System.out.println("!!!!!!!!!!!!!!!!!!" + response.getBody().toString());
+				output.setData(response.getBody());
+//				output.setJson(jsonMapper.writeValueAsString(response.getBody()));
+//				output.setXml(xmlMapper.writeValueAsString(response.getBody()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -252,10 +254,10 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-		catch(JsonProcessingException jpe)
-		{
-			jpe.printStackTrace();
-		}
+//		catch(JsonProcessingException jpe)
+//		{
+//			jpe.printStackTrace();
+//		}
 		return output;
 	}
 
