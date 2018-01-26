@@ -8,16 +8,14 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "xLea"
 })
-
-//@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonRootName(value = "xLeas") // WHY DID THIS WORK?!?!?!??!
+@JsonRootName(value = "xLeas")
 public class XLeaCollectionType
 {
-    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLea")
     private List<XLeaType> xLea = new ArrayList<XLeaType>();
 
@@ -29,13 +27,11 @@ public class XLeaCollectionType
         this.xLea = xLea;
     }
 
-    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLea")
     public List<XLeaType> getXLea() {
         return xLea;
     }
 
-    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLea")
     public void setxLea(List<XLeaType> xLea) {
         this.xLea = xLea;

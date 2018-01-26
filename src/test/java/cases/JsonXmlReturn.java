@@ -37,10 +37,12 @@ public class JsonXmlReturn
 //			System.out.println(xpress2.getXLeas().getJson());
 //			System.out.println(xpress2.getXLeas().getXml());
 //			System.out.println(xpress2.getXLeas().getData().toString());
-
+//			System.out.println("------------------------------------------------------------------------");
 //			System.out.println(xpress2.getXLea("E0BD9FF3-6557-4805-A8B0-2156CD46DC0B").getJson());
 //			System.out.println(xpress2.getXLea("E0BD9FF3-6557-4805-A8B0-2156CD46DC0B").getXml());
-			System.out.println(xpress2.getXLea("03ACF04F-DC12-411A-9A42-E8323516D699").getData());
+//			System.out.println(xpress2.getXLea("03ACF04F-DC12-411A-9A42-E8323516D699").getData().toString());
+
+			System.out.println(xpress2.getXSchools().getData());
 
 //			for(XLeaType l : xpress2.getXLeas().getData())
 //			{

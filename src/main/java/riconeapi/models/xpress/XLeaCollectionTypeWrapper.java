@@ -9,14 +9,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "xLeas"
 })
-
 public class XLeaCollectionTypeWrapper
 {
-    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLeas")
     private XLeaCollectionType xLeas;
 
@@ -28,13 +27,11 @@ public class XLeaCollectionTypeWrapper
         this.xLeas = xLeas;
     }
 
-    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLeas")
     public XLeaCollectionType getXLeas() {
         return xLeas;
     }
 
-    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonProperty("xLeas")
     public void setxLeas(XLeaCollectionType xLeas) {
         this.xLeas = xLeas;

@@ -2,18 +2,15 @@ package riconeapi.models.xpress;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "@refId",
         "localId",
-        "leaRefId",
         "stateProvinceId",
         "ncesId",
         "leaName",
@@ -21,11 +18,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
         "phoneNumber",
         "otherPhoneNumbers"
 })
-
+@JsonRootName(value = "xLea")
 public class XLeaType
 {
-    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     private String refId;
     @JsonProperty("localId")
     private String localId;
@@ -60,14 +57,14 @@ public class XLeaType
         this.otherPhoneNumbers = otherPhoneNumbers;
     }
 
-    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     public String getRefId() {
         return refId;
     }
 
-    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     public void setRefId(String refId) {
         this.refId = refId;
     }
