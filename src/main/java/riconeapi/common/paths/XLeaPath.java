@@ -13,7 +13,6 @@ import riconeapi.authentication.Authenticator;
 import riconeapi.common.ResponseMulti;
 import riconeapi.common.ResponseSingle;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.xpress.XLeaCollectionType;
 import riconeapi.models.xpress.XLeaCollectionTypeWrapper;
 import riconeapi.models.xpress.XLeaType;
 import riconeapi.models.xpress.XLeaTypeWrapper;
@@ -33,17 +32,16 @@ public class XLeaPath
 		this.xmlMapper = xmlMapper;
 	}
 
-	// #################### xLeas ####################
 	/**
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return All Leas with paging
-	 * @throws AuthenticationException
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return All Leas with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionTypeWrapper> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -82,13 +80,13 @@ public class XLeaPath
 	/**
 	 *
 	 * @param opaqueMarker
-	 * @return All Lea value changes from a given point
-	 * @throws AuthenticationException
+	 * @return All Lea value changes from a given point.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeas(String opaqueMarker) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionTypeWrapper> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -106,7 +104,7 @@ public class XLeaPath
 			if(response.getBody() != null)
 			{
 				output.setData(response.getBody().getXLeas().getXLea());
-				output.setJson(jsonMapper.writeValueAsString(response.getBody()));
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
 				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
@@ -127,13 +125,13 @@ public class XLeaPath
 	}
 
 	/**
-	 * @return All Leas
-	 * @throws AuthenticationException
+	 * @return All Leas.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeas() throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionTypeWrapper> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -170,16 +168,16 @@ public class XLeaPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Single Lea by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xLea.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Single Lea by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseSingle<XLeaType> getXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XLeaType> response = null;
-		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
+		ResponseEntity<XLeaTypeWrapper> response;
+		ResponseSingle<XLeaType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -191,13 +189,13 @@ public class XLeaPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}", HttpMethod.GET, entity, XLeaTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
-				output.setJson(jsonMapper.writeValueAsString(response.getBody()));
-				output.setXml(xmlMapper.writeValueAsString(response.getBody()));
+				output.setData(response.getBody().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLea()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLea()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -218,14 +216,14 @@ public class XLeaPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Single Lea by refId
-	 * @throws AuthenticationException
+	 * @param refId of xLea.
+	 * @return Single Lea by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseSingle<XLeaType> getXLea(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XLeaTypeWrapper> response = null;
-		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
+		ResponseEntity<XLeaTypeWrapper> response;
+		ResponseSingle<XLeaType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -263,13 +261,13 @@ public class XLeaPath
 	 *
 	 * @param idType
 	 * @param id
-	 * @return Single Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
-	 * @throws AuthenticationException
+	 * @return Single Lea by BEDS code or Local Id. Header IdType value can be set to beds or local.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseSingle<XLeaType> getXLea(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XLeaType> response = null;
-		ResponseSingle<XLeaType> output = new ResponseSingle<XLeaType>();
+		ResponseEntity<XLeaTypeWrapper> response;
+		ResponseSingle<XLeaType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -280,13 +278,13 @@ public class XLeaPath
 			headers.set("IdType", idType);
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{id}", HttpMethod.GET, entity, XLeaType.class, id);
+			response = rt.exchange(baseApiUrl + "xLeas/{id}", HttpMethod.GET, entity, XLeaTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
-				output.setJson(jsonMapper.writeValueAsString(response.getBody()));
-				output.setXml(xmlMapper.writeValueAsString(response.getBody()));
+				output.setData(response.getBody().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLea()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLea()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -307,15 +305,15 @@ public class XLeaPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Leas associated to a specific School by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xSchools.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Leas associated to a specific School by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionTypeWrapper> response = null;
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
 		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -333,7 +331,7 @@ public class XLeaPath
 			if(response.getBody() != null)
 			{
 				output.setData(response.getBody().getXLeas().getXLea());
-				output.setJson(jsonMapper.writeValueAsString(response.getBody()));
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
 				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
@@ -355,14 +353,14 @@ public class XLeaPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Leas associated to a specific School by refId
-	 * @throws AuthenticationException
+	 * @param refId of xSchools.
+	 * @return Leas associated to a specific School by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -370,15 +368,15 @@ public class XLeaPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -390,7 +388,10 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -398,13 +399,13 @@ public class XLeaPath
 	 *
 	 * @param idType
 	 * @param id
-	 * @return Leas associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local
-	 * @throws AuthenticationException
+	 * @return Leas associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXSchool(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -413,15 +414,15 @@ public class XLeaPath
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("IdType", idType);
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xSchools/{id}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, id);
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -433,22 +434,25 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Leas associated to a specific Roster by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xRoster.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Leas associated to a specific Roster by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -458,15 +462,15 @@ public class XLeaPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -478,20 +482,23 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
 	/**
 	 *
-	 * @param refId
-	 * @return Leas associated to a specific Roster by refId
-	 * @throws AuthenticationException
+	 * @param refId of xRosters.
+	 * @return Leas associated to a specific Roster by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -499,15 +506,15 @@ public class XLeaPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -519,22 +526,25 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Leas associated to a specific Staff by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xStaffs.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Leas associated to a specific Staff by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -544,15 +554,15 @@ public class XLeaPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -564,20 +574,23 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
 	/**
 	 *
-	 * @param refId
-	 * @return Leas associated to a specific Staff by refId
-	 * @throws AuthenticationException
+	 * @param refId of xStaffs.
+	 * @return Leas associated to a specific Staff by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -585,15 +598,15 @@ public class XLeaPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -605,21 +618,24 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Leas associated to a specific Student by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xStudents.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Leas associated to a specific Student by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -629,15 +645,15 @@ public class XLeaPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -649,20 +665,23 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
 	/**
 	 *
-	 * @param refId
-	 * @return Leas associated to a specific Student by refId
-	 * @throws AuthenticationException
+	 * @param refId of xStudents.
+	 * @return Leas associated to a specific Student by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -670,15 +689,15 @@ public class XLeaPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -690,22 +709,25 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Leas associated to a specific Contact by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xContact.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Leas associated to a specific Contact by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -715,15 +737,16 @@ public class XLeaPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 
-			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -735,20 +758,23 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
 	/**
 	 *
-	 * @param refId
-	 * @return Leas associated to a specific Contact by refId
-	 * @throws AuthenticationException
+	 * @param refId of xContact.
+	 * @return Leas associated to a specific Contact by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXContact(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XLeaCollectionType> response = null;
-		ResponseMulti<XLeaType> output = new ResponseMulti<XLeaType>();
+		ResponseEntity<XLeaCollectionTypeWrapper> response;
+		ResponseMulti<XLeaType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -756,15 +782,15 @@ public class XLeaPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xLeas", HttpMethod.GET, entity, XLeaCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXLea());
+				output.setData(response.getBody().getXLeas().getXLea());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXLeas()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXLeas()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -776,7 +802,10 @@ public class XLeaPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 }

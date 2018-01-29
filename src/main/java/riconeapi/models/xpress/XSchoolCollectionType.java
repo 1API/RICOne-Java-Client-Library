@@ -3,14 +3,15 @@ package riconeapi.models.xpress;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import com.fasterxml.jackson.annotation.*;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "xSchool"
 })
+@JsonRootName(value = "xSchools")
 public class XSchoolCollectionType {
 
     @JsonProperty("xSchool")

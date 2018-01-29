@@ -4,6 +4,8 @@ package riconeapi.models.xpress;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -18,9 +20,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "phoneNumber",
         "otherPhoneNumbers"
 })
+@JsonRootName(value = "xSchool")
 public class XSchoolType {
 
     @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     private String refId;
     @JsonProperty("leaRefId")
     private String leaRefId;
@@ -59,11 +63,13 @@ public class XSchoolType {
     }
 
     @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     public String getRefId() {
         return refId;
     }
 
     @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
     public void setRefId(String refId) {
         this.refId = refId;
     }
@@ -158,4 +164,9 @@ public class XSchoolType {
         this.otherPhoneNumbers = otherPhoneNumbers;
     }
 
+    @Override public String toString()
+    {
+        return "XSchoolType{" + "refId='" + refId + '\'' + ", leaRefId='" + leaRefId + '\'' + ", schoolName='" + schoolName + '\'' + ", address=" + address + ", localId='" + localId + '\'' + ", stateProvinceId='" + stateProvinceId + '\'' + ", otherIds=" + otherIds + ", gradeLevels=" + gradeLevels
+                + ", phoneNumber=" + phoneNumber + ", otherPhoneNumbers=" + otherPhoneNumbers + '}';
+    }
 }

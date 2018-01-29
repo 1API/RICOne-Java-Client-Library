@@ -1,10 +1,13 @@
 package riconeapi.common;
 
+import com.ctc.wstx.stax.WstxInputFactory;
+import com.ctc.wstx.stax.WstxOutputFactory;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -50,14 +53,12 @@ public class XPress2
 		converter.setObjectMapper(jsonMapper);
 		jsonMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		jsonMapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
-//		jsonMapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 
 		JacksonXmlModule module = new JacksonXmlModule();
 		module.setDefaultUseWrapper(false);
 		ObjectMapper xmlMapper = new XmlMapper(module);
 		xmlMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 		xmlMapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
-//		xmlMapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 
 		rt.setMessageConverters(Collections.<HttpMessageConverter<?>>singletonList(converter));
 
@@ -65,6 +66,7 @@ public class XPress2
 		xSchoolPath = new XSchoolPath(rt, baseApiUrl, jsonMapper, xmlMapper);
 	}
 
+	/* xLeas */
 	public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
 		return xLeaPath.getXLeas(navigationPage, navigationPageSize);
@@ -89,7 +91,11 @@ public class XPress2
 	{
 		return xLeaPath.getXLea(idType, id);
 	}
-//	getXLeasByXSchool(java.lang.String, int, int)
+
+	public ResponseMulti<XLeaType>getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
+	{
+		return xLeaPath.getXLeasByXSchool(refId, navigationPage, navigationPageSize);
+	}
 //	getXLeasByXSchool(java.lang.String)
 //	getXLeasByXSchool(java.lang.String, java.lang.String)
 //	getXLeasByXRoster(java.lang.String, int, int)
@@ -101,9 +107,15 @@ public class XPress2
 //	getXLeasByXContact(java.lang.String, int, int)
 //	getXLeasByXContact(java.lang.String)
 
+	/* xSchools */
 	public ResponseMulti<XSchoolType> getXSchools() throws AuthenticationException
 	{
 		return xSchoolPath.getXSchools();
+	}
+
+	public ResponseSingle<XSchoolType> getXSchool(String refId) throws AuthenticationException
+	{
+		return xSchoolPath.getXSchool(refId);
 	}
 
 	// #################### xCalendars ####################
