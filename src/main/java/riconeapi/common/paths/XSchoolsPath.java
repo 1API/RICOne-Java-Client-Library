@@ -18,14 +18,14 @@ import riconeapi.models.xpress.XSchoolCollectionTypeWrapper;
 import riconeapi.models.xpress.XSchoolType;
 import riconeapi.models.xpress.XSchoolTypeWrapper;
 
-public class XSchoolPath
+public class XSchoolsPath
 {
 	private RestTemplate rt;
 	private String baseApiUrl;
 	private ObjectMapper jsonMapper;
 	private ObjectMapper xmlMapper;
 
-	public XSchoolPath(RestTemplate rt, String baseApiUrl, ObjectMapper jsonMapper, ObjectMapper xmlMapper)
+	public XSchoolsPath(RestTemplate rt, String baseApiUrl, ObjectMapper jsonMapper, ObjectMapper xmlMapper)
 	{
 		this.rt = rt;
 		this.baseApiUrl = baseApiUrl;
@@ -33,18 +33,17 @@ public class XSchoolPath
 		this.xmlMapper = xmlMapper;
 	}
 
-	// #################### xSchools ####################
 	/**
 	 *
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return All Schools with paging
-	 * @throws AuthenticationException
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return All Schools with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -54,10 +53,8 @@ public class XSchoolPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
 			response = rt.exchange(baseApiUrl + "xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class);
 
 			if(response.getBody() != null)
@@ -80,14 +77,14 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param opaqueMarker
-	 * @return All School value changes from a given point
-	 * @throws AuthenticationException
+	 * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+	 * @return All School value changes from a given point.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchools(String opaqueMarker) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -125,13 +122,13 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @return All Schools
-	 * @throws AuthenticationException
+	 * @return All Schools.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchools() throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionTypeWrapper> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -168,16 +165,16 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Single School by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xSchool.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Single School by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseSingle<XSchoolType> getXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolType> response = null;
-		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
+		ResponseEntity<XSchoolType> response;
+		ResponseSingle<XSchoolType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -213,13 +210,13 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Single School by refId
-	 * @throws AuthenticationException
+	 * @param refId of xSchool.
+	 * @return Single School by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseSingle<XSchoolType> getXSchool(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolTypeWrapper> response = null;
+		ResponseEntity<XSchoolTypeWrapper> response;
 		ResponseSingle<XSchoolType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -257,15 +254,15 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param idType
-	 * @param id
-	 * @return Single School by BEDS code or Local Id. Header IdType value can be set to beds or local
-	 * @throws AuthenticationException
+	 * @param idType Header value can be set to beds or local.
+	 * @param id BEDS or Local Id.
+	 * @return Single School by BEDS code or Local Id.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseSingle<XSchoolType> getXSchool(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolType> response = null;
-		ResponseSingle<XSchoolType> output = new ResponseSingle<XSchoolType>();
+		ResponseEntity<XSchoolType> response;
+		ResponseSingle<XSchoolType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -300,16 +297,16 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Schools associated to a specific Lea by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xLea.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Schools associated to a specific Lea by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -345,14 +342,14 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Schools associated to a specific Lea by refId
-	 * @throws AuthenticationException
+	 * @param refId of xLea.
+	 * @return Schools associated to a specific Lea by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -386,15 +383,15 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param idType
-	 * @param id
-	 * @return Schools associated to a specific Lea by BEDS code or Local Id. Header IdType value can be set to beds or local
-	 * @throws AuthenticationException
+	 * @param idType Header value can be set to beds or local.
+	 * @param id BEDS or Local Id.
+	 * @return Schools associated to a specific Lea by BEDS code or Local Id.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -429,16 +426,16 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Schools associated to a specific Calendar by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xCalendar.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Schools associated to a specific Calendar by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -474,14 +471,14 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Schools associated to a specific Calendar by refId
-	 * @throws AuthenticationException
+	 * @param refId of xCalendar.
+	 * @return Schools associated to a specific Calendar by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -515,16 +512,16 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Schools associated to a specific Course by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xCourse.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Schools associated to a specific Course by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -560,14 +557,14 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Schools associated to a specific Course by refId
-	 * @throws AuthenticationException
+	 * @param refId of xCourse.
+	 * @return Schools associated to a specific Course by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -601,16 +598,16 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Schools associated to a specific Roster by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xRoster.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Schools associated to a specific Roster by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -646,14 +643,14 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Schools associated to a specific Roster by refId
-	 * @throws AuthenticationException
+	 * @param refId of xRoster.
+	 * @return Schools associated to a specific Roster by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -687,16 +684,16 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Schools associated to a specific Staff by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xStaff.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Schools associated to a specific Staff by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -732,14 +729,14 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Schools associated to a specific Staff by refId
-	 * @throws AuthenticationException
+	 * @param refId of xStaff.
+	 * @return Schools associated to a specific Staff by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -773,16 +770,16 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Schools associated to a specific Student by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xStudent.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Schools associated to a specific Student by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -818,14 +815,14 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Schools associated to a specific Student by refId
-	 * @throws AuthenticationException
+	 * @param refId of xStudent.
+	 * @return Schools associated to a specific Student by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -859,16 +856,16 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @param navigationPage
-	 * @param navigationPageSize
-	 * @return Schools associated to a specific Contact by refId with paging
-	 * @throws AuthenticationException
+	 * @param refId of xContact.
+	 * @param navigationPage Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @return Schools associated to a specific Contact by refId with paging.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 
@@ -904,14 +901,14 @@ public class XSchoolPath
 
 	/**
 	 *
-	 * @param refId
-	 * @return Schools associated to a specific Contact by refId
-	 * @throws AuthenticationException
+	 * @param refId of xContact.
+	 * @return Schools associated to a specific Contact by refId.
+	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response = null;
-		ResponseMulti<XSchoolType> output = new ResponseMulti<XSchoolType>();
+		ResponseEntity<XSchoolCollectionType> response;
+		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
 

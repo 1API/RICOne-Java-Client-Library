@@ -17,14 +17,14 @@ import riconeapi.models.xpress.XLeaCollectionTypeWrapper;
 import riconeapi.models.xpress.XLeaType;
 import riconeapi.models.xpress.XLeaTypeWrapper;
 
-public class XLeaPath
+public class XLeasPath
 {
 	private RestTemplate rt;
 	private String baseApiUrl;
 	private ObjectMapper jsonMapper;
 	private ObjectMapper xmlMapper;
 
-	public XLeaPath(RestTemplate rt, String baseApiUrl, ObjectMapper jsonMapper, ObjectMapper xmlMapper)
+	public XLeasPath(RestTemplate rt, String baseApiUrl, ObjectMapper jsonMapper, ObjectMapper xmlMapper)
 	{
 		this.rt = rt;
 		this.baseApiUrl = baseApiUrl;
@@ -79,7 +79,7 @@ public class XLeaPath
 	}
 	/**
 	 *
-	 * @param opaqueMarker
+	 * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
 	 * @return All Lea value changes from a given point.
 	 * @throws AuthenticationException if login does not succeed.
 	 */
@@ -259,9 +259,9 @@ public class XLeaPath
 
 	/**
 	 *
-	 * @param idType
-	 * @param id
-	 * @return Single Lea by BEDS code or Local Id. Header IdType value can be set to beds or local.
+	 * @param idType Header value can be set to beds or local.
+	 * @param id BEDS or Local Id.
+	 * @return Single Lea by BEDS code or Local Id.
 	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseSingle<XLeaType> getXLea(String idType, String id) throws AuthenticationException
@@ -397,9 +397,9 @@ public class XLeaPath
 
 	/**
 	 *
-	 * @param idType
-	 * @param id
-	 * @return Leas associated to a specific School by BEDS code or Local Id. Header IdType value can be set to beds or local.
+	 * @param idType Header value can be set to beds or local.
+	 * @param id BEDS or Local Id.
+	 * @return Leas associated to a specific School by BEDS code or Local Id.
 	 * @throws AuthenticationException if login does not succeed.
 	 */
 	public ResponseMulti<XLeaType> getXLeasByXSchool(String idType, String id) throws AuthenticationException
