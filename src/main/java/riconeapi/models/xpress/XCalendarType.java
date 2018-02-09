@@ -1,133 +1,89 @@
 
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
-/**
- * xCalendar is a composite object that provides information about sessions held at a particular school during a given school year. The refId of a xCalendar object coincides with the refId of a corresponding schoolCalendar object.
- * 
- * <p>Java class for xCalendarType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xCalendarType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.sifassociation.org/datamodel/na/3.2}gSIF_CompositeType">
- *       &lt;sequence>
- *         &lt;element name="schoolRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType"/>
- *         &lt;element name="schoolYear" type="{http://www.sifassociation.org/datamodel/na/3.2}xSchoolYearType" minOccurs="0"/>
- *         &lt;element name="sessions" type="{http://www.sifassociation.org/datamodel/na/3.2}xSessionListType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xCalendarType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "schoolRefId",
-    "schoolYear",
-    "sessions"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "@refId",
+        "schoolRefId",
+        "schoolYear",
+        "sessions"
 })
-public class XCalendarType
-    extends GSIFCompositeType
-{
-	public XCalendarType()
-    {
-        refId = null;
-        schoolRefId = null;
-        schoolYear = null;
-        sessions = new XSessionListType();
+public class XCalendarType {
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    private String refId;
+    @JsonProperty("schoolRefId")
+    private String schoolRefId;
+    @JsonProperty("schoolYear")
+    private XMLGregorianCalendar schoolYear;
+    @JsonProperty("sessions")
+    private XSessionListType sessions;
+
+    public XCalendarType() {
     }
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String schoolRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XMLGregorianCalendar schoolYear;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XSessionListType sessions;
+    public XCalendarType(String refId, String schoolRefId, XMLGregorianCalendar schoolYear, XSessionListType sessions) {
+        super();
+        this.refId = refId;
+        this.schoolRefId = schoolRefId;
+        this.schoolYear = schoolYear;
+        this.sessions = sessions;
+    }
 
-    /**
-     * Gets the value of the schoolRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public String getRefId() {
+        return refId;
+    }
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+    @JsonProperty("schoolRefId")
     public String getSchoolRefId() {
         return schoolRefId;
     }
 
-    /**
-     * Sets the value of the schoolRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSchoolRefId(String value) {
-        this.schoolRefId = value;
+    @JsonProperty("schoolRefId")
+    public void setSchoolRefId(String schoolRefId) {
+        this.schoolRefId = schoolRefId;
     }
 
-    /**
-     * Gets the value of the schoolYear property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
+    @JsonProperty("schoolYear")
     public XMLGregorianCalendar getSchoolYear() {
         return schoolYear;
     }
 
-    /**
-     * Sets the value of the schoolYear property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setSchoolYear(XMLGregorianCalendar value) {
-        this.schoolYear = value;
+    @JsonProperty("schoolYear")
+    public void setSchoolYear(XMLGregorianCalendar schoolYear) {
+        this.schoolYear = schoolYear;
     }
 
-    /**
-     * Gets the value of the sessions property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XSessionListType }
-     *     
-     */
+    @JsonProperty("sessions")
     public XSessionListType getSessions() {
         return sessions;
     }
 
-    /**
-     * Sets the value of the sessions property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XSessionListType }
-     *     
-     */
-    public void setSessions(XSessionListType value) {
-        this.sessions = value;
+    @JsonProperty("sessions")
+    public void setSessions(XSessionListType sessions) {
+        this.sessions = sessions;
     }
 
+    @Override public String toString()
+    {
+        return "XCalendarType{" + "refId='" + refId + '\'' + ", schoolRefId='" + schoolRefId + '\'' + ", schoolYear=" + schoolYear + ", sessions=" + sessions + '}';
+    }
 }

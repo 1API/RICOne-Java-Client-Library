@@ -1,284 +1,143 @@
 
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
-/**
- * <p>Java class for xMeetingTimeType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xMeetingTimeType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="timeTableDay" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="classMeetingDays" type="{http://www.sifassociation.org/datamodel/na/3.2}xDayListType" minOccurs="0"/>
- *         &lt;element name="timeTablePeriod" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="roomNumber" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="classBeginningTime" type="{http://www.w3.org/2001/XMLSchema}time" minOccurs="0"/>
- *         &lt;element name="classEndingTime" type="{http://www.w3.org/2001/XMLSchema}time" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xMeetingTimeType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "timeTableDay",
-    "classMeetingDays",
-    "timeTablePeriod",
-    "roomNumber",
-    "classBeginningTime",
-    "classEndingTime",
-    "sessionCode",
-    "schoolCalendarRefId"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "timeTableDay",
+        "classMeetingDays",
+        "timeTablePeriod",
+        "roomNumber",
+        "classBeginningTime",
+        "classEndingTime",
+        "sessionCode",
+        "schoolCalendarRefId"
 })
 public class XMeetingTimeType {
 
-	public XMeetingTimeType()
-    {
-        timeTableDay = null;
-        classMeetingDays = new XDayListType();
-        timeTablePeriod = null;
-        roomNumber = null;
-        classBeginningTime = null;
-        classEndingTime = null;
-        sessionCode = null;
-        schoolCalendarRefId = null;
+    @JsonProperty("timeTableDay")
+    private String timeTableDay;
+    @JsonProperty("classMeetingDays")
+    private XDayListType classMeetingDays;
+    @JsonProperty("timeTablePeriod")
+    private String timeTablePeriod;
+    @JsonProperty("roomNumber")
+    private String roomNumber;
+    @JsonProperty("classBeginningTime")
+    private XMLGregorianCalendar classBeginningTime;
+    @JsonProperty("classEndingTime")
+    private XMLGregorianCalendar classEndingTime;
+    @JsonProperty("sessionCode")
+    private String sessionCode;
+    @JsonProperty("schoolCalendarRefId")
+    private String schoolCalendarRefId;
 
+
+    public XMeetingTimeType() {
     }
-	
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String timeTableDay;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XDayListType classMeetingDays;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String timeTablePeriod;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String roomNumber;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlSchemaType(name = "time")
-    protected XMLGregorianCalendar classBeginningTime;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlSchemaType(name = "time")
-    protected XMLGregorianCalendar classEndingTime;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String sessionCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String schoolCalendarRefId;
 
-    /**
-     * Gets the value of the timeTableDay property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    public XMeetingTimeType(String timeTableDay, XDayListType classMeetingDays, String timeTablePeriod, String roomNumber, XMLGregorianCalendar classBeginningTime, XMLGregorianCalendar classEndingTime, String sessionCode, String schoolCalendarRefId) {
+        super();
+        this.timeTableDay = timeTableDay;
+        this.classMeetingDays = classMeetingDays;
+        this.timeTablePeriod = timeTablePeriod;
+        this.roomNumber = roomNumber;
+        this.classBeginningTime = classBeginningTime;
+        this.classEndingTime = classEndingTime;
+        this.sessionCode = sessionCode;
+        this.schoolCalendarRefId = schoolCalendarRefId;
+    }
+
+    @JsonProperty("timeTableDay")
     public String getTimeTableDay() {
         return timeTableDay;
     }
 
-    /**
-     * Sets the value of the timeTableDay property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTimeTableDay(String value) {
-        this.timeTableDay = value;
+    @JsonProperty("timeTableDay")
+    public void setTimeTableDay(String timeTableDay) {
+        this.timeTableDay = timeTableDay;
     }
 
-    /**
-     * Gets the value of the classMeetingDays property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XDayListType }
-     *     
-     */
+    @JsonProperty("classMeetingDays")
     public XDayListType getClassMeetingDays() {
         return classMeetingDays;
     }
 
-    /**
-     * Sets the value of the classMeetingDays property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XDayListType }
-     *     
-     */
-    public void setClassMeetingDays(XDayListType value) {
-        this.classMeetingDays = value;
+    @JsonProperty("classMeetingDays")
+    public void setClassMeetingDays(XDayListType classMeetingDays) {
+        this.classMeetingDays = classMeetingDays;
     }
 
-    /**
-     * Gets the value of the timeTablePeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("timeTablePeriod")
     public String getTimeTablePeriod() {
         return timeTablePeriod;
     }
 
-    /**
-     * Sets the value of the timeTablePeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTimeTablePeriod(String value) {
-        this.timeTablePeriod = value;
+    @JsonProperty("timeTablePeriod")
+    public void setTimeTablePeriod(String timeTablePeriod) {
+        this.timeTablePeriod = timeTablePeriod;
     }
 
-    /**
-     * Gets the value of the roomNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("roomNumber")
     public String getRoomNumber() {
         return roomNumber;
     }
 
-    /**
-     * Sets the value of the roomNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRoomNumber(String value) {
-        this.roomNumber = value;
+    @JsonProperty("roomNumber")
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
-    /**
-     * Gets the value of the classBeginningTime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
+    @JsonProperty("classBeginningTime")
     public XMLGregorianCalendar getClassBeginningTime() {
         return classBeginningTime;
     }
 
-    /**
-     * Sets the value of the classBeginningTime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setClassBeginningTime(XMLGregorianCalendar value) {
-        this.classBeginningTime = value;
+    @JsonProperty("classBeginningTime")
+    public void setClassBeginningTime(XMLGregorianCalendar classBeginningTime) {
+        this.classBeginningTime = classBeginningTime;
     }
 
-    /**
-     * Gets the value of the classEndingTime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
+    @JsonProperty("classEndingTime")
     public XMLGregorianCalendar getClassEndingTime() {
         return classEndingTime;
     }
 
-    /**
-     * Sets the value of the classEndingTime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setClassEndingTime(XMLGregorianCalendar value) {
-        this.classEndingTime = value;
+    @JsonProperty("classEndingTime")
+    public void setClassEndingTime(XMLGregorianCalendar classEndingTime) {
+        this.classEndingTime = classEndingTime;
     }
-    
-    /**
-     * Gets the value of the sessionCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+
+    @JsonProperty("sessionCode")
     public String getSessionCode() {
         return sessionCode;
     }
 
-    /**
-     * Sets the value of the sessionCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSessionCode(String value) {
-        this.sessionCode = value;
+    @JsonProperty("sessionCode")
+    public void setSessionCode(String sessionCode) {
+        this.sessionCode = sessionCode;
     }
 
-    /**
-     * Gets the value of the schoolCalendarRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("schoolCalendarRefId")
     public String getSchoolCalendarRefId() {
         return schoolCalendarRefId;
     }
 
-    /**
-     * Sets the value of the schoolCalendarRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSchoolCalendarRefId(String value) {
-        this.schoolCalendarRefId = value;
+    @JsonProperty("schoolCalendarRefId")
+    public void setSchoolCalendarRefId(String schoolCalendarRefId) {
+        this.schoolCalendarRefId = schoolCalendarRefId;
     }
 
+    @Override public String toString()
+    {
+        return "XMeetingTimeType{" + "timeTableDay='" + timeTableDay + '\'' + ", classMeetingDays=" + classMeetingDays + ", timeTablePeriod='" + timeTablePeriod + '\'' + ", roomNumber='" + roomNumber + '\'' + ", classBeginningTime=" + classBeginningTime + ", classEndingTime=" + classEndingTime
+                + ", sessionCode='" + sessionCode + '\'' + ", schoolCalendarRefId='" + schoolCalendarRefId + '\'' + '}';
+    }
 }

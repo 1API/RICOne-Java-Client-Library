@@ -1,71 +1,42 @@
 
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
-/**
- * A list of days.
- * 
- * <p>Java class for xDayListType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xDayListType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="bellScheduleDay" type="{http://www.sifassociation.org/datamodel/na/3.2}xDayOfWeekType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xDayListType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "bellScheduleDay"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "bellScheduleDay"
 })
 public class XDayListType {
-	public XDayListType()
-    {
-        bellScheduleDay = null;
+
+    @JsonProperty("bellScheduleDay")
+    private String bellScheduleDay;
+
+    public XDayListType() {
     }
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String bellScheduleDay;
+    public XDayListType(String bellScheduleDay) {
+        super();
+        this.bellScheduleDay = bellScheduleDay;
+    }
 
-    /**
-     * Gets the value of the bellScheduleDay property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("bellScheduleDay")
     public String getBellScheduleDay() {
         return bellScheduleDay;
     }
 
-    /**
-     * Sets the value of the bellScheduleDay property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setBellScheduleDay(String value) {
-        this.bellScheduleDay = value;
+    @JsonProperty("bellScheduleDay")
+    public void setBellScheduleDay(String bellScheduleDay) {
+        this.bellScheduleDay = bellScheduleDay;
     }
 
+    @Override
+    public String toString()
+    {
+        return "XDayListType{" + "bellScheduleDay='" + bellScheduleDay + '\'' + '}';
+    }
 }

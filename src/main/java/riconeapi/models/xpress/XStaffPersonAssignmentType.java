@@ -1,130 +1,69 @@
 
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
-/**
- * <p>Java class for xStaffPersonAssignmentType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xStaffPersonAssignmentType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="leaRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType" minOccurs="0"/>
- *         &lt;element name="schoolRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType" minOccurs="0"/>
- *         &lt;element name="jobFunction" type="{http://www.sifassociation.org/datamodel/na/3.2}xEducationStaffClassificationType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xStaffPersonAssignmentType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "leaRefId",
-    "schoolRefId",
-    "jobFunction"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "leaRefId",
+        "schoolRefId",
+        "jobFunction"
 })
 public class XStaffPersonAssignmentType {
-	
-	public XStaffPersonAssignmentType()
-    {
-        leaRefId = null;
-        schoolRefId = null;
-        jobFunction = null;
+
+    @JsonProperty("leaRefId")
+    private String leaRefId;
+    @JsonProperty("schoolRefId")
+    private String schoolRefId;
+    @JsonProperty("jobFunction")
+    private String jobFunction;
+
+    public XStaffPersonAssignmentType() {
     }
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String leaRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String schoolRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String jobFunction;
+    public XStaffPersonAssignmentType(String leaRefId, String schoolRefId, String jobFunction) {
+        super();
+        this.leaRefId = leaRefId;
+        this.schoolRefId = schoolRefId;
+        this.jobFunction = jobFunction;
+    }
 
-    /**
-     * Gets the value of the leaRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("leaRefId")
     public String getLeaRefId() {
         return leaRefId;
     }
 
-    /**
-     * Sets the value of the leaRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLeaRefId(String value) {
-        this.leaRefId = value;
+    @JsonProperty("leaRefId")
+    public void setLeaRefId(String leaRefId) {
+        this.leaRefId = leaRefId;
     }
 
-    /**
-     * Gets the value of the schoolRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("schoolRefId")
     public String getSchoolRefId() {
         return schoolRefId;
     }
 
-    /**
-     * Sets the value of the schoolRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSchoolRefId(String value) {
-        this.schoolRefId = value;
+    @JsonProperty("schoolRefId")
+    public void setSchoolRefId(String schoolRefId) {
+        this.schoolRefId = schoolRefId;
     }
 
-    /**
-     * Gets the value of the jobFunction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("jobFunction")
     public String getJobFunction() {
         return jobFunction;
     }
 
-    /**
-     * Sets the value of the jobFunction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setJobFunction(String value) {
-        this.jobFunction = value;
+    @JsonProperty("jobFunction")
+    public void setJobFunction(String jobFunction) {
+        this.jobFunction = jobFunction;
     }
 
+    @Override public String toString()
+    {
+        return "XStaffPersonAssignmentType{" + "leaRefId='" + leaRefId + '\'' + ", schoolRefId='" + schoolRefId + '\'' + ", jobFunction='" + jobFunction + '\'' + '}';
+    }
 }

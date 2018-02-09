@@ -1,76 +1,44 @@
 
 package riconeapi.models.xpress;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
-
-/**
- * A list of sessions.
- * 
- * <p>Java class for xSessionListType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xSessionListType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="sessionList" type="{http://www.sifassociation.org/datamodel/na/3.2}xSessionType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xSessionListType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "sessionList"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sessionList"
 })
 public class XSessionListType {
 
-	public XSessionListType()
-    {
-        sessionList = new ArrayList<XSessionType>();
-    }
-	
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected List<XSessionType> sessionList;
+    @JsonProperty("sessionList")
+    private List<XSessionType> sessionList = new ArrayList<>();
 
-    /**
-     * Gets the value of the sessionList property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sessionList property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSessionList().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link XSessionType }
-     * 
-     * 
-     */
+    public XSessionListType() {
+    }
+
+    public XSessionListType(List<XSessionType> sessionList) {
+        super();
+        this.sessionList = sessionList;
+    }
+
+    @JsonProperty("sessionList")
     public List<XSessionType> getSessionList() {
-        if (sessionList == null) {
-            sessionList = new ArrayList<XSessionType>();
-        }
-        return this.sessionList;
+        return sessionList;
     }
 
+    @JsonProperty("sessionList")
+    public void setSessionList(List<XSessionType> sessionList) {
+        this.sessionList = sessionList;
+    }
+
+    @Override public String toString()
+    {
+        return "XSessionListType{" + "sessionList=" + sessionList + '}';
+    }
 }

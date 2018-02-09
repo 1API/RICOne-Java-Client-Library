@@ -1,281 +1,139 @@
 
 package riconeapi.models.xpress;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-
-/**
- * <p>Java class for xSessionType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xSessionType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="sessionType" type="{http://www.sifassociation.org/datamodel/na/3.2}xSessionTypeType" minOccurs="0"/>
- *         &lt;element name="sessionCode" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="markingTerm" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="schedulingTerm" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="linkedSessionCode" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="startDate" type="{http://www.w3.org/2001/XMLSchema}date"/>
- *         &lt;element name="endDate" type="{http://www.w3.org/2001/XMLSchema}date" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xSessionType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "sessionType",
-    "sessionCode",
-    "description",
-    "markingTerm",
-    "schedulingTerm",
-    "linkedSessionCode",
-    "startDate",
-    "endDate"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "sessionType",
+        "sessionCode",
+        "description",
+        "markingTerm",
+        "schedulingTerm",
+        "linkedSessionCode",
+        "startDate",
+        "endDate"
 })
 public class XSessionType {
 
-	public XSessionType()
-    {
-        sessionType = null;
-        sessionCode = null;
-        description = null;
-        markingTerm = null;
-        schedulingTerm = null;
-        linkedSessionCode = null;
-        startDate = null;
-        endDate = null;
-    }
-	
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String sessionType;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String sessionCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected String description;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected Boolean markingTerm;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected Boolean schedulingTerm;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String linkedSessionCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar startDate;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar endDate;
+    @JsonProperty("sessionType")
+    private String sessionType;
+    @JsonProperty("sessionCode")
+    private String sessionCode;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("markingTerm")
+    private Boolean markingTerm;
+    @JsonProperty("schedulingTerm")
+    private Boolean schedulingTerm;
+    @JsonProperty("linkedSessionCode")
+    private String linkedSessionCode;
+    @JsonProperty("startDate")
+    private String startDate;
+    @JsonProperty("endDate")
+    private String endDate;
 
-    /**
-     * Gets the value of the sessionType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    public XSessionType() {
+    }
+
+    public XSessionType(String sessionType, String sessionCode, String description, Boolean markingTerm, Boolean schedulingTerm, String linkedSessionCode, String startDate, String endDate) {
+        super();
+        this.sessionType = sessionType;
+        this.sessionCode = sessionCode;
+        this.description = description;
+        this.markingTerm = markingTerm;
+        this.schedulingTerm = schedulingTerm;
+        this.linkedSessionCode = linkedSessionCode;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    @JsonProperty("sessionType")
     public String getSessionType() {
         return sessionType;
     }
 
-    /**
-     * Sets the value of the sessionType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSessionType(String value) {
-        this.sessionType = value;
+    @JsonProperty("sessionType")
+    public void setSessionType(String sessionType) {
+        this.sessionType = sessionType;
     }
 
-    /**
-     * Gets the value of the sessionCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("sessionCode")
     public String getSessionCode() {
         return sessionCode;
     }
 
-    /**
-     * Sets the value of the sessionCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSessionCode(String value) {
-        this.sessionCode = value;
+    @JsonProperty("sessionCode")
+    public void setSessionCode(String sessionCode) {
+        this.sessionCode = sessionCode;
     }
 
-    /**
-     * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("description")
     public String getDescription() {
         return description;
     }
 
-    /**
-     * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDescription(String value) {
-        this.description = value;
+    @JsonProperty("description")
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    /**
-     * Gets the value of the markingTerm property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isMarkingTerm() {
+    @JsonProperty("markingTerm")
+    public Boolean getMarkingTerm() {
         return markingTerm;
     }
 
-    /**
-     * Sets the value of the markingTerm property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setMarkingTerm(Boolean value) {
-        this.markingTerm = value;
+    @JsonProperty("markingTerm")
+    public void setMarkingTerm(Boolean markingTerm) {
+        this.markingTerm = markingTerm;
     }
 
-    /**
-     * Gets the value of the schedulingTerm property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public Boolean isSchedulingTerm() {
+    @JsonProperty("schedulingTerm")
+    public Boolean getSchedulingTerm() {
         return schedulingTerm;
     }
 
-    /**
-     * Sets the value of the schedulingTerm property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setSchedulingTerm(Boolean value) {
-        this.schedulingTerm = value;
+    @JsonProperty("schedulingTerm")
+    public void setSchedulingTerm(Boolean schedulingTerm) {
+        this.schedulingTerm = schedulingTerm;
     }
 
-    /**
-     * Gets the value of the linkedSessionCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("linkedSessionCode")
     public String getLinkedSessionCode() {
         return linkedSessionCode;
     }
 
-    /**
-     * Sets the value of the linkedSessionCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLinkedSessionCode(String value) {
-        this.linkedSessionCode = value;
+    @JsonProperty("linkedSessionCode")
+    public void setLinkedSessionCode(String linkedSessionCode) {
+        this.linkedSessionCode = linkedSessionCode;
     }
 
-    /**
-     * Gets the value of the startDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getStartDate() {
+    @JsonProperty("startDate")
+    public String getStartDate() {
         return startDate;
     }
 
-    /**
-     * Sets the value of the startDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setStartDate(XMLGregorianCalendar value) {
-        this.startDate = value;
+    @JsonProperty("startDate")
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    /**
-     * Gets the value of the endDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getEndDate() {
+    @JsonProperty("endDate")
+    public String getEndDate() {
         return endDate;
     }
 
-    /**
-     * Sets the value of the endDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setEndDate(XMLGregorianCalendar value) {
-        this.endDate = value;
+    @JsonProperty("endDate")
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
+    @Override public String toString()
+    {
+        return "XSessionType{" + "sessionType='" + sessionType + '\'' + ", sessionCode='" + sessionCode + '\'' + ", description='" + description + '\'' + ", markingTerm=" + markingTerm + ", schedulingTerm=" + schedulingTerm + ", linkedSessionCode='" + linkedSessionCode + '\'' + ", startDate='"
+                + startDate + '\'' + ", endDate='" + endDate + '\'' + '}';
+    }
 }

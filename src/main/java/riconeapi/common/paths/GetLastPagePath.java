@@ -60,102 +60,139 @@ public class GetLastPagePath
 
 		try
 		{
-			if (p.name().equals("GETXLEASBYXSCHOOL") || p.name().equals("GETXLEASBYXROSTER") || p.name().equals("GETXLEASBYXSTAFF") || p.name().equals("GETXLEASBYXSTUDENT") || p.name().equals("GETXLEASBYXCONTACT"))
+			switch(p.name())
 			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XLeaCollectionType.class, refId);
+				case "GETXLEASBYXSCHOOL":
+				case "GETXLEASBYXROSTER":
+				case "GETXLEASBYXSTAFF":
+				case "GETXLEASBYXSTUDENT":
+				case "GETXLEASBYXCONTACT":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XLeaCollectionType.class, refId);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXSCHOOLSBYXLEA") || p.name().equals("GETXSCHOOLSBYXCALENDAR") || p.name().equals("GETXSCHOOLSBYXCOURSE") || p.name().equals("GETXSCHOOLSBYXROSTER") || p.name().equals("GETXSCHOOLSBYXSTAFF") || p.name().equals("GETXSCHOOLSBYXSTUDENT")
-					|| p.name().equals("GETXSCHOOLSBYXCONTACT"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXSCHOOLSBYXLEA":
+				case "GETXSCHOOLSBYXCALENDAR":
+				case "GETXSCHOOLSBYXCOURSE":
+				case "GETXSCHOOLSBYXROSTER":
+				case "GETXSCHOOLSBYXSTAFF":
+				case "GETXSCHOOLSBYXSTUDENT":
+				case "GETXSCHOOLSBYXCONTACT":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXCALENDARSBYXLEA") || p.name().equals("GETXCALENDARSBYXSCHOOL"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXCALENDARSBYXLEA":
+				case "GETXCALENDARSBYXSCHOOL":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXCOURSESBYXLEA") || p.name().equals("GETXCOURSESBYXSCHOOL") || p.name().equals("GETXCOURSESBYXROSTER"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCourseCollectionType.class, refId);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXCOURSESBYXLEA":
+				case "GETXCOURSESBYXSCHOOL":
+				case "GETXCOURSESBYXROSTER":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCourseCollectionType.class, refId);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXROSTERSBYXLEA") || p.name().equals("GETXROSTERSBYXSCHOOL") || p.name().equals("GETXROSTERSBYXCOURSE") || p.name().equals("GETXROSTERSBYXSTAFF") || p.name().equals("GETXROSTERSBYXSTUDENT"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXROSTERSBYXLEA":
+				case "GETXROSTERSBYXSCHOOL":
+				case "GETXROSTERSBYXCOURSE":
+				case "GETXROSTERSBYXSTAFF":
+				case "GETXROSTERSBYXSTUDENT":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XRosterCollectionType.class, refId);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXSTAFFSBYXLEA") || p.name().equals("GETXSTAFFSBYXSCHOOL") || p.name().equals("GETXSTAFFSBYXCOURSE") || p.name().equals("GETXSTAFFSBYXROSTER") || p.name().equals("GETXSTAFFSBYXSTUDENT"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStaffCollectionType.class, refId);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXSTAFFSBYXLEA":
+				case "GETXSTAFFSBYXSCHOOL":
+				case "GETXSTAFFSBYXCOURSE":
+				case "GETXSTAFFSBYXROSTER":
+				case "GETXSTAFFSBYXSTUDENT":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStaffCollectionType.class, refId);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXSTUDENTSBYXLEA") || p.name().equals("GETXSTUDENTSBYXSCHOOL") || p.name().equals("GETXSTUDENTSBYXROSTER") || p.name().equals("GETXSTUDENTSBYXSTAFF") || p.name().equals("GETXSTUDENTSBYXCONTACT"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStudentCollectionType.class, refId);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXSTUDENTSBYXLEA":
+				case "GETXSTUDENTSBYXSCHOOL":
+				case "GETXSTUDENTSBYXROSTER":
+				case "GETXSTUDENTSBYXSTAFF":
+				case "GETXSTUDENTSBYXCONTACT":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStudentCollectionType.class, refId);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXCONTACTSBYXLEA") || p.name().equals("GETXCONTACTSBYXSCHOOL") || p.name().equals("GETXCONTACTSBYXSTUDENT"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XContactCollectionType.class, refId);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXCONTACTSBYXLEA":
+				case "GETXCONTACTSBYXSCHOOL":
+				case "GETXCONTACTSBYXSTUDENT":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XContactCollectionType.class, refId);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
 			}
 
 			return navigationLastPage;
@@ -179,107 +216,118 @@ public class GetLastPagePath
 
 		try
 		{
-			if (p.name().equals("GETXLEAS"))
+			switch(p.name())
 			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XLeaCollectionType.class);
+				case "GETXLEAS":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XLeaCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XLeaCollectionType.class);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXSCHOOLS"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XSchoolCollectionType.class);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXSCHOOLS":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XSchoolCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XSchoolCollectionType.class);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXCALENDARS"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCalendarCollectionType.class);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXCALENDARS":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XCalendarCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCalendarCollectionType.class);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXCOURSES"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCourseCollectionType.class);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXCOURSES":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XCourseCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XCourseCollectionType.class);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXROSTERS"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XRosterCollectionType.class);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXROSTERS":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XRosterCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XRosterCollectionType.class);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXSTAFFS"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStaffCollectionType.class);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXSTAFFS":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XStaffCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStaffCollectionType.class);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
 
-				//				System.out.println(restTemplate.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStaffCollectionType.class, navigationPage, navigationPageSize).toString());
-				//				System.out.println(response.getHeaders().toString());
-				//				System.out.println(baseApiUrl + p.value, HttpMethod.GET, entity);
-				//				System.out.println(navigationLastPage);
+					//				System.out.println(restTemplate.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStaffCollectionType.class, navigationPage, navigationPageSize).toString());
+					//				System.out.println(response.getHeaders().toString());
+					//				System.out.println(baseApiUrl + p.value, HttpMethod.GET, entity);
+					//				System.out.println(navigationLastPage);
 
-			}
-			else if (p.name().equals("GETXSTUDENTS"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStudentCollectionType.class);
+					break;
+				}
+				case "GETXSTUDENTS":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XStudentCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XStudentCollectionType.class);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
-			}
-			else if (p.name().equals("GETXCONTACTS"))
-			{
-				HttpHeaders headers = new HttpHeaders();
-				headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-				headers.set("navigationPage", Integer.toString(navigationPage));
-				headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-				//headers.set("Content-Type", "application/json");
-				HttpEntity<?> entity = new HttpEntity<Object>(headers);
-				ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XContactCollectionType.class);
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
+				case "GETXCONTACTS":
+				{
+					HttpHeaders headers = new HttpHeaders();
+					headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+					headers.set("navigationPage", Integer.toString(navigationPage));
+					headers.set("navigationPageSize", Integer.toString(navigationPageSize));
+					//headers.set("Content-Type", "application/json");
+					HttpEntity<?> entity = new HttpEntity<Object>(headers);
+					ResponseEntity<XContactCollectionType> response = rt.exchange(baseApiUrl + p.value, HttpMethod.GET, entity, XContactCollectionType.class);
 
-				navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					navigationLastPage = Integer.parseInt(response.getHeaders().getFirst("navigationLastPage"));
+					break;
+				}
 			}
 
 			return navigationLastPage;

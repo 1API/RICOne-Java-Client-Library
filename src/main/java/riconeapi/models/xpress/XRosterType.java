@@ -1,451 +1,228 @@
 
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
-/**
- * xRoster is a composite object that provides a consolidated view of information related to a course section or class, including student enrollment and assigned staff. The refId of a xRoster object coincides with the refId of a corresponding section object.
- * 
- * <p>Java class for xRosterType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xRosterType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.sifassociation.org/datamodel/na/3.2}gSIF_CompositeType">
- *       &lt;sequence>
- *         &lt;element name="courseRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType" minOccurs="0"/>
- *         &lt;element name="courseTitle" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="sectionRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType" minOccurs="0"/>
- *         &lt;element name="subject" type="{http://www.sifassociation.org/datamodel/na/3.2}xSubjectType" minOccurs="0"/>
- *         &lt;element name="schoolRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType"/>
- *         &lt;element name="schoolSectionId" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="schoolYear" type="{http://www.sifassociation.org/datamodel/na/3.2}xSchoolYearType" minOccurs="0"/>
- *         &lt;element name="sessionCode" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="schoolCalendarRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType" minOccurs="0"/>
- *         &lt;element name="meetingTimes" type="{http://www.sifassociation.org/datamodel/na/3.2}xMeetingTimeListType" minOccurs="0"/>
- *         &lt;element name="students" type="{http://www.sifassociation.org/datamodel/na/3.2}xStudentReferenceListType" minOccurs="0"/>
- *         &lt;element name="primaryStaff" type="{http://www.sifassociation.org/datamodel/na/3.2}xStaffReferenceType" minOccurs="0"/>
- *         &lt;element name="otherStaffs" type="{http://www.sifassociation.org/datamodel/na/3.2}xStaffReferenceListType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xRosterType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "courseRefId",
-    "courseTitle",
-    "sectionRefId",
-    "subject",
-    "schoolRefId",
-    "schoolSectionId",
-    "schoolYear",
-    "sessionCode",
-    "schoolCalendarRefId",
-    "meetingTimes",
-    "students",
-    "primaryStaff",
-    "otherStaffs"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "@refId",
+        "courseRefId",
+        "courseTitle",
+        "sectionRefId",
+        "schoolRefId",
+        "schoolSectionId",
+        "schoolYear",
+        "sessionCode",
+        "schoolCalendarRefId",
+        "meetingTimes",
+        "students",
+        "primaryStaff",
+        "otherStaffs"
 })
-public class XRosterType
-    extends GSIFCompositeType
-{
-	public XRosterType()
-    {
-        refId = null;
-        courseRefId = null;
-        courseTitle = null;
-        sectionRefId = null;
-        subject = null;
-        schoolRefId = null;
-        schoolSectionId = null;
-        schoolYear = null;
-        sessionCode = null;
-        schoolCalendarRefId = null;
-        meetingTimes = new XMeetingTimeListType();
-        students = new XStudentReferenceListType();
-        primaryStaff = new XStaffReferenceType();
-        otherStaffs = new XStaffReferenceListType();
+@JsonRootName(value = "xRoster")
+public class XRosterType {
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    private String refId;
+    @JsonProperty("courseRefId")
+    private String courseRefId;
+    @JsonProperty("courseTitle")
+    private String courseTitle;
+    @JsonProperty("sectionRefId")
+    private String sectionRefId;
+    @JsonProperty("schoolRefId")
+    private String schoolRefId;
+    @JsonProperty("schoolSectionId")
+    private String schoolSectionId;
+    @JsonProperty("schoolYear")
+    private XMLGregorianCalendar schoolYear;
+    /**
+     * @deprecated
+     * Use sessionCode in XMeetingTimeType
+     */
+    @Deprecated
+    @JsonProperty("sessionCode")
+    private String sessionCode;
+    /**
+     * @deprecated
+     * Use schoolCalendarRefId in XMeetingTimeType
+     */
+    @Deprecated
+    @JsonProperty("schoolCalendarRefId")
+    private String schoolCalendarRefId;
+    @JsonProperty("meetingTimes")
+    private XMeetingTimeListType meetingTimes;
+    @JsonProperty("students")
+    private XStudentReferenceListType students;
+    @JsonProperty("primaryStaff")
+    private XStaffReferenceType primaryStaff;
+    @JsonProperty("otherStaffs")
+    private XStaffReferenceListType otherStaffs;
+
+    public XRosterType() {
     }
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String courseRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String courseTitle;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String sectionRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String subject;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String schoolRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String schoolSectionId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XMLGregorianCalendar schoolYear;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-	/**
-	 * @deprecated 
-     * Use sessionCode in XMeetingTimeType
-	 */
-    @Deprecated
-    protected String sessionCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    /**
-	 * @deprecated 
-     * Use schoolCalendarRefId in XMeetingTimeType
-	 */
-    @Deprecated
-    protected String schoolCalendarRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XMeetingTimeListType meetingTimes;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XStudentReferenceListType students;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XStaffReferenceType primaryStaff;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XStaffReferenceListType otherStaffs;
+    public XRosterType(String refId, String courseRefId, String courseTitle, String sectionRefId, String schoolRefId, String schoolSectionId, XMLGregorianCalendar schoolYear, String sessionCode, String schoolCalendarRefId, XMeetingTimeListType meetingTimes, XStudentReferenceListType students, XStaffReferenceType primaryStaff, XStaffReferenceListType otherStaffs) {
+        super();
+        this.refId = refId;
+        this.courseRefId = courseRefId;
+        this.courseTitle = courseTitle;
+        this.sectionRefId = sectionRefId;
+        this.schoolRefId = schoolRefId;
+        this.schoolSectionId = schoolSectionId;
+        this.schoolYear = schoolYear;
+        this.sessionCode = sessionCode;
+        this.schoolCalendarRefId = schoolCalendarRefId;
+        this.meetingTimes = meetingTimes;
+        this.students = students;
+        this.primaryStaff = primaryStaff;
+        this.otherStaffs = otherStaffs;
+    }
 
-    /**
-     * Gets the value of the courseRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public String getRefId() {
+        return refId;
+    }
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+    @JsonProperty("courseRefId")
     public String getCourseRefId() {
         return courseRefId;
     }
 
-    /**
-     * Sets the value of the courseRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCourseRefId(String value) {
-        this.courseRefId = value;
+    @JsonProperty("courseRefId")
+    public void setCourseRefId(String courseRefId) {
+        this.courseRefId = courseRefId;
     }
 
-    /**
-     * Gets the value of the courseTitle property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("courseTitle")
     public String getCourseTitle() {
         return courseTitle;
     }
 
-    /**
-     * Sets the value of the courseTitle property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCourseTitle(String value) {
-        this.courseTitle = value;
+    @JsonProperty("courseTitle")
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
 
-    /**
-     * Gets the value of the sectionRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("sectionRefId")
     public String getSectionRefId() {
         return sectionRefId;
     }
 
-    /**
-     * Sets the value of the sectionRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSectionRefId(String value) {
-        this.sectionRefId = value;
+    @JsonProperty("sectionRefId")
+    public void setSectionRefId(String sectionRefId) {
+        this.sectionRefId = sectionRefId;
     }
 
-    /**
-     * Gets the value of the subject property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getSubject() {
-        return subject;
-    }
-
-    /**
-     * Sets the value of the subject property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSubject(String value) {
-        this.subject = value;
-    }
-
-    /**
-     * Gets the value of the schoolRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("schoolRefId")
     public String getSchoolRefId() {
         return schoolRefId;
     }
 
-    /**
-     * Sets the value of the schoolRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSchoolRefId(String value) {
-        this.schoolRefId = value;
+    @JsonProperty("schoolRefId")
+    public void setSchoolRefId(String schoolRefId) {
+        this.schoolRefId = schoolRefId;
     }
 
-    /**
-     * Gets the value of the schoolSectionId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("schoolSectionId")
     public String getSchoolSectionId() {
         return schoolSectionId;
     }
 
-    /**
-     * Sets the value of the schoolSectionId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSchoolSectionId(String value) {
-        this.schoolSectionId = value;
+    @JsonProperty("schoolSectionId")
+    public void setSchoolSectionId(String schoolSectionId) {
+        this.schoolSectionId = schoolSectionId;
     }
 
-    /**
-     * Gets the value of the schoolYear property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
+    @JsonProperty("schoolYear")
     public XMLGregorianCalendar getSchoolYear() {
         return schoolYear;
     }
 
-    /**
-     * Sets the value of the schoolYear property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setSchoolYear(XMLGregorianCalendar value) {
-        this.schoolYear = value;
+    @JsonProperty("schoolYear")
+    public void setSchoolYear(XMLGregorianCalendar schoolYear) {
+        this.schoolYear = schoolYear;
     }
-    
-    /**
-     * Gets the value of the sessionCode property.
-     * @deprecated 
-     * Use sessionCode in XMeetingTimeType
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+
     @Deprecated
+    @JsonProperty("sessionCode")
     public String getSessionCode() {
         return sessionCode;
     }
 
-    /**
-     * Sets the value of the sessionCode property.
-     * @deprecated
-     * Use sessionCode in XMeetingTimeType
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     */
     @Deprecated
-    public void setSessionCode(String value) {
-        this.sessionCode = value;
+    @JsonProperty("sessionCode")
+    public void setSessionCode(String sessionCode) {
+        this.sessionCode = sessionCode;
     }
 
-    /**
-     * Gets the value of the schoolCalendarRefId property.
-     * @deprecated
-     * Use schoolCalendarRefId in XMeetingTimeType  
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }  
-     */
     @Deprecated
+    @JsonProperty("schoolCalendarRefId")
     public String getSchoolCalendarRefId() {
         return schoolCalendarRefId;
     }
 
-    /**
-     * Sets the value of the schoolCalendarRefId property.
-     * @deprecated
-     * Use schoolCalendarRefId in XMeetingTimeType
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }    
-     */
     @Deprecated
-    public void setSchoolCalendarRefId(String value) {
-        this.schoolCalendarRefId = value;
+    @JsonProperty("schoolCalendarRefId")
+    public void setSchoolCalendarRefId(String schoolCalendarRefId) {
+        this.schoolCalendarRefId = schoolCalendarRefId;
     }
 
-    /**
-     * Gets the value of the meetingTimes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMeetingTimeListType }
-     *     
-     */
+    @JsonProperty("meetingTimes")
     public XMeetingTimeListType getMeetingTimes() {
         return meetingTimes;
     }
 
-    /**
-     * Sets the value of the meetingTimes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMeetingTimeListType }
-     *     
-     */
-    public void setMeetingTimes(XMeetingTimeListType value) {
-        this.meetingTimes = value;
+    @JsonProperty("meetingTimes")
+    public void setMeetingTimes(XMeetingTimeListType meetingTimes) {
+        this.meetingTimes = meetingTimes;
     }
 
-    /**
-     * Gets the value of the students property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XStudentReferenceListType }
-     *     
-     */
+    @JsonProperty("students")
     public XStudentReferenceListType getStudents() {
         return students;
     }
 
-    /**
-     * Sets the value of the students property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XStudentReferenceListType }
-     *     
-     */
-    public void setStudents(XStudentReferenceListType value) {
-        this.students = value;
+    @JsonProperty("students")
+    public void setStudents(XStudentReferenceListType students) {
+        this.students = students;
     }
 
-    /**
-     * Gets the value of the primaryStaff property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XStaffReferenceType }
-     *     
-     */
+    @JsonProperty("primaryStaff")
     public XStaffReferenceType getPrimaryStaff() {
         return primaryStaff;
     }
 
-    /**
-     * Sets the value of the primaryStaff property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XStaffReferenceType }
-     *     
-     */
-    public void setPrimaryStaff(XStaffReferenceType value) {
-        this.primaryStaff = value;
+    @JsonProperty("primaryStaff")
+    public void setPrimaryStaff(XStaffReferenceType primaryStaff) {
+        this.primaryStaff = primaryStaff;
     }
 
-    /**
-     * Gets the value of the otherStaffs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XStaffReferenceListType }
-     *     
-     */
+    @JsonProperty("otherStaffs")
     public XStaffReferenceListType getOtherStaffs() {
         return otherStaffs;
     }
 
-    /**
-     * Sets the value of the otherStaffs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XStaffReferenceListType }
-     *     
-     */
-    public void setOtherStaffs(XStaffReferenceListType value) {
-        this.otherStaffs = value;
+    @JsonProperty("otherStaffs")
+    public void setOtherStaffs(XStaffReferenceListType otherStaffs) {
+        this.otherStaffs = otherStaffs;
     }
 
+    @Override public String toString()
+    {
+        return "XRosterType{" + "refId='" + refId + '\'' + ", courseRefId='" + courseRefId + '\'' + ", courseTitle='" + courseTitle + '\'' + ", sectionRefId='" + sectionRefId + '\'' + ", schoolRefId='" + schoolRefId + '\'' + ", schoolSectionId='" + schoolSectionId + '\'' + ", schoolYear="
+                + schoolYear + ", sessionCode='" + sessionCode + '\'' + ", schoolCalendarRefId='" + schoolCalendarRefId + '\'' + ", meetingTimes=" + meetingTimes + ", students=" + students + ", primaryStaff=" + primaryStaff + ", otherStaffs=" + otherStaffs + '}';
+    }
 }

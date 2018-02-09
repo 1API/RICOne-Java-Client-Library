@@ -1,308 +1,168 @@
 
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-
-/**
- * xStaff is a composite object that provides a view of the most commonly used core data elements for teachers and non-teaching staff. The refId of a xStaff object coincides with the refId of a corresponding staff object.
- * 
- * <p>Java class for xStaffType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xStaffType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.sifassociation.org/datamodel/na/3.2}gSIF_CompositeType">
- *       &lt;sequence>
- *         &lt;element name="name" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonNameType" minOccurs="0"/>
- *         &lt;element name="localId" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonIdType" minOccurs="0"/>
- *         &lt;element name="stateProvinceId" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonIdType" minOccurs="0"/>
- *         &lt;element name="otherIds" type="{http://www.sifassociation.org/datamodel/na/3.2}xOtherPersonIdListType" minOccurs="0"/>
- *         &lt;element name="appProvisioningInfo" type="{http://www.sifassociation.org/datamodel/na/3.2}xAppProvisioningInfoType" minOccurs="0"/>
- *         &lt;element name="sex" type="{http://www.sifassociation.org/datamodel/na/3.2}xSexType" minOccurs="0"/>
- *         &lt;element name="email" type="{http://www.sifassociation.org/datamodel/na/3.2}xEmailType" minOccurs="0"/>
- *         &lt;element name="primaryAssignment" type="{http://www.sifassociation.org/datamodel/na/3.2}xStaffPersonAssignmentType" minOccurs="0"/>
- *         &lt;element name="otherAssignments" type="{http://www.sifassociation.org/datamodel/na/3.2}xStaffPersonAssignmentListType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xStaffType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "name",
-    "localId",
-    "stateProvinceId",
-    "otherIds",
-    "appProvisioningInfo",
-    "sex",
-    "email",
-    "primaryAssignment",
-    "otherAssignments"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "@refId",
+        "name",
+        "localId",
+        "stateProvinceId",
+        "otherIds",
+        "sex",
+        "email",
+        "primaryAssignment",
+        "otherAssignments"
 })
-public class XStaffType
-    extends GSIFCompositeType
-{
-	public XStaffType()
-    {
-	    refId = null;
-	    name = new XPersonNameType();
-	    localId = null;
-	    stateProvinceId = null;
-	    otherIds = new XOtherPersonIdListType();
-	    appProvisioningInfo = new XAppProvisioningInfoType();
-	    sex = null;
-	    email = new XEmailType();
-	    primaryAssignment = new XStaffPersonAssignmentType();
-	    otherAssignments = new XStaffPersonAssignmentListType();
+@JsonRootName(value = "xStaff")
+public class XStaffType {
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    private String refId;
+    @JsonProperty("name")
+    private XPersonNameType name;
+    @JsonProperty("localId")
+    private String localId;
+    @JsonProperty("stateProvinceId")
+    private String stateProvinceId;
+    @JsonProperty("otherIds")
+    private XOtherPersonIdListType otherIds;
+    @JsonProperty("appProvisioningInfo")
+    private XAppProvisioningInfoType appProvisioningInfo;
+    @JsonProperty("sex")
+    private String sex;
+    @JsonProperty("email")
+    private XEmailType email;
+    @JsonProperty("primaryAssignment")
+    private XStaffPersonAssignmentType primaryAssignment;
+    @JsonProperty("otherAssignments")
+    private XStaffPersonAssignmentListType otherAssignments;
+
+    public XStaffType() {
     }
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XPersonNameType name;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String localId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String stateProvinceId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XOtherPersonIdListType otherIds;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XAppProvisioningInfoType appProvisioningInfo;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String sex;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XEmailType email;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XStaffPersonAssignmentType primaryAssignment;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XStaffPersonAssignmentListType otherAssignments;
+    public XStaffType(String refId, XPersonNameType name, String localId, String stateProvinceId, XOtherPersonIdListType otherIds, XAppProvisioningInfoType appProvisioningInfo, String sex, XEmailType email, XStaffPersonAssignmentType primaryAssignment, XStaffPersonAssignmentListType otherAssignments) {
+        super();
+        this.refId = refId;
+        this.name = name;
+        this.localId = localId;
+        this.stateProvinceId = stateProvinceId;
+        this.otherIds = otherIds;
+        this.appProvisioningInfo = appProvisioningInfo;
+        this.sex = sex;
+        this.email = email;
+        this.primaryAssignment = primaryAssignment;
+        this.otherAssignments = otherAssignments;
+    }
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XPersonNameType }
-     *     
-     */
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public String getRefId() {
+        return refId;
+    }
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+    @JsonProperty("name")
     public XPersonNameType getName() {
         return name;
     }
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XPersonNameType }
-     *     
-     */
-    public void setName(XPersonNameType value) {
-        this.name = value;
+    @JsonProperty("name")
+    public void setName(XPersonNameType name) {
+        this.name = name;
     }
 
-    /**
-     * Gets the value of the localId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("localId")
     public String getLocalId() {
         return localId;
     }
 
-    /**
-     * Sets the value of the localId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLocalId(String value) {
-        this.localId = value;
+    @JsonProperty("localId")
+    public void setLocalId(String localId) {
+        this.localId = localId;
     }
 
-    /**
-     * Gets the value of the stateProvinceId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("stateProvinceId")
     public String getStateProvinceId() {
         return stateProvinceId;
     }
 
-    /**
-     * Sets the value of the stateProvinceId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStateProvinceId(String value) {
-        this.stateProvinceId = value;
+    @JsonProperty("stateProvinceId")
+    public void setStateProvinceId(String stateProvinceId) {
+        this.stateProvinceId = stateProvinceId;
     }
 
-    /**
-     * Gets the value of the otherIds property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XOtherPersonIdListType }
-     *     
-     */
+    @JsonProperty("otherIds")
     public XOtherPersonIdListType getOtherIds() {
         return otherIds;
     }
 
-    /**
-     * Sets the value of the otherIds property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XOtherPersonIdListType }
-     *     
-     */
-    public void setOtherIds(XOtherPersonIdListType value) {
-        this.otherIds = value;
+    @JsonProperty("otherIds")
+    public void setOtherIds(XOtherPersonIdListType otherIds) {
+        this.otherIds = otherIds;
     }
 
-    /**
-     * Gets the value of the appProvisioningInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XAppProvisioningInfoType }
-     *     
-     */
+    @JsonProperty("appProvisioningInfo")
     public XAppProvisioningInfoType getAppProvisioningInfo() {
         return appProvisioningInfo;
     }
 
-    /**
-     * Sets the value of the appProvisioningInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XAppProvisioningInfoType }
-     *     
-     */
+    @JsonProperty("appProvisioningInfo")
     public void setAppProvisioningInfo(XAppProvisioningInfoType value) {
         this.appProvisioningInfo = value;
     }
-
-    /**
-     * Gets the value of the sex property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("sex")
     public String getSex() {
         return sex;
     }
 
-    /**
-     * Sets the value of the sex property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSex(String value) {
-        this.sex = value;
+    @JsonProperty("sex")
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
-    /**
-     * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XEmailType }
-     *     
-     */
+    @JsonProperty("email")
     public XEmailType getEmail() {
         return email;
     }
 
-    /**
-     * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XEmailType }
-     *     
-     */
-    public void setEmail(XEmailType value) {
-        this.email = value;
+    @JsonProperty("email")
+    public void setEmail(XEmailType email) {
+        this.email = email;
     }
 
-    /**
-     * Gets the value of the primaryAssignment property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XStaffPersonAssignmentType }
-     *     
-     */
+    @JsonProperty("primaryAssignment")
     public XStaffPersonAssignmentType getPrimaryAssignment() {
         return primaryAssignment;
     }
 
-    /**
-     * Sets the value of the primaryAssignment property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XStaffPersonAssignmentType }
-     *     
-     */
-    public void setPrimaryAssignment(XStaffPersonAssignmentType value) {
-        this.primaryAssignment = value;
+    @JsonProperty("primaryAssignment")
+    public void setPrimaryAssignment(XStaffPersonAssignmentType primaryAssignment) {
+        this.primaryAssignment = primaryAssignment;
     }
 
-    /**
-     * Gets the value of the otherAssignments property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XStaffPersonAssignmentListType }
-     *     
-     */
+    @JsonProperty("otherAssignments")
     public XStaffPersonAssignmentListType getOtherAssignments() {
         return otherAssignments;
     }
 
-    /**
-     * Sets the value of the otherAssignments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XStaffPersonAssignmentListType }
-     *     
-     */
-    public void setOtherAssignments(XStaffPersonAssignmentListType value) {
-        this.otherAssignments = value;
+    @JsonProperty("otherAssignments")
+    public void setOtherAssignments(XStaffPersonAssignmentListType otherAssignments) {
+        this.otherAssignments = otherAssignments;
     }
 
+    @Override public String toString()
+    {
+        return "XStaffType{" + "refId='" + refId + '\'' + ", name=" + name + ", localId='" + localId + '\'' + ", stateProvinceId='" + stateProvinceId + '\'' + ", otherIds=" + otherIds + ", appProvisioningInfo=" + appProvisioningInfo + ", sex='" + sex + '\'' + ", email=" + email
+                + ", primaryAssignment=" + primaryAssignment + ", otherAssignments=" + otherAssignments + '}';
+    }
 }

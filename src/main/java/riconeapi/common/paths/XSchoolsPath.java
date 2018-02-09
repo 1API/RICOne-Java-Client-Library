@@ -13,7 +13,6 @@ import riconeapi.authentication.Authenticator;
 import riconeapi.common.ResponseMulti;
 import riconeapi.common.ResponseSingle;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.xpress.XSchoolCollectionType;
 import riconeapi.models.xpress.XSchoolCollectionTypeWrapper;
 import riconeapi.models.xpress.XSchoolType;
 import riconeapi.models.xpress.XSchoolTypeWrapper;
@@ -42,7 +41,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -55,11 +54,13 @@ public class XSchoolsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class);
+			response = rt.exchange(baseApiUrl + "xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -71,7 +72,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -83,7 +87,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchools(String opaqueMarker) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -92,19 +96,18 @@ public class XSchoolsPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
 					.path("xSchools")
 					.queryParam("changesSinceMarker", opaqueMarker);
-
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XSchoolCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -116,7 +119,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -173,7 +179,7 @@ public class XSchoolsPath
 	 */
 	public ResponseSingle<XSchoolType> getXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolType> response;
+		ResponseEntity<XSchoolTypeWrapper> response;
 		ResponseSingle<XSchoolType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -184,15 +190,15 @@ public class XSchoolsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xSchools/{refId}", HttpMethod.GET, entity, XSchoolType.class, refId);
+			response = rt.exchange(baseApiUrl + "xSchools/{refId}", HttpMethod.GET, entity, XSchoolTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
+				output.setData(response.getBody().getxSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getxSchool()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getxSchool()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -204,7 +210,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -261,7 +270,7 @@ public class XSchoolsPath
 	 */
 	public ResponseSingle<XSchoolType> getXSchool(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolType> response;
+		ResponseEntity<XSchoolTypeWrapper> response;
 		ResponseSingle<XSchoolType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -271,15 +280,15 @@ public class XSchoolsPath
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("IdType", idType);
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xSchools/{id}", HttpMethod.GET, entity, XSchoolType.class, id);
+			response = rt.exchange(baseApiUrl + "xSchools/{id}", HttpMethod.GET, entity, XSchoolTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
+				output.setData(response.getBody().getxSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getxSchool()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getxSchool()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -291,7 +300,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -305,7 +317,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -316,15 +328,15 @@ public class XSchoolsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -336,7 +348,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -348,7 +363,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -357,15 +372,15 @@ public class XSchoolsPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -377,7 +392,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -390,7 +408,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -400,15 +418,15 @@ public class XSchoolsPath
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("IdType", idType);
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xLeas/{id}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, id);
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -420,7 +438,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -434,7 +455,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -445,15 +466,15 @@ public class XSchoolsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xCalendars/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xCalendars/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -465,7 +486,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -477,7 +501,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -486,15 +510,15 @@ public class XSchoolsPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xCalendars/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xCalendars/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -506,7 +530,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -520,7 +547,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -531,15 +558,15 @@ public class XSchoolsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -551,7 +578,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -563,7 +593,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -572,15 +602,15 @@ public class XSchoolsPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -592,7 +622,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -606,7 +639,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -617,15 +650,15 @@ public class XSchoolsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -637,7 +670,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -649,7 +685,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -658,15 +694,15 @@ public class XSchoolsPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xRosters/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -678,7 +714,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -692,7 +731,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -703,15 +742,15 @@ public class XSchoolsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -723,7 +762,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -735,7 +777,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -744,15 +786,15 @@ public class XSchoolsPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -764,7 +806,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -778,7 +823,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -789,15 +834,15 @@ public class XSchoolsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -809,7 +854,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -821,7 +869,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -830,15 +878,15 @@ public class XSchoolsPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -850,7 +898,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -864,7 +915,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -875,15 +926,15 @@ public class XSchoolsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -895,7 +946,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -907,7 +961,7 @@ public class XSchoolsPath
 	 */
 	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XSchoolCollectionType> response;
+		ResponseEntity<XSchoolCollectionTypeWrapper> response;
 		ResponseMulti<XSchoolType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -916,15 +970,15 @@ public class XSchoolsPath
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
-
+			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-
-			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xContacts/{refId}/xSchools", HttpMethod.GET, entity, XSchoolCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXSchool());
+				output.setData(response.getBody().getXSchools().getXSchool());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXSchools()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXSchools()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -936,7 +990,10 @@ public class XSchoolsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 }

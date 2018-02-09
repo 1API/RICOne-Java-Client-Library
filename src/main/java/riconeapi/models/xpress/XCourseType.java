@@ -1,379 +1,200 @@
 
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-
-/**
- * xCourse is a composite object that provides essential information about a course. The refId of a xCourse object coincides with the refId of a corresponding course object.
- * 
- * <p>Java class for xCourseType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xCourseType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.sifassociation.org/datamodel/na/3.2}gSIF_CompositeType">
- *       &lt;sequence>
- *         &lt;element name="schoolRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType"/>
- *         &lt;element name="schoolCourseId" type="{http://www.sifassociation.org/datamodel/na/3.2}xCourseIdType" minOccurs="0"/>
- *         &lt;element name="leaCourseId" type="{http://www.sifassociation.org/datamodel/na/3.2}xCourseIdType" minOccurs="0"/>
- *         &lt;element name="otherIds" type="{http://www.sifassociation.org/datamodel/na/3.2}xOtherCourseIdListType" minOccurs="0"/>
- *         &lt;element name="courseTitle" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}normalizedString" minOccurs="0"/>
- *         &lt;element name="subject" type="{http://www.sifassociation.org/datamodel/na/3.2}xSubjectType" minOccurs="0"/>
- *         &lt;element name="applicableEducationLevels" type="{http://www.sifassociation.org/datamodel/na/3.2}xApplicableEducationLevelListType" minOccurs="0"/>
- *         &lt;element name="scedCourseCode" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="scedCourseLevelCode" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="scedCourseSubjectAreaCode" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xCourseType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "schoolRefId",
-    "schoolCourseId",
-    "leaCourseId",
-    "otherIds",
-    "courseTitle",
-    "description",
-    "subject",
-    "applicableEducationLevels",
-    "scedCourseCode",
-    "scedCourseLevelCode",
-    "scedCourseSubjectAreaCode"
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "@refId",
+        "schoolRefId",
+        "schoolCourseId",
+        "leaCourseId",
+        "otherIds",
+        "courseTitle",
+        "description",
+        "subject",
+        "applicableEducationLevels",
+        "scedCourseCode",
+        "scedCourseLevelCode",
+        "scedCourseSubjectAreaCode"
 })
-public class XCourseType
-    extends GSIFCompositeType
-{
-	public XCourseType()
-    {
-        refId = null;
-        schoolRefId = null;
-        schoolCourseId = null;
-        leaCourseId = null;
-        otherIds = new XOtherCourseIdListType();
-        courseTitle = null;
-        description = null;
-        subject = null;
-        applicableEducationLevels = new XApplicableEducationLevelListType();
-        scedCourseCode = null;
-        scedCourseLevelCode = null;
-        scedCourseSubjectAreaCode = null;
+public class XCourseType {
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    private String refId;
+    @JsonProperty("schoolRefId")
+    private String schoolRefId;
+    @JsonProperty("schoolCourseId")
+    private String schoolCourseId;
+    @JsonProperty("leaCourseId")
+    private String leaCourseId;
+    @JsonProperty("otherIds")
+    private XOtherCourseIdListType otherIds;
+    @JsonProperty("courseTitle")
+    private String courseTitle;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty("subject")
+    private String subject;
+    @JsonProperty("applicableEducationLevels")
+    private XApplicableEducationLevelListType applicableEducationLevels;
+    @JsonProperty("scedCourseCode")
+    private String scedCourseCode;
+    @JsonProperty("scedCourseLevelCode")
+    private String scedCourseLevelCode;
+    @JsonProperty("scedCourseSubjectAreaCode")
+    private String scedCourseSubjectAreaCode;
+
+    public XCourseType() {
     }
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String schoolRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String schoolCourseId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String leaCourseId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XOtherCourseIdListType otherIds;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String courseTitle;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
-    @XmlSchemaType(name = "normalizedString")
-    protected String description;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String subject;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XApplicableEducationLevelListType applicableEducationLevels;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String scedCourseCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String scedCourseLevelCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-    protected String scedCourseSubjectAreaCode;
+    public XCourseType(String refId, String schoolRefId, String schoolCourseId, String leaCourseId, XOtherCourseIdListType otherIds, String courseTitle, String description, String subject, XApplicableEducationLevelListType applicableEducationLevels, String scedCourseCode, String scedCourseLevelCode, String scedCourseSubjectAreaCode) {
+        super();
+        this.refId = refId;
+        this.schoolRefId = schoolRefId;
+        this.schoolCourseId = schoolCourseId;
+        this.leaCourseId = leaCourseId;
+        this.otherIds = otherIds;
+        this.courseTitle = courseTitle;
+        this.description = description;
+        this.subject = subject;
+        this.applicableEducationLevels = applicableEducationLevels;
+        this.scedCourseCode = scedCourseCode;
+        this.scedCourseLevelCode = scedCourseLevelCode;
+        this.scedCourseSubjectAreaCode = scedCourseSubjectAreaCode;
+    }
 
-    /**
-     * Gets the value of the schoolRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public String getRefId() {
+        return refId;
+    }
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+    @JsonProperty("schoolRefId")
     public String getSchoolRefId() {
         return schoolRefId;
     }
 
-    /**
-     * Sets the value of the schoolRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSchoolRefId(String value) {
-        this.schoolRefId = value;
+    @JsonProperty("schoolRefId")
+    public void setSchoolRefId(String schoolRefId) {
+        this.schoolRefId = schoolRefId;
     }
 
-    /**
-     * Gets the value of the schoolCourseId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("schoolCourseId")
     public String getSchoolCourseId() {
         return schoolCourseId;
     }
 
-    /**
-     * Sets the value of the schoolCourseId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSchoolCourseId(String value) {
-        this.schoolCourseId = value;
+    @JsonProperty("schoolCourseId")
+    public void setSchoolCourseId(String schoolCourseId) {
+        this.schoolCourseId = schoolCourseId;
     }
 
-    /**
-     * Gets the value of the leaCourseId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("leaCourseId")
     public String getLeaCourseId() {
         return leaCourseId;
     }
 
-    /**
-     * Sets the value of the leaCourseId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLeaCourseId(String value) {
-        this.leaCourseId = value;
+    @JsonProperty("leaCourseId")
+    public void setLeaCourseId(String leaCourseId) {
+        this.leaCourseId = leaCourseId;
     }
 
-    /**
-     * Gets the value of the otherIds property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XOtherCourseIdListType }
-     *     
-     */
+    @JsonProperty("otherIds")
     public XOtherCourseIdListType getOtherIds() {
         return otherIds;
     }
 
-    /**
-     * Sets the value of the otherIds property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XOtherCourseIdListType }
-     *     
-     */
-    public void setOtherIds(XOtherCourseIdListType value) {
-        this.otherIds = value;
+    @JsonProperty("otherIds")
+    public void setOtherIds(XOtherCourseIdListType otherIds) {
+        this.otherIds = otherIds;
     }
 
-    /**
-     * Gets the value of the courseTitle property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("courseTitle")
     public String getCourseTitle() {
         return courseTitle;
     }
 
-    /**
-     * Sets the value of the courseTitle property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCourseTitle(String value) {
-        this.courseTitle = value;
+    @JsonProperty("courseTitle")
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
 
-    /**
-     * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("description")
     public String getDescription() {
         return description;
     }
 
-    /**
-     * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDescription(String value) {
-        this.description = value;
+    @JsonProperty("description")
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    /**
-     * Gets the value of the subject property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("subject")
     public String getSubject() {
         return subject;
     }
 
-    /**
-     * Sets the value of the subject property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setSubject(String value) {
-        this.subject = value;
+    @JsonProperty("subject")
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
-    /**
-     * Gets the value of the applicableEducationLevels property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XApplicableEducationLevelListType }
-     *     
-     */
+    @JsonProperty("applicableEducationLevels")
     public XApplicableEducationLevelListType getApplicableEducationLevels() {
         return applicableEducationLevels;
     }
 
-    /**
-     * Sets the value of the applicableEducationLevels property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XApplicableEducationLevelListType }
-     *     
-     */
-    public void setApplicableEducationLevels(XApplicableEducationLevelListType value) {
-        this.applicableEducationLevels = value;
+    @JsonProperty("applicableEducationLevels")
+    public void setApplicableEducationLevels(XApplicableEducationLevelListType applicableEducationLevels) {
+        this.applicableEducationLevels = applicableEducationLevels;
     }
 
-    /**
-     * Gets the value of the scedCourseCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("scedCourseCode")
     public String getScedCourseCode() {
         return scedCourseCode;
     }
 
-    /**
-     * Sets the value of the scedCourseCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setScedCourseCode(String value) {
-        this.scedCourseCode = value;
+    @JsonProperty("scedCourseCode")
+    public void setScedCourseCode(String scedCourseCode) {
+        this.scedCourseCode = scedCourseCode;
     }
 
-    /**
-     * Gets the value of the scedCourseLevelCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("scedCourseLevelCode")
     public String getScedCourseLevelCode() {
         return scedCourseLevelCode;
     }
 
-    /**
-     * Sets the value of the scedCourseLevelCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setScedCourseLevelCode(String value) {
-        this.scedCourseLevelCode = value;
+    @JsonProperty("scedCourseLevelCode")
+    public void setScedCourseLevelCode(String scedCourseLevelCode) {
+        this.scedCourseLevelCode = scedCourseLevelCode;
     }
 
-    /**
-     * Gets the value of the scedCourseSubjectAreaCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("scedCourseSubjectAreaCode")
     public String getScedCourseSubjectAreaCode() {
         return scedCourseSubjectAreaCode;
     }
 
-    /**
-     * Sets the value of the scedCourseSubjectAreaCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setScedCourseSubjectAreaCode(String value) {
-        this.scedCourseSubjectAreaCode = value;
+    @JsonProperty("scedCourseSubjectAreaCode")
+    public void setScedCourseSubjectAreaCode(String scedCourseSubjectAreaCode) {
+        this.scedCourseSubjectAreaCode = scedCourseSubjectAreaCode;
     }
 
+    @Override public String toString()
+    {
+        return "XCourseType{" + "refId='" + refId + '\'' + ", schoolRefId='" + schoolRefId + '\'' + ", schoolCourseId='" + schoolCourseId + '\'' + ", leaCourseId='" + leaCourseId + '\'' + ", otherIds=" + otherIds + ", courseTitle='" + courseTitle + '\'' + ", description='" + description + '\''
+                + ", subject='" + subject + '\'' + ", applicableEducationLevels=" + applicableEducationLevels + ", scedCourseCode='" + scedCourseCode + '\'' + ", scedCourseLevelCode='" + scedCourseLevelCode + '\'' + ", scedCourseSubjectAreaCode='" + scedCourseSubjectAreaCode + '\'' + '}';
+    }
 }
