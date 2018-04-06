@@ -1,18 +1,19 @@
 package cases;
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3.1
- * @since       Jul 20, 2016
- * Filename		SampleConsole.java
- */
+
 import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
+import riconeapi.common.paths.ServicePath;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XLeaType;
 import riconeapi.models.xpress.XPersonReferenceType;
 import riconeapi.models.xpress.XRosterType;
 
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.7
+ * @since       Feb 14, 2018
+ */
 public class SampleConsole
 {
 	final static String authUrl = "AUTH URL";
@@ -32,21 +33,29 @@ public class SampleConsole
         for(Endpoint e : auth.getEndpoints(providerId)) //For the provided endpoint
         {
             XPress xPress = new XPress(e.getHref()); //Pass endpoint info to data API (token, href)
-            
+
             for(XLeaType l : xPress.getXLeas().getData()) //Iterate through each xLea
             {
-            	for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERSBYXLEA, l.getRefId()); i++) //Get max page size for rosters by lea
+            	System.out.println(navigationPageSize);
+            	System.out.println(ServicePath.GETXROSTERSBYXLEA);
+            	System.out.println(l.getRefId());
+				System.out.println(xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXLEA, l.getRefId()));
+            	for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXLEA, l.getRefId()); i++) //Get max page size for rosters by lea
         		{
+
 	                for(XRosterType r : xPress.getXRostersByXLea(l.getRefId(), i, navigationPageSize).getData()) //Get each roster for each lea refId w/ paging
 	                {
-	                    System.out.println("courseTitle: " + r.getCourseTitle());
-	                    for(XPersonReferenceType p : r.getStudents().getStudentReference()) //Students for each course
-	                    {
-	                        System.out.println("refId: " + p.getRefId());
-	                        System.out.println("localId: " + p.getLocalId());
-	                        System.out.println("givenName: " + p.getGivenName());
-	                        System.out.println("familyName: " + p.getFamilyName());
-	                    }
+	                	if(r.getStudents() != null) //Only return courses with students
+						{
+							System.out.println("courseTitle: " + r.getCourseTitle());
+							for(XPersonReferenceType p : r.getStudents().getStudentReference()) //Students for each course
+							{
+								System.out.println("refId: " + p.getRefId());
+								System.out.println("localId: " + p.getLocalId());
+								System.out.println("givenName: " + p.getGivenName());
+								System.out.println("familyName: " + p.getFamilyName());
+							}
+						}
 	                }
 	                System.out.println("######## PAGE " + i + " ########");
         		}

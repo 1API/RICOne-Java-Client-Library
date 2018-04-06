@@ -3,72 +3,40 @@ package riconeapi.models.xpress;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.*;
 
-/**
- * <p>Java class for xContactCollectionType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xContactCollectionType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="xContact" type="{http://www.sifassociation.org/datamodel/na/3.2}xContactType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xContactCollectionType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "xContact"
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "xContact"
 })
+@JsonRootName(value = "xContacts")
 public class XContactCollectionType {
 
-	public XContactCollectionType()
-    {
-        xContact = new ArrayList<XContactType>();
-    }
-	
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected List<XContactType> xContact;
+    @JsonProperty("xContact")
+    private List<XContactType> xContact = new ArrayList<>();
 
-    /**
-     * Gets the value of the xContact property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the xContact property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getXContact().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link XContactType }
-     * 
-     * 
-     */
+    public XContactCollectionType() {
+    }
+
+    public XContactCollectionType(List<XContactType> xContact) {
+        super();
+        this.xContact = xContact;
+    }
+
+    @JsonProperty("xContact")
     public List<XContactType> getXContact() {
-        if (xContact == null) {
-            xContact = new ArrayList<XContactType>();
-        }
-        return this.xContact;
+        return xContact;
     }
 
+    @JsonProperty("xContact")
+    public void setXContact(List<XContactType> xContact) {
+        this.xContact = xContact;
+    }
+
+    @Override public String toString()
+    {
+        return "XContactCollectionType{" + "xContact=" + xContact + '}';
+    }
 }

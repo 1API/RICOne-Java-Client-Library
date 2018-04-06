@@ -1,5 +1,7 @@
 package riconeapi.common.paths;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,11 +18,15 @@ public class AUPP
 {
 	private RestTemplate rt;
 	private String baseApiUrl;
+	private ObjectMapper jsonMapper;
+	private ObjectMapper xmlMapper;
 
-	public AUPP(RestTemplate rt, String baseApiUrl)
+	public AUPP(RestTemplate rt, String baseApiUrl, ObjectMapper jsonMapper, ObjectMapper xmlMapper)
 	{
 		this.rt = rt;
 		this.baseApiUrl = baseApiUrl;
+		this.jsonMapper = jsonMapper;
+		this.xmlMapper = xmlMapper;
 	}
 
 	/**
@@ -117,7 +123,7 @@ public class AUPP
 	 */
 	public ResponseMulti<XStaffType> getXStaffUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XStaffCollectionType> response;
+		ResponseEntity<XStaffCollectionTypeWrapper> response;
 		ResponseMulti<XStaffType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -128,16 +134,18 @@ public class AUPP
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
+			headers.set("Content-Type", "application/json");
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
 					.path("xSchools/" + refId + "/xStaffs")
 					.queryParam("getUsers", "true");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXStaff());
+				output.setData(response.getBody().getXStaffs().getXStaff());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXStaffs()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXStaffs()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -149,7 +157,10 @@ public class AUPP
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -161,7 +172,7 @@ public class AUPP
 	 */
 	public ResponseMulti<XStaffType> getXStaffUsers(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XStaffCollectionType> response;
+		ResponseEntity<XStaffCollectionTypeWrapper> response;
 		ResponseMulti<XStaffType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -170,16 +181,18 @@ public class AUPP
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
+			headers.set("Content-Type", "application/json");
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
 					.path("xSchools/" + refId + "/xStaffs")
 					.queryParam("getUsers", "true");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStaffCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXStaff());
+				output.setData(response.getBody().getXStaffs().getXStaff());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXStaffs()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXStaffs()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -191,7 +204,10 @@ public class AUPP
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -289,7 +305,7 @@ public class AUPP
 	 */
 	public ResponseMulti<XStudentType> getXStudentUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XStudentCollectionType> response;
+		ResponseEntity<XStudentCollectionTypeWrapper> response;
 		ResponseMulti<XStudentType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -300,16 +316,18 @@ public class AUPP
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("navigationPage", Integer.toString(navigationPage));
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
-			//headers.set("Content-Type", "application/json");
+			headers.set("Content-Type", "application/json");
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
 					.path("xSchools/" + refId + "/xStudents")
 					.queryParam("getUsers", "true");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXStudent());
+				output.setData(response.getBody().getXStudents().getXStudent());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXStudents()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXStudents()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -321,7 +339,10 @@ public class AUPP
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -333,7 +354,7 @@ public class AUPP
 	 */
 	public ResponseMulti<XStudentType> getXStudentUsers(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XStudentCollectionType> response;
+		ResponseEntity<XStudentCollectionTypeWrapper> response;
 		ResponseMulti<XStudentType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -342,16 +363,18 @@ public class AUPP
 		{
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
-			//headers.set("Content-Type", "application/json");
+			headers.set("Content-Type", "application/json");
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseApiUrl)
 					.path("xSchools/" + refId + "/xStudents")
 					.queryParam("getUsers", "true");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XStudentCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXStudent());
+				output.setData(response.getBody().getXStudents().getXStudent());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXStudents()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXStudents()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -363,7 +386,10 @@ public class AUPP
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -461,7 +487,7 @@ public class AUPP
 	 */
 	private ResponseMulti<XContactType> getXContactUsers(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -476,11 +502,13 @@ public class AUPP
 					.queryParam("getUsers", "true");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
 			//			System.out.println(builder.build().encode().toUriString());
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -492,7 +520,10 @@ public class AUPP
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 }

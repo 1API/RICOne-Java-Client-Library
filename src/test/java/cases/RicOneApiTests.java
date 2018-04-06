@@ -37,39 +37,11 @@ import riconeapi.models.xpress.XTelephoneType;
 public class RicOneApiTests
 {
 	// Test Constants
-	final static String authUrl = AuthServiceProperties.getInstance().getProperty("auth.url");
-	final static String clientId = AuthServiceProperties.getInstance().getProperty("auth.clientId");
-	final static String clientSecret = AuthServiceProperties.getInstance().getProperty("auth.clientSecret");
+	final static String authUrl = "https://auth.test.ricone.org/login";
+	final static String clientId = "dpaDemo";
+	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
+	final static String providerId = "localhost";
 
-	final static String providerId = AuthServiceProperties.getInstance().getProperty("auth.providerId");
-    
-	// Null:
-	static String refId = null;
-    // Lea:
-//  static String refId = "1098EFC6-5374-4D7D-AEAE-58E021CCB146";
-//  static String refId = "8DC360AF-5FC2-465C-94E4-EB9596F3F7C4";
-    // School:
-//	static String refId = "0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C";
-//	static String refId = "BAC59C6E-D8DD-4E21-938A-13A80E555B7E";
-//	static String refId = "106E9449-3FF4-499E-B94F-BCE557C013CE";
-    // Calendar:
-//	static String refId = "0451AF50-40BA-4231-8656-AE4C28AF7426";
-    // Course:
-//	static String refId = "A985F5AF-2139-4C5C-B253-00AEE896259E";
-//	static String refId = "01810477-3494-4EE8-87C7-19BE2BBDC524";
-    // Roster:
-//	static String refId = "9AEF7446-1B9F-4C2A-A7FF-0058C51C0E5F";
-//	static String refId = "93C3E007-D29E-4096-A58C-645C620EC9B9";
-    //	 Staff:
-//	static String refId = "DDB25022-B78E-4C89-9A59-AE877E03CFE3";
-//	static String refId = "190C1A4B-AD63-469B-BF2B-9673C8AC312A";
-	//Student:
-//	static String refId = "4C4A57D5-ED2F-4AFC-8C20-2A309989ED71";
-//	static String refId = "62DF00BD-6A5A-4FE9-AD17-9A03189DAEA5";
-//	static String refId = "87B0AA0D-020A-4E0C-9010-AC1F4E315C74";
-    // Contact 1:
-//	static String refId = "F0BED6E9-8636-4BB3-8295-778D8930B2A1";
-	
 	public static void main(String[] args) throws AuthenticationException
 	{   	
 //		Util.disableSslVerification();
@@ -157,7 +129,7 @@ public class RicOneApiTests
 		if(xPress.getXLeas().getData() != null)
 		{
 			for (XLeaType lea : xPress.getXLeas().getData())
-			{	
+			{
 				System.out.println("refId: " + lea.getRefId());
 				System.out.println("leaName: " + lea.getLeaName());
 				System.out.println("leaRefId: " + lea.getLeaRefId());
@@ -192,17 +164,21 @@ public class RicOneApiTests
 				System.out.println("##### END OTHERPHONENUMBER #####");
 
 				System.out.println("========================================");
+				System.out.println(xPress.getXLeas().getJson());
+				System.out.println(xPress.getXLeas().getXml());
 			}
 		}
-		
+
 	}
 	//RETURN SINGLE LEA
 	public static void XLeas_GetXLea(XPress xPress) throws AuthenticationException
     {
+		String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+
 		if(xPress.getXLea(refId).getData() != null)
 		{
 			XLeaType lea = xPress.getXLea(refId).getData();
-			
+
 			System.out.println("refId: " + lea.getRefId());
 			System.out.println("leaName: " + lea.getLeaName());
 			System.out.println("leaRefId: " + lea.getLeaRefId());
@@ -237,16 +213,19 @@ public class RicOneApiTests
 			System.out.println("##### END OTHERPHONENUMBER #####");
 
 			System.out.println("========================================");
-		}		
+			System.out.println(xPress.getXLea(refId).getJson());
+			System.out.println(xPress.getXLea(refId).getXml());
+		}
     }
 
 	 //RETURN LEAS BY SCHOOL
     public static void XLeas_GetXLeasByXSchool(XPress xPress) throws AuthenticationException
     {
+		String refId = "D99DF539-7D00-4AE9-A752-4E08A3394877";
     	if(xPress.getXLeasByXSchool(refId).getData() != null)
     	{
     		for (XLeaType lea : xPress.getXLeasByXSchool(refId).getData())
-    		{	
+    		{
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
     			System.out.println("leaRefId: " + lea.getLeaRefId());
@@ -281,17 +260,20 @@ public class RicOneApiTests
     			System.out.println("##### END OTHERPHONENUMBER #####");
 
     			System.out.println("========================================");
+				System.out.println(xPress.getXLeasByXSchool(refId).getJson());
+				System.out.println(xPress.getXLeasByXSchool(refId).getXml());
     		}
     	}
     }
-    
+
     //RETURN LEAS BY ROSTER
     public static void XLeas_GetXLeasByXRoster(XPress xPress) throws AuthenticationException
     {
+		String refId = "13FFE7CE-E6CD-4A37-AF85-3ABC26A151E5";
     	if(xPress.getXLeasByXRoster(refId).getData() != null)
     	{
     		for (XLeaType lea : xPress.getXLeasByXRoster(refId).getData())
-    		{	
+    		{
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
     			System.out.println("leaRefId: " + lea.getLeaRefId());
@@ -326,17 +308,20 @@ public class RicOneApiTests
     			System.out.println("##### END OTHERPHONENUMBER #####");
 
     			System.out.println("========================================");
+				System.out.println(xPress.getXLeasByXRoster(refId).getJson());
+				System.out.println(xPress.getXLeasByXRoster(refId).getXml());
     		}
     	}
     }
-    
+
     //RETURN LEAS BY STAFF
     public static void XLeas_GetXLeasByXStaff(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B81C3D-E680-4987-9861-0077381C373E";
     	if(xPress.getXLeasByXStaff(refId).getData() != null)
     	{
     		for (XLeaType lea : xPress.getXLeasByXStaff(refId).getData())
-    		{	
+    		{
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
     			System.out.println("leaRefId: " + lea.getLeaRefId());
@@ -371,17 +356,20 @@ public class RicOneApiTests
     			System.out.println("##### END OTHERPHONENUMBER #####");
 
     			System.out.println("========================================");
+				System.out.println(xPress.getXLeasByXStaff(refId).getJson());
+				System.out.println(xPress.getXLeasByXStaff(refId).getXml());
     		}
     	}
     }
-    
+
     //RETURN LEAS BY STUDENT
     public static void XLeas_GetXLeasByXStudent(XPress xPress) throws AuthenticationException
     {
+		String refId = "A03B9D6E-29DE-4F4E-B6D5-09B132794B19";
     	if(xPress.getXLeasByXStudent(refId).getData() != null)
     	{
     		for (XLeaType lea : xPress.getXLeasByXStudent(refId).getData())
-    		{	
+    		{
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
     			System.out.println("leaRefId: " + lea.getLeaRefId());
@@ -419,14 +407,15 @@ public class RicOneApiTests
     		}
     	}
     }
-    
+
     //RETURN LEAS BY CONTACT
     public static void XLeas_GetXLeasByXContact(XPress xPress) throws AuthenticationException
     {
+		String refId = "F18BC016-9075-49F2-B3D1-9A3CE852DBE9";
     	if(xPress.getXLeasByXContact(refId).getData() != null)
     	{
     		for (XLeaType lea : xPress.getXLeasByXContact(refId).getData())
-    		{	
+    		{
     			System.out.println("refId: " + lea.getRefId());
     			System.out.println("leaName: " + lea.getLeaName());
     			System.out.println("leaRefId: " + lea.getLeaRefId());
@@ -464,10 +453,10 @@ public class RicOneApiTests
     		}
     	}
     }
-    
+
     // #################### xSchools ####################
     //RETURN ALL SCHOOLS
- 
+
     public static void XSchools_GetXSchools(XPress xPress) throws AuthenticationException
     {
     	if(xPress.getXSchools().getData() != null)
@@ -521,6 +510,7 @@ public class RicOneApiTests
     //RETURN SINGLE SCHOOL
     public static void XSchools_GetXSchool(XPress xPress) throws AuthenticationException
     {
+		String refId = "D99DF539-7D00-4AE9-A752-4E08A3394877";
         if(xPress.getXSchool(refId).getData() != null)
         {
         	XSchoolType school = xPress.getXSchool(refId).getData();
@@ -571,6 +561,8 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY LEA
     public static void XSchools_GetXSchoolsByXLea(XPress xPress) throws AuthenticationException
     {
+		String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+
     	if(xPress.getXSchoolsByXLea(refId).getData() != null)
     	{
     		for(XSchoolType school : xPress.getXSchoolsByXLea(refId).getData())
@@ -622,6 +614,7 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY CALENDAR
     public static void XSchools_GetXSchoolsByXCalendar(XPress xPress) throws AuthenticationException
     {
+		String refId = "B0FD06FD-5F35-4D96-B2EA-AA96CD2D0F38";
     	if(xPress.getXSchoolsByXCalendar(refId).getData() !=null)
     	{
 			for (XSchoolType school : xPress.getXSchoolsByXCalendar(refId).getData())
@@ -673,6 +666,7 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY COURSE
     public static void XSchools_GetXSchoolsByXCourse(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B19FDB-86F4-4577-8710-44EA0F861586";
     	if(xPress.getXSchoolsByXCourse(refId).getData() != null)
     	{
     		for(XSchoolType school : xPress.getXSchoolsByXCourse(refId).getData())
@@ -721,10 +715,11 @@ public class RicOneApiTests
             }
     	}
      }
-    
+
     //RETURN SCHOOLS BY ROSTER
     public static void XSchools_GetXSchoolsByXRoster(XPress xPress) throws AuthenticationException
      {
+     	String refId = "13FFE7CE-E6CD-4A37-AF85-3ABC26A151E5";
     	if(xPress.getXSchoolsByXRoster(refId).getData() != null)
     	{
     		for(XSchoolType school : xPress.getXSchoolsByXRoster(refId).getData())
@@ -776,6 +771,7 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY STAFF
     public static void XSchools_GetXSchoolsByXStaff(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B81C3D-E680-4987-9861-0077381C373E";
     	if(xPress.getXSchoolsByXStaff(refId).getData() != null)
     	{
     		for(XSchoolType school : xPress.getXSchoolsByXStaff(refId).getData())
@@ -827,6 +823,7 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY STUDENT
     public static void XSchools_GetXSchoolsByXStudent(XPress xPress) throws AuthenticationException
     {
+		String refId = "A03B9D6E-29DE-4F4E-B6D5-09B132794B19";
     	if(xPress.getXSchoolsByXStudent(refId).getData() != null)
     	{
     		for(XSchoolType school : xPress.getXSchoolsByXStudent(refId).getData())
@@ -878,6 +875,7 @@ public class RicOneApiTests
     //RETURN SCHOOLS BY CONTACT
     public static void XSchools_GetXSchoolsByXContact(XPress xPress) throws AuthenticationException
     {
+		String refId = "F18BC016-9075-49F2-B3D1-9A3CE852DBE9";
     	if(xPress.getXSchoolsByXContact(refId).getData() != null)
     	{
     		for(XSchoolType school : xPress.getXSchoolsByXContact(refId).getData())
@@ -926,7 +924,7 @@ public class RicOneApiTests
             }
     	}
     }
-    
+
     // #################### xCalendars ####################
     //RETURN ALL CALENDARS
     public static void XCalendars_GetXCalendars(XPress xPress) throws AuthenticationException
@@ -958,6 +956,7 @@ public class RicOneApiTests
     //RETURN SINGLE CALENDAR
     public static void XCalendars_GetXCalendar(XPress xPress) throws AuthenticationException
     {
+		String refId = "B0FD06FD-5F35-4D96-B2EA-AA96CD2D0F38";
     	if(xPress.getXCalendar(refId).getData() != null)
     	{
     		XCalendarType calendar = xPress.getXCalendar(refId).getData();
@@ -984,6 +983,8 @@ public class RicOneApiTests
     //RETURN CALENDARS BY LEA
     public static void XCalendars_GetXCalendarsByXLea(XPress xPress) throws AuthenticationException
     {
+		String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+
     	if(xPress.getXCalendarsByXLea(refId).getData() != null)
     	{
     		for(XCalendarType calendar : xPress.getXCalendarsByXLea(refId).getData())
@@ -1011,6 +1012,7 @@ public class RicOneApiTests
     //RETURN CALENDARS BY SCHOOL
     public static void XCalendars_GetXCalendarsByXSchool(XPress xPress) throws AuthenticationException
     {
+		String refId = "D99DF539-7D00-4AE9-A752-4E08A3394877";
     	if(xPress.getXCalendarsByXSchool(refId).getData() != null)
     	{
     		for(XCalendarType calendar : xPress.getXCalendarsByXSchool(refId).getData())
@@ -1035,7 +1037,7 @@ public class RicOneApiTests
             }
     	}
     }
-    
+
     // #################### xCourses ####################
     //RETURN ALL COURSES
     public static void XCourses_GetXCourses(XPress xPress) throws AuthenticationException
@@ -1070,15 +1072,16 @@ public class RicOneApiTests
 
                 System.out.println("========================================");
             }
-    	}      
+    	}
     }
     //RETURN SINGLE COURSE
     public static void XCourses_GetXCourse(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B19FDB-86F4-4577-8710-44EA0F861586";
     	if(xPress.getXCourse(refId).getData() != null)
     	{
     		XCourseType course = xPress.getXCourse(refId).getData();
-        	
+
         	System.out.println("refId: " + course.getRefId());
             System.out.println("schoolRefId: " + course.getSchoolRefId());
             System.out.println("schoolCourseId: " + course.getSchoolCourseId());
@@ -1109,6 +1112,8 @@ public class RicOneApiTests
     //RETURN COURSES BY LEA
     public static void XCourses_GetXCoursesByXLea(XPress xPress) throws AuthenticationException
     {
+		String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+
     	if(xPress.getXCoursesByXLea(refId).getData() != null)
     	{
     		for (XCourseType course : xPress.getXCoursesByXLea(refId).getData())
@@ -1144,6 +1149,7 @@ public class RicOneApiTests
     //RETURN COURSES BY School
     public static void XCourses_GetXCoursesByXSchool(XPress xPress) throws AuthenticationException
     {
+		String refId = "D99DF539-7D00-4AE9-A752-4E08A3394877";
     	if(xPress.getXCoursesByXSchool(refId).getData() != null)
     	{
     		for (XCourseType course : xPress.getXCoursesByXSchool(refId).getData())
@@ -1179,6 +1185,7 @@ public class RicOneApiTests
     //RETURN COURSES BY ROSTER
     public static void XCourses_GetXCoursesByXRoster(XPress xPress) throws AuthenticationException
     {
+		String refId = "13FFE7CE-E6CD-4A37-AF85-3ABC26A151E5";
     	if(xPress.getXCoursesByXRoster(refId).getData() != null)
     	{
 			for (XCourseType course : xPress.getXCoursesByXRoster(refId).getData())
@@ -1211,7 +1218,7 @@ public class RicOneApiTests
 			}
     	}
     }
- 	
+
     // #################### xRosters ####################
     //RETURN ALL ROSTERS
     public static void XRosters_GetXRosters(XPress xPress) throws AuthenticationException
@@ -1230,7 +1237,7 @@ public class RicOneApiTests
                 System.out.println("schoolYear: " + r.getSchoolYear());
                 System.out.println("sessionCode: " + r.getSessionCode());
                 System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
-                
+
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for(XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime())
                 {
@@ -1243,7 +1250,7 @@ public class RicOneApiTests
                     System.out.println("classEndingTime: " + mt.getClassEndingTime());
                 }
                 System.out.println("##### END MEETING TIMES #####");
-                
+
                 System.out.println("##### BEGIN STUDENTS #####");
                 for(XPersonReferenceType student : r.getStudents().getStudentReference())
                 {
@@ -1253,7 +1260,7 @@ public class RicOneApiTests
                     System.out.println("familyName: " + student.getFamilyName());
                 }
                 System.out.println("##### END STUDENTS #####");
-                
+
                 System.out.println("##### BEGIN PRIMARY STAFF #####");
                 System.out.println("refId: " + r.getPrimaryStaff().getStaffPersonReference().getRefId());
                 System.out.println("localId: " + r.getPrimaryStaff().getStaffPersonReference().getLocalId());
@@ -1281,6 +1288,7 @@ public class RicOneApiTests
     //RETURN SINGLE ROSTER
     public static void XRosters_GetXRoster(XPress xPress) throws AuthenticationException
     {
+		String refId = "13FFE7CE-E6CD-4A37-AF85-3ABC26A151E5";
         if(xPress.getXRoster(refId).getData() != null)
         {
         	XRosterType r = xPress.getXRoster(refId).getData();
@@ -1295,7 +1303,7 @@ public class RicOneApiTests
             System.out.println("schoolYear: " + r.getSchoolYear());
             System.out.println("sessionCode: " + r.getSessionCode());
             System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
-            
+
             System.out.println("##### BEGIN MEETING TIMES #####");
             for(XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime())
             {
@@ -1308,7 +1316,7 @@ public class RicOneApiTests
                 System.out.println("classEndingTime: " + mt.getClassEndingTime());
             }
             System.out.println("##### END MEETING TIMES #####");
-            
+
             System.out.println("##### BEGIN STUDENTS #####");
             for(XPersonReferenceType student : r.getStudents().getStudentReference())
             {
@@ -1318,7 +1326,7 @@ public class RicOneApiTests
                 System.out.println("familyName: " + student.getFamilyName());
             }
             System.out.println("##### END STUDENTS #####");
-            
+
             System.out.println("##### BEGIN PRIMARY STAFF #####");
             System.out.println("refId: " + r.getPrimaryStaff().getStaffPersonReference().getRefId());
             System.out.println("localId: " + r.getPrimaryStaff().getStaffPersonReference().getLocalId());
@@ -1345,6 +1353,8 @@ public class RicOneApiTests
     //RETURN ROSTERS BY LEA
     public static void XRosters_GetXRostersByXLea(XPress xPress) throws AuthenticationException
     {
+		String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+
     	if(xPress.getXRostersByXLea(refId).getData() != null)
     	{
     		for (XRosterType r : xPress.getXRostersByXLea(refId).getData())
@@ -1359,7 +1369,7 @@ public class RicOneApiTests
                 System.out.println("schoolYear: " + r.getSchoolYear());
                 System.out.println("sessionCode: " + r.getSessionCode());
                 System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
-                
+
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for(XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime())
                 {
@@ -1372,7 +1382,7 @@ public class RicOneApiTests
                     System.out.println("classEndingTime: " + mt.getClassEndingTime());
                 }
                 System.out.println("##### END MEETING TIMES #####");
-                
+
                 System.out.println("##### BEGIN STUDENTS #####");
                 for(XPersonReferenceType student : r.getStudents().getStudentReference())
                 {
@@ -1382,7 +1392,7 @@ public class RicOneApiTests
                     System.out.println("familyName: " + student.getFamilyName());
                 }
                 System.out.println("##### END STUDENTS #####");
-                
+
                 System.out.println("##### BEGIN PRIMARY STAFF #####");
                 System.out.println("refId: " + r.getPrimaryStaff().getStaffPersonReference().getRefId());
                 System.out.println("localId: " + r.getPrimaryStaff().getStaffPersonReference().getLocalId());
@@ -1410,6 +1420,7 @@ public class RicOneApiTests
     //RETURN ROSTERS BY SCHOOL
     public static void XRosters_GetXRostersByXSchool(XPress xPress) throws AuthenticationException
     {
+		String refId = "D99DF539-7D00-4AE9-A752-4E08A3394877";
     	if(xPress.getXRostersByXSchool(refId).getData() != null)
     	{
 			for (XRosterType r : xPress.getXRostersByXSchool(refId).getData())
@@ -1475,6 +1486,7 @@ public class RicOneApiTests
     //RETURN ROSTERS BY CROUSE
     public static void XRosters_GetXRostersByXCourse(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B19FDB-86F4-4577-8710-44EA0F861586";
     	if(xPress.getXRostersByXCourse(refId).getData() != null)
     	{
     		for (XRosterType r : xPress.getXRostersByXCourse(refId).getData())
@@ -1489,7 +1501,7 @@ public class RicOneApiTests
                 System.out.println("schoolYear: " + r.getSchoolYear());
                 System.out.println("sessionCode: " + r.getSessionCode());
                 System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
-                
+
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for(XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime())
                 {
@@ -1502,7 +1514,7 @@ public class RicOneApiTests
                     System.out.println("classEndingTime: " + mt.getClassEndingTime());
                 }
                 System.out.println("##### END MEETING TIMES #####");
-                
+
                 System.out.println("##### BEGIN STUDENTS #####");
                 for(XPersonReferenceType student : r.getStudents().getStudentReference())
                 {
@@ -1512,7 +1524,7 @@ public class RicOneApiTests
                     System.out.println("familyName: " + student.getFamilyName());
                 }
                 System.out.println("##### END STUDENTS #####");
-                
+
                 System.out.println("##### BEGIN PRIMARY STAFF #####");
                 System.out.println("refId: " + r.getPrimaryStaff().getStaffPersonReference().getRefId());
                 System.out.println("localId: " + r.getPrimaryStaff().getStaffPersonReference().getLocalId());
@@ -1540,6 +1552,7 @@ public class RicOneApiTests
     //RETURN ROSTERS BY STAFF
     public static void XRosters_GetXRostersByXStaff(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B81C3D-E680-4987-9861-0077381C373E";
     	if(xPress.getXRostersByXStaff(refId).getData() != null)
     	{
     		for (XRosterType r : xPress.getXRostersByXStaff(refId).getData())
@@ -1554,7 +1567,7 @@ public class RicOneApiTests
                 System.out.println("schoolYear: " + r.getSchoolYear());
                 System.out.println("sessionCode: " + r.getSessionCode());
                 System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
-                
+
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for(XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime())
                 {
@@ -1567,7 +1580,7 @@ public class RicOneApiTests
                     System.out.println("classEndingTime: " + mt.getClassEndingTime());
                 }
                 System.out.println("##### END MEETING TIMES #####");
-                
+
                 System.out.println("##### BEGIN STUDENTS #####");
                 for(XPersonReferenceType student : r.getStudents().getStudentReference())
                 {
@@ -1577,7 +1590,7 @@ public class RicOneApiTests
                     System.out.println("familyName: " + student.getFamilyName());
                 }
                 System.out.println("##### END STUDENTS #####");
-                
+
                 System.out.println("##### BEGIN PRIMARY STAFF #####");
                 System.out.println("refId: " + r.getPrimaryStaff().getStaffPersonReference().getRefId());
                 System.out.println("localId: " + r.getPrimaryStaff().getStaffPersonReference().getLocalId());
@@ -1605,6 +1618,7 @@ public class RicOneApiTests
     //RETURN ROSTERS BY STUDENT
     public static void XRosters_GetXRostersByXStudent(XPress xPress) throws AuthenticationException
     {
+		String refId = "A03B9D6E-29DE-4F4E-B6D5-09B132794B19";
     	if(xPress.getXRostersByXStudent(refId).getData() != null)
     	{
     		for (XRosterType r : xPress.getXRostersByXStudent(refId).getData())
@@ -1619,7 +1633,7 @@ public class RicOneApiTests
                 System.out.println("schoolYear: " + r.getSchoolYear());
                 System.out.println("sessionCode: " + r.getSessionCode());
                 System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
-                
+
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for(XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime())
                 {
@@ -1632,7 +1646,7 @@ public class RicOneApiTests
                     System.out.println("classEndingTime: " + mt.getClassEndingTime());
                 }
                 System.out.println("##### END MEETING TIMES #####");
-                
+
                 System.out.println("##### BEGIN STUDENTS #####");
                 for(XPersonReferenceType student : r.getStudents().getStudentReference())
                 {
@@ -1642,7 +1656,7 @@ public class RicOneApiTests
                     System.out.println("familyName: " + student.getFamilyName());
                 }
                 System.out.println("##### END STUDENTS #####");
-                
+
                 System.out.println("##### BEGIN PRIMARY STAFF #####");
                 System.out.println("refId: " + r.getPrimaryStaff().getStaffPersonReference().getRefId());
                 System.out.println("localId: " + r.getPrimaryStaff().getStaffPersonReference().getLocalId());
@@ -1667,7 +1681,7 @@ public class RicOneApiTests
             }
     	}
     }
- 	
+
     // #################### xStaffs ####################
     //RETURN ALL STAFFS
     public static void XStaffs_GetXStaffs(XPress xPress) throws AuthenticationException
@@ -1719,8 +1733,9 @@ public class RicOneApiTests
     //RETURN SINGLE STAFF
     public static void XStaffs_GetXStaff(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B81C3D-E680-4987-9861-0077381C373E";
         if(xPress.getXStaff(refId).getData() != null)
-        {  		
+        {
         	XStaffType s = xPress.getXStaff(refId).getData();
 
             System.out.println("refId: " + s.getRefId());
@@ -1765,6 +1780,8 @@ public class RicOneApiTests
     //RETURN STAFFS BY LEA
     public static void XStaffs_GetXStaffsByXLea(XPress xPress) throws AuthenticationException
     {
+		String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+
     	if(xPress.getXStaffsByXLea(refId).getData() != null)
     	{
     		for(XStaffType s : xPress.getXStaffsByXLea(refId).getData())
@@ -1812,6 +1829,7 @@ public class RicOneApiTests
     //RETURN STAFFS BY SCHOOL
     public static void XStaffs_GetXStaffsByXSchool(XPress xPress) throws AuthenticationException
     {
+		String refId = "D99DF539-7D00-4AE9-A752-4E08A3394877";
     	if(xPress.getXStaffsByXSchool(refId).getData() != null)
     	{
     		for(XStaffType s : xPress.getXStaffsByXSchool(refId).getData())
@@ -1859,6 +1877,7 @@ public class RicOneApiTests
     //RETURN STAFFS BY COURSE
     public static void XStaffs_GetXStaffsByXCourse(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B19FDB-86F4-4577-8710-44EA0F861586";
     	if(xPress.getXStaffsByXCourse(refId).getData() != null)
     	{
     		for(XStaffType s : xPress.getXStaffsByXCourse(refId).getData())
@@ -1906,6 +1925,7 @@ public class RicOneApiTests
     //RETURN STAFFS BY ROSTER
     public static void XStaffs_GetXStaffsByXRoster(XPress xPress) throws AuthenticationException
     {
+		String refId = "13FFE7CE-E6CD-4A37-AF85-3ABC26A151E5";
     	if(xPress.getXStaffsByXRoster(refId).getData() != null)
     	{
     		for(XStaffType s : xPress.getXStaffsByXRoster(refId).getData())
@@ -1953,6 +1973,7 @@ public class RicOneApiTests
   //RETURN STAFFS BY ROSTER
     public static void XStaffs_GetXStaffsByXStudent(XPress xPress) throws AuthenticationException
     {
+		String refId = "A03B9D6E-29DE-4F4E-B6D5-09B132794B19";
     	if(xPress.getXStaffsByXStudent(refId).getData() != null)
     	{
     		for(XStaffType s : xPress.getXStaffsByXStudent(refId).getData())
@@ -2000,7 +2021,7 @@ public class RicOneApiTests
  	// #################### xStudents ####################
     //RETURN ALL STUDENTS
     public static void XStudents_GetXStudents(XPress xPress) throws AuthenticationException
-    { 
+    {
     	if(xPress.getXStudents().getData() != null)
     	{
     		for(XStudentType s : xPress.getXStudents().getData())
@@ -2110,7 +2131,7 @@ public class RicOneApiTests
                 System.out.println("##### END ENROLLMENT #####");
                 System.out.println("##### BEGIN OTHERENROLLMENT #####");
                 for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
-                {  
+                {
                     System.out.println("leaRefId: " + e.getLeaRefId());
                     System.out.println("schoolRefId: " + e.getSchoolRefId());
                     System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
@@ -2132,7 +2153,7 @@ public class RicOneApiTests
                     System.out.println("localId: " + e.getCounselor().getLocalId());
                     System.out.println("givenName: " + e.getCounselor().getGivenName());
                     System.out.println("familyName: " + e.getCounselor().getFamilyName());
-                    System.out.println("##### END COUNSELOR #####"); 
+                    System.out.println("##### END COUNSELOR #####");
                 }
                 System.out.println("##### END OTHERENROLLMENT #####");
                 System.out.println("##### BEGIN ACADEMICSUMMARY #####");
@@ -2243,8 +2264,9 @@ public class RicOneApiTests
     //RETURN SINGLE STUDENT
     public static void XStudents_GetXStudent(XPress xPress) throws AuthenticationException
     {
+		String refId = "A03B9D6E-29DE-4F4E-B6D5-09B132794B19";
     	if(xPress.getXStudent(refId).getData() != null)
-    	{	
+    	{
     		 	XStudentType s = xPress.getXStudent(refId).getData();
 
     	        System.out.println("refId: " + s.getRefId());
@@ -2352,7 +2374,7 @@ public class RicOneApiTests
     	        System.out.println("##### END ENROLLMENT #####");
     	        System.out.println("##### BEGIN OTHERENROLLMENT #####");
     	        for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
-    	        {  
+    	        {
     	            System.out.println("leaRefId: " + e.getLeaRefId());
     	            System.out.println("schoolRefId: " + e.getSchoolRefId());
     	            System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
@@ -2374,7 +2396,7 @@ public class RicOneApiTests
     	            System.out.println("localId: " + e.getCounselor().getLocalId());
     	            System.out.println("givenName: " + e.getCounselor().getGivenName());
     	            System.out.println("familyName: " + e.getCounselor().getFamilyName());
-    	            System.out.println("##### END COUNSELOR #####"); 
+    	            System.out.println("##### END COUNSELOR #####");
     	        }
     	        System.out.println("##### END OTHERENROLLMENT #####");
     	        System.out.println("##### BEGIN ACADEMICSUMMARY #####");
@@ -2484,6 +2506,8 @@ public class RicOneApiTests
     //RETURN STUDENTS BY LEA
     public static void XStudents_GetXStudentsByXLea(XPress xPress) throws AuthenticationException
     {
+		String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+
     	if(xPress.getXStudentsByXLea(refId).getData() != null)
     	{
     		for(XStudentType s : xPress.getXStudentsByXLea(refId).getData())
@@ -2593,7 +2617,7 @@ public class RicOneApiTests
                 System.out.println("##### END ENROLLMENT #####");
                 System.out.println("##### BEGIN OTHERENROLLMENT #####");
                 for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
-                {  
+                {
                     System.out.println("leaRefId: " + e.getLeaRefId());
                     System.out.println("schoolRefId: " + e.getSchoolRefId());
                     System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
@@ -2615,7 +2639,7 @@ public class RicOneApiTests
                     System.out.println("localId: " + e.getCounselor().getLocalId());
                     System.out.println("givenName: " + e.getCounselor().getGivenName());
                     System.out.println("familyName: " + e.getCounselor().getFamilyName());
-                    System.out.println("##### END COUNSELOR #####"); 
+                    System.out.println("##### END COUNSELOR #####");
                 }
                 System.out.println("##### END OTHERENROLLMENT #####");
                 System.out.println("##### BEGIN ACADEMICSUMMARY #####");
@@ -2724,8 +2748,9 @@ public class RicOneApiTests
     	}
     }
     //RETURN STUDENTS BY SCHOOL
-    public static void XStudents_GetXStudentsByXSchool(XPress xPress) throws AuthenticationException 
+    public static void XStudents_GetXStudentsByXSchool(XPress xPress) throws AuthenticationException
     {
+		String refId = "D99DF539-7D00-4AE9-A752-4E08A3394877";
     	if(xPress.getXStudentsByXSchool(refId).getData() != null)
     	{
     		for(XStudentType s : xPress.getXStudentsByXSchool(refId).getData())
@@ -2835,7 +2860,7 @@ public class RicOneApiTests
                 System.out.println("##### END ENROLLMENT #####");
                 System.out.println("##### BEGIN OTHERENROLLMENT #####");
                 for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
-                {  
+                {
                     System.out.println("leaRefId: " + e.getLeaRefId());
                     System.out.println("schoolRefId: " + e.getSchoolRefId());
                     System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
@@ -2857,7 +2882,7 @@ public class RicOneApiTests
                     System.out.println("localId: " + e.getCounselor().getLocalId());
                     System.out.println("givenName: " + e.getCounselor().getGivenName());
                     System.out.println("familyName: " + e.getCounselor().getFamilyName());
-                    System.out.println("##### END COUNSELOR #####"); 
+                    System.out.println("##### END COUNSELOR #####");
                 }
                 System.out.println("##### END OTHERENROLLMENT #####");
                 System.out.println("##### BEGIN ACADEMICSUMMARY #####");
@@ -2968,6 +2993,7 @@ public class RicOneApiTests
     //RETURN STUDENTS BY ROSTER
     public static void XStudents_GetXStudentsByXRoster(XPress xPress) throws AuthenticationException
     {
+		String refId = "13FFE7CE-E6CD-4A37-AF85-3ABC26A151E5";
     	if(xPress.getXStudentsByXRoster(refId).getData() != null)
     	{
     		for(XStudentType s : xPress.getXStudentsByXRoster(refId).getData())
@@ -3077,7 +3103,7 @@ public class RicOneApiTests
                 System.out.println("##### END ENROLLMENT #####");
                 System.out.println("##### BEGIN OTHERENROLLMENT #####");
                 for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
-                {  
+                {
                     System.out.println("leaRefId: " + e.getLeaRefId());
                     System.out.println("schoolRefId: " + e.getSchoolRefId());
                     System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
@@ -3099,7 +3125,7 @@ public class RicOneApiTests
                     System.out.println("localId: " + e.getCounselor().getLocalId());
                     System.out.println("givenName: " + e.getCounselor().getGivenName());
                     System.out.println("familyName: " + e.getCounselor().getFamilyName());
-                    System.out.println("##### END COUNSELOR #####"); 
+                    System.out.println("##### END COUNSELOR #####");
                 }
                 System.out.println("##### END OTHERENROLLMENT #####");
                 System.out.println("##### BEGIN ACADEMICSUMMARY #####");
@@ -3210,6 +3236,7 @@ public class RicOneApiTests
     //RETURN STUDENTS BY STAFF
     public static void XStudents_GetXStudentsByXStaff(XPress xPress) throws AuthenticationException
     {
+		String refId = "09B81C3D-E680-4987-9861-0077381C373E";
     	if(xPress.getXStudentsByXStaff(refId).getData() != null)
     	{
     		for(XStudentType s : xPress.getXStudentsByXStaff(refId).getData())
@@ -3319,7 +3346,7 @@ public class RicOneApiTests
                 System.out.println("##### END ENROLLMENT #####");
                 System.out.println("##### BEGIN OTHERENROLLMENT #####");
                 for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
-                {  
+                {
                     System.out.println("leaRefId: " + e.getLeaRefId());
                     System.out.println("schoolRefId: " + e.getSchoolRefId());
                     System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
@@ -3341,7 +3368,7 @@ public class RicOneApiTests
                     System.out.println("localId: " + e.getCounselor().getLocalId());
                     System.out.println("givenName: " + e.getCounselor().getGivenName());
                     System.out.println("familyName: " + e.getCounselor().getFamilyName());
-                    System.out.println("##### END COUNSELOR #####"); 
+                    System.out.println("##### END COUNSELOR #####");
                 }
                 System.out.println("##### END OTHERENROLLMENT #####");
                 System.out.println("##### BEGIN ACADEMICSUMMARY #####");
@@ -3452,6 +3479,7 @@ public class RicOneApiTests
     //RETURN STUDENTS BY CONTACT
     public static void XStudents_GetXStudentsByXContact(XPress xPress) throws AuthenticationException
     {
+		String refId = "F18BC016-9075-49F2-B3D1-9A3CE852DBE9";
     	if(xPress.getXStudentsByXContact(refId).getData() != null)
     	{
     		for(XStudentType s : xPress.getXStudentsByXContact(refId).getData())
@@ -3561,7 +3589,7 @@ public class RicOneApiTests
                 System.out.println("##### END ENROLLMENT #####");
                 System.out.println("##### BEGIN OTHERENROLLMENT #####");
                 for(XEnrollmentType e : s.getOtherEnrollments().getEnrollment())
-                {  
+                {
                     System.out.println("leaRefId: " + e.getLeaRefId());
                     System.out.println("schoolRefId: " + e.getSchoolRefId());
                     System.out.println("studentSchoolAssociationRefId: " + e.getStudentSchoolAssociationRefId());
@@ -3583,7 +3611,7 @@ public class RicOneApiTests
                     System.out.println("localId: " + e.getCounselor().getLocalId());
                     System.out.println("givenName: " + e.getCounselor().getGivenName());
                     System.out.println("familyName: " + e.getCounselor().getFamilyName());
-                    System.out.println("##### END COUNSELOR #####"); 
+                    System.out.println("##### END COUNSELOR #####");
                 }
                 System.out.println("##### END OTHERENROLLMENT #####");
                 System.out.println("##### BEGIN ACADEMICSUMMARY #####");
@@ -3687,7 +3715,7 @@ public class RicOneApiTests
                     System.out.println("code: " + l.getCode());
                 }
                 System.out.println("##### END LANGUAGES #####");
-                System.out.println("========================================");        
+                System.out.println("========================================");
             }
     	}
     }
@@ -3789,6 +3817,7 @@ public class RicOneApiTests
     //RETURN SINGLE CONTACT
     public static void XContacts_GetXSContact(XPress xPress) throws AuthenticationException
     {
+		String refId = "F18BC016-9075-49F2-B3D1-9A3CE852DBE9";
     	if(xPress.getXContact(refId).getData() != null)
     	{
     		XContactType c = xPress.getXContact(refId).getData();
@@ -3881,6 +3910,8 @@ public class RicOneApiTests
     //RETURN CONTACTS BY LEA
     public static void XContacts_GetXContactsByXLea(XPress xPress) throws AuthenticationException
     {
+		String refId = "9BA8379D-9A9D-4D59-9202-E976CADF5526";
+
     	if(xPress.getXContactsByXLea(refId).getData() != null)
     	{
     		for(XContactType c : xPress.getXContactsByXLea(refId).getData())
@@ -3974,6 +4005,7 @@ public class RicOneApiTests
     //RETURN CONTACTS BY SCHOOL
     public static void XContacts_GetXContactsByXSchool(XPress xPress) throws AuthenticationException
     {
+		String refId = "D99DF539-7D00-4AE9-A752-4E08A3394877";
     	if(xPress.getXContactsByXSchool(refId).getData() != null)
     	{
     		for(XContactType c : xPress.getXContactsByXSchool(refId).getData())
@@ -4067,6 +4099,7 @@ public class RicOneApiTests
     //RETURN CONTACTS BY STUDENT
     public static void XContacts_GetXContactsByXStudent(XPress xPress) throws AuthenticationException
     {
+		String refId = "A03B9D6E-29DE-4F4E-B6D5-09B132794B19";
     	if(xPress.getXContactsByXStudent(refId).getData() != null)
     	{
     		for(XContactType c : xPress.getXContactsByXStudent(refId).getData())

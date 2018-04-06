@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "sessionType",
         "sessionCode",
@@ -82,7 +82,7 @@ public class XSessionType {
     }
 
     @JsonProperty("markingTerm")
-    public Boolean getMarkingTerm() {
+    public Boolean isMarkingTerm() {
         return markingTerm;
     }
 
@@ -92,7 +92,7 @@ public class XSessionType {
     }
 
     @JsonProperty("schedulingTerm")
-    public Boolean getSchedulingTerm() {
+    public Boolean isSchedulingTerm() {
         return schedulingTerm;
     }
 

@@ -10,15 +10,6 @@ import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
-import riconeapi.models.xpress.XCalendarType;
-import riconeapi.models.xpress.XContactType;
-import riconeapi.models.xpress.XCourseType;
-import riconeapi.models.xpress.XLeaType;
-import riconeapi.models.xpress.XRosterType;
-import riconeapi.models.xpress.XSchoolType;
-import riconeapi.models.xpress.XSessionType;
-import riconeapi.models.xpress.XStaffType;
-import riconeapi.models.xpress.XStudentType;
 
 public class ChangesSince
 {

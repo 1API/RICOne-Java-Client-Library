@@ -1,5 +1,6 @@
 package riconeapi.common.paths;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,8 +13,9 @@ import riconeapi.authentication.Authenticator;
 import riconeapi.common.ResponseMulti;
 import riconeapi.common.ResponseSingle;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.xpress.XCalendarCollectionType;
+import riconeapi.models.xpress.XCalendarCollectionTypeWrapper;
 import riconeapi.models.xpress.XCalendarType;
+import riconeapi.models.xpress.XCalendarTypeWrapper;
 
 public class XCalendarsPath
 {
@@ -39,7 +41,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -52,11 +54,13 @@ public class XCalendarsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class);
+			response = rt.exchange(baseApiUrl + "xCalendars", HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -68,7 +72,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -80,7 +87,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendars(String opaqueMarker) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -93,11 +100,13 @@ public class XCalendarsPath
 					.path("xCalendars")
 					.queryParam("changesSinceMarker", opaqueMarker);
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XCalendarCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -109,7 +118,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -120,7 +132,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendars() throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -131,11 +143,13 @@ public class XCalendarsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class);
+			response = rt.exchange(baseApiUrl + "xCalendars", HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -147,7 +161,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -161,7 +178,7 @@ public class XCalendarsPath
 	 */
 	public ResponseSingle<XCalendarType> getXCalendar(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarType> response;
+		ResponseEntity<XCalendarTypeWrapper> response;
 		ResponseSingle<XCalendarType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -174,11 +191,13 @@ public class XCalendarsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xCalendars/{refId}", HttpMethod.GET, entity, XCalendarType.class, refId);
+			response = rt.exchange(baseApiUrl + "xCalendars/{refId}", HttpMethod.GET, entity, XCalendarTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
+				output.setData(response.getBody().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendar()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendar()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -190,7 +209,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -202,7 +224,7 @@ public class XCalendarsPath
 	 */
 	public ResponseSingle<XCalendarType> getXCalendar(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarType> response;
+		ResponseEntity<XCalendarTypeWrapper> response;
 		ResponseSingle<XCalendarType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -213,11 +235,13 @@ public class XCalendarsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xCalendars/{refId}", HttpMethod.GET, entity, XCalendarType.class, refId);
+			response = rt.exchange(baseApiUrl + "xCalendars/{refId}", HttpMethod.GET, entity, XCalendarTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
+				output.setData(response.getBody().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendar()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendar()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -229,7 +253,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -243,7 +270,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -256,11 +283,13 @@ public class XCalendarsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -272,7 +301,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -284,7 +316,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -295,11 +327,13 @@ public class XCalendarsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -311,7 +345,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -324,7 +361,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -336,11 +373,13 @@ public class XCalendarsPath
 			headers.set("IdType", idType);
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{id}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, id);
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -352,7 +391,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -366,7 +408,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -379,11 +421,13 @@ public class XCalendarsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -395,7 +439,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -407,7 +454,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -418,11 +465,13 @@ public class XCalendarsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -434,7 +483,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -447,7 +499,7 @@ public class XCalendarsPath
 	 */
 	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XCalendarCollectionType> response;
+		ResponseEntity<XCalendarCollectionTypeWrapper> response;
 		ResponseMulti<XCalendarType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -459,11 +511,13 @@ public class XCalendarsPath
 			headers.set("IdType", idType);
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{id}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionType.class, id);
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xCalendars", HttpMethod.GET, entity, XCalendarCollectionTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXCalendar());
+				output.setData(response.getBody().getXCalendars().getXCalendar());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXCalendars()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXCalendars()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -475,7 +529,10 @@ public class XCalendarsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 }

@@ -1,333 +1,171 @@
 
 package riconeapi.models.xpress;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
-/**
- * <p>Java class for xContactStudentRelationshipType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xContactStudentRelationshipType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="studentRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType"/>
- *         &lt;element name="relationshipCode" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonRelationshipToLearnerType" minOccurs="0"/>
- *         &lt;element name="restrictions" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="livesWith" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="primaryContactIndicator" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="emergencyContactIndicator" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="financialResponsibilityIndicator" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="custodialIndicator" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="communicationsIndicator" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
- *         &lt;element name="contactSequence" type="{http://www.w3.org/2001/XMLSchema}integer" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xContactStudentRelationshipType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "studentRefId",
-    "relationshipCode",
-    "restrictions",
-    "livesWith",
-    "primaryContactIndicator",
-    "emergencyContactIndicator",
-    "financialResponsibilityIndicator",
-    "custodialIndicator",
-    "communicationsIndicator",
-    "contactSequence"
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "studentRefId",
+        "relationshipCode",
+        "restrictions",
+        "livesWith",
+        "primaryContactIndicator",
+        "emergencyContactIndicator",
+        "financialResponsibilityIndicator",
+        "custodialIndicator",
+        "communicationsIndicator",
+        "contactSequence"
 })
 public class XContactStudentRelationshipType {
 
-	public XContactStudentRelationshipType()
-    {
-        studentRefId = null;
-        relationshipCode = null;
-        restrictions = null;
-        livesWith = null;
-        primaryContactIndicator = null;
-        emergencyContactIndicator = null;
-        financialResponsibilityIndicator = null;
-        custodialIndicator = null;
-        communicationsIndicator = null;
-        contactSequence = null;
-    }
-	
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String studentRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String relationshipCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected String restrictions;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected Boolean livesWith;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected Boolean primaryContactIndicator;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected Boolean emergencyContactIndicator;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected Boolean financialResponsibilityIndicator;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected Boolean custodialIndicator;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected Boolean communicationsIndicator;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected BigInteger contactSequence;
+    @JsonProperty("studentRefId")
+    private String studentRefId;
+    @JsonProperty("relationshipCode")
+    private String relationshipCode;
+    @JsonProperty("restrictions")
+    private String restrictions;
+    @JsonProperty("livesWith")
+    private Boolean livesWith;
+    @JsonProperty("primaryContactIndicator")
+    private Boolean primaryContactIndicator;
+    @JsonProperty("emergencyContactIndicator")
+    private Boolean emergencyContactIndicator;
+    @JsonProperty("financialResponsibilityIndicator")
+    private Boolean financialResponsibilityIndicator;
+    @JsonProperty("custodialIndicator")
+    private Boolean custodialIndicator;
+    @JsonProperty("communicationsIndicator")
+    private Boolean communicationsIndicator;
+    @JsonProperty("contactSequence")
+    private BigInteger contactSequence;
 
-    /**
-     * Gets the value of the studentRefId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    public XContactStudentRelationshipType() {
+    }
+
+    public XContactStudentRelationshipType(String studentRefId, String relationshipCode, String restrictions, Boolean livesWith, Boolean primaryContactIndicator, Boolean emergencyContactIndicator, Boolean financialResponsibilityIndicator, Boolean custodialIndicator, Boolean communicationsIndicator, BigInteger contactSequence) {
+        super();
+        this.studentRefId = studentRefId;
+        this.relationshipCode = relationshipCode;
+        this.restrictions = restrictions;
+        this.livesWith = livesWith;
+        this.primaryContactIndicator = primaryContactIndicator;
+        this.emergencyContactIndicator = emergencyContactIndicator;
+        this.financialResponsibilityIndicator = financialResponsibilityIndicator;
+        this.custodialIndicator = custodialIndicator;
+        this.communicationsIndicator = communicationsIndicator;
+        this.contactSequence = contactSequence;
+    }
+
+    @JsonProperty("studentRefId")
     public String getStudentRefId() {
         return studentRefId;
     }
 
-    /**
-     * Sets the value of the studentRefId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStudentRefId(String value) {
-        this.studentRefId = value;
+    @JsonProperty("studentRefId")
+    public void setStudentRefId(String studentRefId) {
+        this.studentRefId = studentRefId;
     }
 
-    /**
-     * Gets the value of the relationshipCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("relationshipCode")
     public String getRelationshipCode() {
         return relationshipCode;
     }
 
-    /**
-     * Sets the value of the relationshipCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRelationshipCode(String value) {
-        this.relationshipCode = value;
+    @JsonProperty("relationshipCode")
+    public void setRelationshipCode(String relationshipCode) {
+        this.relationshipCode = relationshipCode;
     }
 
-    /**
-     * Gets the value of the restrictions property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("restrictions")
     public String getRestrictions() {
         return restrictions;
     }
 
-    /**
-     * Sets the value of the restrictions property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRestrictions(String value) {
-        this.restrictions = value;
+    @JsonProperty("restrictions")
+    public void setRestrictions(String restrictions) {
+        this.restrictions = restrictions;
     }
 
-    /**
-     * Gets the value of the livesWith property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
+    @JsonProperty("livesWith")
     public Boolean isLivesWith() {
         return livesWith;
     }
 
-    /**
-     * Sets the value of the livesWith property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setLivesWith(Boolean value) {
-        this.livesWith = value;
+    @JsonProperty("livesWith")
+    public void setLivesWith(Boolean livesWith) {
+        this.livesWith = livesWith;
     }
 
-    /**
-     * Gets the value of the primaryContactIndicator property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
+    @JsonProperty("primaryContactIndicator")
     public Boolean isPrimaryContactIndicator() {
         return primaryContactIndicator;
     }
 
-    /**
-     * Sets the value of the primaryContactIndicator property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setPrimaryContactIndicator(Boolean value) {
-        this.primaryContactIndicator = value;
+    @JsonProperty("primaryContactIndicator")
+    public void setPrimaryContactIndicator(Boolean primaryContactIndicator) {
+        this.primaryContactIndicator = primaryContactIndicator;
     }
 
-    /**
-     * Gets the value of the emergencyContactIndicator property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
+    @JsonProperty("emergencyContactIndicator")
     public Boolean isEmergencyContactIndicator() {
         return emergencyContactIndicator;
     }
 
-    /**
-     * Sets the value of the emergencyContactIndicator property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setEmergencyContactIndicator(Boolean value) {
-        this.emergencyContactIndicator = value;
+    @JsonProperty("emergencyContactIndicator")
+    public void setEmergencyContactIndicator(Boolean emergencyContactIndicator) {
+        this.emergencyContactIndicator = emergencyContactIndicator;
     }
 
-    /**
-     * Gets the value of the financialResponsibilityIndicator property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
+    @JsonProperty("financialResponsibilityIndicator")
     public Boolean isFinancialResponsibilityIndicator() {
         return financialResponsibilityIndicator;
     }
 
-    /**
-     * Sets the value of the financialResponsibilityIndicator property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setFinancialResponsibilityIndicator(Boolean value) {
-        this.financialResponsibilityIndicator = value;
+    @JsonProperty("financialResponsibilityIndicator")
+    public void setFinancialResponsibilityIndicator(Boolean financialResponsibilityIndicator) {
+        this.financialResponsibilityIndicator = financialResponsibilityIndicator;
     }
 
-    /**
-     * Gets the value of the custodialIndicator property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
+    @JsonProperty("custodialIndicator")
     public Boolean isCustodialIndicator() {
         return custodialIndicator;
     }
 
-    /**
-     * Sets the value of the custodialIndicator property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setCustodialIndicator(Boolean value) {
-        this.custodialIndicator = value;
+    @JsonProperty("custodialIndicator")
+    public void setCustodialIndicator(Boolean custodialIndicator) {
+        this.custodialIndicator = custodialIndicator;
     }
 
-    /**
-     * Gets the value of the communicationsIndicator property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
+    @JsonProperty("communicationsIndicator")
     public Boolean isCommunicationsIndicator() {
         return communicationsIndicator;
     }
 
-    /**
-     * Sets the value of the communicationsIndicator property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setCommunicationsIndicator(Boolean value) {
-        this.communicationsIndicator = value;
+    @JsonProperty("communicationsIndicator")
+    public void setCommunicationsIndicator(Boolean communicationsIndicator) {
+        this.communicationsIndicator = communicationsIndicator;
     }
 
-    /**
-     * Gets the value of the contactSequence property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
-     */
+    @JsonProperty("contactSequence")
     public BigInteger getContactSequence() {
         return contactSequence;
     }
 
-    /**
-     * Sets the value of the contactSequence property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
-     */
-    public void setContactSequence(BigInteger value) {
-        this.contactSequence = value;
+    @JsonProperty("contactSequence")
+    public void setContactSequence(BigInteger contactSequence) {
+        this.contactSequence = contactSequence;
     }
 
+    @Override public String toString()
+    {
+        return "XContactStudentRelationshipType{" + "studentRefId='" + studentRefId + '\'' + ", relationshipCode='" + relationshipCode + '\'' + ", restrictions='" + restrictions + '\'' + ", livesWith=" + livesWith + ", primaryContactIndicator=" + primaryContactIndicator
+                + ", emergencyContactIndicator=" + emergencyContactIndicator + ", financialResponsibilityIndicator=" + financialResponsibilityIndicator + ", custodialIndicator=" + custodialIndicator + ", communicationsIndicator=" + communicationsIndicator + ", contactSequence=" + contactSequence
+                + '}';
+    }
 }

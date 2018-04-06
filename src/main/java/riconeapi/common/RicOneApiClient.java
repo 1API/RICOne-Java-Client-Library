@@ -16,7 +16,7 @@
 //	private String token;
 //    private RestTemplate rt;
 //    private String baseApiUrl;
-//    public XPress xPress;
+//    public XPress_OLD xPress;
 //
 //    
 //    /**Use endpoint values to authenticate to data API
@@ -37,7 +37,7 @@
 //        this.baseApiUrl = endpoint.getHref();
 //        this.rt = new RestTemplate();
 //
-//        xPress = new XPress(token, baseApiUrl, rt);
+//        xPress = new XPress_OLD(token, baseApiUrl, rt);
 //    }
 //    
 //    /**Use endpoint values to authenticate to data API
@@ -50,7 +50,7 @@
 //        this.baseApiUrl = baseApiUrl;
 //        this.rt = new RestTemplate();
 //
-//        xPress = new XPress(token, baseApiUrl, rt);
+//        xPress = new XPress_OLD(token, baseApiUrl, rt);
 //    }
 //
 //}

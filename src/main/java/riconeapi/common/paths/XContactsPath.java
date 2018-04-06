@@ -1,5 +1,6 @@
 package riconeapi.common.paths;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,8 +13,9 @@ import riconeapi.authentication.Authenticator;
 import riconeapi.common.ResponseMulti;
 import riconeapi.common.ResponseSingle;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.xpress.XContactCollectionType;
+import riconeapi.models.xpress.XContactCollectionTypeWrapper;
 import riconeapi.models.xpress.XContactType;
+import riconeapi.models.xpress.XContactTypeWrapper;
 
 public class XContactsPath
 {
@@ -39,7 +41,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContacts(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -52,11 +54,13 @@ public class XContactsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionType.class);
+			response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -68,7 +72,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -80,7 +87,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContacts(String opaqueMarker) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -94,11 +101,13 @@ public class XContactsPath
 					.path("xContacts")
 					.queryParam("changesSinceMarker", opaqueMarker);
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XContactCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -110,7 +119,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -121,7 +133,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContacts() throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -132,11 +144,13 @@ public class XContactsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionType.class);
+			response = rt.exchange(baseApiUrl + "xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -148,7 +162,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -162,7 +179,7 @@ public class XContactsPath
 	 */
 	public ResponseSingle<XContactType> getXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XContactType> response;
+		ResponseEntity<XContactTypeWrapper> response;
 		ResponseSingle<XContactType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -175,11 +192,13 @@ public class XContactsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xContacts/{refId}", HttpMethod.GET, entity, XContactType.class, refId);
+			response = rt.exchange(baseApiUrl + "xContacts/{refId}", HttpMethod.GET, entity, XContactTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
+				output.setData(response.getBody().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContact()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContact()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -191,7 +210,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -203,7 +225,7 @@ public class XContactsPath
 	 */
 	public ResponseSingle<XContactType> getXContact(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XContactType> response;
+		ResponseEntity<XContactTypeWrapper> response;
 		ResponseSingle<XContactType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -214,11 +236,13 @@ public class XContactsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xContacts/{refId}", HttpMethod.GET, entity, XContactType.class, refId);
+			response = rt.exchange(baseApiUrl + "xContacts/{refId}", HttpMethod.GET, entity, XContactTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
+				output.setData(response.getBody().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContact()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContact()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -230,7 +254,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -244,7 +271,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContactsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -257,11 +284,13 @@ public class XContactsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -273,7 +302,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -285,7 +317,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContactsByXLea(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -296,11 +328,13 @@ public class XContactsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -312,7 +346,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -325,7 +362,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContactsByXLea(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -337,11 +374,13 @@ public class XContactsPath
 			headers.set("IdType", idType);
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{id}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, id);
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -353,7 +392,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -367,7 +409,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContactsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -380,11 +422,13 @@ public class XContactsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -396,7 +440,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -408,7 +455,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContactsByXSchool(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -419,11 +466,13 @@ public class XContactsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -435,7 +484,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -448,7 +500,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContactsByXSchool(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -460,11 +512,13 @@ public class XContactsPath
 			headers.set("IdType", idType);
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{id}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, id);
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -476,7 +530,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -490,7 +547,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -503,11 +560,13 @@ public class XContactsPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -519,7 +578,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -531,7 +593,7 @@ public class XContactsPath
 	 */
 	public ResponseMulti<XContactType> getXContactsByXStudent(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XContactCollectionType> response;
+		ResponseEntity<XContactCollectionTypeWrapper> response;
 		ResponseMulti<XContactType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -542,11 +604,13 @@ public class XContactsPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xContacts", HttpMethod.GET, entity, XContactCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXContact());
+				output.setData(response.getBody().getXContacts().getXContact());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXContacts()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXContacts()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -558,7 +622,10 @@ public class XContactsPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 }

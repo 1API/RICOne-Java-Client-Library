@@ -3,72 +3,38 @@ package riconeapi.models.xpress;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-/**
- * <p>Java class for xOtherPersonNameListType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xOtherPersonNameListType">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="name" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonNameType" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xOtherPersonNameListType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "name"
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "name"
 })
 public class XOtherPersonNameListType {
 
-	public XOtherPersonNameListType()
-    {
-        name = new ArrayList<XPersonNameType>();
-    }
-	
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected List<XPersonNameType> name;
+    @JsonProperty("name")
+    private List<XPersonNameType> name = new ArrayList<>();
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the name property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getName().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link XPersonNameType }
-     * 
-     * 
-     */
+    public XOtherPersonNameListType() {
+    }
+
+    public XOtherPersonNameListType(List<XPersonNameType> name) {
+        super();
+        this.name = name;
+    }
+
+    @JsonProperty("name")
     public List<XPersonNameType> getName() {
-        if (name == null) {
-            name = new ArrayList<XPersonNameType>();
-        }
-        return this.name;
+        return name;
+    }
+
+    @JsonProperty("name")
+    public void setName(List<XPersonNameType> name) {
+        this.name = name;
     }
 
 }

@@ -6,15 +6,9 @@
  */
 package cases;
 
-import org.joda.time.DateTime;
-
 import riconeapi.authentication.Authenticator;
-import riconeapi.common.XPress;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
-import riconeapi.models.xpress.XLeaType;
-import riconeapi.models.xpress.XRosterType;
-import riconeapi.models.xpress.XSchoolType;
 
 public class NewAuth
 {

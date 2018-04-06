@@ -2,7 +2,6 @@ package cases;
 import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
 import riconeapi.models.authentication.Endpoint;
-import riconeapi.models.xpress.XContactType;
 import riconeapi.models.xpress.XStaffType;
 import riconeapi.models.xpress.XStudentType;
 

@@ -1,7 +1,6 @@
 package cases;
 import riconeapi.authentication.Authenticator;
-import riconeapi.common.Util;
-import riconeapi.common.XPress;
+import riconeapi.common.XPress_OLD;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XCalendarType;
@@ -81,7 +80,7 @@ public class RicOneApiTestsPaging
 		
 		for (Endpoint e : auth.getEndpoints(providerId))
 		{
-			XPress xPress = new XPress(e.getHref());
+			XPress_OLD xPress = new XPress_OLD(e.getHref());
 
 			// #################### navigatonLastPage ####################
 			// xLeas
@@ -149,9 +148,9 @@ public class RicOneApiTestsPaging
  // #################### navigatonLastPage ####################
 	// #################### xLeas ####################
 	//RETURN ALL LEAS
-	public static void XLeas_GetXLeasLastPage(XPress xPress) throws AuthenticationException
+	public static void XLeas_GetXLeasLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXLEAS); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXLEAS); i++)
 		{
 			for (XLeaType lea : xPress.getXLeas().getData())
 			{
@@ -196,9 +195,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN LEAS BY SCHOOL
-	public static void XLeas_GetXLeasByXSchoolLastPage(XPress xPress) throws AuthenticationException
+	public static void XLeas_GetXLeasByXSchoolLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXLEASBYXSCHOOL, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXLEASBYXSCHOOL, refId); i++)
 		{
 			for (XLeaType lea : xPress.getXLeasByXSchool(refId).getData())
 			{
@@ -241,9 +240,9 @@ public class RicOneApiTestsPaging
 		}
 	}
 	// RETURN LEAS BY SCHOOL
-	public static void XLeas_GetXLeasByXRosterLastPage(XPress xPress) throws AuthenticationException
+	public static void XLeas_GetXLeasByXRosterLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXLEASBYXROSTER, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXLEASBYXROSTER, refId); i++)
 		{
 			for (XLeaType lea : xPress.getXLeasByXRoster(refId).getData())
 			{
@@ -286,9 +285,9 @@ public class RicOneApiTestsPaging
 		}
 	}
 	// RETURN LEAS BY STAFF
-	public static void XLeas_GetXLeasByXStaffLastPage(XPress xPress) throws AuthenticationException
+	public static void XLeas_GetXLeasByXStaffLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXLEASBYXSTAFF, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXLEASBYXSTAFF, refId); i++)
 		{
 			for (XLeaType lea : xPress.getXLeasByXStaff(refId).getData())
 			{
@@ -332,9 +331,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN LEAS BY STUDENT
-	public static void XLeas_GetXLeasByXStudentLastPage(XPress xPress) throws AuthenticationException
+	public static void XLeas_GetXLeasByXStudentLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXLEASBYXSTUDENT, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXLEASBYXSTUDENT, refId); i++)
 		{
 			for (XLeaType lea : xPress.getXLeasByXStudent(refId).getData())
 			{
@@ -378,9 +377,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN LEAS BY CONTACT
-	public static void XLeas_GetXLeasByXContactLastPage(XPress xPress) throws AuthenticationException
+	public static void XLeas_GetXLeasByXContactLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXLEASBYXCONTACT, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXLEASBYXCONTACT, refId); i++)
 		{
 			for (XLeaType lea : xPress.getXLeasByXContact(refId).getData())
 			{
@@ -425,9 +424,9 @@ public class RicOneApiTestsPaging
     
     // #################### xSchools ####################
 	// RETURN ALL SCHOOLS
-	public static void XSchools_GetXSchoolsLastPage(XPress xPress) throws AuthenticationException
+	public static void XSchools_GetXSchoolsLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSCHOOLS); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSCHOOLS); i++)
 		{
 			for (XSchoolType school : xPress.getXSchools().getData())
 			{
@@ -478,9 +477,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN SCHOOLS BY LEA
-	public static void XSchools_GetXSchoolsByXLeaLastPage(XPress xPress) throws AuthenticationException
+	public static void XSchools_GetXSchoolsByXLeaLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSCHOOLSBYXLEA, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSCHOOLSBYXLEA, refId); i++)
 		{
 			for (XSchoolType school : xPress.getXSchoolsByXLea(refId).getData())
 			{
@@ -531,9 +530,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN SCHOOLS BY CALENDAR
-	public static void XSchools_GetXSchoolsByXCalendarLastPage(XPress xPress) throws AuthenticationException
+	public static void XSchools_GetXSchoolsByXCalendarLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSCHOOLSBYXCALENDAR, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSCHOOLSBYXCALENDAR, refId); i++)
 		{
 			for (XSchoolType school : xPress.getXSchoolsByXCalendar(refId).getData())
 			{
@@ -584,9 +583,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN SCHOOLS BY COURSE
-	public static void XSchools_GetXSchoolsByXCourseLastPage(XPress xPress) throws AuthenticationException
+	public static void XSchools_GetXSchoolsByXCourseLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSCHOOLSBYXCOURSE, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSCHOOLSBYXCOURSE, refId); i++)
 		{
 			for (XSchoolType school : xPress.getXSchoolsByXCourse(refId).getData())
 			{
@@ -637,9 +636,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN SCHOOLS BY ROSTER
-	public static void XSchools_GetXSchoolsByXRosterLastPage(XPress xPress) throws AuthenticationException
+	public static void XSchools_GetXSchoolsByXRosterLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSCHOOLSBYXROSTER, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSCHOOLSBYXROSTER, refId); i++)
 		{
 			for (XSchoolType school : xPress.getXSchoolsByXRoster(refId).getData())
 			{
@@ -690,9 +689,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN SCHOOLS BY STAFF
-	public static void XSchools_GetXSchoolsByXStaffLastPage(XPress xPress) throws AuthenticationException
+	public static void XSchools_GetXSchoolsByXStaffLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSCHOOLSBYXSTAFF, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSCHOOLSBYXSTAFF, refId); i++)
 		{
 			for (XSchoolType school : xPress.getXSchoolsByXStaff(refId).getData())
 			{
@@ -743,9 +742,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN SCHOOLS BY STUDENT
-	public static void XSchools_GetXSchoolsByXStudentLastPage(XPress xPress) throws AuthenticationException
+	public static void XSchools_GetXSchoolsByXStudentLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSCHOOLSBYXSTUDENT, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSCHOOLSBYXSTUDENT, refId); i++)
 		{
 			for (XSchoolType school : xPress.getXSchoolsByXStudent(refId).getData())
 			{
@@ -796,9 +795,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN SCHOOLS BY CONTACT
-	public static void XSchools_GetXSchoolsByXContactLastPage(XPress xPress) throws AuthenticationException
+	public static void XSchools_GetXSchoolsByXContactLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSCHOOLSBYXCONTACT, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSCHOOLSBYXCONTACT, refId); i++)
 		{
 			for (XSchoolType school : xPress.getXSchoolsByXContact(refId).getData())
 			{
@@ -850,9 +849,9 @@ public class RicOneApiTestsPaging
     
     // #################### xCalendars ####################
 	// RETURN ALL CALENDARS
-	public static void XCalendars_GetXCalendarsLastPage(XPress xPress) throws AuthenticationException
+	public static void XCalendars_GetXCalendarsLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCALENDARS); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCALENDARS); i++)
 		{
 			for (XCalendarType calendar : xPress.getXCalendars().getData())
 			{
@@ -878,9 +877,9 @@ public class RicOneApiTestsPaging
 		}
 	}
 	// RETURN CALENDARS BY LEA
-	public static void XCalendars_GetXCalendarsByXLeaLastPage(XPress xPress) throws AuthenticationException
+	public static void XCalendars_GetXCalendarsByXLeaLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCALENDARSBYXLEA, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCALENDARSBYXLEA, refId); i++)
 		{
 			for (XCalendarType calendar : xPress.getXCalendarsByXLea(refId).getData())
 			{
@@ -907,9 +906,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN CALENDARS BY SCHOOL
-	public static void XCalendars_GetXCalendarsByXSchoolLastPage(XPress xPress) throws AuthenticationException
+	public static void XCalendars_GetXCalendarsByXSchoolLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCALENDARSBYXSCHOOL, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCALENDARSBYXSCHOOL, refId); i++)
 		{
 			for (XCalendarType calendar : xPress.getXCalendarsByXSchool(refId).getData())
 			{
@@ -937,9 +936,9 @@ public class RicOneApiTestsPaging
     
     // #################### xCourses ####################
 	// RETURN ALL COURSES
-	public static void XCourses_GetXCoursesLastPage(XPress xPress) throws AuthenticationException
+	public static void XCourses_GetXCoursesLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCOURSES); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCOURSES); i++)
 		{
 			for (XCourseType course : xPress.getXCourses().getData())
 			{
@@ -974,9 +973,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN COURSES BY LEA
-	public static void XCourses_GetXCoursesByXLeaLastPage(XPress xPress) throws AuthenticationException
+	public static void XCourses_GetXCoursesByXLeaLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCOURSESBYXLEA, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCOURSESBYXLEA, refId); i++)
 		{
 			for (XCourseType course : xPress.getXCoursesByXLea(refId).getData())
 			{
@@ -1010,9 +1009,9 @@ public class RicOneApiTestsPaging
 		}
 	}
 	// RETURN COURSES BY SCHOOL
-	public static void XCourses_GetXCoursesByXSchoolLastPage(XPress xPress) throws AuthenticationException
+	public static void XCourses_GetXCoursesByXSchoolLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCOURSESBYXSCHOOL, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCOURSESBYXSCHOOL, refId); i++)
 		{
 			for (XCourseType course : xPress.getXCoursesByXSchool(refId).getData())
 			{
@@ -1046,9 +1045,9 @@ public class RicOneApiTestsPaging
 		}
 	}
 	// RETURN COURSES BY ROSTER
-	public static void XCourses_GetXCoursesByXRosterLastPage(XPress xPress) throws AuthenticationException
+	public static void XCourses_GetXCoursesByXRosterLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCOURSESBYXROSTER, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCOURSESBYXROSTER, refId); i++)
 		{
 			for (XCourseType course : xPress.getXCoursesByXRoster(refId).getData())
 			{
@@ -1084,9 +1083,9 @@ public class RicOneApiTestsPaging
  	
     // #################### xRosters ####################
 	// RETURN ALL ROSTERS
-	public static void XRosters_GetXRostersLastPage(XPress xPress) throws AuthenticationException
+	public static void XRosters_GetXRostersLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERS); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXROSTERS); i++)
 		{
 			for (XRosterType r : xPress.getXRosters().getData())
 			{
@@ -1152,9 +1151,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN ROSTERS BY LEA
-	public static void XRosters_GetXRostersByXLeaLastPage(XPress xPress) throws AuthenticationException
+	public static void XRosters_GetXRostersByXLeaLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERSBYXLEA, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXROSTERSBYXLEA, refId); i++)
 		{
 			for (XRosterType r : xPress.getXRostersByXLea(refId).getData())
 			{
@@ -1219,9 +1218,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN ROSTERS BY SCHOOL
-	public static void XRosters_GetXRostersByXSchoolLastPage(XPress xPress) throws AuthenticationException
+	public static void XRosters_GetXRostersByXSchoolLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERSBYXSCHOOL, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXROSTERSBYXSCHOOL, refId); i++)
 		{
 			for (XRosterType r : xPress.getXRostersByXSchool(refId).getData())
 			{
@@ -1286,9 +1285,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN ROSTERS BY CROUSE
-	public static void XRosters_GetXRostersByXCourseLastPage(XPress xPress) throws AuthenticationException
+	public static void XRosters_GetXRostersByXCourseLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERSBYXCOURSE, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXROSTERSBYXCOURSE, refId); i++)
 		{
 			for (XRosterType r : xPress.getXRostersByXCourse(refId).getData())
 			{
@@ -1353,9 +1352,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN ROSTERS BY STAFF
-	public static void XRosters_GetXRostersByXStaffLastPage(XPress xPress) throws AuthenticationException
+	public static void XRosters_GetXRostersByXStaffLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERSBYXSTAFF, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXROSTERSBYXSTAFF, refId); i++)
 		{
 			for (XRosterType r : xPress.getXRostersByXStaff(refId).getData())
 			{
@@ -1420,9 +1419,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN ROSTERS BY STUDENT
-	public static void XRosters_GetXRostersByXStudentLastPage(XPress xPress) throws AuthenticationException
+	public static void XRosters_GetXRostersByXStudentLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERSBYXSTUDENT, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXROSTERSBYXSTUDENT, refId); i++)
 		{
 			for (XRosterType r : xPress.getXRostersByXStudent(refId).getData())
 			{
@@ -1488,9 +1487,9 @@ public class RicOneApiTestsPaging
  	
     // #################### xStaffs ####################
 	// RETURN ALL STAFFS
-	public static void XStaffs_GetXStaffsLastPage(XPress xPress) throws AuthenticationException
+	public static void XStaffs_GetXStaffsLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTAFFS); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTAFFS); i++)
 		{
 			for (XStaffType s : xPress.getXStaffs().getData())
 			{
@@ -1537,9 +1536,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STAFFS BY LEA
-	public static void XStaffs_GetXStaffsByXLeaLastPage(XPress xPress) throws AuthenticationException
+	public static void XStaffs_GetXStaffsByXLeaLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTAFFSBYXLEA, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTAFFSBYXLEA, refId); i++)
 		{
 			for (XStaffType s : xPress.getXStaffsByXLea(refId).getData())
 			{
@@ -1586,9 +1585,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STAFFS BY SCHOOL
-	public static void XStaffs_GetXStaffsByXSchoolLastPage(XPress xPress) throws AuthenticationException
+	public static void XStaffs_GetXStaffsByXSchoolLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTAFFSBYXSCHOOL, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTAFFSBYXSCHOOL, refId); i++)
 		{
 			for (XStaffType s : xPress.getXStaffsByXSchool(refId).getData())
 			{
@@ -1636,9 +1635,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STAFFS BY COURSE
-	public static void XStaffs_GetXStaffsByXCourseLastPage(XPress xPress) throws AuthenticationException
+	public static void XStaffs_GetXStaffsByXCourseLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTAFFSBYXCOURSE, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTAFFSBYXCOURSE, refId); i++)
 		{
 			for (XStaffType s : xPress.getXStaffsByXCourse(refId).getData())
 			{
@@ -1686,9 +1685,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STAFFS BY ROSTER
-	public static void XStaffs_GetXStaffsByXRosterLastPage(XPress xPress) throws AuthenticationException
+	public static void XStaffs_GetXStaffsByXRosterLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTAFFSBYXROSTER, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTAFFSBYXROSTER, refId); i++)
 		{
 			for (XStaffType s : xPress.getXStaffsByXRoster(refId).getData())
 			{
@@ -1735,9 +1734,9 @@ public class RicOneApiTestsPaging
 		}
 	}
 	// RETURN STAFFS BY STUDENT
-	public static void XStaffs_GetXStaffsByXStudentLastPage(XPress xPress) throws AuthenticationException
+	public static void XStaffs_GetXStaffsByXStudentLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTAFFSBYXSTUDENT, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTAFFSBYXSTUDENT, refId); i++)
 		{
 			for (XStaffType s : xPress.getXStaffsByXStudent(refId).getData())
 			{
@@ -1785,9 +1784,9 @@ public class RicOneApiTestsPaging
 	}
  	// #################### xStudents ####################
 	// RETURN ALL STUDENTS
-	public static void XStudents_GetXStudentsLastPage(XPress xPress) throws AuthenticationException
+	public static void XStudents_GetXStudentsLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTUDENTS); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTUDENTS); i++)
 		{
 			for (XStudentType s : xPress.getXStudents().getData())
 			{
@@ -2031,9 +2030,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STUDENTS BY LEA
-	public static void XStudents_GetXStudentsByXLeaLastPage(XPress xPress) throws AuthenticationException
+	public static void XStudents_GetXStudentsByXLeaLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTUDENTSBYXLEA, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTUDENTSBYXLEA, refId); i++)
 		{
 			for (XStudentType s : xPress.getXStudentsByXLea(refId).getData())
 			{
@@ -2277,9 +2276,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STUDENTS BY SCHOOL
-	public static void XStudents_GetXStudentsByXSchoolLastPage(XPress xPress) throws AuthenticationException
+	public static void XStudents_GetXStudentsByXSchoolLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTUDENTSBYXSCHOOL, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTUDENTSBYXSCHOOL, refId); i++)
 		{
 			for (XStudentType s : xPress.getXStudentsByXSchool(refId).getData())
 			{
@@ -2523,9 +2522,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STUDENTS BY ROSTER
-	public static void XStudents_GetXStudentsByXRosterLastPage(XPress xPress) throws AuthenticationException
+	public static void XStudents_GetXStudentsByXRosterLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTUDENTSBYXROSTER, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTUDENTSBYXROSTER, refId); i++)
 		{
 			for (XStudentType s : xPress.getXStudentsByXRoster(refId).getData())
 			{
@@ -2769,9 +2768,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STUDENTS BY STAFF
-	public static void XStudents_GetXStudentsByXStaffLastPage(XPress xPress) throws AuthenticationException
+	public static void XStudents_GetXStudentsByXStaffLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTUDENTSBYXSTAFF, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTUDENTSBYXSTAFF, refId); i++)
 		{
 			for (XStudentType s : xPress.getXStudentsByXStaff(refId).getData())
 			{
@@ -3015,9 +3014,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN STUDENTS BY CONTACT
-	public static void XStudents_GetXStudentsByXContactLastPage(XPress xPress) throws AuthenticationException
+	public static void XStudents_GetXStudentsByXContactLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXSTUDENTSBYXCONTACT, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXSTUDENTSBYXCONTACT, refId); i++)
 		{
 			for (XStudentType s : xPress.getXStudentsByXContact(refId).getData())
 			{
@@ -3261,9 +3260,9 @@ public class RicOneApiTestsPaging
 
  	// #################### xContacts ####################
 	// RETURN ALL CONTACTS
-	public static void XContacts_GetXSContactsLastPage(XPress xPress) throws AuthenticationException
+	public static void XContacts_GetXSContactsLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCONTACTS); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCONTACTS); i++)
 		{
 			for (XContactType c : xPress.getXContacts().getData())
 			{
@@ -3357,9 +3356,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN CONTACTS BY LEA
-	public static void XContacts_GetXContactsByXLeaLastPage(XPress xPress) throws AuthenticationException
+	public static void XContacts_GetXContactsByXLeaLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCONTACTSBYXLEA, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCONTACTSBYXLEA, refId); i++)
 		{
 			for (XContactType c : xPress.getXContactsByXLea(refId).getData())
 			{
@@ -3452,9 +3451,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN CONTACTS BY SCHOOL
-	public static void XContacts_GetXContactsByXSchoolLastPage(XPress xPress) throws AuthenticationException
+	public static void XContacts_GetXContactsByXSchoolLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCONTACTSBYXSCHOOL, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCONTACTSBYXSCHOOL, refId); i++)
 		{
 			for (XContactType c : xPress.getXContactsByXSchool(refId).getData())
 			{
@@ -3547,9 +3546,9 @@ public class RicOneApiTestsPaging
 	}
 
 	// RETURN CONTACTS BY STUDENT
-	public static void XContacts_GetXContactsByXStudentLastPage(XPress xPress) throws AuthenticationException
+	public static void XContacts_GetXContactsByXStudentLastPage(XPress_OLD xPress) throws AuthenticationException
 	{
-		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXCONTACTSBYXSTUDENT, refId); i++)
+		for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress_OLD.ServicePath.GETXCONTACTSBYXSTUDENT, refId); i++)
 		{
 			for (XContactType c : xPress.getXContactsByXStudent(refId).getData())
 			{

@@ -1,540 +1,283 @@
 
 package riconeapi.models.xpress;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-
-/**
- * xStudent is a composite object that provides a view of the most commonly used core data elements for students, and references to important associated objects like contacts. The refId of a xStudent object coincides with the refId of a corresponding student object.
- * 
- * <p>Java class for xStudentType complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="xStudentType">
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.sifassociation.org/datamodel/na/3.2}gSIF_CompositeType">
- *       &lt;sequence>
- *         &lt;element name="name" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonNameType" minOccurs="0"/>
- *         &lt;element name="otherNames" type="{http://www.sifassociation.org/datamodel/na/3.2}xOtherPersonNameListType" minOccurs="0"/>
- *         &lt;element name="localId" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonIdType" minOccurs="0"/>
- *         &lt;element name="stateProvinceId" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonIdType" minOccurs="0"/>
- *         &lt;element name="otherIds" type="{http://www.sifassociation.org/datamodel/na/3.2}xOtherPersonIdListType" minOccurs="0"/>
- *         &lt;element name="appProvisioningInfo" type="{http://www.sifassociation.org/datamodel/na/3.2}xAppProvisioningInfoType" minOccurs="0"/>
- *         &lt;element name="address" type="{http://www.sifassociation.org/datamodel/na/3.2}xPersonAddressType" minOccurs="0"/>
- *         &lt;element name="phoneNumber" type="{http://www.sifassociation.org/datamodel/na/3.2}xTelephoneType" minOccurs="0"/>
- *         &lt;element name="otherPhoneNumbers" type="{http://www.sifassociation.org/datamodel/na/3.2}xTelephoneListType" minOccurs="0"/>
- *         &lt;element name="email" type="{http://www.sifassociation.org/datamodel/na/3.2}xEmailType" minOccurs="0"/>
- *         &lt;element name="otherEmails" type="{http://www.sifassociation.org/datamodel/na/3.2}xEmailListType" minOccurs="0"/>
- *         &lt;element name="demographics" type="{http://www.sifassociation.org/datamodel/na/3.2}xDemographicsType" minOccurs="0"/>
- *         &lt;element name="enrollment" type="{http://www.sifassociation.org/datamodel/na/3.2}xEnrollmentType" minOccurs="0"/>
- *         &lt;element name="otherEnrollments" type="{http://www.sifassociation.org/datamodel/na/3.2}xEnrollmentListType" minOccurs="0"/>
- *         &lt;element name="academicSummary" type="{http://www.sifassociation.org/datamodel/na/3.2}xAcademicSummaryType" minOccurs="0"/>
- *         &lt;element name="studentContacts" type="{http://www.sifassociation.org/datamodel/na/3.2}xStudentContactListType" minOccurs="0"/>
- *         &lt;element name="languages" type="{http://www.sifassociation.org/datamodel/na/3.2}xLanguageListType" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- * 
- * 
- */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "xStudentType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
-    "name",
-    "otherNames",
-    "localId",
-    "stateProvinceId",
-    "otherIds",
-    "appProvisioningInfo",
-    "address",
-    "phoneNumber",
-    "otherPhoneNumbers",
-    "email",
-    "otherEmails",
-    "demographics",
-    "enrollment",
-    "otherEnrollments",
-    "academicSummary",
-    "studentContacts",
-    "languages"
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonPropertyOrder({
+        "@refId",
+        "name",
+        "otherNames",
+        "localId",
+        "stateProvinceId",
+        "otherIds",
+        "appProvisioningInfo",
+        "address",
+        "phoneNumber",
+        "otherPhoneNumbers",
+        "email",
+        "otherEmails",
+        "demographics",
+        "enrollment",
+        "otherEnrollments",
+        "academicSummary",
+        "studentContacts",
+        "languages"
 })
-public class XStudentType
-    extends GSIFCompositeType
-{
-	public XStudentType()
-    {
-        refId = null;
-        name = new XPersonNameType();
-        otherNames = new XOtherPersonNameListType();
-        localId = null;
-        stateProvinceId = null;
-        otherIds = new XOtherPersonIdListType();
-        appProvisioningInfo = new XAppProvisioningInfoType();
-        address = new XPersonAddressType();
-        phoneNumber = new XTelephoneType();
-        otherPhoneNumbers = new XTelephoneListType();
-        email = new XEmailType();
-        otherEmails = new XEmailListType();
-        demographics = new XDemographicsType();
-        enrollment = new XEnrollmentType();
-        otherEnrollments = new XEnrollmentListType();
-        academicSummary = new XAcademicSummaryType();
-        studentContacts = new XStudentContactListType();
-        languages = new XLanguageListType();
+@JsonRootName(value = "xStudent")
+public class XStudentType {
 
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    private String refId;
+    @JsonProperty("name")
+    private XPersonNameType name;
+    @JsonProperty("otherNames")
+    private XOtherPersonNameListType otherNames;
+    @JsonProperty("localId")
+    private String localId;
+    @JsonProperty("stateProvinceId")
+    private String stateProvinceId;
+    @JsonProperty("otherIds")
+    private XOtherPersonIdListType otherIds;
+    @JsonProperty("appProvisioningInfo")
+    private XAppProvisioningInfoType appProvisioningInfo;
+    @JsonProperty("address")
+    private XPersonAddressType address;
+    @JsonProperty("phoneNumber")
+    private XTelephoneType phoneNumber;
+    @JsonProperty("otherPhoneNumbers")
+    private XTelephoneListType otherPhoneNumbers;
+    @JsonProperty("email")
+    private XEmailType email;
+    @JsonProperty("otherEmails")
+    private XEmailListType otherEmails;
+    @JsonProperty("demographics")
+    private XDemographicsType demographics;
+    @JsonProperty("enrollment")
+    private XEnrollmentType enrollment;
+    @JsonProperty("otherEnrollments")
+    private XEnrollmentListType otherEnrollments;
+    @JsonProperty("academicSummary")
+    private XAcademicSummaryType academicSummary;
+    @JsonProperty("studentContacts")
+    private XStudentContactListType studentContacts;
+    @JsonProperty("languages")
+    private XLanguageListType languages;
+
+    public XStudentType() {
     }
 
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XPersonNameType name;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XOtherPersonNameListType otherNames;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String localId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String stateProvinceId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XOtherPersonIdListType otherIds;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XAppProvisioningInfoType appProvisioningInfo;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XPersonAddressType address;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XTelephoneType phoneNumber;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XTelephoneListType otherPhoneNumbers;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XEmailType email;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XEmailListType otherEmails;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XDemographicsType demographics;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XEnrollmentType enrollment;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XEnrollmentListType otherEnrollments;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XAcademicSummaryType academicSummary;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XStudentContactListType studentContacts;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    protected XLanguageListType languages;
+    public XStudentType(String refId, XPersonNameType name, XOtherPersonNameListType otherNames, String localId, String stateProvinceId, XOtherPersonIdListType otherIds, XAppProvisioningInfoType appProvisioningInfo, XPersonAddressType address, XTelephoneType phoneNumber, XTelephoneListType otherPhoneNumbers, XEmailType email, XEmailListType otherEmails, XDemographicsType demographics, XEnrollmentType enrollment, XEnrollmentListType otherEnrollments, XAcademicSummaryType academicSummary, XStudentContactListType studentContacts, XLanguageListType languages) {
+        super();
+        this.refId = refId;
+        this.name = name;
+        this.otherNames = otherNames;
+        this.localId = localId;
+        this.stateProvinceId = stateProvinceId;
+        this.otherIds = otherIds;
+        this.appProvisioningInfo = appProvisioningInfo;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.otherPhoneNumbers = otherPhoneNumbers;
+        this.email = email;
+        this.otherEmails = otherEmails;
+        this.demographics = demographics;
+        this.enrollment = enrollment;
+        this.otherEnrollments = otherEnrollments;
+        this.academicSummary = academicSummary;
+        this.studentContacts = studentContacts;
+        this.languages = languages;
+    }
 
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XPersonNameType }
-     *     
-     */
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public String getRefId() {
+        return refId;
+    }
+
+    @JsonProperty("@refId")
+    @JacksonXmlProperty(localName = "refId", isAttribute = true)
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+    @JsonProperty("name")
     public XPersonNameType getName() {
         return name;
     }
 
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XPersonNameType }
-     *     
-     */
-    public void setName(XPersonNameType value) {
-        this.name = value;
+    @JsonProperty("name")
+    public void setName(XPersonNameType name) {
+        this.name = name;
     }
 
-    /**
-     * Gets the value of the otherNames property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XOtherPersonNameListType }
-     *     
-     */
+    @JsonProperty("otherNames")
     public XOtherPersonNameListType getOtherNames() {
         return otherNames;
     }
 
-    /**
-     * Sets the value of the otherNames property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XOtherPersonNameListType }
-     *     
-     */
-    public void setOtherNames(XOtherPersonNameListType value) {
-        this.otherNames = value;
+    @JsonProperty("otherNames")
+    public void setOtherNames(XOtherPersonNameListType otherNames) {
+        this.otherNames = otherNames;
     }
 
-    /**
-     * Gets the value of the localId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("localId")
     public String getLocalId() {
         return localId;
     }
 
-    /**
-     * Sets the value of the localId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLocalId(String value) {
-        this.localId = value;
+    @JsonProperty("localId")
+    public void setLocalId(String localId) {
+        this.localId = localId;
     }
 
-    /**
-     * Gets the value of the stateProvinceId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
+    @JsonProperty("stateProvinceId")
     public String getStateProvinceId() {
         return stateProvinceId;
     }
 
-    /**
-     * Sets the value of the stateProvinceId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setStateProvinceId(String value) {
-        this.stateProvinceId = value;
+    @JsonProperty("stateProvinceId")
+    public void setStateProvinceId(String stateProvinceId) {
+        this.stateProvinceId = stateProvinceId;
     }
 
-    /**
-     * Gets the value of the otherIds property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XOtherPersonIdListType }
-     *     
-     */
+    @JsonProperty("otherIds")
     public XOtherPersonIdListType getOtherIds() {
         return otherIds;
     }
 
-    /**
-     * Sets the value of the otherIds property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XOtherPersonIdListType }
-     *     
-     */
-    public void setOtherIds(XOtherPersonIdListType value) {
-        this.otherIds = value;
+    @JsonProperty("otherIds")
+    public void setOtherIds(XOtherPersonIdListType otherIds) {
+        this.otherIds = otherIds;
     }
 
-    /**
-     * Gets the value of the appProvisioningInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XAppProvisioningInfoType }
-     *     
-     */
+    @JsonProperty("appProvisioningInfo")
     public XAppProvisioningInfoType getAppProvisioningInfo() {
         return appProvisioningInfo;
     }
 
-    /**
-     * Sets the value of the appProvisioningInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XAppProvisioningInfoType }
-     *     
-     */
+    @JsonProperty("appProvisioningInfo")
     public void setAppProvisioningInfo(XAppProvisioningInfoType value) {
         this.appProvisioningInfo = value;
     }
 
-    /**
-     * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XPersonAddressType }
-     *     
-     */
+    @JsonProperty("address")
     public XPersonAddressType getAddress() {
         return address;
     }
 
-    /**
-     * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XPersonAddressType }
-     *     
-     */
-    public void setAddress(XPersonAddressType value) {
-        this.address = value;
+    @JsonProperty("address")
+    public void setAddress(XPersonAddressType address) {
+        this.address = address;
     }
 
-    /**
-     * Gets the value of the phoneNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XTelephoneType }
-     *     
-     */
+    @JsonProperty("phoneNumber")
     public XTelephoneType getPhoneNumber() {
         return phoneNumber;
     }
 
-    /**
-     * Sets the value of the phoneNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XTelephoneType }
-     *     
-     */
-    public void setPhoneNumber(XTelephoneType value) {
-        this.phoneNumber = value;
+    @JsonProperty("phoneNumber")
+    public void setPhoneNumber(XTelephoneType phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    /**
-     * Gets the value of the otherPhoneNumbers property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XTelephoneListType }
-     *     
-     */
+    @JsonProperty("otherPhoneNumbers")
     public XTelephoneListType getOtherPhoneNumbers() {
         return otherPhoneNumbers;
     }
 
-    /**
-     * Sets the value of the otherPhoneNumbers property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XTelephoneListType }
-     *     
-     */
-    public void setOtherPhoneNumbers(XTelephoneListType value) {
-        this.otherPhoneNumbers = value;
+    @JsonProperty("otherPhoneNumbers")
+    public void setOtherPhoneNumbers(XTelephoneListType otherPhoneNumbers) {
+        this.otherPhoneNumbers = otherPhoneNumbers;
     }
 
-    /**
-     * Gets the value of the email property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XEmailType }
-     *     
-     */
+    @JsonProperty("email")
     public XEmailType getEmail() {
         return email;
     }
 
-    /**
-     * Sets the value of the email property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XEmailType }
-     *     
-     */
-    public void setEmail(XEmailType value) {
-        this.email = value;
+    @JsonProperty("email")
+    public void setEmail(XEmailType email) {
+        this.email = email;
     }
 
-    /**
-     * Gets the value of the otherEmails property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XEmailListType }
-     *     
-     */
+    @JsonProperty("otherEmails")
     public XEmailListType getOtherEmails() {
         return otherEmails;
     }
 
-    /**
-     * Sets the value of the otherEmails property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XEmailListType }
-     *     
-     */
-    public void setOtherEmails(XEmailListType value) {
-        this.otherEmails = value;
+    @JsonProperty("otherEmails")
+    public void setOtherEmails(XEmailListType otherEmails) {
+        this.otherEmails = otherEmails;
     }
 
-    /**
-     * Gets the value of the demographics property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XDemographicsType }
-     *     
-     */
+    @JsonProperty("demographics")
     public XDemographicsType getDemographics() {
         return demographics;
     }
 
-    /**
-     * Sets the value of the demographics property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XDemographicsType }
-     *     
-     */
-    public void setDemographics(XDemographicsType value) {
-        this.demographics = value;
+    @JsonProperty("demographics")
+    public void setDemographics(XDemographicsType demographics) {
+        this.demographics = demographics;
     }
 
-    /**
-     * Gets the value of the enrollment property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XEnrollmentType }
-     *     
-     */
+    @JsonProperty("enrollment")
     public XEnrollmentType getEnrollment() {
         return enrollment;
     }
 
-    /**
-     * Sets the value of the enrollment property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XEnrollmentType }
-     *     
-     */
-    public void setEnrollment(XEnrollmentType value) {
-        this.enrollment = value;
+    @JsonProperty("enrollment")
+    public void setEnrollment(XEnrollmentType enrollment) {
+        this.enrollment = enrollment;
     }
 
-    /**
-     * Gets the value of the otherEnrollments property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XEnrollmentListType }
-     *     
-     */
+    @JsonProperty("otherEnrollments")
     public XEnrollmentListType getOtherEnrollments() {
         return otherEnrollments;
     }
 
-    /**
-     * Sets the value of the otherEnrollments property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XEnrollmentListType }
-     *     
-     */
-    public void setOtherEnrollments(XEnrollmentListType value) {
-        this.otherEnrollments = value;
+    @JsonProperty("otherEnrollments")
+    public void setOtherEnrollments(XEnrollmentListType otherEnrollments) {
+        this.otherEnrollments = otherEnrollments;
     }
 
-    /**
-     * Gets the value of the academicSummary property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XAcademicSummaryType }
-     *     
-     */
+    @JsonProperty("academicSummary")
     public XAcademicSummaryType getAcademicSummary() {
         return academicSummary;
     }
 
-    /**
-     * Sets the value of the academicSummary property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XAcademicSummaryType }
-     *     
-     */
-    public void setAcademicSummary(XAcademicSummaryType value) {
-        this.academicSummary = value;
+    @JsonProperty("academicSummary")
+    public void setAcademicSummary(XAcademicSummaryType academicSummary) {
+        this.academicSummary = academicSummary;
     }
 
-    /**
-     * Gets the value of the studentContacts property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XStudentContactListType }
-     *     
-     */
+    @JsonProperty("studentContacts")
     public XStudentContactListType getStudentContacts() {
         return studentContacts;
     }
 
-    /**
-     * Sets the value of the studentContacts property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XStudentContactListType }
-     *     
-     */
-    public void setStudentContacts(XStudentContactListType value) {
-        this.studentContacts = value;
+    @JsonProperty("studentContacts")
+    public void setStudentContacts(XStudentContactListType studentContacts) {
+        this.studentContacts = studentContacts;
     }
 
-    /**
-     * Gets the value of the languages property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XLanguageListType }
-     *     
-     */
+    @JsonProperty("languages")
     public XLanguageListType getLanguages() {
         return languages;
     }
 
-    /**
-     * Sets the value of the languages property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XLanguageListType }
-     *     
-     */
-    public void setLanguages(XLanguageListType value) {
-        this.languages = value;
+    @JsonProperty("languages")
+    public void setLanguages(XLanguageListType languages) {
+        this.languages = languages;
     }
 
+    @Override public String toString()
+    {
+        return "XStudentType{" + "refId='" + refId + '\'' + ", name=" + name + ", otherNames=" + otherNames + ", localId='" + localId + '\'' + ", stateProvinceId='" + stateProvinceId + '\'' + ", otherIds=" + otherIds + ", appProvisioningInfo=" + appProvisioningInfo + ", address=" + address
+                + ", phoneNumber=" + phoneNumber + ", otherPhoneNumbers=" + otherPhoneNumbers + ", email=" + email + ", otherEmails=" + otherEmails + ", demographics=" + demographics + ", enrollment=" + enrollment + ", otherEnrollments=" + otherEnrollments + ", academicSummary=" + academicSummary
+                + ", studentContacts=" + studentContacts + ", languages=" + languages + '}';
+    }
 }

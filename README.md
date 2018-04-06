@@ -39,6 +39,18 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.7
+* Moved ServicePath enumerator into it's own file which causes a call change.
+            Old:
+            ```java
+            xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERSBYXLEA, l.getRefId());
+            ```
+            New:
+            ```java
+            xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXLEA, l.getRefId());
+            ```
+* Added ability to access the JSON and XML String responses.
+
 ### v1.6
 * Added the RIC One API-AuthenticationClientLibrary-Java jar into the project
     * Authentication classes now moved into seperate repository: <a href="https://github.com/RIConeorg/API-AuthenticationClientLibrary-Java" target="blank">API-AuthenticationClientLibrary-Java</a>
@@ -69,14 +81,14 @@ final static String clientSecret = "YOUR PASSWORD";
 	* xSchools/{id}/xObject
 
 ### v1.5
-* Added Changes Since support to XPress.java
+* Added Changes Since support to XPress_OLD.java
 	* Supported calls include: getXLeas(String), getXSchools(String), getXCalendars(String), getXCoursess(String), getXRosters(String), getXStaffs(String), getXStudents(String), getXContactss(String)
 	* More info on Changes Since can be found in the API Developer's Guide <a href="http://www.ricone.org/vendors/ric-one-api/api-developers-guide/" target="_blank">here</a>
 * Added TimestampToISO8601(Date) to Util.java
 * Added custom exception class for failed authentication - AuthenticationException.java 
 * Modified Athenticator.java 
 	* Throws AuthenticationException and will return 401 UNAUTHORIZED message on a failed login attempt
-* Modified XPress.java
+* Modified XPress_OLD.java
 	* Throws AuthenticationException and will return 401 UNAUTHORIZED message on a failed login attempt
 	 
 ### v1.4.1
@@ -90,7 +102,7 @@ final static String clientSecret = "YOUR PASSWORD";
 
 ### v1.3.1
 * Modified Authenticator.java
-* Modified XPress.java
+* Modified XPress_OLD.java
 	* Check token expiration and refresh if expired
 
 ### v1.3
@@ -112,7 +124,7 @@ final static String clientSecret = "YOUR PASSWORD";
 * Paging passed via header
 * Refactored method names
 	* i.e. GetXStudents() now getXStudents()
-* Dropped SIF prefix from SIFXPress class, now XPress
+* Dropped SIF prefix from SIFXPress class, now XPress_OLD
 * Ability to access response status code, status message, and headers
 * Removed LoginId from XContactType, XStaffType, and XStudentType
 * Added XAppProvisioningInfoType

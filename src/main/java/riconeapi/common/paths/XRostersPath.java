@@ -1,5 +1,6 @@
 package riconeapi.common.paths;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,8 +13,9 @@ import riconeapi.authentication.Authenticator;
 import riconeapi.common.ResponseMulti;
 import riconeapi.common.ResponseSingle;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.xpress.XRosterCollectionType;
+import riconeapi.models.xpress.XRosterCollectionTypeWrapper;
 import riconeapi.models.xpress.XRosterType;
+import riconeapi.models.xpress.XRosterTypeWrapper;
 
 public class XRostersPath
 {
@@ -39,7 +41,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRosters(int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -52,11 +54,13 @@ public class XRostersPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionType.class);
+			response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -68,7 +72,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -80,7 +87,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRosters(String opaqueMarker) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -94,11 +101,13 @@ public class XRostersPath
 					.path("xRosters")
 					.queryParam("changesSinceMarker", opaqueMarker);
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XRosterCollectionType.class);
+			response = rt.exchange(builder.build().encode().toUriString(), HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -110,7 +119,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -121,7 +133,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRosters() throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -132,11 +144,13 @@ public class XRostersPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionType.class);
+			response = rt.exchange(baseApiUrl + "xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -148,7 +162,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -162,7 +179,7 @@ public class XRostersPath
 	 */
 	public ResponseSingle<XRosterType> getXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XRosterType> response;
+		ResponseEntity<XRosterTypeWrapper> response;
 		ResponseSingle<XRosterType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -175,11 +192,13 @@ public class XRostersPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xRosters/{refId}", HttpMethod.GET, entity, XRosterType.class, refId);
+			response = rt.exchange(baseApiUrl + "xRosters/{refId}", HttpMethod.GET, entity, XRosterTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
+				output.setData(response.getBody().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRoster()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRoster()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -191,7 +210,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -203,7 +225,7 @@ public class XRostersPath
 	 */
 	public ResponseSingle<XRosterType> getXRoster(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XRosterType> response;
+		ResponseEntity<XRosterTypeWrapper> response;
 		ResponseSingle<XRosterType> output = new ResponseSingle<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -214,11 +236,13 @@ public class XRostersPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xRosters/{refId}", HttpMethod.GET, entity, XRosterType.class, refId);
+			response = rt.exchange(baseApiUrl + "xRosters/{refId}", HttpMethod.GET, entity, XRosterTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody());
+				output.setData(response.getBody().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRoster()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRoster()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -230,7 +254,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -244,7 +271,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -257,11 +284,13 @@ public class XRostersPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -273,7 +302,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -285,7 +317,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXLea(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -296,11 +328,13 @@ public class XRostersPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xLeas/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -312,7 +346,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -325,7 +362,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXLea(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -337,11 +374,13 @@ public class XRostersPath
 			headers.set("IdType", idType);
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xLeas/{id}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, id);
+			response = rt.exchange(baseApiUrl + "xLeas/{id}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -353,7 +392,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -367,7 +409,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -380,11 +422,13 @@ public class XRostersPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -396,7 +440,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -408,7 +455,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -419,11 +466,13 @@ public class XRostersPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xSchools/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -435,7 +484,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -448,7 +500,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXSchool(String idType, String id) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -460,11 +512,13 @@ public class XRostersPath
 			headers.set("IdType", idType);
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xSchools/{id}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, id);
+			response = rt.exchange(baseApiUrl + "xSchools/{id}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, id);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -476,7 +530,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -490,7 +547,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -503,11 +560,13 @@ public class XRostersPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -519,7 +578,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -531,7 +593,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -542,11 +604,13 @@ public class XRostersPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xCourses/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -558,7 +622,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -572,7 +639,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -585,11 +652,13 @@ public class XRostersPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -601,7 +670,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -613,7 +685,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -624,11 +696,13 @@ public class XRostersPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStaffs/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -640,7 +714,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -654,7 +731,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -667,11 +744,13 @@ public class XRostersPath
 			headers.set("navigationPageSize", Integer.toString(navigationPageSize));
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -683,7 +762,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 
@@ -695,7 +777,7 @@ public class XRostersPath
 	 */
 	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId) throws AuthenticationException
 	{
-		ResponseEntity<XRosterCollectionType> response;
+		ResponseEntity<XRosterCollectionTypeWrapper> response;
 		ResponseMulti<XRosterType> output = new ResponseMulti<>();
 
 		Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
@@ -706,11 +788,13 @@ public class XRostersPath
 			headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
 			headers.set("Content-Type", "application/json");
 			HttpEntity<?> entity = new HttpEntity<Object>(headers);
-			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionType.class, refId);
+			response = rt.exchange(baseApiUrl + "xStudents/{refId}/xRosters", HttpMethod.GET, entity, XRosterCollectionTypeWrapper.class, refId);
 
 			if(response.getBody() != null)
 			{
-				output.setData(response.getBody().getXRoster());
+				output.setData(response.getBody().getXRosters().getXRoster());
+				output.setJson(jsonMapper.writeValueAsString(response.getBody().getXRosters()));
+				output.setXml(xmlMapper.writeValueAsString(response.getBody().getXRosters()));
 			}
 			output.setMessage(response.getStatusCode().getReasonPhrase());
 			output.setStatusCode(response.getStatusCode().value());
@@ -722,7 +806,10 @@ public class XRostersPath
 			output.setStatusCode(e.getStatusCode().value());
 			output.setHeader(e.getResponseHeaders().toString());
 		}
-
+		catch(JsonProcessingException jpe)
+		{
+			jpe.printStackTrace();
+		}
 		return output;
 	}
 }

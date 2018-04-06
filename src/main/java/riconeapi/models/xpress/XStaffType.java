@@ -4,8 +4,8 @@ package riconeapi.models.xpress;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "@refId",
         "name",
@@ -120,6 +120,7 @@ public class XStaffType {
     public void setAppProvisioningInfo(XAppProvisioningInfoType value) {
         this.appProvisioningInfo = value;
     }
+
     @JsonProperty("sex")
     public String getSex() {
         return sex;

@@ -6,13 +6,14 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
         "@refId",
         "courseRefId",
         "courseTitle",
         "sectionRefId",
+        "subject",
         "schoolRefId",
         "schoolSectionId",
         "schoolYear",
@@ -37,6 +38,8 @@ public class XRosterType {
     private String sectionRefId;
     @JsonProperty("schoolRefId")
     private String schoolRefId;
+    @JsonProperty("subject")
+    private String subject;
     @JsonProperty("schoolSectionId")
     private String schoolSectionId;
     @JsonProperty("schoolYear")
@@ -67,13 +70,14 @@ public class XRosterType {
     public XRosterType() {
     }
 
-    public XRosterType(String refId, String courseRefId, String courseTitle, String sectionRefId, String schoolRefId, String schoolSectionId, XMLGregorianCalendar schoolYear, String sessionCode, String schoolCalendarRefId, XMeetingTimeListType meetingTimes, XStudentReferenceListType students, XStaffReferenceType primaryStaff, XStaffReferenceListType otherStaffs) {
+    public XRosterType(String refId, String courseRefId, String courseTitle, String sectionRefId, String schoolRefId, String subject, String schoolSectionId, XMLGregorianCalendar schoolYear, String sessionCode, String schoolCalendarRefId, XMeetingTimeListType meetingTimes, XStudentReferenceListType students, XStaffReferenceType primaryStaff, XStaffReferenceListType otherStaffs) {
         super();
         this.refId = refId;
         this.courseRefId = courseRefId;
         this.courseTitle = courseTitle;
         this.sectionRefId = sectionRefId;
         this.schoolRefId = schoolRefId;
+        this.subject = subject;
         this.schoolSectionId = schoolSectionId;
         this.schoolYear = schoolYear;
         this.sessionCode = sessionCode;
@@ -134,6 +138,18 @@ public class XRosterType {
     @JsonProperty("schoolRefId")
     public void setSchoolRefId(String schoolRefId) {
         this.schoolRefId = schoolRefId;
+    }
+
+    @JsonProperty("subject")
+    public String getSubject()
+    {
+        return subject;
+    }
+
+    @JsonProperty("subject")
+    public void setSubject(String subject)
+    {
+        this.subject = subject;
     }
 
     @JsonProperty("schoolSectionId")
@@ -222,7 +238,7 @@ public class XRosterType {
 
     @Override public String toString()
     {
-        return "XRosterType{" + "refId='" + refId + '\'' + ", courseRefId='" + courseRefId + '\'' + ", courseTitle='" + courseTitle + '\'' + ", sectionRefId='" + sectionRefId + '\'' + ", schoolRefId='" + schoolRefId + '\'' + ", schoolSectionId='" + schoolSectionId + '\'' + ", schoolYear="
-                + schoolYear + ", sessionCode='" + sessionCode + '\'' + ", schoolCalendarRefId='" + schoolCalendarRefId + '\'' + ", meetingTimes=" + meetingTimes + ", students=" + students + ", primaryStaff=" + primaryStaff + ", otherStaffs=" + otherStaffs + '}';
+        return "XRosterType{" + "refId='" + refId + '\'' + ", courseRefId='" + courseRefId + '\'' + ", courseTitle='" + courseTitle + '\'' + ", sectionRefId='" + sectionRefId + '\'' + ", schoolRefId='" + schoolRefId + '\'' + ", subject='" + subject + '\'' + ", schoolSectionId='" + schoolSectionId
+                + '\'' + ", schoolYear=" + schoolYear + ", sessionCode='" + sessionCode + '\'' + ", schoolCalendarRefId='" + schoolCalendarRefId + '\'' + ", meetingTimes=" + meetingTimes + ", students=" + students + ", primaryStaff=" + primaryStaff + ", otherStaffs=" + otherStaffs + '}';
     }
 }
