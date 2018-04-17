@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.ICollectionType;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "xRosterCollectionType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
     "xRoster"
 })
-public class XRosterCollectionType {
+public class XRosterCollectionType implements ICollectionType<XRosterType> {
 	
 	public XRosterCollectionType()
     {
@@ -71,4 +73,11 @@ public class XRosterCollectionType {
         return this.xRoster;
     }
 
+    @Override
+    public List<XRosterType> getObject() {
+        if (xRoster == null) {
+            xRoster = new ArrayList<XRosterType>();
+        }
+        return this.xRoster;
+    }
 }

@@ -7,6 +7,7 @@ package cases;
  */
 import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
+import riconeapi.common.paths.ServicePath;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XLeaType;
@@ -35,7 +36,7 @@ public class SampleConsole
             
             for(XLeaType l : xPress.getXLeas().getData()) //Iterate through each xLea
             {
-            	for (int i = 1; i <= xPress.getLastPage(navigationPageSize, XPress.ServicePath.GETXROSTERSBYXLEA, l.getRefId()); i++) //Get max page size for rosters by lea
+            	for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXLEA, l.getRefId()); i++) //Get max page size for rosters by lea
         		{
 	                for(XRosterType r : xPress.getXRostersByXLea(l.getRefId(), i, navigationPageSize).getData()) //Get each roster for each lea refId w/ paging
 	                {

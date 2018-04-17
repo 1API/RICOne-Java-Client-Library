@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.ICollectionType;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "xLeaCollectionType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
     "xLea"
 })
-public class XLeaCollectionType {
+public class XLeaCollectionType implements ICollectionType<XLeaType> {
 	
 	 public XLeaCollectionType()
      {
@@ -71,4 +73,11 @@ public class XLeaCollectionType {
         return this.xLea;
     }
 
+    @Override
+    public List<XLeaType> getObject() {
+        if (xLea == null) {
+            xLea = new ArrayList<XLeaType>();
+        }
+        return this.xLea;
+    }
 }

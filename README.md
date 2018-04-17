@@ -23,8 +23,8 @@ for(Endpoint e : auth.GetEndpoints())
 
 ### Project Contents
 * RicOneApi - Client Library
-* RicOneApiTests - Test Console Outputs
-* RicOneApiTestsPaging - Test Console Outputs with paging
+* RicOneApiTests - RestResponse Console Outputs
+* RicOneApiTestsPaging - RestResponse Console Outputs with paging
 * SampleConsole - Simple console app showing use
 
 ### Getting Started

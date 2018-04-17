@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.IType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -50,7 +52,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 })
 
 public class XLeaType
-    extends GSIFCompositeType
+    extends GSIFCompositeType implements IType<XLeaType>
 {
 	public XLeaType()
 	{
@@ -278,4 +280,8 @@ public class XLeaType
         this.otherPhoneNumbers = value;
     }
 
+    @Override
+    public XLeaType getObject() {
+        return this;
+    }
 }

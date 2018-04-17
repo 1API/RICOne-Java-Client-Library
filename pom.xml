@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ricone.api</groupId>
 	<artifactId>ricone-api</artifactId>
-	<version>1.6</version>
+	<version>1.7</version>
 	<name>RICOne API Client Library</name>
 	<description>Client library for the RIC One data api</description>
 	<url>http://www.ricone.org/</url>
@@ -112,6 +112,14 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>7</source>
+					<target>7</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

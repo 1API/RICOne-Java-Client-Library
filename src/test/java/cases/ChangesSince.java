@@ -23,8 +23,8 @@ import riconeapi.models.xpress.XStudentType;
 public class ChangesSince
 {
 	final static String authUrl = "https://auth.test.ricone.org/login";
-	final static String clientId = "dpaDemo";
-	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
+	final static String clientId = "CastleLearningOnline";
+	final static String clientSecret = "836774581965d73924995cb4c02e9";
 //	final static String clientSecret = "deecd889bff5ed0101a86680752f5f";
 	final static String providerId = "localhost";
 	
@@ -39,12 +39,11 @@ public class ChangesSince
 			for(Endpoint e : auth.getEndpoints(providerId))
 			{
 				XPress xPress = new XPress(e.getHref());
-				System.out.println(e.getHref());
 				
-//				for (XLeaType l : xPress.getXLeas("2016-02-07T10:28:24.626-05:00").getData())
-//				{
-//					System.out.println(l.getRefId());
-//				}
+				for (XLeaType l : xPress.getXLeas("2016-02-07T10:28:24.626-05:00").getData())
+				{
+					System.out.println(l.getRefId());
+				}
 //				for (XSchoolType s : xPress.getXSchools("2016-02-07T10:28:24.626-05:00").getData())
 //				{
 //					System.out.println(s.getRefId());

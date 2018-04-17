@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.IType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -61,7 +63,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "otherStaffs"
 })
 public class XRosterType
-    extends GSIFCompositeType
+    extends GSIFCompositeType implements IType<XRosterType>
 {
 	public XRosterType()
     {
@@ -448,4 +450,8 @@ public class XRosterType
         this.otherStaffs = value;
     }
 
+    @Override
+    public XRosterType getObject() {
+        return this;
+    }
 }

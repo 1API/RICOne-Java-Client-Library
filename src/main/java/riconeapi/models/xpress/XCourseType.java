@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.IType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -57,7 +59,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "scedCourseSubjectAreaCode"
 })
 public class XCourseType
-    extends GSIFCompositeType
+    extends GSIFCompositeType implements IType<XCourseType>
 {
 	public XCourseType()
     {
@@ -376,4 +378,8 @@ public class XCourseType
         this.scedCourseSubjectAreaCode = value;
     }
 
+    @Override
+    public XCourseType getObject() {
+        return this;
+    }
 }

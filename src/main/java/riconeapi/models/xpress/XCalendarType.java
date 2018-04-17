@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.IType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -40,7 +42,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "sessions"
 })
 public class XCalendarType
-    extends GSIFCompositeType
+    extends GSIFCompositeType implements IType<XCalendarType>
 {
 	public XCalendarType()
     {
@@ -130,4 +132,8 @@ public class XCalendarType
         this.sessions = value;
     }
 
+    @Override
+    public XCalendarType getObject() {
+        return this;
+    }
 }

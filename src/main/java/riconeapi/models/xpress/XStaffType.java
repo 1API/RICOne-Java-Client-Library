@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.IType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -51,7 +53,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "otherAssignments"
 })
 public class XStaffType
-    extends GSIFCompositeType
+    extends GSIFCompositeType implements IType<XStaffType>
 {
 	public XStaffType()
     {
@@ -305,4 +307,8 @@ public class XStaffType
         this.otherAssignments = value;
     }
 
+    @Override
+    public XStaffType getObject() {
+        return this;
+    }
 }

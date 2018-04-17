@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.ICollectionType;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "xCalendarCollectionType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
     "xCalendar"
 })
-public class XCalendarCollectionType {
+public class XCalendarCollectionType implements ICollectionType<XCalendarType> {
 	
 	 public XCalendarCollectionType()
      {
@@ -71,4 +73,11 @@ public class XCalendarCollectionType {
         return this.xCalendar;
     }
 
+    @Override
+    public List<XCalendarType> getObject() {
+        if (xCalendar == null) {
+            xCalendar = new ArrayList<XCalendarType>();
+        }
+        return this.xCalendar;
+    }
 }

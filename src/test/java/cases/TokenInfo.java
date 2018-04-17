@@ -13,7 +13,7 @@ import riconeapi.models.authentication.DecodedToken;
 
 public class TokenInfo
 {
-	final static String authUrl = "https://auth.test.ricone.org/login";
+	final static String authUrl = "https://auth.RestResponse.ricone.org/login";
 	final static String clientId = "dpaDemo";
 	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
 	

@@ -21,7 +21,7 @@ public class AppAccountProvisioning
 	final static String providerId = AuthServiceProperties.getInstance().getProperty("auth.providerId");
 	
 //	static String refId = "0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C";
-	static String refId = "106E9449-3FF4-499E-B94F-BCE557C013CE";
+	static String refId = "AE6B3441-5E31-4573-BADB-081669D79C7F";
 	
 	public static void main(String[] args)
 	{
@@ -40,9 +40,9 @@ public class AppAccountProvisioning
 	//            XStaffs_GetXStaffsAccounts(xPress);
 	            
 	            //Student
-	//            xPress.createXStudentUsers(refId);
+	            xPress.createXStudentUsers(refId);
 	//            xPress.deleteXStudentUsers(refId);
-	//            XStudents_GetXStudentsAccounts(xPress);
+//	            XStudents_GetXStudentsAccounts(xPress);
 	            
 	            //Contact
 	//            xPress.createXContactUsers(refId);

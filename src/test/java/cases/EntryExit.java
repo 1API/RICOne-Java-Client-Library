@@ -11,7 +11,7 @@ import riconeapi.models.xpress.*;
  */
 public class EntryExit
 {
-	final static String authUrl = "https://auth.test.ricone.org/login";
+	final static String authUrl = "https://auth.RestResponse.ricone.org/login";
 	final static String clientId = "dpaDemo";
 	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
 	final static String providerId = "localhost";

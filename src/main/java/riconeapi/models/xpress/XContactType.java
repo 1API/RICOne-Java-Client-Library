@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.IType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -57,7 +59,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "relationships"
 })
 public class XContactType
-    extends GSIFCompositeType
+    extends GSIFCompositeType implements IType<XContactType>
 {
 	
 	public XContactType()
@@ -419,4 +421,8 @@ public class XContactType
         this.relationships = value;
     }
 
+    @Override
+    public XContactType getObject() {
+        return this;
+    }
 }

@@ -1,6 +1,8 @@
 
 package riconeapi.models.xpress;
 
+import riconeapi.common.IType;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -67,7 +69,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "languages"
 })
 public class XStudentType
-    extends GSIFCompositeType
+    extends GSIFCompositeType implements IType<XStudentType>
 {
 	public XStudentType()
     {
@@ -537,4 +539,8 @@ public class XStudentType
         this.languages = value;
     }
 
+    @Override
+    public XStudentType getObject() {
+        return this;
+    }
 }
