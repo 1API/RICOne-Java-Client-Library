@@ -15,27 +15,11 @@ public class RestProperties {
     private RestHeader restHeader;
     private RestQueryParameter restQueryParameter;
 
-    public RestProperties(String baseUrl, ServicePath servicePath) {
-        this.baseUrl = baseUrl;
-        this.servicePath = servicePath;
-    }
-
-    public RestProperties(String baseUrl, ServicePath servicePath, String refId) {
-        this.baseUrl = baseUrl;
-        this.servicePath = servicePath;
-        this.refId = refId;
-    }
 
     public RestProperties(String baseUrl, ServicePath servicePath, RestHeader restHeader) {
         this.baseUrl = baseUrl;
         this.servicePath = servicePath;
         this.restHeader = restHeader;
-    }
-
-    public RestProperties(String baseUrl, ServicePath servicePath, RestQueryParameter restQueryParameter) {
-        this.baseUrl = baseUrl;
-        this.servicePath = servicePath;
-        this.restQueryParameter = restQueryParameter;
     }
 
     public RestProperties(String baseUrl, ServicePath servicePath, RestHeader restHeader, RestQueryParameter restQueryParameter) {
@@ -50,13 +34,6 @@ public class RestProperties {
         this.servicePath = servicePath;
         this.refId = refId;
         this.restHeader = restHeader;
-    }
-
-    public RestProperties(String baseUrl, ServicePath servicePath, String refId, RestQueryParameter restQueryParameter) {
-        this.baseUrl = baseUrl;
-        this.servicePath = servicePath;
-        this.refId = refId;
-        this.restQueryParameter = restQueryParameter;
     }
 
     public RestProperties(String baseUrl, ServicePath servicePath, String refId, RestHeader restHeader, RestQueryParameter restQueryParameter) {

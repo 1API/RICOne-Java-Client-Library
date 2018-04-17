@@ -14,6 +14,9 @@ public class RestHeader {
     private String id;
     private Integer schoolYear;
 
+    public RestHeader() {
+    }
+
     public RestHeader(Integer schoolYear) {
         this.schoolYear = schoolYear;
     }

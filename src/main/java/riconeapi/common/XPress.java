@@ -65,14 +65,16 @@ public class XPress {
 
 	public ResponseMulti<XLeaType> getXLeas(String opaqueMarker) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
 		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rqp);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
 		return rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
 	}
 
 	public ResponseMulti<XLeaType> getXLeas() throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh);
 		return rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
 	}
 
@@ -80,7 +82,8 @@ public class XPress {
 
 	public ResponseSingle<XLeaType> getXLea(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEABYREFID, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEABYREFID, refId, rh);
         return rr.makeSingleRequest(rt, rp, XLeaType.class);
 	}
 
@@ -100,7 +103,8 @@ public class XPress {
 
 	public ResponseMulti<XLeaType> getXLeasByXSchool(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
 	}
 
@@ -115,7 +119,8 @@ public class XPress {
 
 	public ResponseMulti<XLeaType> getXLeasByXRoster(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
 	}
 
@@ -128,7 +133,8 @@ public class XPress {
 
 	public ResponseMulti<XLeaType> getXLeasByXStaff(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
 	}
 
@@ -141,7 +147,8 @@ public class XPress {
 
 	public ResponseMulti<XLeaType> getXLeasByXStudent(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
 	}
 
@@ -154,7 +161,8 @@ public class XPress {
 
 	public ResponseMulti<XLeaType> getXLeasByXContact(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
 	}
 
@@ -177,14 +185,16 @@ public class XPress {
 
 	public ResponseMulti<XSchoolType> getXSchools(String opaqueMarker) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
 		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rqp);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
 		return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
 	}
 
 	public ResponseMulti<XSchoolType> getXSchools() throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh);
 		return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
 	}
 
@@ -192,7 +202,8 @@ public class XPress {
 
 	public ResponseSingle<XSchoolType> getXSchool(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLBYREFID, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLBYREFID, refId, rh);
 		return rr.makeSingleRequest(rt, rp, XSchoolType.class);
 	}
 
@@ -212,7 +223,8 @@ public class XPress {
 
 	public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXLEA, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXLEA, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
 	}
 
@@ -227,7 +239,8 @@ public class XPress {
 
 	public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
 	}
 
@@ -240,7 +253,8 @@ public class XPress {
 
 	public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
 	}
 
@@ -253,7 +267,8 @@ public class XPress {
 
 	public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXROSTER, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
 	}
 
@@ -266,7 +281,8 @@ public class XPress {
 
 	public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTAFF, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
 	}
 
@@ -279,7 +295,8 @@ public class XPress {
 
 	public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTUDENT, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
 	}
 
@@ -292,7 +309,8 @@ public class XPress {
 
 	public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCONTACT, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
 	}
 
@@ -315,14 +333,16 @@ public class XPress {
 
 	public ResponseMulti<XCalendarType> getXCalendars(String opaqueMarker) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
 		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rqp);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
 		return rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
 	}
 
 	public ResponseMulti<XCalendarType> getXCalendars() throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh);
 		return rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
 	}
 
@@ -331,7 +351,8 @@ public class XPress {
 
 	public ResponseSingle<XCalendarType> getXCalendar(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARBYREFID, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARBYREFID, refId, rh);
 		return rr.makeSingleRequest(rt, rp, XCalendarType.class);
 	}
 
@@ -344,7 +365,8 @@ public class XPress {
 
 	public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
 	}
 
@@ -359,7 +381,8 @@ public class XPress {
 
 	public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
 	}
 
@@ -384,14 +407,16 @@ public class XPress {
 
 	public ResponseMulti<XCourseType> getXCourses(String opaqueMarker) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
 		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rqp);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
 		return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
 	}
 
 	public ResponseMulti<XCourseType> getXCourses() throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh);
 		return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
 	}
 
@@ -399,7 +424,8 @@ public class XPress {
 
 	public ResponseSingle<XCourseType> getXCourse(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, refId, rh);
 		return rr.makeSingleRequest(rt, rp, XCourseType.class);
 	}
 
@@ -407,95 +433,161 @@ public class XPress {
 		RestResponse rr = new RestResponse();
 		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
 		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh);
-		return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
+		return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
 	}
 
 	public ResponseMulti<XCourseType> getXCoursesByXLea(String refId) throws AuthenticationException {
-		return xCoursesPath.getXCoursesByXLea(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
 	}
 
 	//todo removed getXCoursesByXLea(String idType, String id)
 
 	public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xCoursesPath.getXCoursesByXSchool(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
 	}
 
 	public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId) throws AuthenticationException {
-		return xCoursesPath.getXCoursesByXSchool(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
 	}
 
 	//todo removed getXCoursesByXSchool(String idType, String id)
 
 	public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xCoursesPath.getXCoursesByXRoster(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
 	}
 
 	public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId) throws AuthenticationException {
-		return xCoursesPath.getXCoursesByXRoster(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
 	}
 
 	/* xRosters */
 	public ResponseMulti<XRosterType> getXRosters(int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xRostersPath.getXRosters(navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh);
+		return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
 	}
 
-	//todo add opaque paging
+	//todo NEW
+	public ResponseMulti<XRosterType> getXRosters(int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+		return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
+	}
+
 	public ResponseMulti<XRosterType> getXRosters(String opaqueMarker) throws AuthenticationException {
-		return xRostersPath.getXRosters(opaqueMarker);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+		return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRosters() throws AuthenticationException {
-		return xRostersPath.getXRosters();
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh);
+		return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
 	}
 
 	//todo removed getXRoster(String refId, int navigationPage, int navigationPageSize)
 
 	public ResponseSingle<XRosterType> getXRoster(String refId) throws AuthenticationException {
-		return xRostersPath.getXRoster(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, refId, rh);
+		return rr.makeSingleRequest(rt, rp, XRosterType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xRostersPath.getXRostersByXLea(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRostersByXLea(String refId) throws AuthenticationException {
-		return xRostersPath.getXRostersByXLea(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	//todo removed getXRostersByXLea(String idType, String id)
 
 	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xRostersPath.getXRostersByXSchool(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRostersByXSchool(String refId) throws AuthenticationException {
-		return xRostersPath.getXRostersByXSchool(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	//todo removed getXRostersByXSchool(String idType, String id)
 
 	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xRostersPath.getXRostersByXCourse(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRostersByXCourse(String refId) throws AuthenticationException {
-		return xRostersPath.getXRostersByXCourse(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xRostersPath.getXRostersByXStaff(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRostersByXStaff(String refId) throws AuthenticationException {
-		return xRostersPath.getXRostersByXStaff(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xRostersPath.getXRostersByXStudent(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	public ResponseMulti<XRosterType> getXRostersByXStudent(String refId) throws AuthenticationException {
-		return xRostersPath.getXRostersByXStudent(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
 	}
 
 	/* xStaffs */
@@ -517,14 +609,16 @@ public class XPress {
 
 	public ResponseMulti<XStaffType> getXStaffs(String opaqueMarker) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
 		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rqp);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
 		return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
 	}
 
 	public ResponseMulti<XStaffType> getXStaffs() throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh);
 		return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
 	}
 
@@ -532,7 +626,8 @@ public class XPress {
 
 	public ResponseSingle<XStaffType> getXStaff(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFBYREFID, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFBYREFID, refId, rh);
 		return rr.makeSingleRequest(rt, rp, XStaffType.class);
 	}
 
@@ -545,7 +640,8 @@ public class XPress {
 
 	public ResponseMulti<XStaffType> getXStaffsByXLea(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
 	}
 
@@ -560,7 +656,8 @@ public class XPress {
 
 	public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
 	}
 
@@ -575,7 +672,8 @@ public class XPress {
 
 	public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
 	}
 
@@ -588,7 +686,8 @@ public class XPress {
 
 	public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
 	}
 
@@ -601,122 +700,215 @@ public class XPress {
 
 	public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId);
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh);
 		return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
 	}
 
 	/* xStudents */
 	public ResponseMulti<XStudentType> getXStudents(int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xStudentsPath.getXStudents(navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTS, rh);
+		return rr.makeAllRequest(rt, rp, XStudentCollectionType.class);
 	}
 
-	//todo add opaque paging
+	//todo NEW
+	public ResponseMulti<XStudentType> getXStudents(int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTS, rh, rqp);
+		return rr.makeAllRequest(rt, rp, XStudentCollectionType.class);
+	}
+
 	public ResponseMulti<XStudentType> getXStudents(String opaqueMarker) throws AuthenticationException {
-		return xStudentsPath.getXStudents(opaqueMarker);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTS, rh, rqp);
+		return rr.makeAllRequest(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudents() throws AuthenticationException {
-		return xStudentsPath.getXStudents();
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTS, rh);
+		return rr.makeAllRequest(rt, rp, XStudentCollectionType.class);
 	}
 
 	//todo removed getXStudent(String refId, int navigationPage, int navigationPageSize)
 
 	public ResponseSingle<XStudentType> getXStudent(String refId) throws AuthenticationException {
-		return xStudentsPath.getXStudent(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTBYREFID, refId, rh);
+		return rr.makeSingleRequest(rt, rp, XStudentType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXLea(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXLEA, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentsByXLea(String refId) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXLea(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXLEA, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	//todo removed getXStudentsByXLea(String idType, String id)
 
 	public ResponseMulti<XStudentType> getXStudentsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXSchool(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentsByXSchool(String refId) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXSchool(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	//todo removed getXStudentsByXSchool(String idType, String id)
 
 	public ResponseMulti<XStudentType> getXStudentsByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXRoster(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXROSTER, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentsByXRoster(String refId) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXRoster(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXROSTER, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentsByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXStaff(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSTAFF, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentsByXStaff(String refId) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXStaff(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSTAFF, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentsByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXContact(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXCONTACT, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentsByXContact(String refId) throws AuthenticationException {
-		return xStudentsPath.getXStudentsByXContact(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXCONTACT, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
 	}
 
 	/* xContacts */
 	public ResponseMulti<XContactType> getXContacts(int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xContactsPath.getXContacts(navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTS, rh);
+		return rr.makeAllRequest(rt, rp, XContactCollectionType.class);
 	}
 
-	//todo add opaque paging.
+	//todo NEW
+	public ResponseMulti<XContactType> getXContacts(int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTS, rh, rqp);
+		return rr.makeAllRequest(rt, rp, XContactCollectionType.class);
+	}
+
 	public ResponseMulti<XContactType> getXContacts(String opaqueMarker) throws AuthenticationException {
-		return xContactsPath.getXContacts(opaqueMarker);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTS, rh, rqp);
+		return rr.makeAllRequest(rt, rp, XContactCollectionType.class);
 	}
 
 	public ResponseMulti<XContactType> getXContacts() throws AuthenticationException {
-		return xContactsPath.getXContacts();
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTS, rh);
+		return rr.makeAllRequest(rt, rp, XContactCollectionType.class);
 	}
 
 	//todo removed getXContact(String refId, int navigationPage, int navigationPageSize)
 
 	public ResponseSingle<XContactType> getXContact(String refId) throws AuthenticationException {
-		return xContactsPath.getXContact(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTBYREFID, refId, rh);
+		return rr.makeSingleRequest(rt, rp, XContactType.class);
 	}
 
 	public ResponseMulti<XContactType> getXContactsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xContactsPath.getXContactsByXLea(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXLEA, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XContactCollectionType.class);
 	}
 
 	public ResponseMulti<XContactType> getXContactsByXLea(String refId) throws AuthenticationException {
-		return xContactsPath.getXContactsByXLea(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXLEA, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XContactCollectionType.class);
 	}
 
 	//todo removed getXContactsByXLea(String idType, String id)
 
 	public ResponseMulti<XContactType> getXContactsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xContactsPath.getXContactsByXSchool(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XContactCollectionType.class);
 	}
 
 	public ResponseMulti<XContactType> getXContactsByXSchool(String refId) throws AuthenticationException {
-		return xContactsPath.getXContactsByXSchool(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSCHOOL, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XContactCollectionType.class);
 	}
 
 	//todo removed getXContactsByXSchool(String idType, String id)
 
 	public ResponseMulti<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return xContactsPath.getXContactsByXStudent(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSTUDENT, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XContactCollectionType.class);
 	}
 
 	public ResponseMulti<XContactType> getXContactsByXStudent(String refId) throws AuthenticationException {
-		return xContactsPath.getXContactsByXStudent(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSTUDENT, refId, rh);
+		return rr.makeAllRequestByRefId(rt, rp, XContactCollectionType.class);
 	}
 
+
+	//TODO rework this!!!!!!!!!!!!!!
 	/* navigationLastPage */
 	public int getLastPage(int navigationPageSize, ServicePath p, String refId) {
 		return getLastPagePath.getLastPage(navigationPageSize, p, refId);
@@ -729,55 +921,98 @@ public class XPress {
 
 	/* AUPP */
 	public ResponseMulti<XStaffType> createXStaffUsers(String refId) throws AuthenticationException {
-		return aupp.createXStaffUsers(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
 	}
 
 	public ResponseMulti<XStaffType> deleteXStaffUsers(String refId) throws AuthenticationException {
-		return aupp.deleteXStaffUsers(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
 	}
 
 	public ResponseMulti<XStaffType> getXStaffUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return aupp.getXStaffUsers(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
 	}
 
 	public ResponseMulti<XStaffType> getXStaffUsers(String refId) throws AuthenticationException {
-		return aupp.getXStaffUsers(refId);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> createXStudentUsers(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
 		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE);
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rqp);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
 		return rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> deleteXStudentUsers(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
 		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE);
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rqp);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
 		return rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
-		return aupp.getXStudentUsers(refId, navigationPage, navigationPageSize);
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
 	}
 
 	public ResponseMulti<XStudentType> getXStudentUsers(String refId) throws AuthenticationException {
 		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
 		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
-		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rqp);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
 		return rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
 	}
-//	private ResponseMulti<XContactType> createXContactUsers(String refId) throws AuthenticationException
-//	{
-//		return aupp.createXContactUsers(refId);
-//	}
-//	private ResponseMulti<XContactType> deleteXContactUsers(String refId) throws AuthenticationException
-//	{
-//		return aupp.deleteXContactUsers(refId);
-//	}
-//	private ResponseMulti<XContactType> getXContactUsers(String refId) throws AuthenticationException
-//	{
-//		return aupp.getXContactUsers(refId);
-//	}
+
+	private ResponseMulti<XContactType> createXContactUsers(String refId) throws AuthenticationException {
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XContactCollectionType.class);
+	}
+
+	private ResponseMulti<XContactType> deleteXContactUsers(String refId) throws AuthenticationException {
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XContactCollectionType.class);
+	}
+
+	private ResponseMulti<XContactType> getXContactUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XContactCollectionType.class);
+	}
+
+	private ResponseMulti<XContactType> getXContactUsers(String refId) throws AuthenticationException {
+		RestResponse rr = new RestResponse();
+		RestHeader rh = new RestHeader();
+		RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
+		RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSCHOOL, refId, rh, rqp);
+		return rr.makeAllRequestByAupp(rt, rp, XContactCollectionType.class);
+	}
 }
