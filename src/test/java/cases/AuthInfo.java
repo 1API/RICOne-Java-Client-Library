@@ -4,7 +4,6 @@ package cases;
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.3
  * @since       Jun 20, 2016
- * @filename	AuthInfo.java
  */
 
 public class AuthInfo

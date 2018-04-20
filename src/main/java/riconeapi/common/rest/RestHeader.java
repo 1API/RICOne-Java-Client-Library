@@ -1,12 +1,13 @@
-package riconeapi.common;
+package riconeapi.common.rest;
 
 import org.springframework.util.StringUtils;
 
 /**
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version x.x.x
- * @since 4/16/2018
+ * @version 1.7
+ * @since 4/20/2018
  */
+@SuppressWarnings("unused")
 public class RestHeader {
     private Integer navigationPage;
     private Integer navigationPageSize;
@@ -98,20 +99,15 @@ public class RestHeader {
         this.schoolYear = schoolYear;
     }
 
-    public boolean hasPaging() {
-        if(this.navigationPage != null && this.navigationPageSize != null) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    boolean hasPaging() {
+        return this.navigationPage != null && this.navigationPageSize != null;
     }
 
-    public boolean hasIdType() {
+    boolean hasIdType() {
         return !StringUtils.isEmpty(this.getIdType()) && !StringUtils.isEmpty(this.getId());
     }
 
-    public boolean hasSchoolYear() {
+    boolean hasSchoolYear() {
         return !StringUtils.isEmpty(this.getSchoolYear());
     }
 }

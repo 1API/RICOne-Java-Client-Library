@@ -10,9 +10,7 @@ import riconeapi.models.xpress.XStudentType;
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.3.1
  * @since       Jul 20, 2016
- * @filename	AppAccountProvisioning.java
  */
-
 public class AppAccountProvisioning
 {
 	final static String authUrl = AuthServiceProperties.getInstance().getProperty("auth.url");
@@ -40,9 +38,9 @@ public class AppAccountProvisioning
 	//            XStaffs_GetXStaffsAccounts(xPress);
 	            
 	            //Student
-	            xPress.createXStudentUsers(refId);
+//	            xPress.createXStudentUsers(refId);
 	//            xPress.deleteXStudentUsers(refId);
-//	            XStudents_GetXStudentsAccounts(xPress);
+	            XStudents_GetXStudentsAccounts(xPress);
 	            
 	            //Contact
 	//            xPress.createXContactUsers(refId);

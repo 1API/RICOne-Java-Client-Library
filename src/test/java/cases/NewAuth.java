@@ -1,9 +1,3 @@
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     x.x.x
- * @since       Jul 13, 2016
- * @filename	NewAuth.java
- */
 package cases;
 
 import org.joda.time.DateTime;
@@ -16,6 +10,11 @@ import riconeapi.models.xpress.XLeaType;
 import riconeapi.models.xpress.XRosterType;
 import riconeapi.models.xpress.XSchoolType;
 
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     x.x.x
+ * @since       Jul 13, 2016
+ */
 public class NewAuth
 {
 	final static String authUrl = "https://auth.RestResponse.ricone.org/login";

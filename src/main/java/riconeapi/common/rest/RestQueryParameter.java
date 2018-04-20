@@ -1,15 +1,19 @@
-package riconeapi.common;
+package riconeapi.common.rest;
 
 import org.springframework.util.StringUtils;
 
 /**
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version x.x.x
- * @since 4/16/2018
+ * @version 1.7
+ * @since 4/20/2018
  */
+@SuppressWarnings("unused")
 public class RestQueryParameter {
     private String opaqueMarker;
     private AUPPEnum aupp;
+
+    public RestQueryParameter() {
+    }
 
     public RestQueryParameter(String opaqueMarker) {
         this.opaqueMarker = opaqueMarker;
@@ -35,25 +39,25 @@ public class RestQueryParameter {
         this.aupp = aupp;
     }
 
-    public boolean hasOpaqueMarker() {
+    boolean hasOpaqueMarker() {
         return !StringUtils.isEmpty(this.getOpaqueMarker());
     }
 
-    public boolean isCreateUsers() {
+    boolean isCreateUsers() {
         if(this.aupp != null) {
             return this.aupp.equals(AUPPEnum.CREATE);
         }
         return false;
     }
 
-    public boolean isDeleteUsers() {
+    boolean isDeleteUsers() {
         if(this.aupp != null) {
             return this.aupp.equals(AUPPEnum.DELETE);
         }
         return false;
     }
 
-    public boolean isGetUsers() {
+    boolean isGetUsers() {
         if(this.aupp != null) {
             return this.aupp.equals(AUPPEnum.GET);
         }

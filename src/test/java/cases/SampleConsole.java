@@ -1,19 +1,19 @@
 package cases;
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3.1
- * @since       Jul 20, 2016
- * Filename		SampleConsole.java
- */
+
 import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
-import riconeapi.common.paths.ServicePath;
+import riconeapi.common.objects.ServicePath;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XLeaType;
 import riconeapi.models.xpress.XPersonReferenceType;
 import riconeapi.models.xpress.XRosterType;
 
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.3.1
+ * @since       Jul 20, 2016
+ */
 public class SampleConsole
 {
 	final static String authUrl = "AUTH URL";

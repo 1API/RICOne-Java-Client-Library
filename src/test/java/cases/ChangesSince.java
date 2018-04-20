@@ -1,9 +1,3 @@
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.5
- * @since       Jan 13, 2017
- * @filename	ChangesSince.java
- */
 package cases;
 
 import riconeapi.authentication.Authenticator;
@@ -20,6 +14,11 @@ import riconeapi.models.xpress.XSessionType;
 import riconeapi.models.xpress.XStaffType;
 import riconeapi.models.xpress.XStudentType;
 
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.5
+ * @since       Jan 13, 2017
+ */
 public class ChangesSince
 {
 	final static String authUrl = "https://auth.test.ricone.org/login";

@@ -1,13 +1,14 @@
-package riconeapi.common;
+package riconeapi.common.rest;
 
 import org.springframework.util.StringUtils;
-import riconeapi.common.paths.ServicePath;
+import riconeapi.common.objects.ServicePath;
 
 /**
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
  * @version 1.7
- * @since 4/16/2018
+ * @since 4/20/2018
  */
+@SuppressWarnings("unused")
 public class RestProperties {
     private String baseUrl;
     private ServicePath servicePath;
@@ -15,25 +16,11 @@ public class RestProperties {
     private RestHeader restHeader;
     private RestQueryParameter restQueryParameter;
 
-
-    public RestProperties(String baseUrl, ServicePath servicePath, RestHeader restHeader) {
-        this.baseUrl = baseUrl;
-        this.servicePath = servicePath;
-        this.restHeader = restHeader;
-    }
-
     public RestProperties(String baseUrl, ServicePath servicePath, RestHeader restHeader, RestQueryParameter restQueryParameter) {
         this.baseUrl = baseUrl;
         this.servicePath = servicePath;
         this.restHeader = restHeader;
         this.restQueryParameter = restQueryParameter;
-    }
-
-    public RestProperties(String baseUrl, ServicePath servicePath, String refId, RestHeader restHeader) {
-        this.baseUrl = baseUrl;
-        this.servicePath = servicePath;
-        this.refId = refId;
-        this.restHeader = restHeader;
     }
 
     public RestProperties(String baseUrl, ServicePath servicePath, String refId, RestHeader restHeader, RestQueryParameter restQueryParameter) {
@@ -44,7 +31,7 @@ public class RestProperties {
         this.restQueryParameter = restQueryParameter;
     }
 
-    public String getBaseUrl() {
+    String getBaseUrl() {
         return baseUrl;
     }
 
@@ -52,7 +39,7 @@ public class RestProperties {
         this.baseUrl = baseUrl;
     }
 
-    public ServicePath getServicePath() {
+    ServicePath getServicePath() {
         return servicePath;
     }
 
@@ -68,7 +55,7 @@ public class RestProperties {
         this.refId = refId;
     }
 
-    public RestHeader getRestHeader() {
+    RestHeader getRestHeader() {
         return restHeader;
     }
 
@@ -76,7 +63,7 @@ public class RestProperties {
         this.restHeader = restHeader;
     }
 
-    public RestQueryParameter getRestQueryParameter() {
+    RestQueryParameter getRestQueryParameter() {
         return restQueryParameter;
     }
 
@@ -84,7 +71,7 @@ public class RestProperties {
         this.restQueryParameter = restQueryParameter;
     }
 
-    public boolean hasRefId() {
+    boolean hasRefId() {
         return !StringUtils.isEmpty(this.getRefId());
     }
 }

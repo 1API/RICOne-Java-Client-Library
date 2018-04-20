@@ -1,16 +1,14 @@
 package cases;
 
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.4
- * @since       Aug 30, 2016
- * @filename	TokenInfo.java
- */
-
 import riconeapi.authentication.Authenticator;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.DecodedToken;
 
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.4
+ * @since       Aug 30, 2016
+ */
 public class TokenInfo
 {
 	final static String authUrl = "https://auth.RestResponse.ricone.org/login";

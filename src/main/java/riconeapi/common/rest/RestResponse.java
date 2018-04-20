@@ -1,4 +1,4 @@
-package riconeapi.common;
+package riconeapi.common.rest;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -8,9 +8,19 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import riconeapi.authentication.Authenticator;
+import riconeapi.models.xpress.ICollectionType;
+import riconeapi.models.xpress.IType;
 import riconeapi.exceptions.AuthenticationException;
 
+/**
+ * @author andrew.pieniezny <andrew.pieniezny@neric.org>
+ * @version 1.7
+ * @since 4/20/2018
+ */
+@SuppressWarnings("unchecked")
 public class RestResponse {
+    private Integer navigationLastPage;
+
     public <T extends ICollectionType<E>, E> ResponseMulti<E> makeAllRequest(RestTemplate rt, RestProperties rp, Class clazz) throws AuthenticationException {
         ResponseEntity<T> response;
         ResponseMulti<E> output = new ResponseMulti<>();
@@ -18,7 +28,10 @@ public class RestResponse {
 
         try {
             response = rt.exchange(urlBuilder(rp), HttpMethod.GET, getEntityHeaders(rp), clazz);
-            System.out.println(response.getHeaders());
+
+            if(rp.getRestHeader().hasPaging()) {
+                setNavigationLastPage(Integer.parseInt(response.getHeaders().getFirst("navigationLastPage")));
+            }
             if (response.getBody() != null) {
                 output.setData(response.getBody().getObject());
             }
@@ -41,7 +54,10 @@ public class RestResponse {
 
         try {
             response = rt.exchange(urlBuilder(rp), HttpMethod.GET, getEntityHeaders(rp), clazz, rp.getRefId());
-            System.out.println(response.getHeaders());
+
+            if(rp.getRestHeader().hasPaging()) {
+                setNavigationLastPage(Integer.parseInt(response.getHeaders().getFirst("navigationLastPage")));
+            }
             if (response.getBody() != null) {
                 output.setData(response.getBody().getObject());
             }
@@ -65,7 +81,9 @@ public class RestResponse {
         try {
             response = rt.exchange(urlBuilder(rp), HttpMethod.GET, getEntityHeaders(rp), clazz, rp.getRefId());
 
-            System.out.println(response.getHeaders());
+            if(rp.getRestHeader().hasPaging()) {
+                setNavigationLastPage(Integer.parseInt(response.getHeaders().getFirst("navigationLastPage")));
+            }
             if (response.getBody() != null) {
                 output.setData(response.getBody().getObject());
             }
@@ -88,7 +106,7 @@ public class RestResponse {
 
         try {
             response = rt.exchange(urlBuilder(rp), HttpMethod.GET, getEntityHeaders(rp), clazz, rp.getRefId());
-            System.out.println(response.getHeaders());
+
             if (response.getBody() != null) {
                 output.setData(response.getBody().getObject());
             }
@@ -143,8 +161,7 @@ public class RestResponse {
             headers.set("SchoolYear", rp.getRestHeader().getSchoolYear());
         }
 
-        HttpEntity<?> entity = new HttpEntity<Object>(headers);
-        return entity;
+        return new HttpEntity<Object>(headers);
     }
 
     // Build URL with optional query parameters
@@ -152,7 +169,7 @@ public class RestResponse {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(rp.getBaseUrl());
         if (rp.hasRefId() && !rp.getServicePath().getType().equals(ServicePathType.OBJECT)) {
             String tempUrl = rp.getServicePath().getValue();
-            tempUrl = tempUrl.replaceAll("\\{[^}]*\\}", rp.getRefId());
+            tempUrl = tempUrl.replaceAll("\\{[^}]*}", rp.getRefId());
             builder.path(tempUrl);
 
             if(rp.getRestQueryParameter().isCreateUsers()) {
@@ -165,13 +182,25 @@ public class RestResponse {
                 builder.queryParam("getUsers", "true");
             }
         }
+        else if(rp.getRestHeader().hasIdType()) {
+            String tempUrl = rp.getServicePath().getValue();
+            tempUrl = tempUrl.replaceAll("\\{[^}]*}", rp.getRestHeader().getId());
+            builder.path(tempUrl);
+        }
         else {
             builder.path(rp.getServicePath().getValue());
             if (rp.getRestQueryParameter().hasOpaqueMarker()) {
                 builder.queryParam("changesSinceMarker", rp.getRestQueryParameter().getOpaqueMarker());
             }
         }
-        System.out.println(builder.build().encode().toUriString());
-        return builder.build().encode().toUriString();
+        return builder.build().toUriString();
+    }
+
+    public Integer getNavigationLastPage() {
+        return navigationLastPage;
+    }
+
+    private void setNavigationLastPage(Integer navigationLastPage) {
+        this.navigationLastPage = navigationLastPage;
     }
 }

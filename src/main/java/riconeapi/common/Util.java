@@ -1,10 +1,3 @@
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.5
- * @since       Dec 22, 2016
- * Filename		Util.java
- */
-
 package riconeapi.common;
 
 import java.security.KeyManagementException;
@@ -25,7 +18,11 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.http.HttpStatus;
 
-
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     1.5
+ * @since       Dec 22, 2016
+ */
 public class Util
 {
 	/**

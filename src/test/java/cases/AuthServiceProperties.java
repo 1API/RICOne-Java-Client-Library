@@ -1,16 +1,15 @@
 package cases;
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     x.x.x
- * @since       Jun 20, 2016
- * @filename	AuthenticationInfo.java
- */
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.Set;
 
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     x.x.x
+ * @since       Jun 20, 2016
+ */
 public class AuthServiceProperties
 {
 	private static AuthServiceProperties instance = null;

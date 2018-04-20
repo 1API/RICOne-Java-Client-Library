@@ -1,9 +1,3 @@
-/**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     x.x.x
- * @since       Jan 9, 2017
- * @filename	JsonXmlReturn.java
- */
 package cases;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,6 +8,11 @@ import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
 import riconeapi.models.xpress.XLeaType;
 
+/**
+ * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version     x.x.x
+ * @since       Jan 9, 2017
+ */
 public class JsonXmlReturn
 {
 	final static String authUrl = "https://auth.test.ricone.org/login";

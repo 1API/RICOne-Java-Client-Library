@@ -1,5 +1,5 @@
 
-Copyright © 2014-2016 New York State Education Department. All rights reserved.
+Copyright © 2014-2018 New York State Education Department. All rights reserved.
 
 # RICOne API Java Client Library
 The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTemplate
@@ -39,6 +39,48 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.7
+* Support for multiple school years
+    * Integer value, i.e. 2018 for the 2017-2018 school year
+    * Available on all methods except except ones that except the opaqueMarker for changes since
+    ```java
+    int schoolYear = 2018;
+    xPress.getXLeas(schoolYear).getData();
+    ```
+* Added paging requests for changes since
+    ```java
+    getXRosters(int navigationPage, int navigationPageSize, String opaqueMarker);
+    ```
+* Removed the single object REST calls with paging
+    ```java
+    getXLea(String refId, int navigationPage, int navigationPageSize);
+    getXSchool(String refId, int navigationPage, int navigationPageSize);
+    getXCalendar(String refId, int navigationPage, int navigationPageSize);
+    getXCourse(String refId, int navigationPage, int navigationPageSize);
+    getXRoster(String refId, int navigationPage, int navigationPageSize);
+    getXStaff(String refId, int navigationPage, int navigationPageSize);
+    getXStudent(String refId, int navigationPage, int navigationPageSize);
+    getXContact(String refId, int navigationPage, int navigationPageSize);
+   ```
+* Removed the following REST calls by beds or local id, as they are not supported in the API
+    ```java
+    getXLeasByXSchool(String idType, String id);
+    getXSchoolsByXLea(String idType, String id);
+    getXCalendarsByXLea(String idType, String id);
+    getXCalendarsByXSchool(String idType, String id);
+    getXCoursesByXLea(String idType, String id);
+    getXCoursesByXSchool(String idType, String id);
+    getXRostersByXLea(String idType, String id);
+    getXRostersByXSchool(String idType, String id);
+    getXStaffsByXLea(String idType, String id);
+    getXStaffsByXSchool(String idType, String id);
+    getXStudentsByXLea(String idType, String id);
+    getXStudentsByXSchool(String idType, String id);
+    getXContactsByXLea(String idType, String id);
+    getXContactsByXSchool(String idType, String id);
+    ```
+* Internal code cleanup
+
 ### v1.6
 * Added the RIC One API-AuthenticationClientLibrary-Java jar into the project
     * Authentication classes now moved into seperate repository: <a href="https://github.com/RIConeorg/API-AuthenticationClientLibrary-Java" target="blank">API-AuthenticationClientLibrary-Java</a>
@@ -57,7 +99,7 @@ final static String clientSecret = "YOUR PASSWORD";
 * Entry/Exit Codes now available
     * Added XOtherCodeListType & XOtherCodeType POJOs
     * Added entryType & exitType to XEnrollmentType
-* Added paging methods when retrieving staff and student accounts via AUPP
+* Added paging methods when retrieving staff and student accounts via AUPPObject
     * getXStaffUsers(String refId, int navigationPage, int navigationPageSize)
     * getXStudentUsers(String refId, int navigationPage, int navigationPageSize)
 
