@@ -6,5 +6,5 @@ package riconeapi.models.xpress;
  * @since 4/16/2018
  */
 public interface IType<E> {
-    public E getObject();
+    E getObject();
 }

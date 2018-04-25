@@ -63,4 +63,12 @@ public class RestQueryParameter {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "RestQueryParameter{" +
+                "opaqueMarker='" + opaqueMarker + '\'' +
+                ", aupp=" + aupp +
+                '}';
+    }
 }

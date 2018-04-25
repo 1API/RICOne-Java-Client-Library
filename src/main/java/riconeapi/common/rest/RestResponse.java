@@ -160,7 +160,6 @@ public class RestResponse {
         if (rp.getRestHeader().hasSchoolYear()) {
             headers.set("SchoolYear", rp.getRestHeader().getSchoolYear());
         }
-
         return new HttpEntity<Object>(headers);
     }
 

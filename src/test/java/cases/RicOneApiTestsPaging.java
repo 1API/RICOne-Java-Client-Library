@@ -5,35 +5,12 @@ import riconeapi.common.XPress;
 import riconeapi.common.objects.ServicePath;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.authentication.Endpoint;
-import riconeapi.models.xpress.XCalendarType;
-import riconeapi.models.xpress.XContactStudentRelationshipType;
-import riconeapi.models.xpress.XContactType;
-import riconeapi.models.xpress.XCourseType;
-import riconeapi.models.xpress.XEmailType;
-import riconeapi.models.xpress.XEnrollmentType;
-import riconeapi.models.xpress.XLanguageType;
-import riconeapi.models.xpress.XLeaType;
-import riconeapi.models.xpress.XMeetingTimeType;
-import riconeapi.models.xpress.XOtherCourseIdType;
-import riconeapi.models.xpress.XOtherOrganizationIdType;
-import riconeapi.models.xpress.XOtherPersonIdType;
-import riconeapi.models.xpress.XPersonNameType;
-import riconeapi.models.xpress.XPersonReferenceType;
-import riconeapi.models.xpress.XRaceType;
-import riconeapi.models.xpress.XRosterType;
-import riconeapi.models.xpress.XSchoolType;
-import riconeapi.models.xpress.XSessionType;
-import riconeapi.models.xpress.XStaffPersonAssignmentType;
-import riconeapi.models.xpress.XStaffReferenceType;
-import riconeapi.models.xpress.XStaffType;
-import riconeapi.models.xpress.XStudentType;
-import riconeapi.models.xpress.XTelephoneType;
+import riconeapi.models.xpress.*;
 
 /**
  * @author Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version 1.3.1
- * @filename RicOneApiTestsPaging.java
- * @since Jul 20, 2016
+ * @since Apr 23, 2018
  */
 
 public class RicOneApiTestsPaging {
@@ -44,45 +21,18 @@ public class RicOneApiTestsPaging {
     final static String providerId = AuthServiceProperties.getInstance().getProperty("auth.providerId");
 
 
-    static int navigationPageSize = 1;
-//	static int navigationPageSize = 50;
-//	static int navigationPageSize = 100;
+//    static int navigationPageSize = 1;
+//    static int navigationPageSize = 50;
+    static int navigationPageSize = 100;
 
     static String LEA_REFID = "03ACF04F-DC12-411A-9A42-E8323516D699";
-    static String LEA_BEDSIDTYPE = "beds";
-    static String LEA_BEDSID = "530501060000";
-    static String LEA_LOCALIDTYPE = "local";
-    static String LEA_LOCALID = "530501";
     static String SCHOOL_REFID = "AE6B3441-5E31-4573-BADB-081669D79C7F";
-    static String SCHOOL_BEDSIDTYPE = "BEDS";
-    static String SCHOOL_BEDSID = "530501060004";
-    static String SCHOOL_LOCALIDTYPE = "local";
-    static String SCHOOL_LOCALID = "shm";
     static String CALENDAR_REFID = "C419EBD3-5EFC-449C-8890-28545663350F";
     static String COURSE_REFID = "50F2377E-29BD-45C6-950C-C41B3432FC0A";
     static String ROSTER_REFID = "00BAD4F5-9CF4-4D49-A8CC-666D02180300";
     static String STAFF_REFID = "0C6E7BFA-4E4E-4F82-BCE8-C27729A79F29";
     static String STUDENT_REFID = "3089EF6E-143D-4C58-ABF3-8CED68B7AEEE";
     static String CONTACT_REFID = "0BFFDDCF-B25C-423B-BC65-553DE0B95F4B";
-
-    /*
-    LEA_REFID
-LEA_BEDSIDTYPE
-LEA_BEDSID
-LEA_LOCALIDTYPE
-LEA_LOCALID
-SCHOOL_REFID
-SCHOOL_BEDSIDTYPE
-SCHOOL_BEDSID
-SCHOOL_LOCALIDTYPE
-SCHOOL_LOCALID
-CALENDAR_REFID
-COURSE_REFID
-ROSTER_REFID
-STAFF_REFID
-STUDENT_REFID
-CONTACT_REFID
-     */
 
     public static void main(String[] args) throws AuthenticationException {
         Authenticator auth = Authenticator.getInstance();
@@ -91,16 +41,18 @@ CONTACT_REFID
         for (Endpoint e : auth.getEndpoints(providerId)) {
             XPress xPress = new XPress(e.getHref());
 
-            // #################### navigatonLastPage ####################
-            /* xLeas */
-            XLeas_GetXLeasLastPage(xPress);
-//			XLeas_GetXLeasByXSchoolLastPage(xPress);
-//			XLeas_GetXLeasByXRosterLastPage(xPress);
-//			XLeas_GetXLeasByXStaffLastPage(xPress);
-//			XLeas_GetXLeasByXStudentLastPage(xPress);
-//			XLeas_GetXLeasByXContactLastPage(xPress);
+//            XPress_StatusCodes(xPress);
 
-            /* xSchools */
+            // #################### navigatonLastPage ####################
+//            /* xLeas */
+//            XLeas_GetXLeasLastPage(xPress);
+//            XLeas_GetXLeasByXSchoolLastPage(xPress);
+//            XLeas_GetXLeasByXRosterLastPage(xPress);
+//            XLeas_GetXLeasByXStaffLastPage(xPress);
+//            XLeas_GetXLeasByXStudentLastPage(xPress);
+//            XLeas_GetXLeasByXContactLastPage(xPress);
+//
+//            /* xSchools */
 //			XSchools_GetXSchoolsLastPage(xPress);
 //			XSchools_GetXSchoolsByXLeaLastPage(xPress);
 //			XSchools_GetXSchoolsByXCalendarLastPage(xPress);
@@ -109,43 +61,43 @@ CONTACT_REFID
 //			XSchools_GetXSchoolsByXStaffLastPage(xPress);
 //			XSchools_GetXSchoolsByXStudentLastPage(xPress);
 //			XSchools_GetXSchoolsByXContactLastPage(xPress);
-
-            /* xCalendars */
+//
+//            /* xCalendars */
 //			XCalendars_GetXCalendarsLastPage(xPress);
 //			XCalendars_GetXCalendarsByXLeaLastPage(xPress);
 //			XCalendars_GetXCalendarsByXSchoolLastPage(xPress);
-
-            /* xCourses */
+//
+//            /* xCourses */
 //			XCourses_GetXCoursesLastPage(xPress);
 //			XCourses_GetXCoursesByXLeaLastPage(xPress);
 //			XCourses_GetXCoursesByXSchoolLastPage(xPress);
 //			XCourses_GetXCoursesByXRosterLastPage(xPress);
-
-            /* xRosters */
+//
+//            /* xRosters */
 //			XRosters_GetXRostersLastPage(xPress);
 //			XRosters_GetXRostersByXLeaLastPage(xPress);
 //			XRosters_GetXRostersByXSchoolLastPage(xPress);
 //			XRosters_GetXRostersByXCourseLastPage(xPress);
 //			XRosters_GetXRostersByXStaffLastPage(xPress);
 //			XRosters_GetXRostersByXStudentLastPage(xPress);
-
-            /* xStaffs */
+//
+//            /* xStaffs */
 //			XStaffs_GetXStaffsLastPage(xPress);
 //			XStaffs_GetXStaffsByXLeaLastPage(xPress);
 //			XStaffs_GetXStaffsByXSchoolLastPage(xPress);
 //			XStaffs_GetXStaffsByXCourseLastPage(xPress);
 //			XStaffs_GetXStaffsByXRosterLastPage(xPress);
 //			XStaffs_GetXStaffsByXStudentLastPage(xPress);
-
-            /* xStudents */
+//
+//            /* xStudents */
 //			XStudents_GetXStudentsLastPage(xPress);
 //			XStudents_GetXStudentsByXLeaLastPage(xPress);
 //			XStudents_GetXStudentsByXSchoolLastPage(xPress);
 //			XStudents_GetXStudentsByXRosterLastPage(xPress);
 //			XStudents_GetXStudentsByXStaffLastPage(xPress);
 //			XStudents_GetXStudentsByXContactLastPage(xPress);
-
-            /* xContacts */
+//
+//            /* xContacts */
 //			XContacts_GetXSContactsLastPage(xPress);
 //			XContacts_GetXContactsByXLeaLastPage(xPress);
 //			XContacts_GetXContactsByXSchoolLastPage(xPress);
@@ -154,20 +106,87 @@ CONTACT_REFID
 
     }
 
+    public static void XPress_StatusCodes(XPress xPress) throws AuthenticationException {
+        String format = "%-50s%s%n";
+        /* xLeas */
+        System.out.println("-----xLeas-----");
+        System.out.format(format, "getXLeas()", xPress.getXLeas(1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXLeasByXSchool(SCHOOL_REFID)", xPress.getXLeasByXSchool(SCHOOL_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXLeasByXRoster(ROSTER_REFID", xPress.getXLeasByXRoster(ROSTER_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXLeasByXStaff(STAFF_REFID)", xPress.getXLeasByXStaff(STAFF_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXLeasByXStudent(STUDENT_REFID)", xPress.getXLeasByXStudent(STUDENT_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXLeasByXContact(CONTACT_REFID)", xPress.getXLeasByXContact(CONTACT_REFID, 1, navigationPageSize).getStatusCode());
+
+        /* xSchools */
+        System.out.println("-----xSchools-----");
+        System.out.format(format, "getXSchools()", xPress.getXSchools(1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXSchoolsByXLea(LEA_REFID)", xPress.getXSchoolsByXLea(LEA_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXSchoolsByXCalendar(CALENDAR_REFID)", xPress.getXSchoolsByXCalendar(CALENDAR_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXSchoolsByXCourse(COURSE_REFID)", xPress.getXSchoolsByXCourse(COURSE_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXSchoolsByXRoster(ROSTER_REFID)", xPress.getXSchoolsByXRoster(ROSTER_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXSchoolsByXStaff(STAFF_REFID)", xPress.getXSchoolsByXStaff(STAFF_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXSchoolsByXStudent(STUDENT_REFID)", xPress.getXSchoolsByXStudent(STUDENT_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXSchoolsByXContact(CONTACT_REFID)", xPress.getXSchoolsByXContact(CONTACT_REFID, 1, navigationPageSize).getStatusCode());
+
+        /* xCalendars */
+        System.out.println("-----xCalendars-----");
+        System.out.format(format, "getXCalendars()", xPress.getXCalendars(1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXCalendarsByXLea(LEA_REFID)", xPress.getXCalendarsByXLea(LEA_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXCalendarsByXSchool(SCHOOL_REFID)", xPress.getXCalendarsByXSchool(SCHOOL_REFID, 1, navigationPageSize).getStatusCode());
+
+        /* xCourses */
+        System.out.println("-----xCourses-----");
+        System.out.format(format, "getXCourses()", xPress.getXCourses(1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXCoursesByXLea(LEA_REFID)", xPress.getXCoursesByXLea(LEA_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXCoursesByXSchool(SCHOOL_REFID)", xPress.getXCoursesByXSchool(SCHOOL_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXCoursesByXRoster(ROSTER_REFID)", xPress.getXCoursesByXRoster(ROSTER_REFID, 1, navigationPageSize).getStatusCode());
+
+        /* xRosters */
+        System.out.println("-----xRosters-----");
+        System.out.format(format, "getXRosters()", xPress.getXRosters(1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXRostersByXLea(LEA_REFID)", xPress.getXRostersByXLea(LEA_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXRostersByXSchool(SCHOOL_REFID)", xPress.getXRostersByXSchool(SCHOOL_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXRostersByXCourse(COURSE_REFID)", xPress.getXRostersByXCourse(COURSE_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXRostersByXStaff(STAFF_REFID)", xPress.getXRostersByXStaff(STAFF_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXRostersByXStudent(STUDENT_REFID)", xPress.getXRostersByXStudent(STUDENT_REFID, 1, navigationPageSize).getStatusCode());
+
+        /* xStaffs */
+        System.out.println("-----xStaffs-----");
+        System.out.format(format, "getXStaffs()", xPress.getXStaffs(1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStaffsByXLea(LEA_REFID)", xPress.getXStaffsByXLea(LEA_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStaffsByXSchool(SCHOOL_REFID)", xPress.getXStaffsByXSchool(SCHOOL_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStaffsByXCourse(COURSE_REFID)", xPress.getXStaffsByXCourse(COURSE_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStaffsByXRoster(ROSTER_REFID)", xPress.getXStaffsByXRoster(ROSTER_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStaffsByXStudent(STUDENT_REFID)", xPress.getXStaffsByXStudent(STUDENT_REFID, 1, navigationPageSize).getStatusCode());
+
+        /* xStudents */
+        System.out.println("-----xStudents-----");
+        System.out.format(format, "getXStudents()", xPress.getXStudents(1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStudentsByXLea(LEA_REFID)", xPress.getXStudentsByXLea(LEA_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStudentsByXSchool(SCHOOL_REFID)", xPress.getXStudentsByXSchool(SCHOOL_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStudentsByXRoster(ROSTER_REFID)", xPress.getXStudentsByXRoster(ROSTER_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXStudentsByXStaff(STAFF_REFID)", xPress.getXStudentsByXStaff(STAFF_REFID, 1, navigationPageSize).getStatusCode());
+
+        /* xContacts */
+        System.out.println("-----xContacts-----");
+        System.out.format(format, "getXContacts().getData()", xPress.getXContacts(1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXContactsByXLea(LEA_REFID)", xPress.getXContactsByXLea(LEA_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXContactsByXSchool(SCHOOL_REFID)", xPress.getXContactsByXSchool(SCHOOL_REFID, 1, navigationPageSize).getStatusCode());
+        System.out.format(format, "getXContactsByXStudent(STUDENT_REFID)", xPress.getXContactsByXStudent(STUDENT_REFID, 1, navigationPageSize).getStatusCode());
+    }
     // #################### navigatonLastPage ####################
     // #################### xLeas ####################
+
     //RETURN ALL LEAS
     public static void XLeas_GetXLeasLastPage(XPress xPress) throws AuthenticationException {
         for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEAS); i++) {
-            for (XLeaType lea : xPress.getXLeas().getData()) {
-
+            for (XLeaType lea : xPress.getXLeas(i, navigationPageSize).getData()) {
                 System.out.println("refId: " + lea.getRefId());
                 System.out.println("leaName: " + lea.getLeaName());
                 System.out.println("leaRefId: " + lea.getLeaRefId());
                 System.out.println("localId: " + lea.getLocalId());
                 System.out.println("ncesId: " + lea.getNcesId());
                 System.out.println("stateProvinceId: " + lea.getStateProvinceId());
-
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + lea.getAddress().getAddressType());
                 System.out.println("city: " + lea.getAddress().getCity());
@@ -177,22 +196,18 @@ CONTACT_REFID
                 System.out.println("postalCode: " + lea.getAddress().getPostalCode());
                 System.out.println("stateProvince: " + lea.getAddress().getStateProvince());
                 System.out.println("##### END ADDRESS #####");
-
                 System.out.println("##### BEGIN PHONENUMBER #####");
                 System.out.println("number: " + lea.getPhoneNumber().getNumber());
                 System.out.println("phoneNumberType: " + lea.getPhoneNumber().getPhoneNumberType());
                 System.out.println("primaryIndicator: " + lea.getPhoneNumber().isPrimaryIndicator());
                 System.out.println("##### END PHONENUMBER #####");
-
                 System.out.println("##### BEGIN OTHERPHONENUMBER #####");
-
                 for (XTelephoneType p : lea.getOtherPhoneNumbers().getPhoneNumber()) {
                     System.out.println("number: " + p.getNumber());
                     System.out.println("phoneNumberType: " + p.getPhoneNumberType());
                     System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
                 }
                 System.out.println("##### END OTHERPHONENUMBER #####");
-
                 System.out.println("========================================");
             }
             System.out.println("######## PAGE " + i + " ########");
@@ -201,15 +216,14 @@ CONTACT_REFID
 
     // RETURN LEAS BY SCHOOL
     public static void XLeas_GetXLeasByXSchoolLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXSCHOOL, refId); i++) {
-            for (XLeaType lea : xPress.getXLeasByXSchool(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXSCHOOL, SCHOOL_REFID); i++) {
+            for (XLeaType lea : xPress.getXLeasByXSchool(SCHOOL_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + lea.getRefId());
                 System.out.println("leaName: " + lea.getLeaName());
                 System.out.println("leaRefId: " + lea.getLeaRefId());
                 System.out.println("localId: " + lea.getLocalId());
                 System.out.println("ncesId: " + lea.getNcesId());
                 System.out.println("stateProvinceId: " + lea.getStateProvinceId());
-
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + lea.getAddress().getAddressType());
                 System.out.println("city: " + lea.getAddress().getCity());
@@ -219,13 +233,11 @@ CONTACT_REFID
                 System.out.println("postalCode: " + lea.getAddress().getPostalCode());
                 System.out.println("stateProvince: " + lea.getAddress().getStateProvince());
                 System.out.println("##### END ADDRESS #####");
-
                 System.out.println("##### BEGIN PHONENUMBER #####");
                 System.out.println("number: " + lea.getPhoneNumber().getNumber());
                 System.out.println("phoneNumberType: " + lea.getPhoneNumber().getPhoneNumberType());
                 System.out.println("primaryIndicator: " + lea.getPhoneNumber().isPrimaryIndicator());
                 System.out.println("##### END PHONENUMBER #####");
-
                 System.out.println("##### BEGIN OTHERPHONENUMBER #####");
 
                 for (XTelephoneType p : lea.getOtherPhoneNumbers().getPhoneNumber()) {
@@ -234,7 +246,6 @@ CONTACT_REFID
                     System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
                 }
                 System.out.println("##### END OTHERPHONENUMBER #####");
-
                 System.out.println("========================================");
             }
             System.out.println("######## PAGE " + i + " ########");
@@ -243,15 +254,14 @@ CONTACT_REFID
 
     // RETURN LEAS BY SCHOOL
     public static void XLeas_GetXLeasByXRosterLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXROSTER, refId); i++) {
-            for (XLeaType lea : xPress.getXLeasByXRoster(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXROSTER, ROSTER_REFID); i++) {
+            for (XLeaType lea : xPress.getXLeasByXRoster(ROSTER_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + lea.getRefId());
                 System.out.println("leaName: " + lea.getLeaName());
                 System.out.println("leaRefId: " + lea.getLeaRefId());
                 System.out.println("localId: " + lea.getLocalId());
                 System.out.println("ncesId: " + lea.getNcesId());
                 System.out.println("stateProvinceId: " + lea.getStateProvinceId());
-
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + lea.getAddress().getAddressType());
                 System.out.println("city: " + lea.getAddress().getCity());
@@ -261,22 +271,18 @@ CONTACT_REFID
                 System.out.println("postalCode: " + lea.getAddress().getPostalCode());
                 System.out.println("stateProvince: " + lea.getAddress().getStateProvince());
                 System.out.println("##### END ADDRESS #####");
-
                 System.out.println("##### BEGIN PHONENUMBER #####");
                 System.out.println("number: " + lea.getPhoneNumber().getNumber());
                 System.out.println("phoneNumberType: " + lea.getPhoneNumber().getPhoneNumberType());
                 System.out.println("primaryIndicator: " + lea.getPhoneNumber().isPrimaryIndicator());
                 System.out.println("##### END PHONENUMBER #####");
-
                 System.out.println("##### BEGIN OTHERPHONENUMBER #####");
-
                 for (XTelephoneType p : lea.getOtherPhoneNumbers().getPhoneNumber()) {
                     System.out.println("number: " + p.getNumber());
                     System.out.println("phoneNumberType: " + p.getPhoneNumberType());
                     System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
                 }
                 System.out.println("##### END OTHERPHONENUMBER #####");
-
                 System.out.println("========================================");
             }
             System.out.println("######## PAGE " + i + " ########");
@@ -285,15 +291,14 @@ CONTACT_REFID
 
     // RETURN LEAS BY STAFF
     public static void XLeas_GetXLeasByXStaffLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXSTAFF, refId); i++) {
-            for (XLeaType lea : xPress.getXLeasByXStaff(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXSTAFF, STAFF_REFID); i++) {
+            for (XLeaType lea : xPress.getXLeasByXStaff(STAFF_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + lea.getRefId());
                 System.out.println("leaName: " + lea.getLeaName());
                 System.out.println("leaRefId: " + lea.getLeaRefId());
                 System.out.println("localId: " + lea.getLocalId());
                 System.out.println("ncesId: " + lea.getNcesId());
                 System.out.println("stateProvinceId: " + lea.getStateProvinceId());
-
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + lea.getAddress().getAddressType());
                 System.out.println("city: " + lea.getAddress().getCity());
@@ -303,22 +308,18 @@ CONTACT_REFID
                 System.out.println("postalCode: " + lea.getAddress().getPostalCode());
                 System.out.println("stateProvince: " + lea.getAddress().getStateProvince());
                 System.out.println("##### END ADDRESS #####");
-
                 System.out.println("##### BEGIN PHONENUMBER #####");
                 System.out.println("number: " + lea.getPhoneNumber().getNumber());
                 System.out.println("phoneNumberType: " + lea.getPhoneNumber().getPhoneNumberType());
                 System.out.println("primaryIndicator: " + lea.getPhoneNumber().isPrimaryIndicator());
                 System.out.println("##### END PHONENUMBER #####");
-
                 System.out.println("##### BEGIN OTHERPHONENUMBER #####");
-
                 for (XTelephoneType p : lea.getOtherPhoneNumbers().getPhoneNumber()) {
                     System.out.println("number: " + p.getNumber());
                     System.out.println("phoneNumberType: " + p.getPhoneNumberType());
                     System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
                 }
                 System.out.println("##### END OTHERPHONENUMBER #####");
-
                 System.out.println("========================================");
             }
             System.out.println("######## PAGE " + i + " ########");
@@ -327,15 +328,14 @@ CONTACT_REFID
 
     // RETURN LEAS BY STUDENT
     public static void XLeas_GetXLeasByXStudentLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXSTUDENT, refId); i++) {
-            for (XLeaType lea : xPress.getXLeasByXStudent(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXSTUDENT, STUDENT_REFID); i++) {
+            for (XLeaType lea : xPress.getXLeasByXStudent(STUDENT_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + lea.getRefId());
                 System.out.println("leaName: " + lea.getLeaName());
                 System.out.println("leaRefId: " + lea.getLeaRefId());
                 System.out.println("localId: " + lea.getLocalId());
                 System.out.println("ncesId: " + lea.getNcesId());
                 System.out.println("stateProvinceId: " + lea.getStateProvinceId());
-
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + lea.getAddress().getAddressType());
                 System.out.println("city: " + lea.getAddress().getCity());
@@ -345,22 +345,18 @@ CONTACT_REFID
                 System.out.println("postalCode: " + lea.getAddress().getPostalCode());
                 System.out.println("stateProvince: " + lea.getAddress().getStateProvince());
                 System.out.println("##### END ADDRESS #####");
-
                 System.out.println("##### BEGIN PHONENUMBER #####");
                 System.out.println("number: " + lea.getPhoneNumber().getNumber());
                 System.out.println("phoneNumberType: " + lea.getPhoneNumber().getPhoneNumberType());
                 System.out.println("primaryIndicator: " + lea.getPhoneNumber().isPrimaryIndicator());
                 System.out.println("##### END PHONENUMBER #####");
-
                 System.out.println("##### BEGIN OTHERPHONENUMBER #####");
-
                 for (XTelephoneType p : lea.getOtherPhoneNumbers().getPhoneNumber()) {
                     System.out.println("number: " + p.getNumber());
                     System.out.println("phoneNumberType: " + p.getPhoneNumberType());
                     System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
                 }
                 System.out.println("##### END OTHERPHONENUMBER #####");
-
                 System.out.println("========================================");
             }
             System.out.println("######## PAGE " + i + " ########");
@@ -369,15 +365,14 @@ CONTACT_REFID
 
     // RETURN LEAS BY CONTACT
     public static void XLeas_GetXLeasByXContactLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXCONTACT, refId); i++) {
-            for (XLeaType lea : xPress.getXLeasByXContact(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXLEASBYXCONTACT, CONTACT_REFID); i++) {
+            for (XLeaType lea : xPress.getXLeasByXContact(CONTACT_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + lea.getRefId());
                 System.out.println("leaName: " + lea.getLeaName());
                 System.out.println("leaRefId: " + lea.getLeaRefId());
                 System.out.println("localId: " + lea.getLocalId());
                 System.out.println("ncesId: " + lea.getNcesId());
                 System.out.println("stateProvinceId: " + lea.getStateProvinceId());
-
                 System.out.println("##### BEGIN ADDRESS #####");
                 System.out.println("addressType: " + lea.getAddress().getAddressType());
                 System.out.println("city: " + lea.getAddress().getCity());
@@ -387,22 +382,18 @@ CONTACT_REFID
                 System.out.println("postalCode: " + lea.getAddress().getPostalCode());
                 System.out.println("stateProvince: " + lea.getAddress().getStateProvince());
                 System.out.println("##### END ADDRESS #####");
-
                 System.out.println("##### BEGIN PHONENUMBER #####");
                 System.out.println("number: " + lea.getPhoneNumber().getNumber());
                 System.out.println("phoneNumberType: " + lea.getPhoneNumber().getPhoneNumberType());
                 System.out.println("primaryIndicator: " + lea.getPhoneNumber().isPrimaryIndicator());
                 System.out.println("##### END PHONENUMBER #####");
-
                 System.out.println("##### BEGIN OTHERPHONENUMBER #####");
-
                 for (XTelephoneType p : lea.getOtherPhoneNumbers().getPhoneNumber()) {
                     System.out.println("number: " + p.getNumber());
                     System.out.println("phoneNumberType: " + p.getPhoneNumberType());
                     System.out.println("primaryIndicator: " + p.isPrimaryIndicator());
                 }
                 System.out.println("##### END OTHERPHONENUMBER #####");
-
                 System.out.println("========================================");
             }
             System.out.println("######## PAGE " + i + " ########");
@@ -413,7 +404,7 @@ CONTACT_REFID
     // RETURN ALL SCHOOLS
     public static void XSchools_GetXSchoolsLastPage(XPress xPress) throws AuthenticationException {
         for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLS); i++) {
-            for (XSchoolType school : xPress.getXSchools().getData()) {
+            for (XSchoolType school : xPress.getXSchools(i, navigationPageSize).getData()) {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
                 System.out.println("localId: " + school.getLocalId());
@@ -459,8 +450,8 @@ CONTACT_REFID
 
     // RETURN SCHOOLS BY LEA
     public static void XSchools_GetXSchoolsByXLeaLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXLEA, refId); i++) {
-            for (XSchoolType school : xPress.getXSchoolsByXLea(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXLEA, LEA_REFID); i++) {
+            for (XSchoolType school : xPress.getXSchoolsByXLea(LEA_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
                 System.out.println("localId: " + school.getLocalId());
@@ -506,8 +497,8 @@ CONTACT_REFID
 
     // RETURN SCHOOLS BY CALENDAR
     public static void XSchools_GetXSchoolsByXCalendarLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXCALENDAR, refId); i++) {
-            for (XSchoolType school : xPress.getXSchoolsByXCalendar(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXCALENDAR, CALENDAR_REFID); i++) {
+            for (XSchoolType school : xPress.getXSchoolsByXCalendar(CALENDAR_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
                 System.out.println("localId: " + school.getLocalId());
@@ -553,8 +544,8 @@ CONTACT_REFID
 
     // RETURN SCHOOLS BY COURSE
     public static void XSchools_GetXSchoolsByXCourseLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXCOURSE, refId); i++) {
-            for (XSchoolType school : xPress.getXSchoolsByXCourse(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXCOURSE, COURSE_REFID); i++) {
+            for (XSchoolType school : xPress.getXSchoolsByXCourse(COURSE_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
                 System.out.println("localId: " + school.getLocalId());
@@ -600,8 +591,8 @@ CONTACT_REFID
 
     // RETURN SCHOOLS BY ROSTER
     public static void XSchools_GetXSchoolsByXRosterLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXROSTER, refId); i++) {
-            for (XSchoolType school : xPress.getXSchoolsByXRoster(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXROSTER, ROSTER_REFID); i++) {
+            for (XSchoolType school : xPress.getXSchoolsByXRoster(ROSTER_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
                 System.out.println("localId: " + school.getLocalId());
@@ -647,8 +638,8 @@ CONTACT_REFID
 
     // RETURN SCHOOLS BY STAFF
     public static void XSchools_GetXSchoolsByXStaffLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXSTAFF, refId); i++) {
-            for (XSchoolType school : xPress.getXSchoolsByXStaff(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXSTAFF, STAFF_REFID); i++) {
+            for (XSchoolType school : xPress.getXSchoolsByXStaff(STAFF_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
                 System.out.println("localId: " + school.getLocalId());
@@ -694,8 +685,8 @@ CONTACT_REFID
 
     // RETURN SCHOOLS BY STUDENT
     public static void XSchools_GetXSchoolsByXStudentLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXSTUDENT, refId); i++) {
-            for (XSchoolType school : xPress.getXSchoolsByXStudent(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXSTUDENT, STUDENT_REFID); i++) {
+            for (XSchoolType school : xPress.getXSchoolsByXStudent(STUDENT_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
                 System.out.println("localId: " + school.getLocalId());
@@ -741,8 +732,8 @@ CONTACT_REFID
 
     // RETURN SCHOOLS BY CONTACT
     public static void XSchools_GetXSchoolsByXContactLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXCONTACT, refId); i++) {
-            for (XSchoolType school : xPress.getXSchoolsByXContact(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSCHOOLSBYXCONTACT, CONTACT_REFID); i++) {
+            for (XSchoolType school : xPress.getXSchoolsByXContact(CONTACT_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + school.getRefId());
                 System.out.println("leaRefId: " + school.getRefId());
                 System.out.println("localId: " + school.getLocalId());
@@ -790,7 +781,7 @@ CONTACT_REFID
     // RETURN ALL CALENDARS
     public static void XCalendars_GetXCalendarsLastPage(XPress xPress) throws AuthenticationException {
         for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCALENDARS); i++) {
-            for (XCalendarType calendar : xPress.getXCalendars().getData()) {
+            for (XCalendarType calendar : xPress.getXCalendars(i, navigationPageSize).getData()) {
                 System.out.println("refId: " + calendar.getRefId());
                 System.out.println("schoolRefId: " + calendar.getSchoolRefId());
                 System.out.println("schoolYear: " + calendar.getSchoolYear());
@@ -814,8 +805,8 @@ CONTACT_REFID
 
     // RETURN CALENDARS BY LEA
     public static void XCalendars_GetXCalendarsByXLeaLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCALENDARSBYXLEA, refId); i++) {
-            for (XCalendarType calendar : xPress.getXCalendarsByXLea(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCALENDARSBYXLEA, LEA_REFID); i++) {
+            for (XCalendarType calendar : xPress.getXCalendarsByXLea(LEA_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + calendar.getRefId());
                 System.out.println("schoolRefId: " + calendar.getSchoolRefId());
                 System.out.println("schoolYear: " + calendar.getSchoolYear());
@@ -839,8 +830,8 @@ CONTACT_REFID
 
     // RETURN CALENDARS BY SCHOOL
     public static void XCalendars_GetXCalendarsByXSchoolLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCALENDARSBYXSCHOOL, refId); i++) {
-            for (XCalendarType calendar : xPress.getXCalendarsByXSchool(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCALENDARSBYXSCHOOL, SCHOOL_REFID); i++) {
+            for (XCalendarType calendar : xPress.getXCalendarsByXSchool(SCHOOL_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + calendar.getRefId());
                 System.out.println("schoolRefId: " + calendar.getSchoolRefId());
                 System.out.println("schoolYear: " + calendar.getSchoolYear());
@@ -866,7 +857,7 @@ CONTACT_REFID
     // RETURN ALL COURSES
     public static void XCourses_GetXCoursesLastPage(XPress xPress) throws AuthenticationException {
         for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCOURSES); i++) {
-            for (XCourseType course : xPress.getXCourses().getData()) {
+            for (XCourseType course : xPress.getXCourses(i, navigationPageSize).getData()) {
                 System.out.println("refId: " + course.getRefId());
                 System.out.println("schoolRefId: " + course.getSchoolRefId());
                 System.out.println("schoolCourseId: " + course.getSchoolCourseId());
@@ -897,8 +888,8 @@ CONTACT_REFID
 
     // RETURN COURSES BY LEA
     public static void XCourses_GetXCoursesByXLeaLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCOURSESBYXLEA, refId); i++) {
-            for (XCourseType course : xPress.getXCoursesByXLea(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCOURSESBYXLEA, LEA_REFID); i++) {
+            for (XCourseType course : xPress.getXCoursesByXLea(LEA_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + course.getRefId());
                 System.out.println("schoolRefId: " + course.getSchoolRefId());
                 System.out.println("schoolCourseId: " + course.getSchoolCourseId());
@@ -929,8 +920,8 @@ CONTACT_REFID
 
     // RETURN COURSES BY SCHOOL
     public static void XCourses_GetXCoursesByXSchoolLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCOURSESBYXSCHOOL, refId); i++) {
-            for (XCourseType course : xPress.getXCoursesByXSchool(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCOURSESBYXSCHOOL, SCHOOL_REFID); i++) {
+            for (XCourseType course : xPress.getXCoursesByXSchool(SCHOOL_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + course.getRefId());
                 System.out.println("schoolRefId: " + course.getSchoolRefId());
                 System.out.println("schoolCourseId: " + course.getSchoolCourseId());
@@ -961,8 +952,8 @@ CONTACT_REFID
 
     // RETURN COURSES BY ROSTER
     public static void XCourses_GetXCoursesByXRosterLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCOURSESBYXROSTER, refId); i++) {
-            for (XCourseType course : xPress.getXCoursesByXRoster(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCOURSESBYXROSTER, ROSTER_REFID); i++) {
+            for (XCourseType course : xPress.getXCoursesByXRoster(ROSTER_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + course.getRefId());
                 System.out.println("schoolRefId: " + course.getSchoolRefId());
                 System.out.println("schoolCourseId: " + course.getSchoolCourseId());
@@ -995,7 +986,7 @@ CONTACT_REFID
     // RETURN ALL ROSTERS
     public static void XRosters_GetXRostersLastPage(XPress xPress) throws AuthenticationException {
         for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERS); i++) {
-            for (XRosterType r : xPress.getXRosters().getData()) {
+            for (XRosterType r : xPress.getXRosters(i, navigationPageSize).getData()) {
                 System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
                 System.out.println("courseTitle: " + r.getCourseTitle());
@@ -1056,8 +1047,8 @@ CONTACT_REFID
 
     // RETURN ROSTERS BY LEA
     public static void XRosters_GetXRostersByXLeaLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXLEA, refId); i++) {
-            for (XRosterType r : xPress.getXRostersByXLea(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXLEA, LEA_REFID); i++) {
+            for (XRosterType r : xPress.getXRostersByXLea(LEA_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
                 System.out.println("courseTitle: " + r.getCourseTitle());
@@ -1117,8 +1108,8 @@ CONTACT_REFID
 
     // RETURN ROSTERS BY SCHOOL
     public static void XRosters_GetXRostersByXSchoolLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXSCHOOL, refId); i++) {
-            for (XRosterType r : xPress.getXRostersByXSchool(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXSCHOOL, SCHOOL_REFID); i++) {
+            for (XRosterType r : xPress.getXRostersByXSchool(SCHOOL_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
                 System.out.println("courseTitle: " + r.getCourseTitle());
@@ -1178,8 +1169,8 @@ CONTACT_REFID
 
     // RETURN ROSTERS BY CROUSE
     public static void XRosters_GetXRostersByXCourseLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXCOURSE, refId); i++) {
-            for (XRosterType r : xPress.getXRostersByXCourse(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXCOURSE, COURSE_REFID); i++) {
+            for (XRosterType r : xPress.getXRostersByXCourse(COURSE_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
                 System.out.println("courseTitle: " + r.getCourseTitle());
@@ -1239,8 +1230,8 @@ CONTACT_REFID
 
     // RETURN ROSTERS BY STAFF
     public static void XRosters_GetXRostersByXStaffLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXSTAFF, refId); i++) {
-            for (XRosterType r : xPress.getXRostersByXStaff(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXSTAFF, STAFF_REFID); i++) {
+            for (XRosterType r : xPress.getXRostersByXStaff(STAFF_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
                 System.out.println("courseTitle: " + r.getCourseTitle());
@@ -1300,8 +1291,8 @@ CONTACT_REFID
 
     // RETURN ROSTERS BY STUDENT
     public static void XRosters_GetXRostersByXStudentLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXSTUDENT, refId); i++) {
-            for (XRosterType r : xPress.getXRostersByXStudent(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXSTUDENT, STUDENT_REFID); i++) {
+            for (XRosterType r : xPress.getXRostersByXStudent(STUDENT_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + r.getRefId());
                 System.out.println("courseRefId: " + r.getCourseRefId());
                 System.out.println("courseTitle: " + r.getCourseTitle());
@@ -1363,7 +1354,7 @@ CONTACT_REFID
     // RETURN ALL STAFFS
     public static void XStaffs_GetXStaffsLastPage(XPress xPress) throws AuthenticationException {
         for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFS); i++) {
-            for (XStaffType s : xPress.getXStaffs().getData()) {
+            for (XStaffType s : xPress.getXStaffs(i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -1406,8 +1397,8 @@ CONTACT_REFID
 
     // RETURN STAFFS BY LEA
     public static void XStaffs_GetXStaffsByXLeaLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXLEA, refId); i++) {
-            for (XStaffType s : xPress.getXStaffsByXLea(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXLEA, LEA_REFID); i++) {
+            for (XStaffType s : xPress.getXStaffsByXLea(LEA_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -1450,8 +1441,8 @@ CONTACT_REFID
 
     // RETURN STAFFS BY SCHOOL
     public static void XStaffs_GetXStaffsByXSchoolLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXSCHOOL, refId); i++) {
-            for (XStaffType s : xPress.getXStaffsByXSchool(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXSCHOOL, SCHOOL_REFID); i++) {
+            for (XStaffType s : xPress.getXStaffsByXSchool(SCHOOL_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -1495,8 +1486,8 @@ CONTACT_REFID
 
     // RETURN STAFFS BY COURSE
     public static void XStaffs_GetXStaffsByXCourseLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXCOURSE, refId); i++) {
-            for (XStaffType s : xPress.getXStaffsByXCourse(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXCOURSE, COURSE_REFID); i++) {
+            for (XStaffType s : xPress.getXStaffsByXCourse(COURSE_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -1540,8 +1531,8 @@ CONTACT_REFID
 
     // RETURN STAFFS BY ROSTER
     public static void XStaffs_GetXStaffsByXRosterLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXROSTER, refId); i++) {
-            for (XStaffType s : xPress.getXStaffsByXRoster(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXROSTER, ROSTER_REFID); i++) {
+            for (XStaffType s : xPress.getXStaffsByXRoster(ROSTER_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -1585,8 +1576,8 @@ CONTACT_REFID
 
     // RETURN STAFFS BY STUDENT
     public static void XStaffs_GetXStaffsByXStudentLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXSTUDENT, refId); i++) {
-            for (XStaffType s : xPress.getXStaffsByXStudent(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTAFFSBYXSTUDENT, STUDENT_REFID); i++) {
+            for (XStaffType s : xPress.getXStaffsByXStudent(STUDENT_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -1632,7 +1623,7 @@ CONTACT_REFID
     // RETURN ALL STUDENTS
     public static void XStudents_GetXStudentsLastPage(XPress xPress) throws AuthenticationException {
         for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTS); i++) {
-            for (XStudentType s : xPress.getXStudents().getData()) {
+            for (XStudentType s : xPress.getXStudents(i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -1654,7 +1645,6 @@ CONTACT_REFID
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for (XOtherPersonIdType id : s.getOtherIds().getOtherId()) {
@@ -1715,7 +1705,25 @@ CONTACT_REFID
                 System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
                 System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
                 System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+                if (s.getEnrollment().getEntryType() != null) {
+                    System.out.println("##### BEGIN ENTRYTYPE #####");
+                    System.out.println("entryCode: " + s.getEnrollment().getEntryType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getEntryType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END ENTRYTYPE #####");
+                }
                 System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+                if (s.getEnrollment().getExitType() != null) {
+                    System.out.println("##### BEGIN EXITTYPE #####");
+                    System.out.println("exitCode: " + s.getEnrollment().getExitType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getExitType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END EXITTYPE #####");
+                }
                 System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
                 System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                 System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
@@ -1740,7 +1748,25 @@ CONTACT_REFID
                     System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
                     System.out.println("membershipType: " + e.getMembershipType());
                     System.out.println("entryDate: " + e.getEntryDate());
+                    if (e.getEntryType() != null) {
+                        System.out.println("##### BEGIN ENTRYTYPE #####");
+                        System.out.println("entryCode: " + e.getEntryType().getCode());
+                        for (XOtherCodeType oct : e.getEntryType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END ENTRYTYPE #####");
+                    }
                     System.out.println("exitDate: " + e.getExitDate());
+                    if (e.getExitType() != null) {
+                        System.out.println("##### BEGIN EXITTYPE #####");
+                        System.out.println("exitCode: " + e.getExitType().getCode());
+                        for (XOtherCodeType oct : e.getExitType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END EXITTYPE #####");
+                    }
                     System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
                     System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                     System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
@@ -1787,7 +1813,6 @@ CONTACT_REFID
                     }
                     System.out.println("##### END OTHERNAME #####");
                     System.out.println(": " + c.getLocalId());
-
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for (XOtherPersonIdType id : c.getOtherIds().getOtherId()) {
                         System.out.println("id: " + id.getId());
@@ -1860,8 +1885,8 @@ CONTACT_REFID
 
     // RETURN STUDENTS BY LEA
     public static void XStudents_GetXStudentsByXLeaLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXLEA, refId); i++) {
-            for (XStudentType s : xPress.getXStudentsByXLea(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXLEA, LEA_REFID); i++) {
+            for (XStudentType s : xPress.getXStudentsByXLea(LEA_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -1883,7 +1908,6 @@ CONTACT_REFID
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for (XOtherPersonIdType id : s.getOtherIds().getOtherId()) {
@@ -1944,7 +1968,25 @@ CONTACT_REFID
                 System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
                 System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
                 System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+                if (s.getEnrollment().getEntryType() != null) {
+                    System.out.println("##### BEGIN ENTRYTYPE #####");
+                    System.out.println("entryCode: " + s.getEnrollment().getEntryType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getEntryType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END ENTRYTYPE #####");
+                }
                 System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+                if (s.getEnrollment().getExitType() != null) {
+                    System.out.println("##### BEGIN EXITTYPE #####");
+                    System.out.println("exitCode: " + s.getEnrollment().getExitType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getExitType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END EXITTYPE #####");
+                }
                 System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
                 System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                 System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
@@ -1969,7 +2011,25 @@ CONTACT_REFID
                     System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
                     System.out.println("membershipType: " + e.getMembershipType());
                     System.out.println("entryDate: " + e.getEntryDate());
+                    if (e.getEntryType() != null) {
+                        System.out.println("##### BEGIN ENTRYTYPE #####");
+                        System.out.println("entryCode: " + e.getEntryType().getCode());
+                        for (XOtherCodeType oct : e.getEntryType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END ENTRYTYPE #####");
+                    }
                     System.out.println("exitDate: " + e.getExitDate());
+                    if (e.getExitType() != null) {
+                        System.out.println("##### BEGIN EXITTYPE #####");
+                        System.out.println("exitCode: " + e.getExitType().getCode());
+                        for (XOtherCodeType oct : e.getExitType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END EXITTYPE #####");
+                    }
                     System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
                     System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                     System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
@@ -2016,7 +2076,6 @@ CONTACT_REFID
                     }
                     System.out.println("##### END OTHERNAME #####");
                     System.out.println(": " + c.getLocalId());
-
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for (XOtherPersonIdType id : c.getOtherIds().getOtherId()) {
                         System.out.println("id: " + id.getId());
@@ -2089,8 +2148,8 @@ CONTACT_REFID
 
     // RETURN STUDENTS BY SCHOOL
     public static void XStudents_GetXStudentsByXSchoolLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXSCHOOL, refId); i++) {
-            for (XStudentType s : xPress.getXStudentsByXSchool(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXSCHOOL, SCHOOL_REFID); i++) {
+            for (XStudentType s : xPress.getXStudentsByXSchool(SCHOOL_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -2112,7 +2171,6 @@ CONTACT_REFID
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for (XOtherPersonIdType id : s.getOtherIds().getOtherId()) {
@@ -2173,7 +2231,25 @@ CONTACT_REFID
                 System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
                 System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
                 System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+                if (s.getEnrollment().getEntryType() != null) {
+                    System.out.println("##### BEGIN ENTRYTYPE #####");
+                    System.out.println("entryCode: " + s.getEnrollment().getEntryType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getEntryType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END ENTRYTYPE #####");
+                }
                 System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+                if (s.getEnrollment().getExitType() != null) {
+                    System.out.println("##### BEGIN EXITTYPE #####");
+                    System.out.println("exitCode: " + s.getEnrollment().getExitType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getExitType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END EXITTYPE #####");
+                }
                 System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
                 System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                 System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
@@ -2198,7 +2274,25 @@ CONTACT_REFID
                     System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
                     System.out.println("membershipType: " + e.getMembershipType());
                     System.out.println("entryDate: " + e.getEntryDate());
+                    if (e.getEntryType() != null) {
+                        System.out.println("##### BEGIN ENTRYTYPE #####");
+                        System.out.println("entryCode: " + e.getEntryType().getCode());
+                        for (XOtherCodeType oct : e.getEntryType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END ENTRYTYPE #####");
+                    }
                     System.out.println("exitDate: " + e.getExitDate());
+                    if (e.getExitType() != null) {
+                        System.out.println("##### BEGIN EXITTYPE #####");
+                        System.out.println("exitCode: " + e.getExitType().getCode());
+                        for (XOtherCodeType oct : e.getExitType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END EXITTYPE #####");
+                    }
                     System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
                     System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                     System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
@@ -2245,7 +2339,6 @@ CONTACT_REFID
                     }
                     System.out.println("##### END OTHERNAME #####");
                     System.out.println(": " + c.getLocalId());
-
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for (XOtherPersonIdType id : c.getOtherIds().getOtherId()) {
                         System.out.println("id: " + id.getId());
@@ -2318,8 +2411,8 @@ CONTACT_REFID
 
     // RETURN STUDENTS BY ROSTER
     public static void XStudents_GetXStudentsByXRosterLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXROSTER, refId); i++) {
-            for (XStudentType s : xPress.getXStudentsByXRoster(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXROSTER, ROSTER_REFID); i++) {
+            for (XStudentType s : xPress.getXStudentsByXRoster(ROSTER_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -2341,7 +2434,6 @@ CONTACT_REFID
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for (XOtherPersonIdType id : s.getOtherIds().getOtherId()) {
@@ -2402,7 +2494,25 @@ CONTACT_REFID
                 System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
                 System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
                 System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+                if (s.getEnrollment().getEntryType() != null) {
+                    System.out.println("##### BEGIN ENTRYTYPE #####");
+                    System.out.println("entryCode: " + s.getEnrollment().getEntryType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getEntryType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END ENTRYTYPE #####");
+                }
                 System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+                if (s.getEnrollment().getExitType() != null) {
+                    System.out.println("##### BEGIN EXITTYPE #####");
+                    System.out.println("exitCode: " + s.getEnrollment().getExitType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getExitType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END EXITTYPE #####");
+                }
                 System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
                 System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                 System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
@@ -2427,7 +2537,25 @@ CONTACT_REFID
                     System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
                     System.out.println("membershipType: " + e.getMembershipType());
                     System.out.println("entryDate: " + e.getEntryDate());
+                    if (e.getEntryType() != null) {
+                        System.out.println("##### BEGIN ENTRYTYPE #####");
+                        System.out.println("entryCode: " + e.getEntryType().getCode());
+                        for (XOtherCodeType oct : e.getEntryType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END ENTRYTYPE #####");
+                    }
                     System.out.println("exitDate: " + e.getExitDate());
+                    if (e.getExitType() != null) {
+                        System.out.println("##### BEGIN EXITTYPE #####");
+                        System.out.println("exitCode: " + e.getExitType().getCode());
+                        for (XOtherCodeType oct : e.getExitType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END EXITTYPE #####");
+                    }
                     System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
                     System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                     System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
@@ -2474,7 +2602,6 @@ CONTACT_REFID
                     }
                     System.out.println("##### END OTHERNAME #####");
                     System.out.println(": " + c.getLocalId());
-
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for (XOtherPersonIdType id : c.getOtherIds().getOtherId()) {
                         System.out.println("id: " + id.getId());
@@ -2547,8 +2674,8 @@ CONTACT_REFID
 
     // RETURN STUDENTS BY STAFF
     public static void XStudents_GetXStudentsByXStaffLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXSTAFF, refId); i++) {
-            for (XStudentType s : xPress.getXStudentsByXStaff(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXSTAFF, STAFF_REFID); i++) {
+            for (XStudentType s : xPress.getXStudentsByXStaff(STAFF_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -2570,7 +2697,6 @@ CONTACT_REFID
                 System.out.println("##### END OTHERNAME #####");
 
                 System.out.println("localId: " + s.getLocalId());
-
                 System.out.println("stateProvinceIdloginId: " + s.getStateProvinceId());
                 System.out.println("##### BEGIN OTHERIDS #####");
                 for (XOtherPersonIdType id : s.getOtherIds().getOtherId()) {
@@ -2631,7 +2757,25 @@ CONTACT_REFID
                 System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
                 System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
                 System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+                if (s.getEnrollment().getEntryType() != null) {
+                    System.out.println("##### BEGIN ENTRYTYPE #####");
+                    System.out.println("entryCode: " + s.getEnrollment().getEntryType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getEntryType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END ENTRYTYPE #####");
+                }
                 System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+                if (s.getEnrollment().getExitType() != null) {
+                    System.out.println("##### BEGIN EXITTYPE #####");
+                    System.out.println("exitCode: " + s.getEnrollment().getExitType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getExitType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END EXITTYPE #####");
+                }
                 System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
                 System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                 System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
@@ -2656,7 +2800,25 @@ CONTACT_REFID
                     System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
                     System.out.println("membershipType: " + e.getMembershipType());
                     System.out.println("entryDate: " + e.getEntryDate());
+                    if (e.getEntryType() != null) {
+                        System.out.println("##### BEGIN ENTRYTYPE #####");
+                        System.out.println("entryCode: " + e.getEntryType().getCode());
+                        for (XOtherCodeType oct : e.getEntryType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END ENTRYTYPE #####");
+                    }
                     System.out.println("exitDate: " + e.getExitDate());
+                    if (e.getExitType() != null) {
+                        System.out.println("##### BEGIN EXITTYPE #####");
+                        System.out.println("exitCode: " + e.getExitType().getCode());
+                        for (XOtherCodeType oct : e.getExitType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END EXITTYPE #####");
+                    }
                     System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
                     System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                     System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
@@ -2703,7 +2865,6 @@ CONTACT_REFID
                     }
                     System.out.println("##### END OTHERNAME #####");
                     System.out.println(": " + c.getLocalId());
-
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for (XOtherPersonIdType id : c.getOtherIds().getOtherId()) {
                         System.out.println("id: " + id.getId());
@@ -2776,8 +2937,8 @@ CONTACT_REFID
 
     // RETURN STUDENTS BY CONTACT
     public static void XStudents_GetXStudentsByXContactLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXCONTACT, refId); i++) {
-            for (XStudentType s : xPress.getXStudentsByXContact(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXSTUDENTSBYXCONTACT, CONTACT_REFID); i++) {
+            for (XStudentType s : xPress.getXStudentsByXContact(CONTACT_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + s.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + s.getName().getType());
@@ -2859,7 +3020,25 @@ CONTACT_REFID
                 System.out.println("responsibleSchoolType: " + s.getEnrollment().getResponsibleSchoolType());
                 System.out.println("membershipType: " + s.getEnrollment().getMembershipType());
                 System.out.println("entryDate: " + s.getEnrollment().getEntryDate());
+                if (s.getEnrollment().getEntryType() != null) {
+                    System.out.println("##### BEGIN ENTRYTYPE #####");
+                    System.out.println("entryCode: " + s.getEnrollment().getEntryType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getEntryType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END ENTRYTYPE #####");
+                }
                 System.out.println("exitDate: " + s.getEnrollment().getExitDate());
+                if (s.getEnrollment().getExitType() != null) {
+                    System.out.println("##### BEGIN EXITTYPE #####");
+                    System.out.println("exitCode: " + s.getEnrollment().getExitType().getCode());
+                    for (XOtherCodeType otherCodeType : s.getEnrollment().getExitType().getOtherCode()) {
+                        System.out.println("otherCodesetName: " + otherCodeType.getCodesetName());
+                        System.out.println("otherCodeValue" + otherCodeType.getOtherCodeValue());
+                    }
+                    System.out.println("##### END EXITTYPE #####");
+                }
                 System.out.println("homeRoomNumber: " + s.getEnrollment().getHomeRoomNumber());
                 System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                 System.out.println("refId: " + s.getEnrollment().getHomeRoomTeacher().getRefId());
@@ -2884,7 +3063,25 @@ CONTACT_REFID
                     System.out.println("responsibleSchoolType: " + e.getResponsibleSchoolType());
                     System.out.println("membershipType: " + e.getMembershipType());
                     System.out.println("entryDate: " + e.getEntryDate());
+                    if (e.getEntryType() != null) {
+                        System.out.println("##### BEGIN ENTRYTYPE #####");
+                        System.out.println("entryCode: " + e.getEntryType().getCode());
+                        for (XOtherCodeType oct : e.getEntryType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END ENTRYTYPE #####");
+                    }
                     System.out.println("exitDate: " + e.getExitDate());
+                    if (e.getExitType() != null) {
+                        System.out.println("##### BEGIN EXITTYPE #####");
+                        System.out.println("exitCode: " + e.getExitType().getCode());
+                        for (XOtherCodeType oct : e.getExitType().getOtherCode()) {
+                            System.out.println("otherCodesetName: " + oct.getCodesetName());
+                            System.out.println("otherCodeValue" + oct.getOtherCodeValue());
+                        }
+                        System.out.println("##### END EXITTYPE #####");
+                    }
                     System.out.println("homeRoomNumber: " + e.getHomeRoomNumber());
                     System.out.println("##### BEGIN HOMEROOMTEACHER #####");
                     System.out.println("refId: " + e.getHomeRoomTeacher().getRefId());
@@ -2931,7 +3128,6 @@ CONTACT_REFID
                     }
                     System.out.println("##### END OTHERNAME #####");
                     System.out.println(": " + c.getLocalId());
-
                     System.out.println("##### BEGIN OTHERIDS #####");
                     for (XOtherPersonIdType id : c.getOtherIds().getOtherId()) {
                         System.out.println("id: " + id.getId());
@@ -3006,7 +3202,7 @@ CONTACT_REFID
     // RETURN ALL CONTACTS
     public static void XContacts_GetXSContactsLastPage(XPress xPress) throws AuthenticationException {
         for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCONTACTS); i++) {
-            for (XContactType c : xPress.getXContacts().getData()) {
+            for (XContactType c : xPress.getXContacts(i, navigationPageSize).getData()) {
                 System.out.println("refId: " + c.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + c.getName().getType());
@@ -3093,8 +3289,8 @@ CONTACT_REFID
 
     // RETURN CONTACTS BY LEA
     public static void XContacts_GetXContactsByXLeaLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCONTACTSBYXLEA, refId); i++) {
-            for (XContactType c : xPress.getXContactsByXLea(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCONTACTSBYXLEA, LEA_REFID); i++) {
+            for (XContactType c : xPress.getXContactsByXLea(LEA_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + c.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + c.getName().getType());
@@ -3180,8 +3376,8 @@ CONTACT_REFID
 
     // RETURN CONTACTS BY SCHOOL
     public static void XContacts_GetXContactsByXSchoolLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCONTACTSBYXSCHOOL, refId); i++) {
-            for (XContactType c : xPress.getXContactsByXSchool(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCONTACTSBYXSCHOOL, SCHOOL_REFID); i++) {
+            for (XContactType c : xPress.getXContactsByXSchool(SCHOOL_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + c.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + c.getName().getType());
@@ -3267,8 +3463,8 @@ CONTACT_REFID
 
     // RETURN CONTACTS BY STUDENT
     public static void XContacts_GetXContactsByXStudentLastPage(XPress xPress) throws AuthenticationException {
-        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCONTACTSBYXSTUDENT, refId); i++) {
-            for (XContactType c : xPress.getXContactsByXStudent(refId).getData()) {
+        for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXCONTACTSBYXSTUDENT, STUDENT_REFID); i++) {
+            for (XContactType c : xPress.getXContactsByXStudent(STUDENT_REFID, i, navigationPageSize).getData()) {
                 System.out.println("refId: " + c.getRefId());
                 System.out.println("##### BEGIN NAME #####");
                 System.out.println("type: " + c.getName().getType());

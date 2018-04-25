@@ -74,4 +74,15 @@ public class RestProperties {
     boolean hasRefId() {
         return !StringUtils.isEmpty(this.getRefId());
     }
+
+    @Override
+    public String toString() {
+        return "RestProperties{" +
+                "baseUrl='" + baseUrl + '\'' +
+                ", servicePath=" + servicePath +
+                ", refId='" + refId + '\'' +
+                ", restHeader=" + restHeader +
+                ", restQueryParameter=" + restQueryParameter +
+                '}';
+    }
 }

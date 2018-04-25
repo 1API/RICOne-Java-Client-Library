@@ -91,11 +91,9 @@ public class RestHeader {
         this.id = id;
     }
 
-    public String getSchoolYear() {
-        return String.valueOf(this.schoolYear);
-    }
+    public String getSchoolYear() { return String.valueOf(this.schoolYear); }
 
-    public void setSchoolYear(int schoolYear) {
+    public void setSchoolYear(Integer schoolYear) {
         this.schoolYear = schoolYear;
     }
 
@@ -108,6 +106,17 @@ public class RestHeader {
     }
 
     boolean hasSchoolYear() {
-        return !StringUtils.isEmpty(this.getSchoolYear());
+        return this.schoolYear != null;
+    }
+
+    @Override
+    public String toString() {
+        return "RestHeader{" +
+                "navigationPage=" + navigationPage +
+                ", navigationPageSize=" + navigationPageSize +
+                ", idType='" + idType + '\'' +
+                ", id='" + id + '\'' +
+                ", schoolYear=" + schoolYear +
+                '}';
     }
 }

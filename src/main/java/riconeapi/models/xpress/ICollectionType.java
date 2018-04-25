@@ -8,5 +8,5 @@ import java.util.List;
  * @since 4/16/2018
  */
 public interface ICollectionType<E> {
-    public List<E> getObject();
+    List<E> getObject();
 }
