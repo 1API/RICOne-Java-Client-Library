@@ -15,14 +15,20 @@ public class AUPPObject {
     private final RestTemplate rt;
     private final String baseApiUrl;
 
+    /**
+     * AUPP Object Constructor.
+     * @param rt REST template.
+     * @param baseApiUrl Base API url.
+     */
     public AUPPObject(RestTemplate rt, String baseApiUrl) {
         this.rt = rt;
         this.baseApiUrl = baseApiUrl;
     }
 
     /**
+     * Request creation of xStaffs usernames and passwords by xSchool.
      * @param refId of xSchool.
-     * @return Create staff username and passwords by school.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> createXStaffUsers(String refId) throws AuthenticationException {
@@ -34,8 +40,9 @@ public class AUPPObject {
     }
 
     /**
+     * Request deletion of generated xStaffs passwords by xSchool.
      * @param refId of xSchool.
-     * @return Delete generated staff passwords by school.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> deleteXStaffUsers(String refId) throws AuthenticationException {
@@ -47,8 +54,9 @@ public class AUPPObject {
     }
 
     /**
+     * Request generated xStaffs usernames and passwords by xSchool.
      * @param refId of xSchool.
-     * @return Generated staff username and passwords by school.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffUsers(String refId) throws AuthenticationException {
@@ -60,10 +68,11 @@ public class AUPPObject {
     }
 
     /**
+     * Request generated xStaffs usernames and passwords by xSchool with paging.
      * @param refId              of xSchool.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Return generated staff username and passwords by school with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -75,8 +84,9 @@ public class AUPPObject {
     }
 
     /**
+     * Request creation of xStudents usernames and passwords by xSchool.
      * @param refId of xSchool.
-     * @return Create student username and passwords by school.
+     * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStudentType> createXStudentUsers(String refId) throws AuthenticationException {
@@ -88,8 +98,9 @@ public class AUPPObject {
     }
 
     /**
+     * Request deletion of generated xStudents passwords by xSchool.
      * @param refId of xSchool.
-     * @return Delete generated student passwords by school.
+     * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStudentType> deleteXStudentUsers(String refId) throws AuthenticationException {
@@ -101,8 +112,9 @@ public class AUPPObject {
     }
 
     /**
+     * Request generated xStudents usernames and passwords by xSchool.
      * @param refId of xSchool.
-     * @return Generated student username and passwords by school.
+     * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStudentType> getXStudentUsers(String refId) throws AuthenticationException {
@@ -114,10 +126,11 @@ public class AUPPObject {
     }
 
     /**
+     * Request generated xStudents usernames and passwords by xSchool.
      * @param refId              of xSchool.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Return generated student username and passwords by school with paging.
+     * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStudentType> getXStudentUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -129,8 +142,9 @@ public class AUPPObject {
     }
 
 //    /**
+//     * Request creation of xContacts usernames and passwords by xSchool.
 //     * @param refId of xSchool.
-//     * @return Create contact username and passwords by school.
+//     * @return List of xContacts type.
 //     * @throws AuthenticationException if login does not succeed.
 //     */
 //    private ResponseMulti<XContactType> createXContactUsers(String refId) throws AuthenticationException {
@@ -142,8 +156,9 @@ public class AUPPObject {
 //    }
 //
 //    /**
+//     * Request deletion of generated xContacts passwords by xSchool.
 //     * @param refId of xSchool.
-//     * @return Delete generated contact passwords by school.
+//     * @return List of xContacts type.
 //     * @throws AuthenticationException if login does not succeed.
 //     */
 //    private ResponseMulti<XContactType> deleteXContactUsers(String refId) throws AuthenticationException {
@@ -155,8 +170,9 @@ public class AUPPObject {
 //    }
 //
 //    /**
+//     * Request generated xContacts usernames and passwords by xSchool.
 //     * @param refId of xSchool.
-//     * @return Generated contact username and passwords by school.
+//     * @return List of xContacts type.
 //     * @throws AuthenticationException if login does not succeed.
 //     */
 //    private ResponseMulti<XContactType> getXContactUsers(String refId) throws AuthenticationException {
@@ -168,10 +184,11 @@ public class AUPPObject {
 //    }
 //
 //    /**
+//     * Request generated xContacts usernames and passwords by xSchool with paging.
 //     * @param refId              of xSchool.
 //     * @param navigationPage     Page to retrieve.
 //     * @param navigationPageSize Number of resources to retrieve.
-//     * @return Generated contact username and passwords by school with paging.
+//     * @return List of xContacts type.
 //     * @throws AuthenticationException if login does not succeed.
 //     */
 //    private ResponseMulti<XContactType> getXContactUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {

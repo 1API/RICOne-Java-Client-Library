@@ -36,7 +36,7 @@ public class SampleConsole
             
             for(XLeaType l : xPress.getXLeas().getData()) //Iterate through each xLea
             {
-            	for (int i = 1; i <= xPress.getLastPage(navigationPageSize, ServicePath.GETXROSTERSBYXLEA, l.getRefId()); i++) //Get max page size for rosters by lea
+            	for (int i = 1; i <= xPress.getLastPage(ServicePath.GETXROSTERSBYXLEA, l.getRefId(), navigationPageSize); i++) //Get max page size for rosters by lea
         		{
 	                for(XRosterType r : xPress.getXRostersByXLea(l.getRefId(), i, navigationPageSize).getData()) //Get each roster for each lea refId w/ paging
 	                {

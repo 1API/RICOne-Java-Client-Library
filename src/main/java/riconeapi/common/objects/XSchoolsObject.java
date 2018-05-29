@@ -16,13 +16,19 @@ public class XSchoolsObject {
     private final RestTemplate rt;
     private final String baseApiUrl;
 
+    /**
+     * XSchools Object Constructor.
+     * @param rt REST template.
+     * @param baseApiUrl Base API url.
+     */
     public XSchoolsObject(RestTemplate rt, String baseApiUrl) {
         this.rt = rt;
         this.baseApiUrl = baseApiUrl;
     }
 
     /**
-     * @return All Schools.
+     * Request all xSchools.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchools() throws AuthenticationException {
@@ -34,8 +40,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request all xSchools by school year.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return All Schools.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchools(int schoolYear) throws AuthenticationException {
@@ -47,9 +54,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request all xSchools with paging.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return All Schools with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -60,10 +68,11 @@ public class XSchoolsObject {
         return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
     }
     /**
+     * Request all xSchools with paging by school year.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return All Schools with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -75,8 +84,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request all xSchools value changes from a given point.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
-     * @return All School value changes from a given point.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchools(String opaqueMarker) throws AuthenticationException {
@@ -88,10 +98,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request all xSchools value changes from a given point with paging.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
-     * @return All School value changes from a given point with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchools(int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
@@ -103,8 +114,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request single xSchool by refId.
      * @param refId of xSchool.
-     * @return Single School by refId.
+     * @return Single xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XSchoolType> getXSchool(String refId) throws AuthenticationException {
@@ -116,9 +128,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request single xSchool by refId by school year.
      * @param refId of xSchool.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Single School by refId.
+     * @return Single xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XSchoolType> getXSchool(String refId, int schoolYear) throws AuthenticationException {
@@ -130,9 +143,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request single xSchool by BEDS code or Local Id.
      * @param idType Header value can be set to beds or local.
      * @param id     BEDS or Local Id.
-     * @return Single School by BEDS code or Local Id.
+     * @return Single xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XSchoolType> getXSchool(String idType, String id) throws AuthenticationException {
@@ -144,10 +158,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request single xSchool by BEDS code or Local Id by school year.
      * @param idType Header value can be set to beds or local.
      * @param id     BEDS or Local Id.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Single School by BEDS code or Local Id.
+     * @return Single xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XSchoolType> getXSchool(String idType, String id, int schoolYear) throws AuthenticationException {
@@ -159,8 +174,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xLea by refId.
      * @param refId of xLea.
-     * @return Schools associated to a specific Lea by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId) throws AuthenticationException {
@@ -172,9 +188,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xLea by refId by school year.
      * @param refId of xLea.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Lea by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int schoolYear) throws AuthenticationException {
@@ -186,10 +203,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xLea by refId with paging.
      * @param refId              of xLea.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Schools associated to a specific Lea by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -201,11 +219,12 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xLea by refId with paging by school year.
      * @param refId              of xLea.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Lea by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXLea(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -217,8 +236,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xCalendar by refId.
      * @param refId of xCalendar.
-     * @return Schools associated to a specific Calendar by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId) throws AuthenticationException {
@@ -230,9 +250,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xCalendar by refId by school year.
      * @param refId of xCalendar.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Calendar by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int schoolYear) throws AuthenticationException {
@@ -244,10 +265,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xCalendar by refId with paging.
      * @param refId              of xCalendar.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Schools associated to a specific Calendar by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -259,11 +281,12 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xCalendar by refId with paging by school year.
      * @param refId              of xCalendar.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Calendar by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXCalendar(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -275,8 +298,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xCourse by refId.
      * @param refId of xCourse.
-     * @return Schools associated to a specific Course by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId) throws AuthenticationException {
@@ -288,9 +312,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xCourse by refId by school year.
      * @param refId of xCourse.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Course by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int schoolYear) throws AuthenticationException {
@@ -302,10 +327,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xCourse by refId with paging.
      * @param refId              of xCourse.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Schools associated to a specific Course by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -317,11 +343,12 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xCourse by refId with paging by school year.
      * @param refId              of xCourse.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Course by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXCourse(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -333,8 +360,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xRoster by refId.
      * @param refId of xRoster.
-     * @return Schools associated to a specific Roster by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId) throws AuthenticationException {
@@ -346,9 +374,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xRoster by refId by school year.
      * @param refId of xRoster.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Roster by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int schoolYear) throws AuthenticationException {
@@ -360,10 +389,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xRoster by refId with paging.
      * @param refId              of xRoster.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Schools associated to a specific Roster by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -375,11 +405,12 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xRoster by refId with paging by school year.
      * @param refId              of xRoster.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Roster by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXRoster(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -391,8 +422,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xStaff by refId.
      * @param refId of xStaff.
-     * @return Schools associated to a specific Staff by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId) throws AuthenticationException {
@@ -404,9 +436,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xStaff by refId by school year.
      * @param refId of xStaff.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Staff by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int schoolYear) throws AuthenticationException {
@@ -418,10 +451,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xStaff by refId with paging.
      * @param refId              of xStaff.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Schools associated to a specific Staff by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -433,11 +467,12 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xStaff by refId with paging by school year.
      * @param refId              of xStaff.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Staff by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXStaff(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -449,8 +484,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xStudent by refId.
      * @param refId of xStudent.
-     * @return Schools associated to a specific Student by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId) throws AuthenticationException {
@@ -462,9 +498,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xStudent by refId by school year.
      * @param refId of xStudent.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Student by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int schoolYear) throws AuthenticationException {
@@ -476,10 +513,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xStudent by refId with paging.
      * @param refId              of xStudent.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Schools associated to a specific Student by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -491,11 +529,12 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xStudent by refId with paging by school year.
      * @param refId              of xStudent.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Student by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXStudent(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -507,8 +546,9 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xContact by refId.
      * @param refId of xContact.
-     * @return Schools associated to a specific Contact by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId) throws AuthenticationException {
@@ -520,9 +560,10 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xContact by refId by school year.
      * @param refId of xContact.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Contact by refId.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int schoolYear) throws AuthenticationException {
@@ -534,10 +575,11 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xContact by refId with paging.
      * @param refId              of xContact.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Schools associated to a specific Contact by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -549,11 +591,12 @@ public class XSchoolsObject {
     }
 
     /**
+     * Request xSchools associated to a specific xContact by refId with paging by school year.
      * @param refId              of xContact.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Schools associated to a specific Contact by refId with paging.
+     * @return List of xSchools type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XSchoolType> getXSchoolsByXContact(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {

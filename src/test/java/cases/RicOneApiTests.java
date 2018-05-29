@@ -1310,8 +1310,9 @@ public class RicOneApiTests {
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
+                    System.out.println("sessionCode: " + mt.getSessionCode());
+                    System.out.println("schoolCalendarRefId: " + mt.getSchoolCalendarRefId());
                     System.out.println("timeTableDay: " + mt.getTimeTableDay());
-
                     System.out.println("bellScheduleDay: " + mt.getClassMeetingDays().getBellScheduleDay());
                     System.out.println("timeTablePeriod: " + mt.getTimeTablePeriod());
                     System.out.println("roomNumber: " + mt.getRoomNumber());
@@ -1371,8 +1372,9 @@ public class RicOneApiTests {
 
             System.out.println("##### BEGIN MEETING TIMES #####");
             for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
+                System.out.println("sessionCode: " + mt.getSessionCode());
+                System.out.println("schoolCalendarRefId: " + mt.getSchoolCalendarRefId());
                 System.out.println("timeTableDay: " + mt.getTimeTableDay());
-
                 System.out.println("bellScheduleDay: " + mt.getClassMeetingDays().getBellScheduleDay());
                 System.out.println("timeTablePeriod: " + mt.getTimeTablePeriod());
                 System.out.println("roomNumber: " + mt.getRoomNumber());
@@ -1430,8 +1432,9 @@ public class RicOneApiTests {
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
+                    System.out.println("sessionCode: " + mt.getSessionCode());
+                    System.out.println("schoolCalendarRefId: " + mt.getSchoolCalendarRefId());
                     System.out.println("timeTableDay: " + mt.getTimeTableDay());
-
                     System.out.println("bellScheduleDay: " + mt.getClassMeetingDays().getBellScheduleDay());
                     System.out.println("timeTablePeriod: " + mt.getTimeTablePeriod());
                     System.out.println("roomNumber: " + mt.getRoomNumber());
@@ -1490,8 +1493,9 @@ public class RicOneApiTests {
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
+                    System.out.println("sessionCode: " + mt.getSessionCode());
+                    System.out.println("schoolCalendarRefId: " + mt.getSchoolCalendarRefId());
                     System.out.println("timeTableDay: " + mt.getTimeTableDay());
-
                     System.out.println("bellScheduleDay: " + mt.getClassMeetingDays().getBellScheduleDay());
                     System.out.println("timeTablePeriod: " + mt.getTimeTablePeriod());
                     System.out.println("roomNumber: " + mt.getRoomNumber());
@@ -1550,8 +1554,9 @@ public class RicOneApiTests {
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
+                    System.out.println("sessionCode: " + mt.getSessionCode());
+                    System.out.println("schoolCalendarRefId: " + mt.getSchoolCalendarRefId());
                     System.out.println("timeTableDay: " + mt.getTimeTableDay());
-
                     System.out.println("bellScheduleDay: " + mt.getClassMeetingDays().getBellScheduleDay());
                     System.out.println("timeTablePeriod: " + mt.getTimeTablePeriod());
                     System.out.println("roomNumber: " + mt.getRoomNumber());
@@ -1610,8 +1615,9 @@ public class RicOneApiTests {
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
+                    System.out.println("sessionCode: " + mt.getSessionCode());
+                    System.out.println("schoolCalendarRefId: " + mt.getSchoolCalendarRefId());
                     System.out.println("timeTableDay: " + mt.getTimeTableDay());
-
                     System.out.println("bellScheduleDay: " + mt.getClassMeetingDays().getBellScheduleDay());
                     System.out.println("timeTablePeriod: " + mt.getTimeTablePeriod());
                     System.out.println("roomNumber: " + mt.getRoomNumber());
@@ -1670,8 +1676,9 @@ public class RicOneApiTests {
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
+                    System.out.println("sessionCode: " + mt.getSessionCode());
+                    System.out.println("schoolCalendarRefId: " + mt.getSchoolCalendarRefId());
                     System.out.println("timeTableDay: " + mt.getTimeTableDay());
-
                     System.out.println("bellScheduleDay: " + mt.getClassMeetingDays().getBellScheduleDay());
                     System.out.println("timeTablePeriod: " + mt.getTimeTablePeriod());
                     System.out.println("roomNumber: " + mt.getRoomNumber());

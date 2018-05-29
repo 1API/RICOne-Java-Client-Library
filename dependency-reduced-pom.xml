@@ -4,7 +4,7 @@
   <groupId>org.ricone.api</groupId>
   <artifactId>ricone-api</artifactId>
   <name>RICOne API Client Library</name>
-  <version>1.7-beetah</version>
+  <version>1.7</version>
   <description>Client library for the RIC One data api</description>
   <url>http://www.ricone.org/</url>
   <build>

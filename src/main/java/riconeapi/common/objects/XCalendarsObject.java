@@ -16,13 +16,19 @@ public class XCalendarsObject {
     private final RestTemplate rt;
     private final String baseApiUrl;
 
+    /**
+     * XCalendars Object Constructor.
+     * @param rt Rest template.
+     * @param baseApiUrl Base API url.
+     */
     public XCalendarsObject(RestTemplate rt, String baseApiUrl) {
         this.rt = rt;
         this.baseApiUrl = baseApiUrl;
     }
 
     /**
-     * @return All Calendars.
+     * Request all xCalendars.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendars() throws AuthenticationException {
@@ -34,8 +40,9 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request all xCalendars by school year.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return All Calendars.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendars(int schoolYear) throws AuthenticationException {
@@ -47,9 +54,10 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request all xCalendars with paging.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return All Calendars with paging.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -61,10 +69,11 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request all xCalendars with paging by school year.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return All Calendars with paging.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -76,8 +85,9 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request all xCalendar value changes from a given point.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
-     * @return All Calendar value changes from a given point.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendars(String opaqueMarker) throws AuthenticationException {
@@ -89,10 +99,11 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request all xCalendar value changes from a given point with paging.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
-     * @return All Calendar value changes from a given point with paging.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendars(int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
@@ -104,8 +115,9 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request single xCalendar by refId.
      * @param refId of xCalendar.
-     * @return Single Calendar by refId.
+     * @return Single xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XCalendarType> getXCalendar(String refId) throws AuthenticationException {
@@ -117,9 +129,10 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request single xCalendar by refId by school year.
      * @param refId of xCalendar.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Single Calendar by refId.
+     * @return Single xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XCalendarType> getXCalendar(String refId, int schoolYear) throws AuthenticationException {
@@ -131,8 +144,9 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request xCalendars associated to a specific xLea by refId.
      * @param refId of xLea.
-     * @return Calendars associated to a specific Lea by refId.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId) throws AuthenticationException {
@@ -144,9 +158,10 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request xCalendars associated to a specific xLea by refId by school year.
      * @param refId of xLea.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Calendars associated to a specific Lea by refId.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int schoolYear) throws AuthenticationException {
@@ -158,10 +173,11 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request xCalendars associated to a specific xLea by refId with paging.
      * @param refId              of xLea.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Calendars associated to a specific Lea by refId with paging.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -173,11 +189,12 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request xCalendars associated to a specific xLea by refId with paging by school year.
      * @param refId              of xLea.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Calendars associated to a specific Lea by refId with paging.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -189,8 +206,9 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request xCalendars associated to a specific xSchool by refId.
      * @param refId of xSchool.
-     * @return Calendars associated to a specific School by refId.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId) throws AuthenticationException {
@@ -202,9 +220,10 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request xCalendars associated to a specific xSchool by refId by school year.
      * @param refId of xSchool.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Calendars associated to a specific School by refId.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int schoolYear) throws AuthenticationException {
@@ -216,10 +235,11 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request xCalendars associated to a specific xSchool by refId with paging.
      * @param refId              of xSchool.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Calendars associated to a specific School by refId with paging.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -231,11 +251,12 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request xCalendars associated to a specific xSchool by refId with paging by school year.
      * @param refId              of xSchool.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Calendars associated to a specific School by refId with paging.
+     * @return List of xCalendars type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {

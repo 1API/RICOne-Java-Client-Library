@@ -42,7 +42,7 @@ final static String clientSecret = "YOUR PASSWORD";
 ### v1.7
 * Support for multiple school years
     * Integer value, i.e. 2018 for the 2017-2018 school year
-    * Available on all methods except except ones that except the opaqueMarker for changes since
+    * Available on all methods except except ones that accept the opaqueMarker for changes since
     ```java
     int schoolYear = 2018;
     xPress.getXLeas(schoolYear).getData();
@@ -51,6 +51,17 @@ final static String clientSecret = "YOUR PASSWORD";
     ```java
     getXRosters(int navigationPage, int navigationPageSize, String opaqueMarker);
     ```
+* Changed order of getLastPage method
+    ```java
+    //NEW
+    getLastPage(ServicePath servicePath, int navigationPageSize)
+    getLastPage(ServicePath servicePath, String refId, int navigationPageSize);
+
+    //OLD
+    getLastPage(int navigationPageSize, ServicePath servicePath)
+    getLastPage(int navigationPageSize, ServicePath servicePath, String refId);
+    ```
+
 * Removed the single object REST calls with paging
     ```java
     getXLea(String refId, int navigationPage, int navigationPageSize);

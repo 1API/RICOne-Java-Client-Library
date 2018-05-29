@@ -16,13 +16,19 @@ public class XLeasObject {
     private final RestTemplate rt;
     private final String baseApiUrl;
 
+    /**
+     * XLeas Object Constructor.
+     * @param rt REST template.
+     * @param baseApiUrl Base API url.
+     */
     public XLeasObject(RestTemplate rt, String baseApiUrl) {
         this.rt = rt;
         this.baseApiUrl = baseApiUrl;
     }
 
     /**
-     * @return All Leas.
+     * Request all xLeas
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeas() throws AuthenticationException {
@@ -34,8 +40,9 @@ public class XLeasObject {
     }
 
     /**
+     * Request all xLeas by school year.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return All Leas.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeas(int schoolYear) throws AuthenticationException {
@@ -47,9 +54,10 @@ public class XLeasObject {
     }
 
     /**
+     * Request all xLeas with paging.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return All Leas with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -61,10 +69,11 @@ public class XLeasObject {
     }
 
     /**
+     * Request all xLeas with paging by school year.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return All Leas with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -76,8 +85,9 @@ public class XLeasObject {
     }
 
     /**
+     * Request all xLeas value changes from a given point.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
-     * @return All Lea value changes from a given point.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeas(String opaqueMarker) throws AuthenticationException {
@@ -89,10 +99,11 @@ public class XLeasObject {
     }
 
     /**
+     * Request all xLeas value changes from a given point with paging.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
-     * @return All Lea value changes from a given point with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeas(int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
@@ -104,8 +115,9 @@ public class XLeasObject {
     }
 
     /**
+     * Request single xLea by refId.
      * @param refId of xLea.
-     * @return Single Lea by refId.
+     * @return Single xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XLeaType> getXLea(String refId) throws AuthenticationException {
@@ -117,9 +129,10 @@ public class XLeasObject {
     }
 
     /**
+     * Request single xLea by refId by school year.
      * @param refId of xLea.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Single Lea by refId.
+     * @return Single xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XLeaType> getXLea(String refId, int schoolYear) throws AuthenticationException {
@@ -131,9 +144,10 @@ public class XLeasObject {
     }
 
     /**
+     * Request single xLea by BEDS code or Local Id.
      * @param idType Header value can be set to beds or local.
      * @param id     BEDS or Local Id.
-     * @return Single Lea by BEDS code or Local Id.
+     * @return Single xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XLeaType> getXLea(String idType, String id) throws AuthenticationException {
@@ -145,10 +159,11 @@ public class XLeasObject {
     }
 
     /**
+     * Request single xLea by BEDS code or Local Id by school year.
      * @param idType Header value can be set to beds or local.
      * @param id     BEDS or Local Id.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Single Lea by BEDS code or Local Id.
+     * @return Single xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XLeaType> getXLea(String idType, String id, int schoolYear) throws AuthenticationException {
@@ -160,8 +175,9 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xSchool by refId.
      * @param refId of xSchools.
-     * @return Leas associated to a specific School by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXSchool(String refId) throws AuthenticationException {
@@ -173,9 +189,10 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xSchool by refId by school year.
      * @param refId of xSchools.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific School by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int schoolYear) throws AuthenticationException {
@@ -187,10 +204,11 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xSchool by refId with paging.
      * @param refId              of xSchools.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Leas associated to a specific School by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -202,11 +220,12 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xSchool by refId with paging by school year.
      * @param refId              of xSchools.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific School by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -218,8 +237,9 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xRoster by refId.
      * @param refId of xRosters.
-     * @return Leas associated to a specific Roster by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXRoster(String refId) throws AuthenticationException {
@@ -231,9 +251,10 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xRoster by refId by school year.
      * @param refId of xRosters.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific Roster by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int schoolYear) throws AuthenticationException {
@@ -245,10 +266,11 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xRoster by refId with paging.
      * @param refId              of xRoster.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Leas associated to a specific Roster by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -260,11 +282,12 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xRoster by refId with paging by school year.
      * @param refId              of xRoster.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific Roster by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -276,8 +299,9 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xStaff by refId.
      * @param refId of xStaffs.
-     * @return Leas associated to a specific Staff by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXStaff(String refId) throws AuthenticationException {
@@ -289,9 +313,10 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xStaff by refId by school year.
      * @param refId of xStaffs.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific Staff by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int schoolYear) throws AuthenticationException {
@@ -303,10 +328,11 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xStaff by refId with paging.
      * @param refId              of xStaffs.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Leas associated to a specific Staff by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -318,11 +344,12 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xStaff by refId with paging by school year.
      * @param refId              of xStaffs.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific Staff by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -334,8 +361,9 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xStudent by refId.
      * @param refId of xStudents.
-     * @return Leas associated to a specific Student by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXStudent(String refId) throws AuthenticationException {
@@ -347,9 +375,10 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xStudent by refId by school year.
      * @param refId of xStudents.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific Student by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int schoolYear) throws AuthenticationException {
@@ -361,10 +390,11 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xStudent by refId with paging.
      * @param refId              of xStudents.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Leas associated to a specific Student by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -376,11 +406,12 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xStudent by refId with paging by school year.
      * @param refId              of xStudents.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific Student by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -392,8 +423,9 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xContact by refId.
      * @param refId of xContact.
-     * @return Leas associated to a specific Contact by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXContact(String refId) throws AuthenticationException {
@@ -405,9 +437,10 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xContact by refId by school year.
      * @param refId of xContact.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific Contact by refId.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int schoolYear) throws AuthenticationException {
@@ -419,10 +452,11 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xContact by refId with paging.
      * @param refId              of xContact.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Leas associated to a specific Contact by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -434,11 +468,12 @@ public class XLeasObject {
     }
 
     /**
+     * Request xLeas associated to a specific xContact by refId with paging by school year.
      * @param refId              of xContact.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Leas associated to a specific Contact by refId with paging.
+     * @return List of xLeas type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {

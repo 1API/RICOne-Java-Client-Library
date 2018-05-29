@@ -16,13 +16,19 @@ public class XStaffsObject {
     private final RestTemplate rt;
     private final String baseApiUrl;
 
+    /**
+     * XStaffs Object Constructor.
+     * @param rt REST template.
+     * @param baseApiUrl Base API url.
+     */
     public XStaffsObject(RestTemplate rt, String baseApiUrl) {
         this.rt = rt;
         this.baseApiUrl = baseApiUrl;
     }
 
     /**
-     * @return All Staffs.
+     * Request all xStaffs.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffs() throws AuthenticationException {
@@ -34,8 +40,9 @@ public class XStaffsObject {
     }
 
     /**
+     * Request all xStaffs by school year.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return All Staffs.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffs(int schoolYear) throws AuthenticationException {
@@ -47,9 +54,10 @@ public class XStaffsObject {
     }
 
     /**
+     * Request all xStaffs with paging.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return All Staffs with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffs(int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -61,10 +69,11 @@ public class XStaffsObject {
     }
 
     /**
+     * Request all xStaffs with paging by school year.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return All Staffs with paging.
+     * @return List of xStaffs type..
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffs(int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -76,8 +85,9 @@ public class XStaffsObject {
     }
 
     /**
+     * Request all xStaffs value changes from a given point.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
-     * @return All Staff value changes from a given point.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffs(String opaqueMarker) throws AuthenticationException {
@@ -89,10 +99,11 @@ public class XStaffsObject {
     }
 
     /**
+     * Request all xStaffs value changes from a given point with paging.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
-     * @return All Staff value changes from a given point with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffs(int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
@@ -104,8 +115,9 @@ public class XStaffsObject {
     }
 
     /**
+     * Request single xStaff by refId.
      * @param refId of xStaff.
-     * @return Single Staffs by refId.
+     * @return Single xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XStaffType> getXStaff(String refId) throws AuthenticationException {
@@ -117,9 +129,10 @@ public class XStaffsObject {
     }
 
     /**
+     * Request single xStaff by refId by school year.
      * @param refId of xStaff.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Single Staffs by refId.
+     * @return Single xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseSingle<XStaffType> getXStaff(String refId, int schoolYear) throws AuthenticationException {
@@ -131,8 +144,9 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xLea by refId.
      * @param refId of xStaff.
-     * @return Staffs associated to a specific Lea by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXLea(String refId) throws AuthenticationException {
@@ -144,9 +158,10 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xLea by refId by school year.
      * @param refId of xStaff.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific Lea by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXLea(String refId, int schoolYear) throws AuthenticationException {
@@ -158,10 +173,11 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xLea by refId with paging.
      * @param refId              of xLea.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Staffs associated to a specific Lea by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -173,11 +189,12 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xLea by refId with paging by school year.
      * @param refId              of xLea.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific Lea by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -189,8 +206,9 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xSchool by refId.
      * @param refId of xSchool.
-     * @return Staffs associated to a specific School by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId) throws AuthenticationException {
@@ -202,9 +220,10 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xSchool by refId by school year.
      * @param refId of xSchool.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific School by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int schoolYear) throws AuthenticationException {
@@ -216,10 +235,11 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xSchool by refId with paging.
      * @param refId              of xSchool.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Staffs associated to a specific School by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -231,11 +251,12 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xSchool by refId with paging by school year.
      * @param refId              of xSchool.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific School by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -247,8 +268,9 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xCourse by refId.
      * @param refId of xCourse.
-     * @return Staffs associated to a specific Course by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId) throws AuthenticationException {
@@ -260,9 +282,10 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xCourse by refId by school year.
      * @param refId of xCourse.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific Course by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int schoolYear) throws AuthenticationException {
@@ -274,10 +297,11 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xCourse by refId with paging.
      * @param refId              of xCourse.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Staffs associated to a specific Course by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -289,11 +313,12 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xCourse by refId with paging by school year.
      * @param refId              of xCourse.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific Course by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -305,8 +330,9 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xRoster by refId.
      * @param refId of xRoster.
-     * @return Staffs associate to a specific Roster by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId) throws AuthenticationException {
@@ -318,9 +344,10 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xRoster by refId by school year.
      * @param refId of xRoster.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associate to a specific Roster by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int schoolYear) throws AuthenticationException {
@@ -332,10 +359,11 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xRoster by refId with paging.
      * @param refId              of xRoster.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Staffs associated to a specific Roster by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -347,11 +375,12 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xRoster by refId with paging by school year.
      * @param refId              of xRoster.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific Roster by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
@@ -363,8 +392,9 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xStudent by refId.
      * @param refId of xStudent.
-     * @return Staffs associated to a specific Student by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId) throws AuthenticationException {
@@ -376,9 +406,10 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xStudent by refId by school year.
      * @param refId of xStudent.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific Student by refId.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int schoolYear) throws AuthenticationException {
@@ -390,10 +421,11 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xStudent by refId with paging.
      * @param refId              of xStudent.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @return Staffs associated to a specific Student by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
@@ -405,11 +437,12 @@ public class XStaffsObject {
     }
 
     /**
+     * Request xStaffs associated to a specific xStudent by refId with paging by school year.
      * @param refId              of xStudent.
      * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @return Staffs associated to a specific Student by refId with paging.
+     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {

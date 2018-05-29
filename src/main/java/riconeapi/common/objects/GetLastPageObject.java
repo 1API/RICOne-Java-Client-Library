@@ -19,18 +19,24 @@ public class GetLastPageObject {
     private final RestTemplate rt;
     private final String baseApiUrl;
 
+    /**
+     * GetLastPage Object Constructor.
+     * @param rt REST template.
+     * @param baseApiUrl Base API url.
+     */
     public GetLastPageObject(RestTemplate rt, String baseApiUrl) {
         this.rt = rt;
         this.baseApiUrl = baseApiUrl;
     }
 
     /**
-     * @param navigationPageSize Number of resources to retrieve.
+     * Returns the max page value for specified service path object.
      * @param servicePath The requested service path.
-     * @return Max page value for specified service path object.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
      */
-    public int getLastPage(int navigationPageSize, ServicePath servicePath) throws AuthenticationException {
+    public int getLastPage(ServicePath servicePath, int navigationPageSize) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
@@ -86,14 +92,14 @@ public class GetLastPageObject {
     }
 
     /**
-     *
+     * Returns the max page value for specified service path object by school year.
+     * @param servicePath The requested service path.
      * @param navigationPageSize Number of resources to retrieve.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
-     * @param servicePath The requested service path.
-     * @return Max page value for specified service path object.
+     * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
      */
-    public int getLastPage(int navigationPageSize, int schoolYear, ServicePath servicePath) throws AuthenticationException {
+    public int getLastPage(ServicePath servicePath, int navigationPageSize, int schoolYear) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
@@ -149,13 +155,14 @@ public class GetLastPageObject {
     }
 
     /**
-     * @param navigationPageSize Number of resources to retrieve.
+     * Returns the max page value for specified service path object.
      * @param servicePath The requested service path.
      * @param refId of xObject.
-     * @return Max page value for specified service path object.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
      */
-    public int getLastPage(int navigationPageSize, ServicePath servicePath, String refId) throws AuthenticationException {
+    public int getLastPage(ServicePath servicePath, String refId, int navigationPageSize) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
@@ -248,14 +255,15 @@ public class GetLastPageObject {
     }
 
     /**
-     * @param navigationPageSize Number of resources to retrieve.
-     * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * Returns the max page value for specified service path object by school year.
      * @param servicePath The requested service path.
      * @param refId of xObject.
-     * @return Max page value for specified service path object.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
      */
-    public int getLastPage(int navigationPageSize, int schoolYear, ServicePath servicePath, String refId) throws AuthenticationException {
+    public int getLastPage(ServicePath servicePath, String refId, int navigationPageSize, int schoolYear) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
