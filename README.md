@@ -42,20 +42,20 @@ final static String clientSecret = "YOUR PASSWORD";
 ### v1.7.1
 * Added support to return responses as JSON or XML strings.
     ```java
-        getJsonXml(ServicePath servicePath, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, int schoolYear, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, int schoolYear, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, String refId, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, String refId, int schoolYear, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, int schoolYear, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, String idType, String id, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, String idType, String id, int schoolYear, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, Date opaqueMarker, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, Date opaqueMarker, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, String refId, AUPPEnum auppEnum, MediaTypeEnum type)
-    	getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, AUPPEnum auppEnum, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, int schoolYear, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, int schoolYear, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, String refId, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, String refId, int schoolYear, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, int schoolYear, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, String idType, String id, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, String idType, String id, int schoolYear, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, Date opaqueMarker, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, Date opaqueMarker, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, String refId, AUPPEnum auppEnum, MediaTypeEnum type)
+    getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, AUPPEnum auppEnum, MediaTypeEnum type)
     ```
 
 ### v1.7
