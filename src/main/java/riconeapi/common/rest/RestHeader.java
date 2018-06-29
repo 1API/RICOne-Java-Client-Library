@@ -1,11 +1,12 @@
 package riconeapi.common.rest;
 
+import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 
-/**
+/*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since 4/20/2018
+ * @version 1.7.1
+ * @since 6/21/2018
  */
 @SuppressWarnings("unused")
 public class RestHeader {
@@ -14,6 +15,7 @@ public class RestHeader {
     private String idType;
     private String id;
     private Integer schoolYear;
+    private MediaTypeEnum contentType;
 
     public RestHeader() {
     }
@@ -59,6 +61,41 @@ public class RestHeader {
         this.schoolYear = schoolYear;
     }
 
+    public RestHeader(MediaTypeEnum contentType) {
+        this.contentType = contentType;
+    }
+
+    public RestHeader(Integer schoolYear, MediaTypeEnum contentType) {
+        this.schoolYear = schoolYear;
+        this.contentType = contentType;
+    }
+
+    public RestHeader(String idType, String id, MediaTypeEnum contentType) {
+        this.idType = idType;
+        this.id = id;
+        this.contentType = contentType;
+    }
+
+    public RestHeader(String idType, String id, Integer schoolYear, MediaTypeEnum contentType) {
+        this.idType = idType;
+        this.id = id;
+        this.schoolYear = schoolYear;
+        this.contentType = contentType;
+    }
+
+    public RestHeader(Integer navigationPage, Integer navigationPageSize, MediaTypeEnum contentType) {
+        this.navigationPage = navigationPage;
+        this.navigationPageSize = navigationPageSize;
+        this.contentType = contentType;
+    }
+
+    public RestHeader(Integer navigationPage, Integer navigationPageSize, Integer schoolYear, MediaTypeEnum contentType) {
+        this.navigationPage = navigationPage;
+        this.navigationPageSize = navigationPageSize;
+        this.schoolYear = schoolYear;
+        this.contentType = contentType;
+    }
+
     public String getNavigationPage() {
         return String.valueOf(this.navigationPage);
     }
@@ -97,6 +134,14 @@ public class RestHeader {
         this.schoolYear = schoolYear;
     }
 
+    public MediaTypeEnum getContentType() {
+        return contentType;
+    }
+
+    void setContentType(MediaTypeEnum contentType) {
+        this.contentType = contentType;
+    }
+
     boolean hasPaging() {
         return this.navigationPage != null && this.navigationPageSize != null;
     }
@@ -109,6 +154,10 @@ public class RestHeader {
         return this.schoolYear != null;
     }
 
+    boolean hasContentType() {
+        return this.contentType != null;
+    }
+
     @Override
     public String toString() {
         return "RestHeader{" +
@@ -117,6 +166,7 @@ public class RestHeader {
                 ", idType='" + idType + '\'' +
                 ", id='" + id + '\'' +
                 ", schoolYear=" + schoolYear +
+                ", contentType=" + contentType +
                 '}';
     }
 }

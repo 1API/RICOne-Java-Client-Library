@@ -2,16 +2,22 @@ package riconeapi.common;
 
 import org.springframework.web.client.RestTemplate;
 import riconeapi.common.objects.*;
+import riconeapi.common.rest.AUPPEnum;
+import riconeapi.common.rest.MediaTypeEnum;
 import riconeapi.common.rest.ResponseMulti;
 import riconeapi.common.rest.ResponseSingle;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.*;
 
-/**
+import java.util.Date;
+
+/*
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.7
- * @since       Apr 20, 2018
- *
+ * @version     1.7.1
+ * @since       Jun 28, 2018
+ */
+
+/**
  * Static class allowing access to xPress data model objects
  */
 @SuppressWarnings("unused")
@@ -26,6 +32,7 @@ public class XPress {
 	private final XContactsObject xContactsObject;
 	private final GetLastPageObject getLastPageObject;
 	private final AUPPObject auppObject;
+	private final JsonXmlObject jsonXmlObject;
 
 	public XPress(String baseApiUrl) {
 		RestTemplate rt = new RestTemplate();
@@ -40,6 +47,7 @@ public class XPress {
 		xContactsObject = new XContactsObject(rt, baseApiUrl);
 		getLastPageObject = new GetLastPageObject(rt, baseApiUrl);
 		auppObject = new AUPPObject(rt, baseApiUrl);
+		jsonXmlObject = new JsonXmlObject(rt, baseApiUrl);
 	}
 
 	/* xLeas */
@@ -2309,6 +2317,7 @@ public class XPress {
     public ResponseMulti<XStudentType> getXStudentUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
         return auppObject.getXStudentUsers(refId, navigationPage, navigationPageSize);
     }
+
 //    /**
 //     * Request creation of xContacts usernames and passwords by xSchool.
 //     * @param refId of xSchool.
@@ -2347,4 +2356,223 @@ public class XPress {
 //	private ResponseMulti<XContactType> getXContactUsers(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
 //		return auppObject.getXContactUsers(refId, navigationPage, navigationPageSize);
 //	}
+
+	/**
+	 * Request String response of a service path in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, type);
+	}
+
+	/**
+	 * Request String response of a service path by school year in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, int schoolYear, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, schoolYear, type);
+	}
+
+	/**
+	 * Request String response of a service path with paging in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param navigationPage     Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, navigationPage, navigationPageSize, type);
+	}
+
+	/**
+	 * Request String response of a service path with paging by school year in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param navigationPage     Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, int schoolYear, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, navigationPage, navigationPageSize, schoolYear, type);
+	}
+
+	/**
+	 * Request String response of a service path by refId in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param refId of xObject.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, String refId, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, refId, type);
+	}
+
+	/**
+	 * Request String response of a service path by refId and school year in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param refId of xObject.
+	 * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, String refId, int schoolYear, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, refId, schoolYear, type);
+	}
+
+	/**
+	 * Request String response of a service path by refId with paging in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param refId of xObject.
+	 * @param navigationPage     Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, refId, navigationPage, navigationPageSize, type);
+	}
+
+	/**
+	 * Request String response of a service path by refId with paging by school year in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param refId of xObject.
+	 * @param navigationPage     Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @param schoolYear  The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, int schoolYear, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, refId, navigationPage, navigationPageSize, schoolYear, type);
+	}
+
+	/**
+	 * Request String response of a service path by BEDS code or Local Id in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param idType Header value can be set to beds or local.
+	 * @param id     BEDS or Local Id.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, String idType, String id, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, idType, id, type);
+	}
+
+	/**
+	 * Request String response of a service path by BEDS code or Local Id by school year in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param idType Header value can be set to beds or local.
+	 * @param id     BEDS or Local Id.
+	 * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, String idType, String id, int schoolYear, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, idType, id, schoolYear, type);
+	}
+
+	/**
+	 * Request value changes from a given point on a service path in JSON or XML format.
+	 * This will only work for ServicePath.GETXLEAS, ServicePath.GETXSCHOOLS, ServicePath.GETXCALENDARS, ServicePath.GETXCOURSES,
+	 * ServicePath.GETXROSTERS, ServicePath.GETXSTAFFS, ServicePath.GETXSTUDENTS, ServicePath.GETXCONTACTS.
+	 * @param servicePath The requested service path.
+	 * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, Date opaqueMarker, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, opaqueMarker, type);
+	}
+
+	/**
+	 * Request value changes from a given point on a service path with paging in JSON or XML format.
+	 * This will only work for ServicePath.GETXLEAS, ServicePath.GETXSCHOOLS, ServicePath.GETXCALENDARS, ServicePath.GETXCOURSES,
+	 * ServicePath.GETXROSTERS, ServicePath.GETXSTAFFS, ServicePath.GETXSTUDENTS, ServicePath.GETXCONTACTS.
+	 * @param servicePath The requested service path.
+	 * @param navigationPage     Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, int navigationPage, int navigationPageSize, Date opaqueMarker, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, navigationPage, navigationPageSize, opaqueMarker, type);
+	}
+
+	/**
+	 * Request String response of a service path for AUPP in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param refId of xObject.
+	 * @param auppEnum AUPP Enumerator for values AUPPEnum.CREATE, AUPPEnum.DELETE, AUPPEnum.GET.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see AUPPEnum
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, String refId, AUPPEnum auppEnum, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, refId, auppEnum, type);
+	}
+
+	/**
+	 * Request String response of a service path for AUPP with paging in JSON or XML format.
+	 * @param servicePath The requested service path.
+	 * @param refId of xObject.
+	 * @param navigationPage     Page to retrieve.
+	 * @param navigationPageSize Number of resources to retrieve.
+	 * @param auppEnum AUPP Enumerator for values AUPPEnum.CREATE, AUPPEnum.DELETE, AUPPEnum.GET.
+	 * @param type MediaType Enumerator for values MediaTypeEnum.JSON or MediaTypeEnum.XML.
+	 * @return String value of requested service path.
+	 * @see ServicePath
+	 * @see AUPPEnum
+	 * @see MediaTypeEnum
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public String getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, AUPPEnum auppEnum, MediaTypeEnum type) throws AuthenticationException {
+		return jsonXmlObject.getJsonXml(servicePath, refId, navigationPage, navigationPageSize, auppEnum, type);
+	}
 }

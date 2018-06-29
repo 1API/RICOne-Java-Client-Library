@@ -9,7 +9,7 @@ import riconeapi.common.rest.RestResponse;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.*;
 
-/**
+/*
  * @author Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version 1.7
  * @since Apr 20, 2018

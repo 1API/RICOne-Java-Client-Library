@@ -3,7 +3,7 @@ package riconeapi.common.rest;
 import org.springframework.util.StringUtils;
 import riconeapi.common.objects.ServicePath;
 
-/**
+/*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
  * @version 1.7
  * @since 4/20/2018
@@ -55,7 +55,7 @@ public class RestProperties {
         this.refId = refId;
     }
 
-    RestHeader getRestHeader() {
+    public RestHeader getRestHeader() {
         return restHeader;
     }
 

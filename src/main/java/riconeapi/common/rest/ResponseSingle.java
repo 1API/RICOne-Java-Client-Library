@@ -1,6 +1,6 @@
 package riconeapi.common.rest;
 
-/**
+/*
  * @author Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version 1.7
  * @since Apr 20, 2018

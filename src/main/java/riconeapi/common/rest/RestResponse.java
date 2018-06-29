@@ -1,26 +1,26 @@
 package riconeapi.common.rest;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import riconeapi.authentication.Authenticator;
+import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.ICollectionType;
 import riconeapi.models.xpress.IType;
-import riconeapi.exceptions.AuthenticationException;
 
-/**
+import static riconeapi.common.rest.RestUtil.toISO8601;
+
+/*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since 4/20/2018
+ * @version 1.7.1
+ * @since 6/21/2018
  */
 @SuppressWarnings("unchecked")
 public class RestResponse {
     private Integer navigationLastPage;
 
+    // Response for all object returns.
     public <T extends ICollectionType<E>, E> ResponseMulti<E> makeAllRequest(RestTemplate rt, RestProperties rp, Class clazz) throws AuthenticationException {
         ResponseEntity<T> response;
         ResponseMulti<E> output = new ResponseMulti<>();
@@ -28,7 +28,6 @@ public class RestResponse {
 
         try {
             response = rt.exchange(urlBuilder(rp), HttpMethod.GET, getEntityHeaders(rp), clazz);
-
             if(rp.getRestHeader().hasPaging()) {
                 setNavigationLastPage(Integer.parseInt(response.getHeaders().getFirst("navigationLastPage")));
             }
@@ -47,6 +46,7 @@ public class RestResponse {
         return output;
     }
 
+    // Response for predicate returns.
     public <T extends ICollectionType<E>, E> ResponseMulti<E> makeAllRequestByRefId(RestTemplate rt, RestProperties rp, Class clazz) throws AuthenticationException {
         ResponseEntity<T> response;
         ResponseMulti<E> output = new ResponseMulti<>();
@@ -73,6 +73,7 @@ public class RestResponse {
         return output;
     }
 
+    // Response for AUPP returns.
     public <T extends ICollectionType<E>, E> ResponseMulti<E> makeAllRequestByAupp(RestTemplate rt, RestProperties rp, Class clazz) throws AuthenticationException {
         ResponseEntity<T> response;
         ResponseMulti<E> output = new ResponseMulti<>();
@@ -99,6 +100,7 @@ public class RestResponse {
         return output;
     }
 
+    // Response for single refId returns.
     public <T extends IType<E>, E> ResponseSingle<E> makeSingleRequest(RestTemplate rt, RestProperties rp, Class clazz) throws AuthenticationException {
         ResponseEntity<T> response;
         ResponseSingle<E> output = new ResponseSingle<>();
@@ -122,6 +124,7 @@ public class RestResponse {
         return output;
     }
 
+    // Response for BEDS code and Local Id returns.
     public <T extends IType<E>, E> ResponseSingle<E> makeSingleRequestById(RestTemplate rt, RestProperties rp, Class clazz) throws AuthenticationException {
         ResponseEntity<T> response;
         ResponseSingle<E> output = new ResponseSingle<>();
@@ -145,10 +148,33 @@ public class RestResponse {
         return output;
     }
 
+    // Response for JSON and XML returns.
+    public String makeJsonXmlRequest(RestTemplate rt, RestProperties rp) throws AuthenticationException {
+        ResponseEntity<String> response;
+        Authenticator.getInstance().refreshToken(Authenticator.getInstance().getToken());
+
+        if(rp.hasRefId()) {
+            response = rt.exchange(urlBuilder(rp), HttpMethod.GET, getEntityHeaders(rp), String.class, rp.getRefId());
+        }
+        else if(rp.getRestHeader().hasIdType()) {
+            response = rt.exchange(urlBuilder(rp), HttpMethod.GET, getEntityHeaders(rp), String.class, rp.getRestHeader().getId());
+        }
+        else {
+            response = rt.exchange(urlBuilder(rp), HttpMethod.GET, getEntityHeaders(rp), String.class);
+        }
+        return response.getBody();
+    }
+
     // Get Headers for request
     private HttpEntity<?> getEntityHeaders(RestProperties rp) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+        if(rp.getRestHeader().hasContentType()) {
+            headers.setContentType(rp.getRestHeader().getContentType().getValue());
+        }
+        else {
+            headers.setContentType(MediaType.APPLICATION_XML);
+        }
 
         if (rp.getRestHeader().hasPaging()) {
             headers.set("navigationPage", rp.getRestHeader().getNavigationPage());
@@ -164,7 +190,7 @@ public class RestResponse {
     }
 
     // Build URL with optional query parameters
-    private String urlBuilder(RestProperties rp) {
+     private String urlBuilder(RestProperties rp) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(rp.getBaseUrl());
         if (rp.hasRefId() && !rp.getServicePath().getType().equals(ServicePathType.OBJECT)) {
             String tempUrl = rp.getServicePath().getValue();
@@ -190,6 +216,9 @@ public class RestResponse {
             builder.path(rp.getServicePath().getValue());
             if (rp.getRestQueryParameter().hasOpaqueMarker()) {
                 builder.queryParam("changesSinceMarker", rp.getRestQueryParameter().getOpaqueMarker());
+            }
+            else if(rp.getRestQueryParameter().hasOpaqueMarkerDate()) {
+                builder.queryParam("changesSinceMarker", toISO8601(rp.getRestQueryParameter().getOpaqueMarkerDate()));
             }
         }
         return builder.build().toUriString();

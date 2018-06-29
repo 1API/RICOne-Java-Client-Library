@@ -6,7 +6,7 @@ import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XSchoolCollectionType;
 import riconeapi.models.xpress.XSchoolType;
 
-/**
+/*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
  * @version 1.7
  * @since 4/20/2018
