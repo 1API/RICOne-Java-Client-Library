@@ -40,6 +40,7 @@ final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
 ### v1.7.2
+* Updated to use version 1.2 of RIC One API-AuthenticationClientLibrary-Java
 * Added method to get the last page on Changes Since requests
     ```java
     getLastPage(ServicePath servicePath, int navigationPageSize, String opaqueMarker)
