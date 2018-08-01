@@ -22,9 +22,8 @@ import riconeapi.models.xpress.XStudentType;
 public class ChangesSince
 {
 	final static String authUrl = "https://auth.test.ricone.org/login";
-	final static String clientId = "CastleLearningOnline";
-	final static String clientSecret = "836774581965d73924995cb4c02e9";
-//	final static String clientSecret = "deecd889bff5ed0101a86680752f5f";
+	final static String clientId = "dpaDemo";
+	final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
 	final static String providerId = "localhost";
 	
 	public static void main(String[] args) throws AuthenticationException

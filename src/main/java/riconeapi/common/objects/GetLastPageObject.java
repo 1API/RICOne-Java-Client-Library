@@ -11,8 +11,8 @@ import riconeapi.models.xpress.*;
 
 /*
  * @author Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since Apr 20, 2018
+ * @version 1.7.2
+ * @since Jul 30, 2018
  */
 @SuppressWarnings({"SpellCheckingInspection", "unused"})
 public class GetLastPageObject {
@@ -104,6 +104,69 @@ public class GetLastPageObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+
+        try {
+            switch (servicePath.name()) {
+                case "GETXLEAS": {
+                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+                    rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
+                    break;
+                }
+                case "GETXSCHOOLS": {
+                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+                    rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
+                    break;
+                }
+                case "GETXCALENDARS": {
+                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+                    rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
+                    break;
+                }
+                case "GETXCOURSES": {
+                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+                    rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
+                    break;
+                }
+                case "GETXROSTERS": {
+                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+                    rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
+                    break;
+                }
+                case "GETXSTAFFS": {
+                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+                    rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
+                    break;
+                }
+                case "GETXSTUDENTS": {
+                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTS, rh, rqp);
+                    rr.makeAllRequest(rt, rp, XStudentCollectionType.class);
+                    break;
+                }
+                case "GETXCONTACTS": {
+                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTS, rh, rqp);
+                    rr.makeAllRequest(rt, rp, XContactCollectionType.class);
+                    break;
+                }
+            }
+            return rr.getNavigationLastPage();
+        } catch (HttpClientErrorException e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Returns the max page value for specified service path object from a given point.
+     * @param servicePath The requested service path.
+     * @param navigationPageSize Number of resources to retrieve
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return Integer value.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public int getLastPage(ServicePath servicePath, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        int navigationPage = 1;
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
 
         try {
             switch (servicePath.name()) {

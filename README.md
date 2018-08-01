@@ -39,6 +39,12 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.7.2
+* Added method to get the last page on Changes Since requests
+    ```java
+    getLastPage(ServicePath servicePath, int navigationPageSize, String opaqueMarker)
+    ```
+
 ### v1.7.1
 * Added support to return responses as JSON or XML strings.
     ```java

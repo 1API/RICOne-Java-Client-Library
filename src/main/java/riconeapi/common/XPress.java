@@ -13,8 +13,8 @@ import java.util.Date;
 
 /*
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.7.1
- * @since       Jun 28, 2018
+ * @version     1.7.2
+ * @since       Jul 30, 2018
  */
 
 /**
@@ -2215,6 +2215,17 @@ public class XPress {
      */
 	public int getLastPage(ServicePath servicePath, int navigationPageSize, int schoolYear) throws AuthenticationException {
 		return getLastPageObject.getLastPage(servicePath, navigationPageSize, schoolYear);
+	}
+	/**
+	 * Returns the max page value for specified service path object from a given point.
+	 * @param servicePath The requested service path.
+	 * @param navigationPageSize Number of resources to retrieve
+	 * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+	 * @return Integer value.
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public int getLastPage(ServicePath servicePath, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+		return getLastPageObject.getLastPage(servicePath, navigationPageSize, opaqueMarker);
 	}
     /**
      * Returns the max page value for specified service path object.
