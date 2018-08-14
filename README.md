@@ -39,6 +39,19 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.7.3
+* Changed return type of AUPP creates and deletes to void as data is not returned.
+* Added additional AUPP methods for deleting generated xStaff and xStudent usernames and passwords.
+    ```java
+    // xStaffs
+    deleteXStaffPasswords(String refId)
+    deleteXStaffUsernames(String refId)
+
+    // xStudents
+    deleteXStudentPasswords(String refId)
+    deleteXStudentUsernames(String refId)
+    ```
+
 ### v1.7.2
 * Updated to use version 1.2 of RIC One API-AuthenticationClientLibrary-Java
 * Added method to get the last page on Changes Since requests

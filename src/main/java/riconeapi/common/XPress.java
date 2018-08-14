@@ -13,8 +13,8 @@ import java.util.Date;
 
 /*
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.7.2
- * @since       Jul 30, 2018
+ * @version     1.7.3
+ * @since       Aug 13, 2018
  */
 
 /**
@@ -2255,20 +2255,34 @@ public class XPress {
     /**
      * Request creation of xStaffs usernames and passwords by xSchool.
      * @param refId of xSchool.
-     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
-	public ResponseMulti<XStaffType> createXStaffUsers(String refId) throws AuthenticationException {
-		return auppObject.createXStaffUsers(refId);
+	public void createXStaffUsers(String refId) throws AuthenticationException {
+		auppObject.createXStaffUsers(refId);
 	}
     /**
      * Request deletion of generated xStaffs passwords by xSchool.
      * @param refId of xSchool.
-     * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
-	public ResponseMulti<XStaffType> deleteXStaffUsers(String refId) throws AuthenticationException {
-		return auppObject.deleteXStaffUsers(refId);
+	public void deleteXStaffUsers(String refId) throws AuthenticationException {
+		auppObject.deleteXStaffUsers(refId);
+	}
+	/**
+	 * Request deletion of generated xStaffs passwords by xSchool.
+	 * @param refId of xSchool.
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public void deleteXStaffPasswords(String refId) throws AuthenticationException {
+		auppObject.deleteXStaffPasswords(refId);
+	}
+	/**
+	 * Request deletion of generated xStaffs usernames and passwords by xSchool.
+	 * @param refId of xSchool.
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public void deleteXStaffUsernames(String refId) throws AuthenticationException {
+		auppObject.deleteXStaffUsernames(refId);
 	}
     /**
      * Request generated xStaffs usernames and passwords by xSchool.
@@ -2293,20 +2307,34 @@ public class XPress {
     /**
      * Request creation of xStudents usernames and passwords by xSchool.
      * @param refId of xSchool.
-     * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
-	public ResponseMulti<XStudentType> createXStudentUsers(String refId) throws AuthenticationException {
-		return auppObject.createXStudentUsers(refId);
+	public void createXStudentUsers(String refId) throws AuthenticationException {
+		auppObject.createXStudentUsers(refId);
 	}
     /**
      * Request deletion of generated xStudents passwords by xSchool.
      * @param refId of xSchool.
-     * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
-	public ResponseMulti<XStudentType> deleteXStudentUsers(String refId) throws AuthenticationException {
-		return auppObject.deleteXStudentUsers(refId);
+	public void deleteXStudentUsers(String refId) throws AuthenticationException {
+		auppObject.deleteXStudentUsers(refId);
+	}
+	/**
+	 * Request deletion of generated xStudents passwords by xSchool.
+	 * @param refId of xSchool.
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public void deleteXStudentPasswords(String refId) throws AuthenticationException {
+		auppObject.deleteXStudentPasswords(refId);
+	}
+	/**
+	 * Request deletion of generated xStudents usernames and passwords by xSchool.
+	 * @param refId of xSchool.
+	 * @throws AuthenticationException if login does not succeed.
+	 */
+	public void deleteXStudentUsernames(String refId) throws AuthenticationException {
+		auppObject.deleteXStudentUsernames(refId);
 	}
     /**
      * Request generated xStudents usernames and passwords by xSchool.

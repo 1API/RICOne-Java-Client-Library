@@ -1,4 +1,5 @@
 package cases;
+
 import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
 import riconeapi.models.authentication.Endpoint;
@@ -7,86 +8,75 @@ import riconeapi.models.xpress.XStaffType;
 import riconeapi.models.xpress.XStudentType;
 
 /**
- * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.3.1
- * @since       Jul 20, 2016
+ * @author Andrew Pieniezny <andrew.pieniezny@neric.org>
+ * @version 1.3.1
+ * @since Jul 20, 2016
  */
-public class AppAccountProvisioning
-{
-	final static String authUrl = AuthServiceProperties.getInstance().getProperty("auth.url");
-	final static String clientId = AuthServiceProperties.getInstance().getProperty("auth.clientId");
-	final static String clientSecret = AuthServiceProperties.getInstance().getProperty("auth.clientSecret");
-	final static String providerId = AuthServiceProperties.getInstance().getProperty("auth.providerId");
-	
-//	static String refId = "0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C";
-	static String refId = "AE6B3441-5E31-4573-BADB-081669D79C7F";
-	
-	public static void main(String[] args)
-	{
-		try
-		{
-			Authenticator auth = Authenticator.getInstance();
-			auth.authenticate(authUrl, clientId, clientSecret);
-			
-			for(Endpoint e : auth.getEndpoints(providerId))
-			{
-	            XPress xPress = new XPress(e.getHref());
-	            
-	            //Staff
-	//            xPress.createXStaffUsers(refId);
-	//            xPress.deleteXStaffUsers(refId);
-	//            XStaffs_GetXStaffsAccounts(xPress);
-	            
-	            //Student
-//	            xPress.createXStudentUsers(refId);
-	//            xPress.deleteXStudentUsers(refId);
-	            XStudents_GetXStudentsAccounts(xPress);
-	            
-	            //Contact
-	//            xPress.createXContactUsers(refId);
-	//            xPress.deleteXContactUsers(refId);
-	//            xPress.getXContactUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");    
-			}
-		}
-		catch(Exception e)
-		{}
+public class AppAccountProvisioning {
+    final static String authUrl = AuthServiceProperties.getInstance().getProperty("auth.url");
+    final static String clientId = AuthServiceProperties.getInstance().getProperty("auth.clientId");
+    final static String clientSecret = AuthServiceProperties.getInstance().getProperty("auth.clientSecret");
+    final static String providerId = AuthServiceProperties.getInstance().getProperty("auth.providerId");
 
-	}
-	
-	public static void XStaffs_GetXStaffsAccounts(XPress xPress)
-	{
-		try
-		{
-			if(xPress.getXStaffUsers(refId).getData() !=null)
-			{
-				for(XStaffType s : xPress.getXStaffUsers(refId).getData())
-				{
-					System.out.println("loginId: " + s.getAppProvisioningInfo().getLoginId());
-					System.out.println("tempPassword: " + s.getAppProvisioningInfo().getTempPassword());
-					System.out.println("tempExpiryDate: " + s.getAppProvisioningInfo().getTempPasswordExpiryDate());
-				}
-			}
-		}
-		catch(Exception e)
-		{}
-	}
-	
-	public static void XStudents_GetXStudentsAccounts(XPress xPress)
-	{
-		try
-		{
-			if(xPress.getXStudentUsers(refId).getData() !=null)
-			{
-				for(XStudentType s : xPress.getXStudentUsers(refId).getData())
-				{
-					System.out.println("loginId: " + s.getAppProvisioningInfo().getLoginId());
-					System.out.println("tempPassword: " + s.getAppProvisioningInfo().getTempPassword());
-					System.out.println("tempExpiryDate: " + s.getAppProvisioningInfo().getTempPasswordExpiryDate());
-				}
-			}
-		}
-		catch(Exception e)
-		{}
-	}
+    //	static String refId = "0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C";
+    static String refId = "AE6B3441-5E31-4573-BADB-081669D79C7F";
+
+    public static void main(String[] args) {
+        try {
+            Authenticator auth = Authenticator.getInstance();
+            auth.authenticate(authUrl, clientId, clientSecret);
+
+            for (Endpoint e : auth.getEndpoints(providerId)) {
+                XPress xPress = new XPress(e.getHref());
+
+                // Staff
+//                xPress.createXStaffUsers(refId);
+//                xPress.deleteXStaffUsers(refId);
+//                xPress.deleteXStaffPasswords(refId);
+//                xPress.deleteXStaffUsernames(refId); // deletes usernames and passwords
+                XStaffs_GetXStaffsAccounts(xPress);
+
+                // Student
+//                xPress.createXStudentUsers(refId);
+//                xPress.deleteXStudentUsers(refId);
+//                xPress.deleteXStudentPasswords(refId);
+//                xPress.deleteXStudentUsernames(refId); // deletes usernames and passwords
+//                XStudents_GetXStudentsAccounts(xPress);
+
+                // Contact
+//                xPress.createXContactUsers(refId);
+//                xPress.deleteXContactUsers(refId);
+//                xPress.getXContactUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+    public static void XStaffs_GetXStaffsAccounts(XPress xPress) {
+        try {
+            if (xPress.getXStaffUsers(refId).getData() != null) {
+                for (XStaffType s : xPress.getXStaffUsers(refId).getData()) {
+                    System.out.println("loginId: " + s.getAppProvisioningInfo().getLoginId());
+                    System.out.println("tempPassword: " + s.getAppProvisioningInfo().getTempPassword());
+                    System.out.println("tempExpiryDate: " + s.getAppProvisioningInfo().getTempPasswordExpiryDate());
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public static void XStudents_GetXStudentsAccounts(XPress xPress) {
+        try {
+            if (xPress.getXStudentUsers(refId).getData() != null) {
+                for (XStudentType s : xPress.getXStudentUsers(refId).getData()) {
+                    System.out.println("loginId: " + s.getAppProvisioningInfo().getLoginId());
+                    System.out.println("tempPassword: " + s.getAppProvisioningInfo().getTempPassword());
+                    System.out.println("tempExpiryDate: " + s.getAppProvisioningInfo().getTempPasswordExpiryDate());
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
 
 }

@@ -2,8 +2,8 @@ package riconeapi.common.rest;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since 4/20/2018
+ * @version 1.7.3
+ * @since 8/13/2018
  */
 
 /**
@@ -16,9 +16,17 @@ public enum AUPPEnum {
      */
     CREATE("create"),
     /**
-     * AUPP Delete users.
+     * AUPP Delete user passwords.
      */
     DELETE("delete"),
+    /**
+     * AUPP Delete user passwords.
+     */
+    DELETEPASSWORDS("deletePasswords"),
+    /**
+     * AUPP Delete usernames and passwords.
+     */
+    DELETEUSERNAMES("deleteUsernames"),
     /**
      * AUPP Get users.
      */

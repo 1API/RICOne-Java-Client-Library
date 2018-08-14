@@ -13,8 +13,8 @@ import static riconeapi.common.rest.RestUtil.toISO8601;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7.1
- * @since 6/21/2018
+ * @version 1.7.3
+ * @since 8/13/2018
  */
 @SuppressWarnings("unchecked")
 public class RestResponse {
@@ -202,6 +202,15 @@ public class RestResponse {
             }
             else if(rp.getRestQueryParameter().isDeleteUsers()) {
                 builder.queryParam("deleteUsers", "true");
+            }
+            else if(rp.getRestQueryParameter().isDeletePasswords()) {
+                builder.queryParam("deleteUsers", "true");
+                builder.queryParam("deletePasswords", "true");
+            }
+            else if(rp.getRestQueryParameter().isDeleteUsernames())
+            {
+                builder.queryParam("deleteUsers", "true");
+                builder.queryParam("usernames", "true");
             }
             else if(rp.getRestQueryParameter().isGetUsers()) {
                 builder.queryParam("getUsers", "true");
