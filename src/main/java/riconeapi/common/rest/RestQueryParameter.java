@@ -7,7 +7,7 @@ import java.util.Date;
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
  * @version 1.7.3
- * @since 8/13/2018
+ * @since 8/15/2018
  */
 @SuppressWarnings("unused")
 public class RestQueryParameter {
@@ -60,6 +60,13 @@ public class RestQueryParameter {
 
     boolean hasOpaqueMarkerDate() {
         return opaqueMarkerDate != null;
+    }
+
+    boolean hasAUPP() {
+        if(this.aupp != null){
+            return true;
+        }
+        return false;
     }
 
     boolean isCreateUsers() {

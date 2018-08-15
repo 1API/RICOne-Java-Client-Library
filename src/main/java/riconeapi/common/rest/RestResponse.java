@@ -197,23 +197,25 @@ public class RestResponse {
             tempUrl = tempUrl.replaceAll("\\{[^}]*}", rp.getRefId());
             builder.path(tempUrl);
 
-            if(rp.getRestQueryParameter().isCreateUsers()) {
-                builder.queryParam("createUsers", "true");
-            }
-            else if(rp.getRestQueryParameter().isDeleteUsers()) {
-                builder.queryParam("deleteUsers", "true");
-            }
-            else if(rp.getRestQueryParameter().isDeletePasswords()) {
-                builder.queryParam("deleteUsers", "true");
-                builder.queryParam("deletePasswords", "true");
-            }
-            else if(rp.getRestQueryParameter().isDeleteUsernames())
-            {
-                builder.queryParam("deleteUsers", "true");
-                builder.queryParam("usernames", "true");
-            }
-            else if(rp.getRestQueryParameter().isGetUsers()) {
-                builder.queryParam("getUsers", "true");
+            if(rp.getRestQueryParameter().hasAUPP()) {
+                if(rp.getRestQueryParameter().isCreateUsers()) {
+                    builder.queryParam("createUsers", "true");
+                }
+                else if(rp.getRestQueryParameter().isDeleteUsers()) {
+                    builder.queryParam("deleteUsers", "true");
+                }
+                else if(rp.getRestQueryParameter().isDeletePasswords()) {
+                    builder.queryParam("deleteUsers", "true");
+                    builder.queryParam("deletePasswords", "true");
+                }
+                else if(rp.getRestQueryParameter().isDeleteUsernames())
+                {
+                    builder.queryParam("deleteUsers", "true");
+                    builder.queryParam("usernames", "true");
+                }
+                else if(rp.getRestQueryParameter().isGetUsers()) {
+                    builder.queryParam("getUsers", "true");
+                }
             }
         }
         else if(rp.getRestHeader().hasIdType()) {
