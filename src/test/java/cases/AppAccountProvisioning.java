@@ -32,15 +32,13 @@ public class AppAccountProvisioning {
                 // Staff
 //                xPress.createXStaffUsers(refId);
 //                xPress.deleteXStaffUsers(refId);
-//                xPress.deleteXStaffPasswords(refId);
-//                xPress.deleteXStaffUsernames(refId); // deletes usernames and passwords
-                XStaffs_GetXStaffsAccounts(xPress);
+//                xPress.deleteXStaffUsernamesPasswords(refId);
+//                XStaffs_GetXStaffsAccounts(xPress);
 
                 // Student
 //                xPress.createXStudentUsers(refId);
 //                xPress.deleteXStudentUsers(refId);
-//                xPress.deleteXStudentPasswords(refId);
-//                xPress.deleteXStudentUsernames(refId); // deletes usernames and passwords
+//                xPress.deleteXStudentUsernamesPasswords(refId);
 //                XStudents_GetXStudentsAccounts(xPress);
 
                 // Contact

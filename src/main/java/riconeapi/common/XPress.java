@@ -2269,20 +2269,12 @@ public class XPress {
 		auppObject.deleteXStaffUsers(refId);
 	}
 	/**
-	 * Request deletion of generated xStaffs passwords by xSchool.
-	 * @param refId of xSchool.
-	 * @throws AuthenticationException if login does not succeed.
-	 */
-	public void deleteXStaffPasswords(String refId) throws AuthenticationException {
-		auppObject.deleteXStaffPasswords(refId);
-	}
-	/**
 	 * Request deletion of generated xStaffs usernames and passwords by xSchool.
 	 * @param refId of xSchool.
 	 * @throws AuthenticationException if login does not succeed.
 	 */
-	public void deleteXStaffUsernames(String refId) throws AuthenticationException {
-		auppObject.deleteXStaffUsernames(refId);
+	public void deleteXStaffUsernamesPasswords(String refId) throws AuthenticationException {
+		auppObject.deleteXStaffUsernamesPasswords(refId);
 	}
     /**
      * Request generated xStaffs usernames and passwords by xSchool.
@@ -2321,20 +2313,12 @@ public class XPress {
 		auppObject.deleteXStudentUsers(refId);
 	}
 	/**
-	 * Request deletion of generated xStudents passwords by xSchool.
-	 * @param refId of xSchool.
-	 * @throws AuthenticationException if login does not succeed.
-	 */
-	public void deleteXStudentPasswords(String refId) throws AuthenticationException {
-		auppObject.deleteXStudentPasswords(refId);
-	}
-	/**
 	 * Request deletion of generated xStudents usernames and passwords by xSchool.
 	 * @param refId of xSchool.
 	 * @throws AuthenticationException if login does not succeed.
 	 */
-	public void deleteXStudentUsernames(String refId) throws AuthenticationException {
-		auppObject.deleteXStudentUsernames(refId);
+	public void deleteXStudentUsernamesPasswords(String refId) throws AuthenticationException {
+		auppObject.deleteXStudentUsernamesPasswords(refId);
 	}
     /**
      * Request generated xStudents usernames and passwords by xSchool.

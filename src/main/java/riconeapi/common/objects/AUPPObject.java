@@ -52,27 +52,14 @@ public class AUPPObject {
     }
 
     /**
-     * Request deletion of generated xStaffs passwords by xSchool.
-     * @param refId of xSchool.
-     * @throws AuthenticationException if login does not succeed.
-     */
-    public void deleteXStaffPasswords(String refId) throws AuthenticationException {
-        RestResponse rr = new RestResponse();
-        RestHeader rh = new RestHeader();
-        RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEPASSWORDS);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
-        rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
-    }
-
-    /**
      * Request deletion of generated xStaffs usernames and passwords by xSchool.
      * @param refId of xSchool.
      * @throws AuthenticationException if login does not succeed.
      */
-    public void deleteXStaffUsernames(String refId) throws AuthenticationException {
+    public void deleteXStaffUsernamesPasswords(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
-        RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMES);
+        RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMESPASSWORDS);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
     }
@@ -134,27 +121,14 @@ public class AUPPObject {
     }
 
     /**
-     * Request deletion of generated xStudents passwords by xSchool.
+     * Request deletion of generated xStudents usernames passwords by xSchool.
      * @param refId of xSchool.
      * @throws AuthenticationException if login does not succeed.
      */
-    public void deleteXStudentPasswords(String refId) throws AuthenticationException {
+    public void deleteXStudentUsernamesPasswords(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
-        RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEPASSWORDS);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
-        rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
-    }
-
-    /**
-     * Request deletion of generated xStudents usernames and passwords by xSchool.
-     * @param refId of xSchool.
-     * @throws AuthenticationException if login does not succeed.
-     */
-    public void deleteXStudentUsernames(String refId) throws AuthenticationException {
-        RestResponse rr = new RestResponse();
-        RestHeader rh = new RestHeader();
-        RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMES);
+        RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMESPASSWORDS);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
         rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
     }

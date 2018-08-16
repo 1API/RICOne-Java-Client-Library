@@ -204,12 +204,7 @@ public class RestResponse {
                 else if(rp.getRestQueryParameter().isDeleteUsers()) {
                     builder.queryParam("deleteUsers", "true");
                 }
-                else if(rp.getRestQueryParameter().isDeletePasswords()) {
-                    builder.queryParam("deleteUsers", "true");
-                    builder.queryParam("deletePasswords", "true");
-                }
-                else if(rp.getRestQueryParameter().isDeleteUsernames())
-                {
+                else if(rp.getRestQueryParameter().isDeleteUsernamesPasswords()) {
                     builder.queryParam("deleteUsers", "true");
                     builder.queryParam("usernames", "true");
                 }

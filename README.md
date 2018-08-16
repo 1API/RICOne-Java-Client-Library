@@ -44,12 +44,10 @@ final static String clientSecret = "YOUR PASSWORD";
 * Added additional AUPP methods for deleting generated xStaff and xStudent usernames and passwords.
     ```java
     // xStaffs
-    deleteXStaffPasswords(String refId)
-    deleteXStaffUsernames(String refId)
+    deleteXStaffUsernamesPasswords(String refId)
 
     // xStudents
-    deleteXStudentPasswords(String refId)
-    deleteXStudentUsernames(String refId)
+    deleteXStudentUsernamesPasswords(String refId)
     ```
 
 ### v1.7.2

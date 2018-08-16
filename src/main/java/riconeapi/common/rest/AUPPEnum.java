@@ -20,13 +20,9 @@ public enum AUPPEnum {
      */
     DELETE("delete"),
     /**
-     * AUPP Delete user passwords.
-     */
-    DELETEPASSWORDS("deletePasswords"),
-    /**
      * AUPP Delete usernames and passwords.
      */
-    DELETEUSERNAMES("deleteUsernames"),
+    DELETEUSERNAMESPASSWORDS("delete"),
     /**
      * AUPP Get users.
      */

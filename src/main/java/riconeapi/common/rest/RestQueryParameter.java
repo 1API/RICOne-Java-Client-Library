@@ -7,7 +7,7 @@ import java.util.Date;
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
  * @version 1.7.3
- * @since 8/15/2018
+ * @since 8/16/2018
  */
 @SuppressWarnings("unused")
 public class RestQueryParameter {
@@ -83,16 +83,9 @@ public class RestQueryParameter {
         return false;
     }
 
-    boolean isDeletePasswords() {
+    boolean isDeleteUsernamesPasswords() {
         if(this.aupp != null) {
-            return  this.aupp.equals(AUPPEnum.DELETEPASSWORDS);
-        }
-        return false;
-    }
-
-    boolean isDeleteUsernames() {
-        if(this.aupp != null) {
-            return this.aupp.equals(AUPPEnum.DELETEUSERNAMES);
+            return  this.aupp.equals(AUPPEnum.DELETEUSERNAMESPASSWORDS);
         }
         return false;
     }
