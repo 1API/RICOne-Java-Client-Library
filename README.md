@@ -56,7 +56,7 @@ final static String clientSecret = "YOUR PASSWORD";
     }
     ```
 * Added changesSince to all service paths.
-* Deprecated the following Changes Since methods. Creation and deletion is handled automatically by the API.
+* Deprecated the following AUPP methods. Creation and deletion is handled automatically by the API.
     * createXStaffUsers(String refId)
     * deleteXStaffUsers(String refId)
     * deleteXStaffUsernamesPasswords(String refId)
