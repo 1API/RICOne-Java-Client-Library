@@ -48,7 +48,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "sex",
     "email",
     "primaryAssignment",
-    "otherAssignments"
+    "otherAssignments",
+    "metadata"
 })
 public class XStaffType
     extends GSIFCompositeType implements IType<XStaffType>
@@ -65,6 +66,7 @@ public class XStaffType
 	    email = new XEmailType();
 	    primaryAssignment = new XStaffPersonAssignmentType();
 	    otherAssignments = new XStaffPersonAssignmentListType();
+        metadata = new XMetadata();
     }
 
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
@@ -88,6 +90,8 @@ public class XStaffType
     protected XStaffPersonAssignmentType primaryAssignment;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XStaffPersonAssignmentListType otherAssignments;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XMetadata metadata;
 
     /**
      * Gets the value of the name property.
@@ -303,6 +307,14 @@ public class XStaffType
      */
     public void setOtherAssignments(XStaffPersonAssignmentListType value) {
         this.otherAssignments = value;
+    }
+
+    public XMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(XMetadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override

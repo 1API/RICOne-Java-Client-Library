@@ -8,8 +8,8 @@ import riconeapi.models.xpress.XCalendarType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since 4/18/2018
+ * @version 1.8
+ * @since 12/17/2018
  */
 @SuppressWarnings("unused")
 public class XCalendarsObject {
@@ -206,6 +206,38 @@ public class XCalendarsObject {
     }
 
     /**
+     * Request all xCalendars value changes from a given point by a specific xLea.
+     * @param refId of xLea.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCalendars type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
+    }
+
+    /**
+     * Request all xCalendars value changes from a given point by a specific xLea with paging.
+     * @param refId of xLea.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCalendars type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCalendarType> getXCalendarsByXLea(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
+    }
+
+    /**
      * Request xCalendars associated to a specific xSchool by refId.
      * @param refId of xSchool.
      * @return List of xCalendars type.
@@ -263,6 +295,38 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
+    }
+
+    /**
+     * Request all xCalendars value changes from a given point by a specific xSchool.
+     * @param refId of xSchool.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCalendars type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
+    }
+
+    /**
+     * Request all xCalendars value changes from a given point by a specific xSchool with paging.
+     * @param refId of xSchool.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCalendars type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCalendarType> getXCalendarsByXSchool(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }

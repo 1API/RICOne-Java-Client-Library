@@ -1305,8 +1305,6 @@ public class RicOneApiTests {
                 System.out.println("schoolRefId: " + r.getSchoolRefId());
                 System.out.println("schoolSectionId: " + r.getSchoolSectionId());
                 System.out.println("schoolYear: " + r.getSchoolYear());
-                System.out.println("sessionCode: " + r.getSessionCode());
-                System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
@@ -1367,8 +1365,6 @@ public class RicOneApiTests {
             System.out.println("schoolRefId: " + r.getSchoolRefId());
             System.out.println("schoolSectionId: " + r.getSchoolSectionId());
             System.out.println("schoolYear: " + r.getSchoolYear());
-            System.out.println("sessionCode: " + r.getSessionCode());
-            System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
 
             System.out.println("##### BEGIN MEETING TIMES #####");
             for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
@@ -1427,8 +1423,6 @@ public class RicOneApiTests {
                 System.out.println("schoolRefId: " + r.getSchoolRefId());
                 System.out.println("schoolSectionId: " + r.getSchoolSectionId());
                 System.out.println("schoolYear: " + r.getSchoolYear());
-                System.out.println("sessionCode: " + r.getSessionCode());
-                System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
@@ -1488,8 +1482,6 @@ public class RicOneApiTests {
                 System.out.println("schoolRefId: " + r.getSchoolRefId());
                 System.out.println("schoolSectionId: " + r.getSchoolSectionId());
                 System.out.println("schoolYear: " + r.getSchoolYear());
-                System.out.println("sessionCode: " + r.getSessionCode());
-                System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
@@ -1549,8 +1541,6 @@ public class RicOneApiTests {
                 System.out.println("schoolRefId: " + r.getSchoolRefId());
                 System.out.println("schoolSectionId: " + r.getSchoolSectionId());
                 System.out.println("schoolYear: " + r.getSchoolYear());
-                System.out.println("sessionCode: " + r.getSessionCode());
-                System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
@@ -1610,8 +1600,6 @@ public class RicOneApiTests {
                 System.out.println("schoolRefId: " + r.getSchoolRefId());
                 System.out.println("schoolSectionId: " + r.getSchoolSectionId());
                 System.out.println("schoolYear: " + r.getSchoolYear());
-                System.out.println("sessionCode: " + r.getSessionCode());
-                System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {
@@ -1671,8 +1659,6 @@ public class RicOneApiTests {
                 System.out.println("schoolRefId: " + r.getSchoolRefId());
                 System.out.println("schoolSectionId: " + r.getSchoolSectionId());
                 System.out.println("schoolYear: " + r.getSchoolYear());
-                System.out.println("sessionCode: " + r.getSessionCode());
-                System.out.println("schoolCalendarRefId: " + r.getSchoolCalendarRefId());
 
                 System.out.println("##### BEGIN MEETING TIMES #####");
                 for (XMeetingTimeType mt : r.getMeetingTimes().getMeetingTime()) {

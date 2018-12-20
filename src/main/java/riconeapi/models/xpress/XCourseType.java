@@ -54,7 +54,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "applicableEducationLevels",
     "scedCourseCode",
     "scedCourseLevelCode",
-    "scedCourseSubjectAreaCode"
+    "scedCourseSubjectAreaCode",
+    "metadata"
 })
 public class XCourseType
     extends GSIFCompositeType implements IType<XCourseType>
@@ -73,6 +74,7 @@ public class XCourseType
         scedCourseCode = null;
         scedCourseLevelCode = null;
         scedCourseSubjectAreaCode = null;
+        metadata = new XMetadata();
     }
 
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
@@ -111,6 +113,8 @@ public class XCourseType
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlSchemaType(name = "token")
     protected String scedCourseSubjectAreaCode;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XMetadata metadata;
 
     /**
      * Gets the value of the schoolRefId property.
@@ -374,6 +378,14 @@ public class XCourseType
      */
     public void setScedCourseSubjectAreaCode(String value) {
         this.scedCourseSubjectAreaCode = value;
+    }
+
+    public XMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(XMetadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override

@@ -29,8 +29,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="subject" type="{http://www.sifassociation.org/datamodel/na/3.2}xSubjectType" minOccurs="0"/>
  *         &lt;element name="schoolRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType"/>
  *         &lt;element name="schoolSectionId" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
- *         &lt;element name="schoolYear" type="{http://www.sifassociation.org/datamodel/na/3.2}xSchoolYearType" minOccurs="0"/>
- *         &lt;element name="sessionCode" type="{http://www.w3.org/2001/XMLSchema}token" minOccurs="0"/>
  *         &lt;element name="schoolCalendarRefId" type="{http://www.sifassociation.org/datamodel/na/3.2}gRefIdPointerType" minOccurs="0"/>
  *         &lt;element name="meetingTimes" type="{http://www.sifassociation.org/datamodel/na/3.2}xMeetingTimeListType" minOccurs="0"/>
  *         &lt;element name="students" type="{http://www.sifassociation.org/datamodel/na/3.2}xStudentReferenceListType" minOccurs="0"/>
@@ -53,12 +51,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "schoolRefId",
     "schoolSectionId",
     "schoolYear",
-    "sessionCode",
-    "schoolCalendarRefId",
     "meetingTimes",
     "students",
     "primaryStaff",
-    "otherStaffs"
+    "otherStaffs",
+    "metadata"
 })
 public class XRosterType
     extends GSIFCompositeType implements IType<XRosterType>
@@ -73,12 +70,11 @@ public class XRosterType
         schoolRefId = null;
         schoolSectionId = null;
         schoolYear = null;
-        sessionCode = null;
-        schoolCalendarRefId = null;
         meetingTimes = new XMeetingTimeListType();
         students = new XStudentReferenceListType();
         primaryStaff = new XStaffReferenceType();
         otherStaffs = new XStaffReferenceListType();
+        metadata = new XMetadata();
     }
 
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
@@ -104,23 +100,6 @@ public class XRosterType
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XMLGregorianCalendar schoolYear;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    @XmlSchemaType(name = "token")
-	/**
-	 * @deprecated 
-     * Use sessionCode in XMeetingTimeType
-	 */
-    @Deprecated
-    protected String sessionCode;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
-    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    /**
-	 * @deprecated 
-     * Use schoolCalendarRefId in XMeetingTimeType
-	 */
-    @Deprecated
-    protected String schoolCalendarRefId;
-    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XMeetingTimeListType meetingTimes;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XStudentReferenceListType students;
@@ -128,6 +107,8 @@ public class XRosterType
     protected XStaffReferenceType primaryStaff;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XStaffReferenceListType otherStaffs;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XMetadata metadata;
 
     /**
      * Gets the value of the courseRefId property.
@@ -296,61 +277,6 @@ public class XRosterType
     public void setSchoolYear(XMLGregorianCalendar value) {
         this.schoolYear = value;
     }
-    
-    /**
-     * Gets the value of the sessionCode property.
-     * @deprecated 
-     * Use sessionCode in XMeetingTimeType
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    @Deprecated
-    public String getSessionCode() {
-        return sessionCode;
-    }
-
-    /**
-     * Sets the value of the sessionCode property.
-     * @deprecated
-     * Use sessionCode in XMeetingTimeType
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     */
-    @Deprecated
-    public void setSessionCode(String value) {
-        this.sessionCode = value;
-    }
-
-    /**
-     * Gets the value of the schoolCalendarRefId property.
-     * @deprecated
-     * Use schoolCalendarRefId in XMeetingTimeType  
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }  
-     */
-    @Deprecated
-    public String getSchoolCalendarRefId() {
-        return schoolCalendarRefId;
-    }
-
-    /**
-     * Sets the value of the schoolCalendarRefId property.
-     * @deprecated
-     * Use schoolCalendarRefId in XMeetingTimeType
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }    
-     */
-    @Deprecated
-    public void setSchoolCalendarRefId(String value) {
-        this.schoolCalendarRefId = value;
-    }
 
     /**
      * Gets the value of the meetingTimes property.
@@ -446,6 +372,14 @@ public class XRosterType
      */
     public void setOtherStaffs(XStaffReferenceListType value) {
         this.otherStaffs = value;
+    }
+
+    public XMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(XMetadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override

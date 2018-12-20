@@ -37,7 +37,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlType(name = "xCalendarType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
     "schoolRefId",
     "schoolYear",
-    "sessions"
+    "sessions",
+    "metadata"
 })
 public class XCalendarType
     extends GSIFCompositeType implements IType<XCalendarType>
@@ -48,6 +49,7 @@ public class XCalendarType
         schoolRefId = null;
         schoolYear = null;
         sessions = new XSessionListType();
+        metadata = new XMetadata();
     }
 
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
@@ -57,6 +59,8 @@ public class XCalendarType
     protected XMLGregorianCalendar schoolYear;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XSessionListType sessions;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XMetadata metadata;
 
     /**
      * Gets the value of the schoolRefId property.
@@ -128,6 +132,14 @@ public class XCalendarType
      */
     public void setSessions(XSessionListType value) {
         this.sessions = value;
+    }
+
+    public XMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(XMetadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override

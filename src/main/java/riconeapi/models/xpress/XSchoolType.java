@@ -48,7 +48,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "gradeLevels",
     "address",
     "phoneNumber",
-    "otherPhoneNumbers"
+    "otherPhoneNumbers",
+    "metadata"
 })
 public class XSchoolType
     extends GSIFCompositeType implements IType<XSchoolType>
@@ -65,6 +66,7 @@ public class XSchoolType
         address = new XOrganizationAddressType();
         phoneNumber = new XTelephoneType();
         otherPhoneNumbers = new XTelephoneListType();
+        metadata = new XMetadata();
     }
 
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
@@ -88,6 +90,8 @@ public class XSchoolType
     protected XTelephoneType phoneNumber;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XTelephoneListType otherPhoneNumbers;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XMetadata metadata;
 
     /**
      * Gets the value of the leaRefId property.
@@ -303,6 +307,14 @@ public class XSchoolType
      */
     public void setOtherPhoneNumbers(XTelephoneListType value) {
         this.otherPhoneNumbers = value;
+    }
+
+    public XMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(XMetadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override

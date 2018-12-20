@@ -46,7 +46,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "leaName",
     "address",
     "phoneNumber",
-    "otherPhoneNumbers"
+    "otherPhoneNumbers",
+    "metadata"
 })
 
 public class XLeaType
@@ -63,6 +64,7 @@ public class XLeaType
 	    address = new XOrganizationAddressType();
 	    phoneNumber = new XTelephoneType();
 	    otherPhoneNumbers = new XTelephoneListType();
+        metadata = new XMetadata();
 	}
 
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
@@ -85,6 +87,8 @@ public class XLeaType
     protected XTelephoneType phoneNumber;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XTelephoneListType otherPhoneNumbers;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XMetadata metadata;
 
     /**
      * Gets the value of the localId property.
@@ -276,6 +280,14 @@ public class XLeaType
      */
     public void setOtherPhoneNumbers(XTelephoneListType value) {
         this.otherPhoneNumbers = value;
+    }
+
+    public XMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(XMetadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override

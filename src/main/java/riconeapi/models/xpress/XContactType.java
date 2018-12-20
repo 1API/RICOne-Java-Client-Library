@@ -54,7 +54,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "otherEmails",
     "sex",
     "employerType",
-    "relationships"
+    "relationships",
+    "metadata"
 })
 public class XContactType
     extends GSIFCompositeType implements IType<XContactType>
@@ -75,6 +76,7 @@ public class XContactType
         sex = null;
         employerType = null;
         relationships = new XContactStudentRelationshipListType();
+        metadata = new XMetadata();
     }
 
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2", required = true)
@@ -106,6 +108,8 @@ public class XContactType
     protected String employerType;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XContactStudentRelationshipListType relationships;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XMetadata metadata;
 
     /**
      * Gets the value of the name property.
@@ -417,6 +421,14 @@ public class XContactType
      */
     public void setRelationships(XContactStudentRelationshipListType value) {
         this.relationships = value;
+    }
+
+    public XMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(XMetadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override

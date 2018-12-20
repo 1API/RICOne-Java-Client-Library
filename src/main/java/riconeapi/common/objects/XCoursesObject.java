@@ -8,8 +8,8 @@ import riconeapi.models.xpress.XCourseType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since 4/20/2018
+ * @version 1.8
+ * @since 12/17/2018
  */
 @SuppressWarnings("unused")
 public class XCoursesObject {
@@ -206,6 +206,38 @@ public class XCoursesObject {
     }
 
     /**
+     * Request all xCourses value changes from a given point by a specific xLea.
+     * @param refId of xLea.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCourses type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCourseType> getXCoursesByXLea(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
+    }
+
+    /**
+     * Request all xCourses value changes from a given point by a specific xLea with paging.
+     * @param refId of xLea.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCourses type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCourseType> getXCoursesByXLea(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
+    }
+
+    /**
      * Request xCourses associated to a specific xSchool by refId.
      * @param refId of xSchool.
      * @return List of xCourses type.
@@ -268,6 +300,38 @@ public class XCoursesObject {
     }
 
     /**
+     * Request all xCourses value changes from a given point by a specific xSchool.
+     * @param refId of xSchool.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCourses type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
+    }
+
+    /**
+     * Request all xCourses value changes from a given point by a specific xSchool with paging.
+     * @param refId of xSchool.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCourses type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCourseType> getXCoursesByXSchool(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
+    }
+
+    /**
      * Request xCourses associated to a specific xRoster by refId.
      * @param refId of xRoster.
      * @return List of xCourses type.
@@ -277,7 +341,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -292,7 +356,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -325,6 +389,38 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
+    }
+
+    /**
+     * Request all xCourses value changes from a given point by a specific xRoster.
+     * @param refId of xRoster.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCourses type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
+    }
+
+    /**
+     * Request all xCourses value changes from a given point by a specific xRoster with paging.
+     * @param refId of xRoster.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xCourses type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XCourseType> getXCoursesByXRoster(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }

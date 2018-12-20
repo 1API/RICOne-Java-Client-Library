@@ -8,8 +8,8 @@ import riconeapi.models.xpress.XRosterType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since 4/18/2018
+ * @version 1.8
+ * @since 12/17/2018
  */
 @SuppressWarnings("unused")
 public class XRostersObject {
@@ -206,6 +206,38 @@ public class XRostersObject {
     }
 
     /**
+     * Request all xRosters value changes from a given point by a specific xLea.
+     * @param refId of xLea.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXLea(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
+     * Request all xRosters value changes from a given point by a specific xLea with paging.
+     * @param refId of xLea.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXLea(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
      * Request xRosters associated to a specific xSchool by refId.
      * @param refId of xSchool.
      * @return List of xRosters type.
@@ -263,6 +295,38 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
+     * Request all xRosters value changes from a given point by a specific xSchool.
+     * @param refId of xSchool.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXSchool(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
+     * Request all xRosters value changes from a given point by a specific xSchool with paging.
+     * @param refId of xSchool.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXSchool(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
@@ -330,6 +394,38 @@ public class XRostersObject {
     }
 
     /**
+     * Request all xRosters value changes from a given point by a specific xCourse.
+     * @param refId of xCourse.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXCourse(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
+     * Request all xRosters value changes from a given point by a specific xCourse with paging.
+     * @param refId of xCourse.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXCourse(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
      * Request xRosters associated to a specific xStaff by refId.
      * @param refId of xStaff.
      * @return List of xRosters type.
@@ -392,6 +488,38 @@ public class XRostersObject {
     }
 
     /**
+     * Request all xRosters value changes from a given point by a specific xStaff.
+     * @param refId of xStaff.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXStaff(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
+     * Request all xRosters value changes from a given point by a specific xStaff with paging.
+     * @param refId of xStaff.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXStaff(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
      * Request xRosters associated to a specific xStudent by refId.
      * @param refId of xStudent.
      * @return List of xRosters type.
@@ -449,6 +577,38 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
+     * Request all xRosters value changes from a given point by a specific xStudent.
+     * @param refId of xStudent.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXStudent(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
+    }
+
+    /**
+     * Request all xRosters value changes from a given point by a specific xStudent with paging.
+     * @param refId of xStudent.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xRosters type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XRosterType> getXRostersByXStudent(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }

@@ -8,8 +8,8 @@ import riconeapi.models.xpress.XStaffType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since 4/20/2018
+ * @version 1.8
+ * @since 12/18/2018
  */
 @SuppressWarnings("unused")
 public class XStaffsObject {
@@ -206,6 +206,38 @@ public class XStaffsObject {
     }
 
     /**
+     * Request all xStaffs value changes from a given point by a specific xLea.
+     * @param refId of xLea.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXLea(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
+     * Request all xStaffs value changes from a given point by a specific xLea with paging.
+     * @param refId of xLea.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXLea(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
      * Request xStaffs associated to a specific xSchool by refId.
      * @param refId of xSchool.
      * @return List of xStaffs type.
@@ -263,6 +295,38 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
+     * Request all xStaffs value changes from a given point by a specific xSchool.
+     * @param refId of xSchool.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
+     * Request all xStaffs value changes from a given point by a specific xSchool with paging.
+     * @param refId of xSchool.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXSchool(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
@@ -330,6 +394,38 @@ public class XStaffsObject {
     }
 
     /**
+     * Request all xStaffs value changes from a given point by a specific xCourse.
+     * @param refId of xCourse.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
+     * Request all xStaffs value changes from a given point by a specific xCourse with paging.
+     * @param refId of xCourse.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXCourse(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
      * Request xStaffs associated to a specific xRoster by refId.
      * @param refId of xRoster.
      * @return List of xStaffs type.
@@ -392,6 +488,38 @@ public class XStaffsObject {
     }
 
     /**
+     * Request all xStaffs value changes from a given point by a specific xRoster.
+     * @param refId of xRoster.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
+     * Request all xStaffs value changes from a given point by a specific xRoster with paging.
+     * @param refId of xRoster.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXRoster(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
      * Request xStaffs associated to a specific xStudent by refId.
      * @param refId of xStudent.
      * @return List of xStaffs type.
@@ -449,6 +577,38 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
+     * Request all xStaffs value changes from a given point by a specific xStudent.
+     * @param refId of xStudent.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
+    }
+
+    /**
+     * Request all xStaffs value changes from a given point by a specific xStudent with paging.
+     * @param refId of xStudent.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xStaffs type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XStaffType> getXStaffsByXStudent(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }

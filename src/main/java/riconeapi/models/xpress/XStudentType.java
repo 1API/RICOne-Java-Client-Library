@@ -64,7 +64,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "otherEnrollments",
     "academicSummary",
     "studentContacts",
-    "languages"
+    "languages",
+    "metadata"
 })
 public class XStudentType
     extends GSIFCompositeType implements IType<XStudentType>
@@ -89,6 +90,7 @@ public class XStudentType
         academicSummary = new XAcademicSummaryType();
         studentContacts = new XStudentContactListType();
         languages = new XLanguageListType();
+        metadata = new XMetadata();
 
     }
 
@@ -128,6 +130,8 @@ public class XStudentType
     protected XStudentContactListType studentContacts;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XLanguageListType languages;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XMetadata metadata;
 
     /**
      * Gets the value of the name property.
@@ -535,6 +539,14 @@ public class XStudentType
      */
     public void setLanguages(XLanguageListType value) {
         this.languages = value;
+    }
+
+    public XMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(XMetadata metadata) {
+        this.metadata = metadata;
     }
 
     @Override

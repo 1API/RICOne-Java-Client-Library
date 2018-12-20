@@ -8,8 +8,8 @@ import riconeapi.models.xpress.XLeaType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7
- * @since 4/20/2018
+ * @version 1.8
+ * @since 12/10/2018
  */
 @SuppressWarnings("unused")
 public class XLeasObject {
@@ -237,6 +237,38 @@ public class XLeasObject {
     }
 
     /**
+     * Request all xLeas value changes from a given point by a specific xSchool.
+     * @param refId of xSchools.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
+     * Request all xLeas value changes from a given point by a specific xSchool with paging.
+     * @param refId of xSchools.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXSchool(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
      * Request xLeas associated to a specific xRoster by refId.
      * @param refId of xRosters.
      * @return List of xLeas type.
@@ -294,6 +326,38 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
+     * Request all xLeas value changes from a given point by a specific xRoster.
+     * @param refId of xRosters.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
+     * Request all xLeas value changes from a given point by a specific xRoster with paging.
+     * @param refId of xRosters.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXRoster(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
@@ -361,6 +425,38 @@ public class XLeasObject {
     }
 
     /**
+     * Request all xLeas value changes from a given point by a specific xStaff.
+     * @param refId of xStaffs.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
+     * Request all xLeas value changes from a given point by a specific xStaff with paging.
+     * @param refId of xStaffs.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXStaff(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
      * Request xLeas associated to a specific xStudent by refId.
      * @param refId of xStudents.
      * @return List of xLeas type.
@@ -423,6 +519,38 @@ public class XLeasObject {
     }
 
     /**
+     * Request all xLeas value changes from a given point by a specific xStudent.
+     * @param refId of xStudent.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
+     * Request all xLeas value changes from a given point by a specific xStudent with paging.
+     * @param refId of xStudent.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXStudent(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
      * Request xLeas associated to a specific xContact by refId.
      * @param refId of xContact.
      * @return List of xLeas type.
@@ -480,6 +608,38 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
+     * Request all xLeas value changes from a given point by a specific xContact.
+     * @param refId of xContacts.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXContact(String refId, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader();
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
+        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
+        return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
+    }
+
+    /**
+     * Request all xLeas value changes from a given point by a specific xContact with paging.
+     * @param refId of xContacts.
+     * @param navigationPage Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xLeas type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XLeaType> getXLeasByXContact(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        RestResponse rr = new RestResponse();
+        RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
+        RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }

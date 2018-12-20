@@ -7,8 +7,8 @@ import riconeapi.models.xpress.*;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7.3
- * @since 8/13/2018
+ * @version 1.8
+ * @since 12/17/2018
  */
 @SuppressWarnings("unused")
 public class AUPPObject {
@@ -26,10 +26,12 @@ public class AUPPObject {
     }
 
     /**
+     * @deprecated As of version 1.8, the process is handled automatically by the API.
      * Request creation of xStaffs usernames and passwords by xSchool.
      * @param refId of xSchool.
      * @throws AuthenticationException if login does not succeed.
      */
+    @Deprecated
     public void createXStaffUsers(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
@@ -39,10 +41,12 @@ public class AUPPObject {
     }
 
     /**
+     * @deprecated As of version 1.8, the process is handled automatically by the API.
      * Request deletion of generated xStaffs passwords by xSchool.
      * @param refId of xSchool.
      * @throws AuthenticationException if login does not succeed.
      */
+    @Deprecated
     public void deleteXStaffUsers(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
@@ -52,10 +56,12 @@ public class AUPPObject {
     }
 
     /**
+     * @deprecated As of version 1.8, the process is handled automatically by the API.
      * Request deletion of generated xStaffs usernames and passwords by xSchool.
      * @param refId of xSchool.
      * @throws AuthenticationException if login does not succeed.
      */
+    @Deprecated
     public void deleteXStaffUsernamesPasswords(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
@@ -95,10 +101,12 @@ public class AUPPObject {
     }
 
     /**
+     * @deprecated As of version 1.8, the process is handled automatically by the API.
      * Request creation of xStudents usernames and passwords by xSchool.
      * @param refId of xSchool.
      * @throws AuthenticationException if login does not succeed.
      */
+    @Deprecated
     public void createXStudentUsers(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
@@ -108,10 +116,12 @@ public class AUPPObject {
     }
 
     /**
+     * @deprecated As of version 1.8, the process is handled automatically by the API.
      * Request deletion of generated xStudents passwords by xSchool.
      * @param refId of xSchool.
      * @throws AuthenticationException if login does not succeed.
      */
+    @Deprecated
     public void deleteXStudentUsers(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
@@ -121,10 +131,12 @@ public class AUPPObject {
     }
 
     /**
+     * @deprecated As of version 1.8, the process is handled automatically by the API.
      * Request deletion of generated xStudents usernames passwords by xSchool.
      * @param refId of xSchool.
      * @throws AuthenticationException if login does not succeed.
      */
+    @Deprecated
     public void deleteXStudentUsernamesPasswords(String refId) throws AuthenticationException {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
@@ -163,34 +175,6 @@ public class AUPPObject {
         return rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
     }
 
-//    /**
-//     * Request creation of xContacts usernames and passwords by xSchool.
-//     * @param refId of xSchool.
-//     * @return List of xContacts type.
-//     * @throws AuthenticationException if login does not succeed.
-//     */
-//    private ResponseMulti<XContactType> createXContactUsers(String refId) throws AuthenticationException {
-//        RestResponse rr = new RestResponse();
-//        RestHeader rh = new RestHeader();
-//        RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE);
-//        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSCHOOL, refId, rh, rqp);
-//        return rr.makeAllRequestByAupp(rt, rp, XContactCollectionType.class);
-//    }
-//
-//    /**
-//     * Request deletion of generated xContacts passwords by xSchool.
-//     * @param refId of xSchool.
-//     * @return List of xContacts type.
-//     * @throws AuthenticationException if login does not succeed.
-//     */
-//    private ResponseMulti<XContactType> deleteXContactUsers(String refId) throws AuthenticationException {
-//        RestResponse rr = new RestResponse();
-//        RestHeader rh = new RestHeader();
-//        RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE);
-//        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTSBYXSCHOOL, refId, rh, rqp);
-//        return rr.makeAllRequestByAupp(rt, rp, XContactCollectionType.class);
-//    }
-//
 //    /**
 //     * Request generated xContacts usernames and passwords by xSchool.
 //     * @param refId of xSchool.

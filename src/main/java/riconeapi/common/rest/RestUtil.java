@@ -3,6 +3,7 @@ package riconeapi.common.rest;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Date;
 

@@ -30,20 +30,18 @@ public class AppAccountProvisioning {
                 XPress xPress = new XPress(e.getHref());
 
                 // Staff
-//                xPress.createXStaffUsers(refId);
-//                xPress.deleteXStaffUsers(refId);
-//                xPress.deleteXStaffUsernamesPasswords(refId);
+                xPress.createXStaffUsers(refId);
+                xPress.deleteXStaffUsers(refId);
+                xPress.deleteXStaffUsernamesPasswords(refId);
 //                XStaffs_GetXStaffsAccounts(xPress);
 
                 // Student
-//                xPress.createXStudentUsers(refId);
-//                xPress.deleteXStudentUsers(refId);
-//                xPress.deleteXStudentUsernamesPasswords(refId);
+                xPress.createXStudentUsers(refId);
+                xPress.deleteXStudentUsers(refId);
+                xPress.deleteXStudentUsernamesPasswords(refId);
 //                XStudents_GetXStudentsAccounts(xPress);
 
                 // Contact
-//                xPress.createXContactUsers(refId);
-//                xPress.deleteXContactUsers(refId);
 //                xPress.getXContactUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
             }
         } catch (Exception e) {

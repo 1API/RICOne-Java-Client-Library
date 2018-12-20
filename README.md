@@ -15,8 +15,7 @@ The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTe
 Authenticator auth = Authenticator.getInstance();
 auth.authenticate(authUrl, clientId, clientSecret);
 
-for(Endpoint e : auth.GetEndpoints())
-{
+for(Endpoint e : auth.GetEndpoints()) {
 	XPress xPress = new XPress(e.getHref());
 }
 ```
@@ -39,6 +38,32 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.8
+* Updated Jackson libraries to 2.9.7
+    * jackson-databind due to security vulnerability in previous version
+    * jackson-core
+    * jackson-annotations
+* Removed depricated fields from XRosterType.
+    * sessionCode - use sessionCode in XMeetingTimeType
+    * schoolCalendarRefId - use schoolCalendarRefId XMeetingTimeType
+* Added School Year to all xPress types.
+    * Use new xPress object - XMetadata class
+    ```java
+    XPress xPress = new XPress();
+    List<XLeaType> xLeaTypeList = xPress.getXLeas().getData();
+    for(XLeaType o : xLeaTypeList){
+        System.out.println(o.getMetadata().getSchoolYear());
+    }
+    ```
+* Added changesSince to all service paths.
+* Deprecated the following Changes Since methods. Creation and deletion is handled automatically by the API.
+    * createXStaffUsers(String refId)
+    * deleteXStaffUsers(String refId)
+    * deleteXStaffUsernamesPasswords(String refId)
+    * createXStudentUsers(String refId)
+    * deleteXStudentUsers(String refId)
+    * deleteXStudentUsernamesPasswords(String refId)
+
 ### v1.7.3
 * Changed return type of AUPP creates and deletes to void as data is not returned.
 * Added additional AUPP methods for deleting generated xStaff and xStudent usernames and passwords.
