@@ -1,16 +1,14 @@
 package riconeapi.common.rest;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
-import org.springframework.web.util.UriComponentsBuilder;
-
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7.1
- * @since 6/21/2018
+ * @version 1.8.0
+ * @since 5/7/2019
  */
 
 /**
@@ -23,8 +21,7 @@ class RestUtil {
      * @return An ISO8601 String date/timestamp
      */
      static String toISO8601(Date date) {
-        DateTime dt = new DateTime(date);
-        DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
-        return fmt.print(dt);
+         OffsetDateTime odt = OffsetDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+         return DateTimeFormatter.ISO_DATE_TIME.format(odt);
     }
 }

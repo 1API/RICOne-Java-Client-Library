@@ -4,7 +4,7 @@
   <groupId>org.ricone.api</groupId>
   <artifactId>ricone-api</artifactId>
   <name>RICOne API Client Library</name>
-  <version>1.8</version>
+  <version>1.8.0</version>
   <description>Client library for the RIC One data api</description>
   <url>http://www.ricone.org/</url>
   <build>
@@ -27,37 +27,13 @@
                   </excludes>
                 </filter>
                 <filter>
-                  <artifact>commons-logging:*</artifact>
-                  <excludes>
-                    <exclude>**</exclude>
-                  </excludes>
-                </filter>
-                <filter>
                   <artifact>com.fasterxml.jackson.core:*</artifact>
                   <excludes>
                     <exclude>**</exclude>
                   </excludes>
                 </filter>
                 <filter>
-                  <artifact>aopalliance:*</artifact>
-                  <excludes>
-                    <exclude>**</exclude>
-                  </excludes>
-                </filter>
-                <filter>
-                  <artifact>aopalliance:*</artifact>
-                  <excludes>
-                    <exclude>**</exclude>
-                  </excludes>
-                </filter>
-                <filter>
-                  <artifact>com.auth0:*</artifact>
-                  <excludes>
-                    <exclude>**</exclude>
-                  </excludes>
-                </filter>
-                <filter>
-                  <artifact>joda-time:*</artifact>
+                  <artifact>commons-codec*</artifact>
                   <excludes>
                     <exclude>**</exclude>
                   </excludes>
@@ -75,17 +51,17 @@
             <goals>
               <goal>jar</goal>
             </goals>
-            <configuration>
-              <additionalparam>-Xdoclint:none</additionalparam>
-            </configuration>
           </execution>
         </executions>
+        <configuration>
+          <doclint>none</doclint>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>7</source>
-          <target>7</target>
+          <source>8</source>
+          <target>8</target>
         </configuration>
       </plugin>
     </plugins>

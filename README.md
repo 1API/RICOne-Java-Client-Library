@@ -1,8 +1,8 @@
 
-Copyright © 2014-2018 New York State Education Department. All rights reserved.
+Copyright © 2014-2019 New York State Education Department. All rights reserved.
 
 # RICOne API Java Client Library
-The RICOne Java Client Library was developed using Java JDK 7, Spring’s RestTemplate
+The RICOne Java Client Library was developed using Java JDK 8, Spring’s RestTemplate
 (http://projects.spring.io/spring-framework/), and FasterXML Jackson (http://wiki.fasterxml.com/JacksonHome).
 
 ### Features
@@ -38,11 +38,18 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
-### v1.8
-* Updated Jackson libraries to 2.9.7
-    * jackson-databind due to security vulnerability in previous version
-    * jackson-core
-    * jackson-annotations
+### v1.8.0
+* Updated project to build in Java 8.
+* Updated dependency Jars.
+    * Jackson Annotations, Core, and Databind - v2.9.8
+    * Spring Beans, Core, and Web - v5.1.5
+* Added the following dependencies
+    * Apache Commons Codec - v1.12
+    * Spring Commons Logging Bridge - v5.1.5
+* Removed the following dependencies
+    * Java JWT - using Apache Commons Codec
+    * Joda Time - using Java 8 time library
+    * Commons Logging - using Spring Commons Logging Bridge
 * Removed depricated fields from XRosterType.
     * sessionCode - use sessionCode in XMeetingTimeType
     * schoolCalendarRefId - use schoolCalendarRefId XMeetingTimeType
