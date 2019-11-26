@@ -7,6 +7,11 @@ import riconeapi.authentication.Authenticator;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.ICollectionType;
 import riconeapi.models.xpress.IType;
+import riconeapi.models.xpress.XLeaCollectionType;
+import riconeapi.models.xpress.XLeaType;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
@@ -166,11 +171,13 @@ public class RestResponse {
     private HttpEntity<?> getEntityHeaders(RestProperties rp) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + Authenticator.getInstance().getToken());
+//        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         if(rp.getRestHeader().hasContentType()) {
             headers.setContentType(rp.getRestHeader().getContentType().getValue());
+            headers.setAccept(Collections.singletonList(rp.getRestHeader().getContentType().getValue()));
         }
         else {
-            headers.setContentType(MediaType.APPLICATION_XML);
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
         }
 
         if (rp.getRestHeader().hasPaging()) {
@@ -183,7 +190,7 @@ public class RestResponse {
         if (rp.getRestHeader().hasSchoolYear()) {
             headers.set("SchoolYear", rp.getRestHeader().getSchoolYear());
         }
-        return new HttpEntity<Object>(headers);
+        return new HttpEntity<>(headers);
     }
 
     public Integer getNavigationLastPage() {

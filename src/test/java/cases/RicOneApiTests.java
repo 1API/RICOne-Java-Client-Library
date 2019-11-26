@@ -14,8 +14,8 @@ import riconeapi.models.xpress.*;
 public class RicOneApiTests {
     // RestResponse Constants
     final static String authUrl = AuthServiceProperties.getInstance().getProperty("auth.url");
-    final static String clientId = AuthServiceProperties.getInstance().getProperty("auth.clientId");
-    final static String clientSecret = AuthServiceProperties.getInstance().getProperty("auth.clientSecret");
+    final static String clientId = "dpaDemo";
+    final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
     final static String providerId = AuthServiceProperties.getInstance().getProperty("auth.providerId");
 
     static String LEA_REFID = "03ACF04F-DC12-411A-9A42-E8323516D699";
@@ -46,7 +46,7 @@ public class RicOneApiTests {
 //            XPress_StatusCodes(xPress);
 
             /* xLeas */
-//			XLeas_GetXLeas(xPress);
+			XLeas_GetXLeas(xPress);
 //			XLeas_GetXLea(xPress);
 //			XLeas_GetXLeaById(xPress);
 //			XLeas_GetXLeasByXSchool(xPress);

@@ -4,8 +4,8 @@ import riconeapi.common.rest.ServicePathType;
 
 /*
   @author Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7.1
- * @since Jun 28, 2018
+ * @version 1.9.0
+ * @since 11/8/2019
  */
 
 /**
@@ -224,7 +224,25 @@ public enum ServicePath {
     /**
      * xStudents/{refId}/xContacts
      */
-    GETXCONTACTSBYXSTUDENT("xStudents/{refId}/xContacts", ServicePathType.PREDICATE);
+    GETXCONTACTSBYXSTUDENT("xStudents/{refId}/xContacts", ServicePathType.PREDICATE),
+    /**
+     * xEmployments
+     */
+    GETXEMPLOYMENTS("xEmployments", ServicePathType.OBJECT),
+    /**
+     * xEmployments/{refId}
+     */
+    GETXEMPLOYMENTBYREFID("xEmployments/{refId}", ServicePathType.PREDICATE),
+
+    /**
+     * xLeas/{refId}/xEmployments
+     */
+    GETXEMPLOYMENTSBYXLEA("xLeas/{refId}/xEmployments", ServicePathType.OBJECT),
+
+    /**
+     * xSchools/{refId}/xEmployments
+     */
+    GETXEMPLOYMENTSBYXSCHOOL("xSchools/{refId}/xEmployments", ServicePathType.OBJECT);
 
     private final String value;
     protected ServicePathType type;

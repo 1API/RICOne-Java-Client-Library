@@ -13,8 +13,8 @@ import java.util.Date;
 
 /*
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version     1.8
- * @since       Dec 18, 2018
+ * @version     1.9.0
+ * @since       11/8/2018
  */
 
 /**
@@ -30,6 +30,7 @@ public class XPress {
     private final XStaffsObject xStaffsObject;
     private final XStudentsObject xStudentsObject;
     private final XContactsObject xContactsObject;
+    private final XEmploymentsObject xEmploymentsObject;
     private final GetLastPageObject getLastPageObject;
     private final AUPPObject auppObject;
     private final JsonXmlObject jsonXmlObject;
@@ -45,6 +46,7 @@ public class XPress {
         xStaffsObject = new XStaffsObject(rt, baseApiUrl);
         xStudentsObject = new XStudentsObject(rt, baseApiUrl);
         xContactsObject = new XContactsObject(rt, baseApiUrl);
+        xEmploymentsObject = new XEmploymentsObject(rt, baseApiUrl);
         getLastPageObject = new GetLastPageObject(rt, baseApiUrl);
         auppObject = new AUPPObject(rt, baseApiUrl);
         jsonXmlObject = new JsonXmlObject(rt, baseApiUrl);
@@ -2869,7 +2871,8 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xLea.
-     * @param refId of xLea.
+     *
+     * @param refId        of xLea.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
@@ -2880,10 +2883,11 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xLea with paging.
-     * @param refId of xLea.
-     * @param navigationPage Page to retrieve.
+     *
+     * @param refId              of xLea.
+     * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
@@ -2943,7 +2947,8 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xSchool.
-     * @param refId of xSchool.
+     *
+     * @param refId        of xSchool.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
@@ -2954,10 +2959,11 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xSchool with paging.
-     * @param refId of xSchool.
-     * @param navigationPage Page to retrieve.
+     *
+     * @param refId              of xSchool.
+     * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
@@ -3017,7 +3023,8 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xRoster.
-     * @param refId of xRoster.
+     *
+     * @param refId        of xRoster.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
@@ -3028,10 +3035,11 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xRoster with paging.
-     * @param refId of xRoster.
-     * @param navigationPage Page to retrieve.
+     *
+     * @param refId              of xRoster.
+     * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
@@ -3091,7 +3099,8 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xStaff.
-     * @param refId of xStaff.
+     *
+     * @param refId        of xStaff.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
@@ -3102,10 +3111,11 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xStaff with paging.
-     * @param refId of xStaff.
-     * @param navigationPage Page to retrieve.
+     *
+     * @param refId              of xStaff.
+     * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
@@ -3165,7 +3175,8 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xContact.
-     * @param refId of xContact.
+     *
+     * @param refId        of xContact.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
@@ -3176,10 +3187,11 @@ public class XPress {
 
     /**
      * Request all xStudents value changes from a given point by a specific xContact with paging.
-     * @param refId of xContact.
-     * @param navigationPage Page to retrieve.
+     *
+     * @param refId              of xContact.
+     * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xStudents type.
      * @throws AuthenticationException if login does not succeed.
      */
@@ -3334,7 +3346,8 @@ public class XPress {
 
     /**
      * Request all xContacts value changes from a given point by a specific xLea.
-     * @param refId of xLea.
+     *
+     * @param refId        of xLea.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xContacts type.
      * @throws AuthenticationException if login does not succeed.
@@ -3345,10 +3358,11 @@ public class XPress {
 
     /**
      * Request all xContacts value changes from a given point by a specific xLea with paging.
-     * @param refId of xLea.
-     * @param navigationPage Page to retrieve.
+     *
+     * @param refId              of xLea.
+     * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xContacts type.
      * @throws AuthenticationException if login does not succeed.
      */
@@ -3408,7 +3422,8 @@ public class XPress {
 
     /**
      * Request all xContacts value changes from a given point by a specific xSchool.
-     * @param refId of xSchool.
+     *
+     * @param refId        of xSchool.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xContacts type.
      * @throws AuthenticationException if login does not succeed.
@@ -3419,10 +3434,11 @@ public class XPress {
 
     /**
      * Request all xContacts value changes from a given point by a specific xSchool with paging.
-     * @param refId of xSchool.
-     * @param navigationPage Page to retrieve.
+     *
+     * @param refId              of xSchool.
+     * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xContacts type.
      * @throws AuthenticationException if login does not succeed.
      */
@@ -3482,7 +3498,8 @@ public class XPress {
 
     /**
      * Request all xContacts value changes from a given point by a specific xStudent.
-     * @param refId of xStudent.
+     *
+     * @param refId        of xStudent.
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xContacts type.
      * @throws AuthenticationException if login does not succeed.
@@ -3493,15 +3510,263 @@ public class XPress {
 
     /**
      * Request all xContacts value changes from a given point by a specific xStudent with paging.
-     * @param refId of xStudent.
-     * @param navigationPage Page to retrieve.
+     *
+     * @param refId              of xStudent.
+     * @param navigationPage     Page to retrieve.
      * @param navigationPageSize Number of resources to retrieve.
-     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return List of xContacts type.
      * @throws AuthenticationException if login does not succeed.
      */
     public ResponseMulti<XContactType> getXContactsByXStudent(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
         return xContactsObject.getXContactsByXStudent(refId, navigationPage, navigationPageSize, opaqueMarker);
+    }
+
+    /* xEmployments */
+
+    /**
+     * Request all xEmployments.
+     *
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmployments() throws AuthenticationException {
+        return xEmploymentsObject.getXEmployments();
+    }
+
+    /**
+     * Request all xEmployments by school year.
+     *
+     * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmployments(int schoolYear) throws AuthenticationException {
+        return xEmploymentsObject.getXEmployments(schoolYear);
+    }
+
+    /**
+     * Request all xEmployments with paging.
+     *
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmployments(int navigationPage, int navigationPageSize) throws AuthenticationException {
+        return xEmploymentsObject.getXEmployments(navigationPage, navigationPageSize);
+    }
+
+    /**
+     * Request all xEmployments with paging by school year.
+     *
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param schoolYear         The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmployments(int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
+        return xEmploymentsObject.getXEmployments(navigationPage, navigationPageSize, schoolYear);
+    }
+
+    /**
+     * Request all xEmployments value changes from a given point.
+     *
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmployments(String opaqueMarker) throws AuthenticationException {
+        return xEmploymentsObject.getXEmployments(opaqueMarker);
+    }
+
+    /**
+     * Request all xEmployments value changes from a given point with paging.
+     *
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmployments(int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        return xEmploymentsObject.getXEmployments(navigationPage, navigationPageSize, opaqueMarker);
+    }
+
+    /**
+     * Request single xEmployment by refId.
+     *
+     * @param refId of xEmployment.
+     * @return Single xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseSingle<XEmploymentType> getXEmployment(String refId) throws AuthenticationException {
+        return xEmploymentsObject.getXEmployment(refId);
+    }
+
+    /**
+     * Request single xEmployment by refId by school year.
+     *
+     * @param refId      of xEmployment.
+     * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return Single xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseSingle<XEmploymentType> getXEmployment(String refId, int schoolYear) throws AuthenticationException {
+        return xEmploymentsObject.getXEmployment(refId, schoolYear);
+    }
+
+    /**
+     * Request xEmployments associated to a specific xLea by refId.
+     *
+     * @param refId of xLea.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXLea(String refId) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXLea(refId);
+    }
+
+    /**
+     * Request xEmployments associated to a specific xLea by refId by school year.
+     *
+     * @param refId      of xLea.
+     * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXLea(String refId, int schoolYear) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXLea(refId, schoolYear);
+    }
+
+    /**
+     * Request xEmployments associated to a specific xLea by refId with paging.
+     *
+     * @param refId              of xLea.
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXLea(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXLea(refId, navigationPage, navigationPageSize);
+    }
+
+    /**
+     * Request xEmployments associated to a specific xLea by refId with paging by school year.
+     *
+     * @param refId              of xLea.
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param schoolYear         The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXLea(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXLea(refId, navigationPage, navigationPageSize, schoolYear);
+    }
+
+    /**
+     * Request all xEmployments value changes from a given point by a specific xLea.
+     *
+     * @param refId        of xLea.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXLea(String refId, String opaqueMarker) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXLea(refId, opaqueMarker);
+    }
+
+    /**
+     * Request all xEmployments value changes from a given point by a specific xLea with paging.
+     *
+     * @param refId              of xLea.
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXLea(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXLea(refId, navigationPage, navigationPageSize, opaqueMarker);
+    }
+
+    /**
+     * Request xEmployments associated to a specific xSchool by refId.
+     *
+     * @param refId of xSchool.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXSchool(String refId) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXSchool(refId);
+    }
+
+    /**
+     * Request xEmployments associated to a specific xSchool by refId by school year.
+     *
+     * @param refId      of xSchool.
+     * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXSchool(String refId, int schoolYear) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXSchool(refId, schoolYear);
+    }
+
+    /**
+     * Request xEmployments associated to a specific xSchool by refId with paging.
+     *
+     * @param refId              of xSchool.
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXSchool(String refId, int navigationPage, int navigationPageSize) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXSchool(refId, navigationPage, navigationPageSize);
+    }
+
+    /**
+     * Request xEmployments associated to a specific xSchool by refId with paging by school year.
+     *
+     * @param refId              of xSchool.
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param schoolYear         The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXSchool(String refId, int navigationPage, int navigationPageSize, int schoolYear) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXSchool(refId, navigationPage, navigationPageSize, schoolYear);
+    }
+
+    /**
+     * Request all xEmployments value changes from a given point by a specific xSchool.
+     *
+     * @param refId        of xSchool.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXSchool(String refId, String opaqueMarker) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXSchool(refId, opaqueMarker);
+    }
+
+    /**
+     * Request all xEmployments value changes from a given point by a specific xSchool with paging.
+     *
+     * @param refId              of xSchool.
+     * @param navigationPage     Page to retrieve.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return List of xEmployments type.
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public ResponseMulti<XEmploymentType> getXEmploymentsByXSchool(String refId, int navigationPage, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        return xEmploymentsObject.getXEmploymentsByXSchool(refId, navigationPage, navigationPageSize, opaqueMarker);
     }
 
     /* navigationLastPage */

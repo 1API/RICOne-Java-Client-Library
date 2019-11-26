@@ -55,6 +55,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "otherIds",
     "appProvisioningInfo",
     "address",
+    "otherAddresses",
     "phoneNumber",
     "otherPhoneNumbers",
     "email",
@@ -80,6 +81,7 @@ public class XStudentType
         otherIds = new XOtherPersonIdListType();
         appProvisioningInfo = new XAppProvisioningInfoType();
         address = new XPersonAddressType();
+        otherAddresses = new XOtherPersonAddressListType();
         phoneNumber = new XTelephoneType();
         otherPhoneNumbers = new XTelephoneListType();
         email = new XEmailType();
@@ -110,6 +112,8 @@ public class XStudentType
     protected XAppProvisioningInfoType appProvisioningInfo;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XPersonAddressType address;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XOtherPersonAddressListType otherAddresses;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XTelephoneType phoneNumber;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
@@ -299,6 +303,30 @@ public class XStudentType
      */
     public void setAddress(XPersonAddressType value) {
         this.address = value;
+    }
+
+    /**
+     * Gets the value of the otherAddresses property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XOtherPersonAddressListType }
+     *
+     */
+    public XOtherPersonAddressListType getOtherAddresses() {
+        return otherAddresses;
+    }
+
+    /**
+     * sets the value of the otherAddresses property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XOtherPersonAddressListType }
+     *
+     */
+    public void setOtherAddresses(XOtherPersonAddressListType otherAddresses) {
+        this.otherAddresses = otherAddresses;
     }
 
     /**

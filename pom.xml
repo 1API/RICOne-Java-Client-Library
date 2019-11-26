@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ricone.api</groupId>
 	<artifactId>ricone-api</artifactId>
-	<version>1.8.0</version>
+	<version>1.9.0</version>
 	<name>RICOne API Client Library</name>
 	<description>Client library for the RIC One data api</description>
 	<url>http://www.ricone.org/</url>

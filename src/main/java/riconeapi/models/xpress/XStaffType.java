@@ -41,14 +41,20 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "xStaffType", namespace = "http://www.sifassociation.org/datamodel/na/3.2", propOrder = {
     "name",
+    "sex",
     "localId",
     "stateProvinceId",
     "otherIds",
     "appProvisioningInfo",
-    "sex",
+    "address",
+    "otherAddresses",
+    "phoneNumber",
+    "otherPhoneNumbers",
     "email",
+    "otherEmails",
     "primaryAssignment",
     "otherAssignments",
+    "languages",
     "metadata"
 })
 public class XStaffType
@@ -62,10 +68,16 @@ public class XStaffType
 	    stateProvinceId = null;
 	    otherIds = new XOtherPersonIdListType();
 	    appProvisioningInfo = new XAppProvisioningInfoType();
+        address = new XPersonAddressType();
+        otherAddresses = new XOtherPersonAddressListType();
+        phoneNumber = new XTelephoneType();
+        otherPhoneNumbers = new XTelephoneListType();
 	    sex = null;
 	    email = new XEmailType();
+        otherEmails = new XEmailListType();
 	    primaryAssignment = new XStaffPersonAssignmentType();
 	    otherAssignments = new XStaffPersonAssignmentListType();
+        languages = new XLanguageListType();
         metadata = new XMetadata();
     }
 
@@ -82,14 +94,26 @@ public class XStaffType
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XAppProvisioningInfoType appProvisioningInfo;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XPersonAddressType address;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XOtherPersonAddressListType otherAddresses;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XTelephoneType phoneNumber;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XTelephoneListType otherPhoneNumbers;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String sex;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XEmailType email;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XEmailListType otherEmails;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XStaffPersonAssignmentType primaryAssignment;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XStaffPersonAssignmentListType otherAssignments;
+    @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
+    protected XLanguageListType languages;
     @XmlElement(namespace = "http://www.sifassociation.org/datamodel/na/3.2")
     protected XMetadata metadata;
 
@@ -214,6 +238,102 @@ public class XStaffType
     }
 
     /**
+     * Gets the value of the address property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XPersonAddressType }
+     *
+     */
+    public XPersonAddressType getAddress() {
+        return address;
+    }
+
+    /**
+     * Sets the value of the address property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link XPersonAddressType }
+     *
+     */
+    public void setAddress(XPersonAddressType value) {
+        this.address = value;
+    }
+
+    /**
+     * Gets the value of the otherAddresses property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XOtherPersonAddressListType }
+     *
+     */
+    public XOtherPersonAddressListType getOtherAddresses() {
+        return otherAddresses;
+    }
+
+    /**
+     * Sets the value of the otherAddresses property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XOtherPersonAddressListType }
+     *
+     */
+    public void setOtherAddresses(XOtherPersonAddressListType otherAddresses) {
+        this.otherAddresses = otherAddresses;
+    }
+
+    /**
+     * Gets the value of the phoneNumber property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XTelephoneType }
+     *
+     */
+    public XTelephoneType getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * Sets the value of the phoneNumber property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link XTelephoneType }
+     *
+     */
+    public void setPhoneNumber(XTelephoneType value) {
+        this.phoneNumber = value;
+    }
+
+    /**
+     * Gets the value of the otherPhoneNumbers property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XTelephoneListType }
+     *
+     */
+    public XTelephoneListType getOtherPhoneNumbers() {
+        return otherPhoneNumbers;
+    }
+
+    /**
+     * Sets the value of the otherPhoneNumbers property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link XTelephoneListType }
+     *
+     */
+    public void setOtherPhoneNumbers(XTelephoneListType value) {
+        this.otherPhoneNumbers = value;
+    }
+
+    /**
      * Gets the value of the sex property.
      * 
      * @return
@@ -262,6 +382,30 @@ public class XStaffType
     }
 
     /**
+     * Gets the value of the otherEmails property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XEmailListType }
+     *
+     */
+    public XEmailListType getOtherEmails() {
+        return otherEmails;
+    }
+
+    /**
+     * Sets the value of the otherEmails property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link XEmailListType }
+     *
+     */
+    public void setOtherEmails(XEmailListType value) {
+        this.otherEmails = value;
+    }
+
+    /**
      * Gets the value of the primaryAssignment property.
      * 
      * @return
@@ -307,6 +451,29 @@ public class XStaffType
      */
     public void setOtherAssignments(XStaffPersonAssignmentListType value) {
         this.otherAssignments = value;
+    }
+
+    /**
+     * Gets the value of the languages property.
+     *
+     *     allowed object is
+     *     {@link XLanguageListType }
+     *
+     */
+    public XLanguageListType getLanguages() {
+        return languages;
+    }
+
+    /**
+     * Sets the value of the languages property.
+     *
+     * @return
+     *     possible object is
+     *     {@link XLanguageListType }
+     *
+     */
+    public void setLanguages(XLanguageListType value) {
+        this.languages = value;
     }
 
     public XMetadata getMetadata() {

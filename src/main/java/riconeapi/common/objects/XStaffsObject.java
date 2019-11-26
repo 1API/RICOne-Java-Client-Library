@@ -47,7 +47,7 @@ public class XStaffsObject {
      */
     public ResponseMulti<XStaffType> getXStaffs(int schoolYear) throws AuthenticationException {
         RestResponse rr = new RestResponse();
-        RestHeader rh = new RestHeader();
+        RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
         RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
@@ -145,7 +145,7 @@ public class XStaffsObject {
 
     /**
      * Request xStaffs associated to a specific xLea by refId.
-     * @param refId of xStaff.
+     * @param refId of xLea.
      * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.
      */
@@ -159,7 +159,7 @@ public class XStaffsObject {
 
     /**
      * Request xStaffs associated to a specific xLea by refId by school year.
-     * @param refId of xStaff.
+     * @param refId of xLea.
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
      * @return List of xStaffs type.
      * @throws AuthenticationException if login does not succeed.

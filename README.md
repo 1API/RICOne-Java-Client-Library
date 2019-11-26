@@ -38,6 +38,20 @@ final static String clientId = "YOUR USERNAME";
 final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
+### v1.9.0
+* Added OtherAddresses to xStudents object.
+* Added the following to xStaff:
+    * Addresses
+    * OtherAddressses
+    * PhoneNumber
+    * OtherPhoneNumbers
+    * OtherEmails
+    * Languages
+* Added support for new service path xEmployments, which includes staff employment information.
+    * /xEmployments
+    * /xLeas/{refId}/xEmployments
+    * /xSchool/{refId}/xEmployments
+
 ### v1.8.0
 * Updated project to build in Java 8.
 * Updated dependency Jars.
