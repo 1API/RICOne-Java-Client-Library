@@ -51,6 +51,7 @@ final static String clientSecret = "YOUR PASSWORD";
     * /xEmployments
     * /xLeas/{refId}/xEmployments
     * /xSchool/{refId}/xEmployments
+* Updated to use RIC One <a href="https://github.com/RIConeorg/API-AuthenticationClientLibrary-Java" target="blank">API-AuthenticationClientLibrary-Java v1.3.1</a>
 
 ### v1.8.0
 * Updated project to build in Java 8.
