@@ -1,6 +1,7 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XSchoolCollectionType;
@@ -8,22 +9,22 @@ import riconeapi.models.xpress.XSchoolType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.8
- * @since 12/13/2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 @SuppressWarnings("unused")
 public class XSchoolsObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * XSchools Object Constructor.
      * @param rt REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Base API url.
      */
-    public XSchoolsObject(RestTemplate rt, String baseApiUrl) {
+    public XSchoolsObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -35,7 +36,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -49,7 +50,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -64,7 +65,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
     }
     /**
@@ -79,7 +80,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -93,7 +94,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -109,7 +110,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -123,7 +124,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XSchoolType.class);
     }
 
@@ -138,7 +139,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XSchoolType.class);
     }
 
@@ -153,7 +154,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(idType, id);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLBYID, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLBYID, rh, rqp);
         return rr.makeSingleRequestById(rt, rp, XSchoolType.class);
     }
 
@@ -169,7 +170,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(idType, id, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLBYID, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLBYID, rh, rqp);
         return rr.makeSingleRequestById(rt, rp, XSchoolType.class);
     }
 
@@ -183,7 +184,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -198,7 +199,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -214,7 +215,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -231,7 +232,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -246,7 +247,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -263,7 +264,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -277,7 +278,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -292,7 +293,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -308,7 +309,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestQueryParameter rqp = new RestQueryParameter();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -325,7 +326,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestQueryParameter rqp = new RestQueryParameter();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -340,7 +341,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -357,7 +358,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCALENDAR, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -371,7 +372,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -386,7 +387,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -402,7 +403,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -419,7 +420,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -434,7 +435,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -451,7 +452,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -465,7 +466,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -480,7 +481,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -496,7 +497,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -513,7 +514,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -528,7 +529,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -545,7 +546,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -559,7 +560,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -574,7 +575,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -590,7 +591,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -607,7 +608,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -622,7 +623,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -639,7 +640,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -653,7 +654,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -668,7 +669,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -684,7 +685,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -701,7 +702,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -716,7 +717,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -733,7 +734,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -747,7 +748,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -762,7 +763,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -778,7 +779,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -795,7 +796,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -810,7 +811,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 
@@ -827,7 +828,7 @@ public class XSchoolsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLSBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
     }
 }

@@ -1,6 +1,7 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XStaffCollectionType;
@@ -8,22 +9,22 @@ import riconeapi.models.xpress.XStaffType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.8
- * @since 12/18/2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 @SuppressWarnings("unused")
 public class XStaffsObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * XStaffs Object Constructor.
      * @param rt REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Base API url.
      */
-    public XStaffsObject(RestTemplate rt, String baseApiUrl) {
+    public XStaffsObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -35,7 +36,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
     }
 
@@ -49,7 +50,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
     }
 
@@ -64,7 +65,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
     }
 
@@ -80,7 +81,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
     }
 
@@ -94,7 +95,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
     }
 
@@ -110,7 +111,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
     }
 
@@ -124,7 +125,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XStaffType.class);
     }
 
@@ -139,7 +140,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XStaffType.class);
     }
 
@@ -153,7 +154,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -168,7 +169,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -184,7 +185,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -201,7 +202,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -216,7 +217,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -233,7 +234,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -247,7 +248,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -262,7 +263,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -278,7 +279,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -295,7 +296,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -310,7 +311,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -327,7 +328,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -341,7 +342,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -356,7 +357,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -372,7 +373,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -389,7 +390,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -404,7 +405,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -421,7 +422,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -435,7 +436,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -450,7 +451,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -466,7 +467,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -483,7 +484,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -498,7 +499,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -515,7 +516,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -529,7 +530,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -544,7 +545,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -560,7 +561,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -577,7 +578,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -592,7 +593,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 
@@ -609,7 +610,7 @@ public class XStaffsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
     }
 }

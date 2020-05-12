@@ -1,6 +1,7 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XEmploymentCollectionType;
@@ -9,22 +10,22 @@ import riconeapi.models.xpress.XEmploymentType;
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
  * @version 1.9.0
- * @since 11/7/2019
+ * @since 5/8/2020
  */
 @SuppressWarnings("unused")
 public class XEmploymentsObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * XStaffs Object Constructor.
      *
      * @param rt         REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Base API url.
      */
-    public XEmploymentsObject(RestTemplate rt, String baseApiUrl) {
+    public XEmploymentsObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -37,7 +38,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -52,7 +53,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -68,7 +69,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -85,7 +86,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -100,7 +101,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -117,7 +118,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -132,7 +133,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XEmploymentType.class);
     }
 
@@ -148,7 +149,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XEmploymentType.class);
     }
 
@@ -163,7 +164,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -179,7 +180,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -196,7 +197,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -214,7 +215,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -230,7 +231,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -248,7 +249,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -263,7 +264,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -279,7 +280,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -296,7 +297,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -314,7 +315,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -330,7 +331,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 
@@ -348,7 +349,7 @@ public class XEmploymentsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXEMPLOYMENTSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XEmploymentCollectionType.class);
     }
 }

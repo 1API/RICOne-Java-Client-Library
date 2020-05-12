@@ -1,6 +1,7 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XLeaCollectionType;
@@ -8,22 +9,22 @@ import riconeapi.models.xpress.XLeaType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.8
- * @since 12/10/2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 @SuppressWarnings("unused")
 public class XLeasObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * XLeas Object Constructor.
      * @param rt REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Endpoint object.
      */
-    public XLeasObject(RestTemplate rt, String baseApiUrl) {
+    public XLeasObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -35,7 +36,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
     }
 
@@ -49,7 +50,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
     }
 
@@ -64,7 +65,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
     }
 
@@ -80,7 +81,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
     }
 
@@ -94,7 +95,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
     }
 
@@ -110,7 +111,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
     }
 
@@ -124,7 +125,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEABYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEABYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XLeaType.class);
     }
 
@@ -139,7 +140,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEABYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEABYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XLeaType.class);
     }
 
@@ -154,7 +155,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(idType, id);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEABYID, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEABYID, rh, rqp);
         return rr.makeSingleRequestById(rt, rp, XLeaType.class);
     }
 
@@ -170,7 +171,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(idType, id, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEABYID, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEABYID, rh, rqp);
         return rr.makeSingleRequestById(rt, rp, XLeaType.class);
     }
 
@@ -184,7 +185,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -199,7 +200,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -215,7 +216,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -232,7 +233,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -247,7 +248,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -264,7 +265,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -278,7 +279,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -293,7 +294,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -309,7 +310,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -326,7 +327,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -341,7 +342,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -358,7 +359,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -372,7 +373,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -387,7 +388,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -403,7 +404,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -420,7 +421,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -435,7 +436,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -452,7 +453,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -466,7 +467,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -481,7 +482,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -497,7 +498,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -514,7 +515,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -529,7 +530,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -546,7 +547,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -560,7 +561,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -575,7 +576,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -591,7 +592,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -608,7 +609,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -623,7 +624,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 
@@ -640,7 +641,7 @@ public class XLeasObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEASBYXCONTACT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
     }
 }

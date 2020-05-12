@@ -6,7 +6,11 @@
   <name>RICOne API Client Library</name>
   <version>1.9.0</version>
   <description>Client library for the RIC One data api</description>
-  <url>http://www.ricone.org/</url>
+  <url>https://github.com/RIConeorg/API-ClientLibrary-Java</url>
+  <organization>
+    <name>RIC One</name>
+    <url>http://www.ricone.org/</url>
+  </organization>
   <build>
     <plugins>
       <plugin>
@@ -34,6 +38,12 @@
                 </filter>
                 <filter>
                   <artifact>commons-codec*</artifact>
+                  <excludes>
+                    <exclude>**</exclude>
+                  </excludes>
+                </filter>
+                <filter>
+                  <artifact>com.auth0:*</artifact>
                   <excludes>
                     <exclude>**</exclude>
                   </excludes>

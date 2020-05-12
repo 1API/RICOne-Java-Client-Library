@@ -1,6 +1,7 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XCalendarCollectionType;
@@ -8,22 +9,22 @@ import riconeapi.models.xpress.XCalendarType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.8
- * @since 12/17/2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 @SuppressWarnings("unused")
 public class XCalendarsObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * XCalendars Object Constructor.
      * @param rt Rest template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Endpoint object.
      */
-    public XCalendarsObject(RestTemplate rt, String baseApiUrl) {
+    public XCalendarsObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -35,7 +36,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -49,7 +50,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -64,7 +65,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -80,7 +81,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -94,7 +95,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -110,7 +111,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -124,7 +125,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XCalendarType.class);
     }
 
@@ -139,7 +140,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XCalendarType.class);
     }
 
@@ -153,7 +154,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -168,7 +169,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -184,7 +185,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -201,7 +202,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -216,7 +217,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -233,7 +234,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -247,7 +248,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -262,7 +263,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -278,7 +279,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -295,7 +296,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -310,7 +311,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 
@@ -327,7 +328,7 @@ public class XCalendarsObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
     }
 }

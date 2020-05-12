@@ -16,7 +16,7 @@ Authenticator auth = Authenticator.getInstance();
 auth.authenticate(authUrl, clientId, clientSecret);
 
 for(Endpoint e : auth.GetEndpoints()) {
-	XPress xPress = new XPress(e.getHref());
+	XPress xPress = new XPress(e);
 }
 ```
 
@@ -39,6 +39,21 @@ final static String clientSecret = "YOUR PASSWORD";
 ```
 ## Change Log
 ### v1.9.0
+* XPress object now takes an Endpoint object versus String.
+    ```java
+  // Old
+  XPress xPress = new XPress(String url);
+
+  // New
+  XPress xPress = new XPress(Endpoint endpoint);
+    ```
+* Dependencies
+    * New
+        * Java JWT - 3.10.2 
+    * Updated
+        * Apache Commons Codec - v1.14
+        * Jackson Annotations, Core, and Databind - v2.11.0
+        * Spring Beans, Core, and Web - v5.2.6
 * Added OtherAddresses to xStudents object.
 * Added the following to xStaff:
     * Addresses
@@ -51,7 +66,7 @@ final static String clientSecret = "YOUR PASSWORD";
     * /xEmployments
     * /xLeas/{refId}/xEmployments
     * /xSchool/{refId}/xEmployments
-* Updated to use RIC One <a href="https://github.com/RIConeorg/API-AuthenticationClientLibrary-Java" target="blank">API-AuthenticationClientLibrary-Java v1.3.1</a>
+* Updated to use RIC One <a href="https://github.com/RIConeorg/API-AuthenticationClientLibrary-Java" target="blank">API-AuthenticationClientLibrary-Java v2.0.0</a>
 
 ### v1.8.0
 * Updated project to build in Java 8.

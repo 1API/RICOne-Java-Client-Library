@@ -11,7 +11,7 @@ import static riconeapi.common.rest.RestUtil.toISO8601;
  */
 class UrlBuilder {
     static String urlBuildler(RestProperties rp) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(rp.getBaseUrl());
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(rp.getEndpoint().getHref());
         if(rp.getServicePath().getType().equals(ServicePathType.OBJECT)) {
             builder.path(rp.getServicePath().getValue());
         }

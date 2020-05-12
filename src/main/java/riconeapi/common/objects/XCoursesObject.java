@@ -1,6 +1,7 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XCourseCollectionType;
@@ -8,22 +9,22 @@ import riconeapi.models.xpress.XCourseType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.8
- * @since 12/17/2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 @SuppressWarnings("unused")
 public class XCoursesObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * XCourses Object Constructor.
      * @param rt REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Endpoint object.
      */
-    public XCoursesObject(RestTemplate rt, String baseApiUrl) {
+    public XCoursesObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -35,7 +36,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
     }
 
@@ -49,7 +50,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
     }
 
@@ -64,7 +65,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
     }
 
@@ -80,7 +81,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
     }
 
@@ -94,7 +95,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
     }
 
@@ -110,7 +111,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
         return rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
     }
 
@@ -124,7 +125,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSEBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSEBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XCourseType.class);
     }
 
@@ -139,7 +140,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSEBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSEBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XCourseType.class);
     }
 
@@ -153,7 +154,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -168,7 +169,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -184,7 +185,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -201,7 +202,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -216,7 +217,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -233,7 +234,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -247,7 +248,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -262,7 +263,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -278,7 +279,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -295,7 +296,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -310,7 +311,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -327,7 +328,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -341,7 +342,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -356,7 +357,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -372,7 +373,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -389,7 +390,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -404,7 +405,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 
@@ -421,7 +422,7 @@ public class XCoursesObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSESBYXROSTER, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
     }
 }

@@ -1,6 +1,7 @@
 package riconeapi.common;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.objects.*;
 import riconeapi.common.rest.AUPPEnum;
 import riconeapi.common.rest.MediaTypeEnum;
@@ -14,7 +15,7 @@ import java.util.Date;
 /*
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
  * @version     1.9.0
- * @since       11/8/2018
+ * @since       5/8/2020
  */
 
 /**
@@ -35,21 +36,21 @@ public class XPress {
     private final AUPPObject auppObject;
     private final JsonXmlObject jsonXmlObject;
 
-    public XPress(String baseApiUrl) {
+    public XPress(Endpoint endpoint) {
         RestTemplate rt = new RestTemplate();
 
-        xLeasObject = new XLeasObject(rt, baseApiUrl);
-        xSchoolsObject = new XSchoolsObject(rt, baseApiUrl);
-        xCalendarsObject = new XCalendarsObject(rt, baseApiUrl);
-        xCoursesObject = new XCoursesObject(rt, baseApiUrl);
-        xRostersObject = new XRostersObject(rt, baseApiUrl);
-        xStaffsObject = new XStaffsObject(rt, baseApiUrl);
-        xStudentsObject = new XStudentsObject(rt, baseApiUrl);
-        xContactsObject = new XContactsObject(rt, baseApiUrl);
-        xEmploymentsObject = new XEmploymentsObject(rt, baseApiUrl);
-        getLastPageObject = new GetLastPageObject(rt, baseApiUrl);
-        auppObject = new AUPPObject(rt, baseApiUrl);
-        jsonXmlObject = new JsonXmlObject(rt, baseApiUrl);
+        xLeasObject = new XLeasObject(rt, endpoint);
+        xSchoolsObject = new XSchoolsObject(rt, endpoint);
+        xCalendarsObject = new XCalendarsObject(rt, endpoint);
+        xCoursesObject = new XCoursesObject(rt, endpoint);
+        xRostersObject = new XRostersObject(rt, endpoint);
+        xStaffsObject = new XStaffsObject(rt, endpoint);
+        xStudentsObject = new XStudentsObject(rt, endpoint);
+        xContactsObject = new XContactsObject(rt, endpoint);
+        xEmploymentsObject = new XEmploymentsObject(rt, endpoint);
+        getLastPageObject = new GetLastPageObject(rt, endpoint);
+        auppObject = new AUPPObject(rt, endpoint);
+        jsonXmlObject = new JsonXmlObject(rt, endpoint);
     }
 
     /* xLeas */

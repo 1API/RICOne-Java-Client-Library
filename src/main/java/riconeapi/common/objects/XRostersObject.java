@@ -1,6 +1,7 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XRosterCollectionType;
@@ -8,22 +9,22 @@ import riconeapi.models.xpress.XRosterType;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.8
- * @since 12/17/2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 @SuppressWarnings("unused")
 public class XRostersObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * XRosters Object Constructor.
      * @param rt REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Base API url.
      */
-    public XRostersObject(RestTemplate rt, String baseApiUrl) {
+    public XRostersObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -35,7 +36,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
     }
 
@@ -49,7 +50,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
     }
 
@@ -64,7 +65,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
     }
 
@@ -80,7 +81,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
     }
 
@@ -94,7 +95,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
     }
 
@@ -110,7 +111,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
         return rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
     }
 
@@ -124,7 +125,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XRosterType.class);
     }
 
@@ -139,7 +140,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERBYREFID, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERBYREFID, refId, rh, rqp);
         return rr.makeSingleRequest(rt, rp, XRosterType.class);
     }
 
@@ -153,7 +154,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -168,7 +169,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -184,7 +185,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -201,7 +202,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -216,7 +217,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -233,7 +234,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXLEA, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -247,7 +248,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -262,7 +263,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -278,7 +279,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -295,7 +296,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -310,7 +311,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -327,7 +328,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -341,7 +342,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -356,7 +357,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -372,7 +373,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -389,7 +390,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -404,7 +405,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -421,7 +422,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXCOURSE, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -435,7 +436,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -450,7 +451,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -466,7 +467,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -483,7 +484,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -498,7 +499,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -515,7 +516,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTAFF, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -529,7 +530,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -544,7 +545,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -560,7 +561,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -577,7 +578,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -592,7 +593,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 
@@ -609,7 +610,7 @@ public class XRostersObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERSBYXSTUDENT, refId, rh, rqp);
         return rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
     }
 }

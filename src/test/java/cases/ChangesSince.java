@@ -3,10 +3,11 @@ package cases;
 import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.authentication.Endpoint;
+import riconeapi.authentication.Endpoint;
 import riconeapi.models.xpress.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
@@ -37,17 +38,16 @@ public class ChangesSince
 		Authenticator auth = Authenticator.getInstance();
         auth.authenticate(authUrl, clientId, clientSecret);
 
-        for(Endpoint e : auth.getEndpoints(providerId)) {
-            XPress xPress = new XPress(e.getHref());
+        XPress xPress = new XPress(auth.getEndpoints(providerId).get());
 
-            /* xLeas */
+        /* xLeas */
 //            getXLeas(xPress);
 //            getXLeasByXSchool(xPress);
 //            getXLeasByXRoster(xPress);
 //            getXLeasByXStaff(xPress);
 //            getXLeasByXStudent(xPress);
 //            getXLeasByXContact(xPress);
-            /* xSchools */
+        /* xSchools */
 //            getXSchools(xPress);
 //            getXSchoolsByXLea(xPress);
 //            getXSchoolsByXCalendar(xPress);
@@ -56,43 +56,42 @@ public class ChangesSince
 //            getXSchoolsByXStaff(xPress);
 //            getXSchoolsByXStudent(xPress);
 //            getXSchoolsByXContact(xPress);
-            /* xCalendars */
+        /* xCalendars */
 //            getXCalendars(xPress);
 //            getXCalendarsByXLea(xPress);
 //            getXCalendarsByXSchool(xPress);
-            /* xCourses */
+        /* xCourses */
 //            getXCourses(xPress);
 //            getXCoursesByXLea(xPress);
 //            getXCoursesByXSchool(xPress);
 //            getXCoursesByXRoster(xPress);
-            /* xRosters */
+        /* xRosters */
 //            getXRosters(xPress);
 //            getXRostersByXLea(xPress);
 //            getXRostersByXSchool(xPress);
 //            getXRostersByXCourse(xPress);
 //            getXRostersByXStaff(xPress);
 //            getXRostersByXStudent(xPress);
-            /* xStaffs */
+        /* xStaffs */
 //            getXStaffs(xPress);
 //            getXStaffsByXLea(xPress);
 //            getXStaffsByXSchool(xPress);
 //            getXStaffsByXCourse(xPress);
 //            getXStaffsByXRoster(xPress);
 //            getXStaffsByXStudent(xPress);
-            /* xStudents */
+        /* xStudents */
 //            getXStudents(xPress);
 //            getXStudentsByXLea(xPress);
 //            getXStudentsByXSchool(xPress);
 //            getXStudentsByXRoster(xPress);
 //            getXStudentsByXStaff(xPress);
 //            getXStudentsByXContact(xPress);
-            /* xContacts */
+        /* xContacts */
 //            getXContacts(xPress);
 //            getXContactsByXLea(xPress);
 //            getXContactsByXSchool(xPress);
 //            getXContactsByXStudent(xPress);
-        }
-	}
+    }
 
 	/* xLeas */
     public static void getXLeas(XPress xPress) throws AuthenticationException {

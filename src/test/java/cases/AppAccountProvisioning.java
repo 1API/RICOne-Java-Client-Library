@@ -2,10 +2,13 @@ package cases;
 
 import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
-import riconeapi.models.authentication.Endpoint;
+import riconeapi.authentication.Endpoint;
+import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.XContactType;
 import riconeapi.models.xpress.XStaffType;
 import riconeapi.models.xpress.XStudentType;
+
+import java.util.Optional;
 
 /**
  * @author Andrew Pieniezny <andrew.pieniezny@neric.org>
@@ -21,57 +24,53 @@ public class AppAccountProvisioning {
     //	static String refId = "0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C";
     static String refId = "AE6B3441-5E31-4573-BADB-081669D79C7F";
 
-    public static void main(String[] args) {
-        try {
-            Authenticator auth = Authenticator.getInstance();
-            auth.authenticate(authUrl, clientId, clientSecret);
+    public static void main(String[] args) throws AuthenticationException {
+        Authenticator auth = Authenticator.getInstance();
+        auth.authenticate(authUrl, clientId, clientSecret);
+        Optional<Endpoint> e = auth.getEndpoints(providerId);
+        XPress xPress = new XPress(e.get());
 
-            for (Endpoint e : auth.getEndpoints(providerId)) {
-                XPress xPress = new XPress(e.getHref());
-
-                // Staff
-                xPress.createXStaffUsers(refId);
-                xPress.deleteXStaffUsers(refId);
-                xPress.deleteXStaffUsernamesPasswords(refId);
+        // Staff
+        xPress.createXStaffUsers(refId);
+        xPress.deleteXStaffUsers(refId);
+        xPress.deleteXStaffUsernamesPasswords(refId);
 //                XStaffs_GetXStaffsAccounts(xPress);
 
-                // Student
-                xPress.createXStudentUsers(refId);
-                xPress.deleteXStudentUsers(refId);
-                xPress.deleteXStudentUsernamesPasswords(refId);
+        // Student
+        xPress.createXStudentUsers(refId);
+        xPress.deleteXStudentUsers(refId);
+        xPress.deleteXStudentUsernamesPasswords(refId);
 //                XStudents_GetXStudentsAccounts(xPress);
 
-                // Contact
+        // Contact
 //                xPress.getXContactUsers("0F4DE8DE-5AA3-48A7-A330-62E0B8910F1C");
-            }
-        } catch (Exception e) {
-        }
-
     }
 
     public static void XStaffs_GetXStaffsAccounts(XPress xPress) {
         try {
-            if (xPress.getXStaffUsers(refId).getData() != null) {
-                for (XStaffType s : xPress.getXStaffUsers(refId).getData()) {
+            if(xPress.getXStaffUsers(refId).getData() != null) {
+                for(XStaffType s : xPress.getXStaffUsers(refId).getData()) {
                     System.out.println("loginId: " + s.getAppProvisioningInfo().getLoginId());
                     System.out.println("tempPassword: " + s.getAppProvisioningInfo().getTempPassword());
                     System.out.println("tempExpiryDate: " + s.getAppProvisioningInfo().getTempPasswordExpiryDate());
                 }
             }
-        } catch (Exception e) {
+        }
+        catch(Exception e) {
         }
     }
 
     public static void XStudents_GetXStudentsAccounts(XPress xPress) {
         try {
-            if (xPress.getXStudentUsers(refId).getData() != null) {
-                for (XStudentType s : xPress.getXStudentUsers(refId).getData()) {
+            if(xPress.getXStudentUsers(refId).getData() != null) {
+                for(XStudentType s : xPress.getXStudentUsers(refId).getData()) {
                     System.out.println("loginId: " + s.getAppProvisioningInfo().getLoginId());
                     System.out.println("tempPassword: " + s.getAppProvisioningInfo().getTempPassword());
                     System.out.println("tempExpiryDate: " + s.getAppProvisioningInfo().getTempPasswordExpiryDate());
                 }
             }
-        } catch (Exception e) {
+        }
+        catch(Exception e) {
         }
     }
 

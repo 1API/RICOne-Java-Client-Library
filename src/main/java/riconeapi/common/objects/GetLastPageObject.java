@@ -2,6 +2,7 @@ package riconeapi.common.objects;
 
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.RestHeader;
 import riconeapi.common.rest.RestProperties;
 import riconeapi.common.rest.RestQueryParameter;
@@ -11,22 +12,22 @@ import riconeapi.models.xpress.*;
 
 /*
  * @author Andrew Pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7.2
- * @since Jul 30, 2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 @SuppressWarnings({"SpellCheckingInspection", "unused"})
 public class GetLastPageObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * GetLastPage Object Constructor.
      * @param rt REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Endpoint object.
      */
-    public GetLastPageObject(RestTemplate rt, String baseApiUrl) {
+    public GetLastPageObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -45,42 +46,42 @@ public class GetLastPageObject {
         try {
             switch (servicePath.name()) {
                 case "GETXLEAS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
                     break;
                 }
                 case "GETXSCHOOLS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
                     break;
                 }
                 case "GETXCALENDARS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
                     break;
                 }
                 case "GETXCOURSES": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
                     rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
                     break;
                 }
                 case "GETXROSTERS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
                     break;
                 }
                 case "GETXSTAFFS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
                     break;
                 }
                 case "GETXSTUDENTS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTUDENTS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XStudentCollectionType.class);
                     break;
                 }
                 case "GETXCONTACTS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCONTACTS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XContactCollectionType.class);
                     break;
                 }
@@ -108,42 +109,42 @@ public class GetLastPageObject {
         try {
             switch (servicePath.name()) {
                 case "GETXLEAS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
                     break;
                 }
                 case "GETXSCHOOLS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
                     break;
                 }
                 case "GETXCALENDARS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
                     break;
                 }
                 case "GETXCOURSES": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
                     rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
                     break;
                 }
                 case "GETXROSTERS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
                     break;
                 }
                 case "GETXSTAFFS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
                     break;
                 }
                 case "GETXSTUDENTS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTUDENTS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XStudentCollectionType.class);
                     break;
                 }
                 case "GETXCONTACTS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCONTACTS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XContactCollectionType.class);
                     break;
                 }
@@ -171,42 +172,42 @@ public class GetLastPageObject {
         try {
             switch (servicePath.name()) {
                 case "GETXLEAS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXLEAS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXLEAS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XLeaCollectionType.class);
                     break;
                 }
                 case "GETXSCHOOLS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSCHOOLS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSCHOOLS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XSchoolCollectionType.class);
                     break;
                 }
                 case "GETXCALENDARS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCALENDARS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCALENDARS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XCalendarCollectionType.class);
                     break;
                 }
                 case "GETXCOURSES": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCOURSES, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCOURSES, rh, rqp);
                     rr.makeAllRequest(rt, rp, XCourseCollectionType.class);
                     break;
                 }
                 case "GETXROSTERS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXROSTERS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXROSTERS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XRosterCollectionType.class);
                     break;
                 }
                 case "GETXSTAFFS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XStaffCollectionType.class);
                     break;
                 }
                 case "GETXSTUDENTS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTUDENTS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XStudentCollectionType.class);
                     break;
                 }
                 case "GETXCONTACTS": {
-                    RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXCONTACTS, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, ServicePath.GETXCONTACTS, rh, rqp);
                     rr.makeAllRequest(rt, rp, XContactCollectionType.class);
                     break;
                 }
@@ -238,7 +239,7 @@ public class GetLastPageObject {
                 case "GETXLEASBYXSTAFF":
                 case "GETXLEASBYXSTUDENT":
                 case "GETXLEASBYXCONTACT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
                     break;
                 }
@@ -249,20 +250,20 @@ public class GetLastPageObject {
                 case "GETXSCHOOLSBYXSTAFF":
                 case "GETXSCHOOLSBYXSTUDENT":
                 case "GETXSCHOOLSBYXCONTACT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
                     break;
                 }
                 case "GETXCALENDARSBYXLEA":
                 case "GETXCALENDARSBYXSCHOOL": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
                     break;
                 }
                 case "GETXCOURSESBYXLEA":
                 case "GETXCOURSESBYXSCHOOL":
                 case "GETXCOURSESBYXROSTER": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
                     break;
                 }
@@ -271,7 +272,7 @@ public class GetLastPageObject {
                 case "GETXROSTERSBYXCOURSE":
                 case "GETXROSTERSBYXSTAFF":
                 case "GETXROSTERSBYXSTUDENT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
                     break;
                 }
@@ -280,7 +281,7 @@ public class GetLastPageObject {
                 case "GETXSTAFFSBYXCOURSE":
                 case "GETXSTAFFSBYXROSTER":
                 case "GETXSTAFFSBYXSTUDENT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
                     break;
                 }
@@ -289,24 +290,24 @@ public class GetLastPageObject {
                 case "GETXSTUDENTSBYXROSTER":
                 case "GETXSTUDENTSBYXSTAFF":
                 case "GETXSTUDENTSBYXCONTACT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
                     break;
                 }
                 case "GETXCONTACTSBYXLEA":
                 case "GETXCONTACTSBYXSCHOOL":
                 case "GETXCONTACTSBYXSTUDENT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XContactCollectionType.class);
                     break;
                 }
                 case "GETXSTAFFSBYXSCHOOLAUPP": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
                     break;
                 }
                 case "GETXSTUDENTSBYXSCHOOLAUPP": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
                     break;
                 }
@@ -339,7 +340,7 @@ public class GetLastPageObject {
                 case "GETXLEASBYXSTAFF":
                 case "GETXLEASBYXSTUDENT":
                 case "GETXLEASBYXCONTACT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XLeaCollectionType.class);
                     break;
                 }
@@ -350,20 +351,20 @@ public class GetLastPageObject {
                 case "GETXSCHOOLSBYXSTAFF":
                 case "GETXSCHOOLSBYXSTUDENT":
                 case "GETXSCHOOLSBYXCONTACT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XSchoolCollectionType.class);
                     break;
                 }
                 case "GETXCALENDARSBYXLEA":
                 case "GETXCALENDARSBYXSCHOOL": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XCalendarCollectionType.class);
                     break;
                 }
                 case "GETXCOURSESBYXLEA":
                 case "GETXCOURSESBYXSCHOOL":
                 case "GETXCOURSESBYXROSTER": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XCourseCollectionType.class);
                     break;
                 }
@@ -372,7 +373,7 @@ public class GetLastPageObject {
                 case "GETXROSTERSBYXCOURSE":
                 case "GETXROSTERSBYXSTAFF":
                 case "GETXROSTERSBYXSTUDENT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XRosterCollectionType.class);
                     break;
                 }
@@ -381,7 +382,7 @@ public class GetLastPageObject {
                 case "GETXSTAFFSBYXCOURSE":
                 case "GETXSTAFFSBYXROSTER":
                 case "GETXSTAFFSBYXSTUDENT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
                     break;
                 }
@@ -390,24 +391,24 @@ public class GetLastPageObject {
                 case "GETXSTUDENTSBYXROSTER":
                 case "GETXSTUDENTSBYXSTAFF":
                 case "GETXSTUDENTSBYXCONTACT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
                     break;
                 }
                 case "GETXCONTACTSBYXLEA":
                 case "GETXCONTACTSBYXSCHOOL":
                 case "GETXCONTACTSBYXSTUDENT": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XContactCollectionType.class);
                     break;
                 }
                 case "GETXSTAFFSBYXSCHOOLAUPP": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XStaffCollectionType.class);
                     break;
                 }
                 case "GETXSTUDENTSBYXSCHOOLAUPP": {
-                    RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+                    RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
                     rr.makeAllRequestByRefId(rt, rp, XStudentCollectionType.class);
                     break;
                 }

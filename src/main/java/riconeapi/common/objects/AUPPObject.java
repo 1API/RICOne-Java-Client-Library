@@ -1,28 +1,29 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.*;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.8
- * @since 12/17/2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 @SuppressWarnings("unused")
 public class AUPPObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * AUPP Object Constructor.
      * @param rt REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Endpoint object.
      */
-    public AUPPObject(RestTemplate rt, String baseApiUrl) {
+    public AUPPObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -36,7 +37,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
     }
 
@@ -51,7 +52,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
     }
 
@@ -66,7 +67,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMESPASSWORDS);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
     }
 
@@ -80,7 +81,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
     }
 
@@ -96,7 +97,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTAFFSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByAupp(rt, rp, XStaffCollectionType.class);
     }
 
@@ -111,7 +112,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.CREATE);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
         rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
     }
 
@@ -126,7 +127,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETE);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
         rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
     }
 
@@ -141,7 +142,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.DELETEUSERNAMESPASSWORDS);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
         rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
     }
 
@@ -155,7 +156,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader();
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
     }
 
@@ -171,7 +172,7 @@ public class AUPPObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize);
         RestQueryParameter rqp = new RestQueryParameter(AUPPEnum.GET);
-        RestProperties rp = new RestProperties(baseApiUrl, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, ServicePath.GETXSTUDENTSBYXSCHOOL, refId, rh, rqp);
         return rr.makeAllRequestByAupp(rt, rp, XStudentCollectionType.class);
     }
 

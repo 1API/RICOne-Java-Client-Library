@@ -3,8 +3,10 @@ package cases;
 import riconeapi.authentication.Authenticator;
 import riconeapi.common.XPress;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.authentication.Endpoint;
+import riconeapi.authentication.Endpoint;
 import riconeapi.models.xpress.*;
+
+import java.util.Optional;
 
 /**
  * @author Andrew Pieniezny <andrew.pieniezny@neric.org>
@@ -13,10 +15,10 @@ import riconeapi.models.xpress.*;
  */
 public class RicOneApiTests {
     // RestResponse Constants
-    final static String authUrl = AuthServiceProperties.getInstance().getProperty("auth.url");
+    final static String authUrl = "https://auth.test.ricone.org/login";
     final static String clientId = "dpaDemo";
     final static String clientSecret = "deecd889bff5ed0101a86680752f5f9";
-    final static String providerId = AuthServiceProperties.getInstance().getProperty("auth.providerId");
+    final static String providerId = "localhost";
 
     static String LEA_REFID = "03ACF04F-DC12-411A-9A42-E8323516D699";
 	static String LEA_BEDSIDTYPE = "beds";
@@ -40,13 +42,13 @@ public class RicOneApiTests {
         Authenticator auth = Authenticator.getInstance();
         auth.authenticate(authUrl, clientId, clientSecret);
 
-        for (Endpoint e : auth.getEndpoints(providerId)) {
-            XPress xPress = new XPress(e.getHref());
+        Optional<Endpoint> e = auth.getEndpoints(providerId);
+        XPress xPress = new XPress(e.get());
 
-//            XPress_StatusCodes(xPress);
+            XPress_StatusCodes(xPress);
 
             /* xLeas */
-			XLeas_GetXLeas(xPress);
+//			XLeas_GetXLeas(xPress);
 //			XLeas_GetXLea(xPress);
 //			XLeas_GetXLeaById(xPress);
 //			XLeas_GetXLeasByXSchool(xPress);
@@ -108,7 +110,6 @@ public class RicOneApiTests {
 //			XContacts_GetXContactsByXStudent(xPress);
         }
 
-    }
 
     public static void XPress_StatusCodes(XPress xPress) throws AuthenticationException {
         String format = "%-50s%s%n";

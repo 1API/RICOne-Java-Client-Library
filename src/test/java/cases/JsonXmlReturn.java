@@ -6,11 +6,12 @@ import riconeapi.common.objects.ServicePath;
 import riconeapi.common.rest.AUPPEnum;
 import riconeapi.common.rest.MediaTypeEnum;
 import riconeapi.exceptions.AuthenticationException;
-import riconeapi.models.authentication.Endpoint;
+import riconeapi.authentication.Endpoint;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 /*
  * @author      Andrew Pieniezny <andrew.pieniezny@neric.org>
@@ -49,8 +50,8 @@ public class JsonXmlReturn
 	    Authenticator auth = Authenticator.getInstance();
 		auth.authenticate(authUrl, clientId, clientSecret);
 		
-		for(Endpoint e : auth.getEndpoints(providerId)) {
-			XPress xPress = new XPress(e.getHref());
+		Optional<Endpoint> e = auth.getEndpoints(providerId);
+        XPress xPress = new XPress(e.get());
 
             stringResponse = xPress.getJsonXml(servicePath, mediaType);
 //            stringResponse = xPress.getJsonXml(servicePath, schoolYear, mediaType);
@@ -69,7 +70,6 @@ public class JsonXmlReturn
 
             System.out.println(stringResponse);
 
-		}
-	}
+    }
 
 }

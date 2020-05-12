@@ -1,6 +1,7 @@
 package riconeapi.common.objects;
 
 import org.springframework.web.client.RestTemplate;
+import riconeapi.authentication.Endpoint;
 import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 
@@ -8,21 +9,21 @@ import java.util.Date;
 
 /*
  * @author andrew.pieniezny <andrew.pieniezny@neric.org>
- * @version 1.7.1
- * @since 6/20/2018
+ * @version 1.9.0
+ * @since 5/8/2020
  */
 public class JsonXmlObject {
     private final RestTemplate rt;
-    private final String baseApiUrl;
+    private final Endpoint endpoint;
 
     /**
      * JsonXml Object Constructor.
      * @param rt REST template.
-     * @param baseApiUrl Base API url.
+     * @param endpoint Endpoint object.
      */
-    public JsonXmlObject(RestTemplate rt, String baseApiUrl) {
+    public JsonXmlObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
-        this.baseApiUrl = baseApiUrl;
+        this.endpoint = endpoint;
     }
 
     /**
@@ -38,7 +39,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -56,7 +57,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear, type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -75,7 +76,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -95,7 +96,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear, type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -113,7 +114,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -132,7 +133,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(schoolYear, type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -152,7 +153,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -173,7 +174,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, schoolYear, type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -192,7 +193,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(idType, id, type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -212,7 +213,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(idType, id, schoolYear, type);
         RestQueryParameter rqp = new RestQueryParameter();
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -232,7 +233,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(type);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -254,7 +255,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, type);
         RestQueryParameter rqp = new RestQueryParameter(opaqueMarker);
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -274,7 +275,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(type);
         RestQueryParameter rqp = new RestQueryParameter(auppEnum);
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 
@@ -296,7 +297,7 @@ public class JsonXmlObject {
         RestResponse rr = new RestResponse();
         RestHeader rh = new RestHeader(navigationPage, navigationPageSize, type);
         RestQueryParameter rqp = new RestQueryParameter(auppEnum);
-        RestProperties rp = new RestProperties(baseApiUrl, servicePath, refId, rh, rqp);
+        RestProperties rp = new RestProperties(endpoint, servicePath, refId, rh, rqp);
         return rr.makeJsonXmlRequest(rt, rp);
     }
 }
