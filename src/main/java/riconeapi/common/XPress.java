@@ -3,10 +3,7 @@ package riconeapi.common;
 import org.springframework.web.client.RestTemplate;
 import riconeapi.authentication.Endpoint;
 import riconeapi.common.objects.*;
-import riconeapi.common.rest.AUPPEnum;
-import riconeapi.common.rest.MediaTypeEnum;
-import riconeapi.common.rest.ResponseMulti;
-import riconeapi.common.rest.ResponseSingle;
+import riconeapi.common.rest.*;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.*;
 
@@ -35,6 +32,7 @@ public class XPress {
     private final GetLastPageObject getLastPageObject;
     private final AUPPObject auppObject;
     private final JsonXmlObject jsonXmlObject;
+    private final HeaderRequest headerRequest;
 
     public XPress(Endpoint endpoint) {
         RestTemplate rt = new RestTemplate();
@@ -51,6 +49,7 @@ public class XPress {
         getLastPageObject = new GetLastPageObject(rt, endpoint);
         auppObject = new AUPPObject(rt, endpoint);
         jsonXmlObject = new JsonXmlObject(rt, endpoint);
+        headerRequest = new HeaderRequest(rt, endpoint);
     }
 
     /* xLeas */
@@ -3779,7 +3778,9 @@ public class XPress {
      * @param navigationPageSize Number of resources to retrieve.
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, int navigationPageSize) throws AuthenticationException {
         return getLastPageObject.getLastPage(servicePath, navigationPageSize);
     }
@@ -3792,7 +3793,9 @@ public class XPress {
      * @param schoolYear         The year of the requested data (i.e. 2018 for the 2017-2018 school year).
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, int navigationPageSize, int schoolYear) throws AuthenticationException {
         return getLastPageObject.getLastPage(servicePath, navigationPageSize, schoolYear);
     }
@@ -3805,7 +3808,9 @@ public class XPress {
      * @param opaqueMarker       Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
         return getLastPageObject.getLastPage(servicePath, navigationPageSize, opaqueMarker);
     }
@@ -3818,7 +3823,9 @@ public class XPress {
      * @param navigationPageSize Number of resources to retrieve.
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, String refId, int navigationPageSize) throws AuthenticationException {
         return getLastPageObject.getLastPage(servicePath, refId, navigationPageSize);
     }
@@ -3832,7 +3839,9 @@ public class XPress {
      * @param schoolYear         The year of the requested data (i.e. 2018 for the 2017-2018 school year).
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, String refId, int navigationPageSize, int schoolYear) throws AuthenticationException {
         return getLastPageObject.getLastPage(servicePath, refId, navigationPageSize, schoolYear);
     }
@@ -4196,5 +4205,93 @@ public class XPress {
      */
     public String getJsonXml(ServicePath servicePath, String refId, int navigationPage, int navigationPageSize, AUPPEnum auppEnum, MediaTypeEnum type) throws AuthenticationException {
         return jsonXmlObject.getJsonXml(servicePath, refId, navigationPage, navigationPageSize, auppEnum, type);
+    }
+
+    /**
+     * Makes a HEAD request to return the header, status code, status message, navigation last page, and record count
+     * for a service path.
+     * @param servicePath The requested service path.
+     * @return HeaderResponse
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public HeaderResponse getHeaders(ServicePath servicePath) throws AuthenticationException {
+        return headerRequest.getHeaders(servicePath);
+    }
+
+    /**
+     * Makes a HEAD request to return the header, status code, status message, navigation last page, and record count
+     * for a service path with paging.
+     * @param servicePath The requested service path.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @return HeaderResponse
+     * @throws AuthenticationException if login does not succeed
+     */
+    public HeaderResponse getHeaders(ServicePath servicePath, int navigationPageSize) throws AuthenticationException {
+        return headerRequest.getHeaders(servicePath, navigationPageSize);
+    }
+
+    /**
+     * Makes a HEAD request to return the header, status code, status message, navigation last page, and record count
+     * for a service path with paging by school year.
+     * @param servicePath The requested service path.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return HeaderResponse
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public HeaderResponse getHeaders(ServicePath servicePath, int navigationPageSize, int schoolYear) throws AuthenticationException {
+        return headerRequest.getHeaders(servicePath, navigationPageSize, schoolYear);
+    }
+
+    /**
+     * Makes a HEAD request to return the header, status code, status message, navigation last page, and record count
+     * for a service path from a given point with paging.
+     * @param servicePath The requested service path.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
+     * @return HeaderResponse
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public HeaderResponse getHeaders(ServicePath servicePath, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
+        return headerRequest.getHeaders(servicePath, navigationPageSize, opaqueMarker);
+    }
+
+    /**
+     * Makes a HEAD request to return the header, status code, status message, navigation last page, and record count
+     * for a service path.
+     * @param servicePath The requested service path
+     * @param refId of xObject.
+     * @return HeaderResponse
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public HeaderResponse getHeaders(ServicePath servicePath, String refId) throws AuthenticationException {
+        return headerRequest.getHeaders(servicePath, refId);
+    }
+
+    /**
+     * Makes a HEAD request to return the header, status code, status message, navigation last page, and record count
+     * for a service path with paging.
+     * @param servicePath The requested service path
+     * @param refId of xObject.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @return HeaderResponse
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public HeaderResponse getHeaders(ServicePath servicePath, String refId, int navigationPageSize) throws AuthenticationException {
+        return headerRequest.getHeaders(servicePath, refId, navigationPageSize);
+    }
+
+    /**
+     * Makes a HEAD request to return the header, status code, status message, navigation last page, and record count
+     * for a service path with paging by school year.
+     * @param servicePath The requested service path
+     * @param refId of xObject.
+     * @param navigationPageSize Number of resources to retrieve.
+     * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
+     * @return HeaderResponse
+     * @throws AuthenticationException if login does not succeed.
+     */
+    public HeaderResponse getHeaders(ServicePath servicePath, String refId, int navigationPageSize, int schoolYear) throws AuthenticationException {
+        return headerRequest.getHeaders(servicePath, refId, navigationPageSize, schoolYear);
     }
 }

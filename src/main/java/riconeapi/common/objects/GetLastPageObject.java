@@ -15,6 +15,7 @@ import riconeapi.models.xpress.*;
  * @version 1.9.0
  * @since 5/8/2020
  */
+@Deprecated
 @SuppressWarnings({"SpellCheckingInspection", "unused"})
 public class GetLastPageObject {
     private final RestTemplate rt;
@@ -25,6 +26,7 @@ public class GetLastPageObject {
      * @param rt REST template.
      * @param endpoint Endpoint object.
      */
+    @Deprecated
     public GetLastPageObject(RestTemplate rt, Endpoint endpoint) {
         this.rt = rt;
         this.endpoint = endpoint;
@@ -36,7 +38,9 @@ public class GetLastPageObject {
      * @param navigationPageSize Number of resources to retrieve.
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, int navigationPageSize) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();
@@ -99,7 +103,9 @@ public class GetLastPageObject {
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, int navigationPageSize, int schoolYear) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();
@@ -162,7 +168,9 @@ public class GetLastPageObject {
      * @param opaqueMarker Uses an ISO8601 timestamp that indicates a point since the last changes have been requested.
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, int navigationPageSize, String opaqueMarker) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();
@@ -225,7 +233,9 @@ public class GetLastPageObject {
      * @param navigationPageSize Number of resources to retrieve.
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, String refId, int navigationPageSize) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();
@@ -326,7 +336,9 @@ public class GetLastPageObject {
      * @param schoolYear The year of the requested data (i.e. 2018 for the 2017-2018 school year).
      * @return Integer value.
      * @throws AuthenticationException if login does not succeed.
+     * @deprecated As of version 1.9.0, use getHeaders().getNavigationLastPage().
      */
+    @Deprecated
     public int getLastPage(ServicePath servicePath, String refId, int navigationPageSize, int schoolYear) throws AuthenticationException {
         int navigationPage = 1;
         RestResponse rr = new RestResponse();

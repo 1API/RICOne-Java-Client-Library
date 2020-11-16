@@ -62,10 +62,18 @@ final static String clientSecret = "YOUR PASSWORD";
     * OtherPhoneNumbers
     * OtherEmails
     * Languages
+* Added new method getHeaders()
+    * New method will make a HEAD request versus GET to retrieve header information and will return the following:
+        * Header
+        * Status code
+        * Status message
+        * Navigation Last Page
+        * Record Count
 * Added support for new service path xEmployments, which includes staff employment information.
     * /xEmployments
     * /xLeas/{refId}/xEmployments
     * /xSchool/{refId}/xEmployments
+* Deprecated getLastPage() - use new getHeaders().getNavigationLastPage() method to retrieve NavigationLastPage value
 * Updated to use RIC One <a href="https://github.com/RIConeorg/API-AuthenticationClientLibrary-Java" target="blank">API-AuthenticationClientLibrary-Java v2.0.0</a>
 
 ### v1.8.0

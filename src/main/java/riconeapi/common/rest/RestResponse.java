@@ -3,15 +3,10 @@ package riconeapi.common.rest;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import riconeapi.authentication.Authenticator;
-import riconeapi.authentication.Endpoint;
 import riconeapi.exceptions.AuthenticationException;
 import riconeapi.models.xpress.ICollectionType;
 import riconeapi.models.xpress.IType;
-import riconeapi.models.xpress.XLeaCollectionType;
-import riconeapi.models.xpress.XLeaType;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 /*
@@ -22,6 +17,24 @@ import java.util.Collections;
 @SuppressWarnings("unchecked")
 public class RestResponse {
     private Integer navigationLastPage;
+
+    public HeaderResponse headRequest(RestTemplate rt, RestProperties rp) throws AuthenticationException {
+        ResponseEntity<String> response;
+        HeaderResponse headerResponse = new HeaderResponse();
+
+        response = rt.exchange(UrlBuilder.urlBuildler(rp), HttpMethod.HEAD, getEntityHeaders(rp), String.class);
+        headerResponse.setHeader(response.toString());
+        headerResponse.setStatusCode(response.getStatusCode().value());
+        headerResponse.setMessage(response.getStatusCode().getReasonPhrase());
+        if(rp.getRestHeader().hasPaging()) {
+            headerResponse.setNavigationLastPage(Integer.parseInt(response.getHeaders().getFirst("NavigationLastPage")));
+            headerResponse.setRecordCount(Integer.parseInt(response.getHeaders().getFirst("NavigationCount")));
+        }
+        else {
+            headerResponse.setRecordCount(Integer.parseInt(response.getHeaders().getFirst("X-Record-Count")));
+        }
+        return headerResponse;
+    }
 
     // Response for all object returns.
     public <T extends ICollectionType<E>, E> ResponseMulti<E> makeAllRequest(RestTemplate rt, RestProperties rp, Class clazz) throws AuthenticationException {
@@ -173,7 +186,7 @@ public class RestResponse {
             headers.setAccept(Collections.singletonList(rp.getRestHeader().getContentType().getValue()));
         }
         else {
-            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         }
 
         if (rp.getRestHeader().hasPaging()) {
@@ -189,10 +202,12 @@ public class RestResponse {
         return new HttpEntity<>(headers);
     }
 
+    @Deprecated
     public Integer getNavigationLastPage() {
         return navigationLastPage;
     }
 
+    @Deprecated
     private void setNavigationLastPage(Integer navigationLastPage) {
         this.navigationLastPage = navigationLastPage;
     }
