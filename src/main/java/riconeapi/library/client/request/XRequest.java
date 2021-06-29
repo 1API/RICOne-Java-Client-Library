@@ -29,7 +29,7 @@ public class XRequest {
     private ServicePath servicePath;
     private String id;
     private IdType idType;
-    private Paging paging;
+    private XPaging paging;
     private Integer schoolYear;
     private ChangesSince changesSince;
     private boolean accountProvisioning;
@@ -40,8 +40,8 @@ public class XRequest {
     }
 
     /**
-     * Builder method that appends the components to make an XRequest.
-     * @return the components of an XRequest.
+     * A new instance of XRequestBuilder.
+     * @return a new XRequestBuilder instance.
      */
     public static XRequestBuilder builder() { return new XRequestBuilder(); }
 
@@ -57,7 +57,7 @@ public class XRequest {
         return idType;
     }
 
-    Paging paging() {
+    XPaging paging() {
         return paging;
     }
 
@@ -118,15 +118,16 @@ public class XRequest {
         }
 
         /**
-         * Request an xPress object with paging.
+         * Request an xPress object with paging. This method creates a new instance of the XPagingBuilder with paging
+         * components.
          * <p>
          * The default paging values are navigationPage=1 and navigationPageSize=100
          * if values not explicitly provided.
          * @return an xPress object payload with paging.
          */
-        public Paging.XPagingBuilder paging() {
-            Consumer<Paging> f = obj -> {instance.paging = obj;};
-            return new Paging.XPagingBuilder(this, f);
+        public XPaging.XPagingBuilder paging() {
+            Consumer<XPaging> f = obj -> {instance.paging = obj;};
+            return new XPaging.XPagingBuilder(this, f);
         }
 
         /**

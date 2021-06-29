@@ -28,7 +28,9 @@ public abstract class XResponse<M extends Model> implements IResponse<M> {
     @JsonIgnore
     private HttpHeaders requestHeaders;
     @JsonIgnore
-    private HttpStatus responseStatusCode;
+    private HttpStatus responseStatus;
+    @JsonIgnore
+    private int responseStatusCode;
     @JsonIgnore
     private String responseStatusText;
     @JsonIgnore
@@ -61,12 +63,22 @@ public abstract class XResponse<M extends Model> implements IResponse<M> {
     }
 
     @Override
-    public HttpStatus getResponseStatusCode() {
+    public HttpStatus getResponseStatus() {
+        return responseStatus;
+    }
+
+    @Override
+    public void setResponseStatus(HttpStatus responseStatus) {
+        this.responseStatus = responseStatus;
+    }
+
+    @Override
+    public int getResponseStatusCode() {
         return responseStatusCode;
     }
 
     @Override
-    public void setResponseStatusCode(HttpStatus responseStatusCode) {
+    public void setResponseStatusCode(int responseStatusCode) {
         this.responseStatusCode = responseStatusCode;
     }
 

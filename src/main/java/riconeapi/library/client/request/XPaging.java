@@ -8,12 +8,12 @@ import java.util.function.Consumer;
  * @since 1/21/2021
  */
 // Paging builder
-final class Paging {
+final class XPaging {
     private int navigationPage;
     private int navigationPageSize;
 
     // Default paging values of navigationPage 1, navigationPageSize 100.
-    Paging() {
+    XPaging() {
         this.navigationPage = 1;
         this.navigationPageSize = 100;
     }
@@ -26,9 +26,9 @@ final class Paging {
      * Builder class that appends the paging components to the Paging class.
      */
     public static class XPagingBuilder {
-        private Paging instance = new Paging();
+        private XPaging instance = new XPaging();
         private XRequest.XRequestBuilder parentBuilder;
-        private Consumer<Paging> consumer;
+        private Consumer<XPaging> consumer;
 
         /**
          * Empty constructor.
@@ -40,7 +40,7 @@ final class Paging {
          * @param b the XRequest builder.
          * @param c the Paging builder.
          */
-        public XPagingBuilder(XRequest.XRequestBuilder b, Consumer<Paging> c) {
+        public XPagingBuilder(XRequest.XRequestBuilder b, Consumer<XPaging> c) {
             this.parentBuilder = b;
             this.consumer = c;
         }

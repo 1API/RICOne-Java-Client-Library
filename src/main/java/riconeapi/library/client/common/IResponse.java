@@ -51,16 +51,29 @@ public interface IResponse<M> {
     void setRequestHeaders(HttpHeaders requestHeaders);
 
     /**
-     * Gets the http response status code.
+     * Gets the http response status.
      * @return the HttpStatus type of the response.
      */
-    HttpStatus getResponseStatusCode();
+    HttpStatus getResponseStatus();
+
+    /**
+     * Sets the response http status.
+     * @param status the http status.
+     */
+    void setResponseStatus(HttpStatus status);
+
+    /**
+     * Gets the http response status code.
+     * @return the integer value of the http status code.
+     */
+    int getResponseStatusCode();
+
 
     /**
      * Sets the http status code.
-     * @param status the http status code.
+     * @param statusCode the status integer value.
      */
-    void setResponseStatusCode(HttpStatus status);
+    void setResponseStatusCode(int statusCode);
 
     /**
      * Gets the http status text value.

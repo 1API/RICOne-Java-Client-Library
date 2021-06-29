@@ -362,7 +362,7 @@ public class XPress {
      * <p>
      *     <ul>
      *         <li>GET_XCONTACTS</li>
-     *         <li>>GET_XCONTACTS_BY_XLEA</li>
+     *         <li>GET_XCONTACTS_BY_XLEA</li>
      *         <li>GET_XCONTACTS_BY_XSCHOOL</li>
      *         <li>GET_XCONTACTS_BY_XSTUDENT</li>
      *     </ul>
@@ -482,7 +482,9 @@ public class XPress {
                 assert response != null;
                 response.setRequestUrl(requestUrl);
                 response.setRequestHeaders(requestEntity.getHeaders());
-                response.setResponseStatusCode(responseEntity.getStatusCode());
+                response.setResponseStatus(responseEntity.getStatusCode());
+                response.setResponseStatusCode(responseEntity.getStatusCodeValue());
+                response.setResponseStatusText(responseEntity.getStatusCode().getReasonPhrase());
                 response.setResponseHeaders(responseEntity.getHeaders());
 
 //                if(request.hasPaging() && !request.servicePath().getServicePathType().equals(ServicePathType.SINGLE)) {
@@ -582,7 +584,7 @@ public class XPress {
             responseError.setData(modelClass.getDeclaredConstructor().newInstance());
             responseError.setRequestUrl(setRequestUrl);
             responseError.setRequestHeaders(httpEntity.getHeaders());
-            responseError.setResponseStatusCode(response.getStatusCode());
+            responseError.setResponseStatus(response.getStatusCode());
             responseError.setResponseStatusText(response.getStatusCode().getReasonPhrase());
             responseError.setResponseHeaders(response.getHeaders());
         }
@@ -600,7 +602,7 @@ public class XPress {
             responseError.setData(modelClass.getDeclaredConstructor().newInstance());
             responseError.setRequestUrl(requestUrl);
             responseError.setRequestHeaders(httpEntity.getHeaders());
-            responseError.setResponseStatusCode(exception.getStatusCode());
+            responseError.setResponseStatus(exception.getStatusCode());
             responseError.setResponseStatusText(exception.getStatusCode().getReasonPhrase());
             responseError.setResponseHeaders(exception.getResponseHeaders());
         }
@@ -618,7 +620,7 @@ public class XPress {
             responseError.setData(modelClass.getDeclaredConstructor().newInstance());
             responseError.setRequestUrl(requestUrl);
             responseError.setRequestHeaders(httpEntity.getHeaders());
-            responseError.setResponseStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            responseError.setResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             responseError.setResponseStatusText(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
             responseError.setResponseHeaders(new HttpHeaders());
         }
